@@ -28,3 +28,5 @@ hs_err_pid*
 /data/
 target/
 /.vscode/
+ggs-webapp/app/bower_components/**
+ggs-webapp/app/node_modules/**
