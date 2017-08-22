@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 // @ImportResource({"classpath:spring-bean.xml""})
 public class Application extends SpringBootServletInitializer {
 
-    @RequestMapping("/")
-    @ResponseBody
-    public String index() {
-        return "Hello World!";
-    }
+    // @RequestMapping("/")
+    // @ResponseBody
+    // public String index() {
+    //     return "Hello World!";
+    // }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
