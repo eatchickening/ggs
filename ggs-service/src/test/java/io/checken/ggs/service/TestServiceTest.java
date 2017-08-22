@@ -1,6 +1,4 @@
-/*
- * Copyright (C), 2011-2017, 微贷网.
- */
+
 package io.checken.ggs.service;
 
 import org.junit.runner.RunWith;
