@@ -30,3 +30,4 @@ target/
 /.vscode/
 ggs-webapp/app/bower_components/**
 ggs-webapp/app/node_modules/**
+ggs-webapp/app/src/bower_components/**
