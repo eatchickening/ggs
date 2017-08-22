@@ -1,0 +1,29 @@
+<main class="auth-main loginback">
+    <div class="auth-block" ng-controller="LoginCtrl">
+        <h1>学生评优管理系统</h1>
+        <!-- <a href="reg.html" class="auth-link">New to Blur Admin? Sign up!</a> -->
+
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="inputname" class="col-sm-2 control-label">帐号：</label>
+
+                <div class="col-sm-10">
+                    <input type="name" class="form-control" id="inputname" ng-model="user.username" placeholder="Account">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-2 control-label">密码：</label>
+
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword" ng-model="user.password" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default btn-auth" ng-click="login()">登录</button>
+                    <a href class="forgot-pass">忘记密码?</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>

@@ -1,0 +1,13 @@
+<div class="body-bg"></div>
+<main class="maincontent {{$baSidebarService.isMenuCollapsed()? 'menu-collapsed':''}}">
+    <ba-sidebar></ba-sidebar>
+    <page-top></page-top>
+
+    <div class="al-main">
+        <div class="al-content">
+            <content-top></content-top>
+            <div ui-view=""></div>
+        </div>
+    </div>
+    <back-top></back-top>
+</main>
