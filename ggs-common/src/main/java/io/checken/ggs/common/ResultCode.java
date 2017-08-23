@@ -1,4 +1,4 @@
-package io.checken.ggs.common;
+package io.chicken.ggs.common;
 
 /**
  *

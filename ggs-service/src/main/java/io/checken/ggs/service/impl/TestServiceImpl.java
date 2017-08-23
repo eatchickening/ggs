@@ -1,7 +1,7 @@
 
-package io.checken.ggs.service.impl;
+package io.chicken.ggs.service.impl;
 
-import io.checken.ggs.service.TestService;
+import io.chicken.ggs.service.TestService;
 import org.springframework.stereotype.Service;
 
 /**

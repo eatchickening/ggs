@@ -1,5 +1,5 @@
 
-package io.checken.ggs.service;
+package io.chicken.ggs.service;
 
 /**
  * @author wung 2017/8/21.

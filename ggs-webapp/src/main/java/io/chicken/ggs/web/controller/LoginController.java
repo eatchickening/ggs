@@ -1,8 +1,8 @@
 
-package io.checken.ggs.web.controller;
+package io.chicken.ggs.web.controller;
 
-import io.checken.ggs.common.Result;
-import io.checken.ggs.common.ResultCode;
+import io.chicken.ggs.common.Result;
+import io.chicken.ggs.common.ResultCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

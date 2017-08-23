@@ -1,6 +1,6 @@
-package io.checken.ggs.web.controller;
+package io.chicken.ggs.web.controller;
 
-import io.checken.ggs.service.TestService;
+import io.chicken.ggs.service.TestService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

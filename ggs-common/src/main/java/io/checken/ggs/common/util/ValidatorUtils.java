@@ -1,4 +1,4 @@
-package io.checken.ggs.common.util;
+package io.chicken.ggs.common.util;
 
 
 import org.hibernate.validator.HibernateValidator;

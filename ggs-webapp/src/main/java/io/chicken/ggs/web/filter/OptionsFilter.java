@@ -1,5 +1,5 @@
 
-package io.checken.ggs.web.filter;
+package io.chicken.ggs.web.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

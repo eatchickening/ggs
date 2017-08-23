@@ -1,5 +1,5 @@
 
-package io.checken.ggs.dal.model;
+package io.chicken.ggs.dal.model;
 
 /**
  * @author wung 2017/8/21.

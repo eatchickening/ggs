@@ -1,4 +1,4 @@
-package io.checken.ggs.service;
+package io.chicken.ggs.service;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -10,9 +10,9 @@ import org.springframework.context.annotation.ImportResource;
  * Unit test for simple App.
  */
 @SpringBootApplication
-@ComponentScan(basePackages ={"io.checken.ggs"})
+@ComponentScan(basePackages ={"io.chicken.ggs"})
 //mybatis路劲自动扫面
-@MapperScan("io.checken.ggs.dal")
+@MapperScan("io.chicken.ggs.dal")
 //手动引入xml文件
 // @ImportResource({"classpath:spring-bean.xml"})
 public class AppTest {

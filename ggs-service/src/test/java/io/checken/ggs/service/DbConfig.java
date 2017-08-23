@@ -1,5 +1,5 @@
 
-package io.checken.ggs.service;
+package io.chicken.ggs.service;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -30,7 +30,7 @@ public class DbConfig {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         DruidDataSource dataSource = dataSource();
         sqlSessionFactoryBean.setDataSource(dataSource);
-        sqlSessionFactoryBean.setTypeAliasesPackage("io.checken.ggs.dal.model");
+        sqlSessionFactoryBean.setTypeAliasesPackage("io.chicken.ggs.dal.model");
         return sqlSessionFactoryBean;
     }
 

@@ -1,7 +1,7 @@
-package io.checken.ggs.common;
+package io.chicken.ggs.common;
 
 
-import io.checken.ggs.common.util.ValidateErrorResult;
+import io.chicken.ggs.common.util.ValidateErrorResult;
 
 import java.io.Serializable;
 

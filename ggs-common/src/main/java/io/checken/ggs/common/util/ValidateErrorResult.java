@@ -1,5 +1,5 @@
 
-package io.checken.ggs.common.util;
+package io.chicken.ggs.common.util;
 
 /**
  * 检验的错误信息包装类，包含属性名和错误信息

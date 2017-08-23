@@ -23,6 +23,6 @@
 
     <typeAliases>
         <!-- 将包下的实体类的别名设置为其类名 -->
-        <package name="io.checken.ggs.dal.model"/>
+        <package name="io.chicken.ggs.dal.model"/>
     </typeAliases>
 </configuration>

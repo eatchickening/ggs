@@ -1,5 +1,5 @@
 
-package io.checken.ggs.web;
+package io.chicken.ggs.web;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
