@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @SpringBootApplication
 @ComponentScan(basePackages ={"io.checken.ggs"})
 //mybatis路劲自动扫面
-// @MapperScan("io.checken.ggs.dal")
+@MapperScan("io.checken.ggs.dal")
 @ServletComponentScan(value = "io.checken.ggs.web.filter")
 // @ImportResource({"classpath:spring-bean.xml""})
 public class Application extends SpringBootServletInitializer {
