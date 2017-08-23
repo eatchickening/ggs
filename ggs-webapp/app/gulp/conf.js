@@ -13,7 +13,7 @@ var gutil = require('gulp-util');
  */
 exports.paths = {
   src: 'src',
-  dist: 'release',
+  dist: 'static',
   devDist: 'dev-release',
   tmp: '.tmp',
   e2e: 'e2e'
@@ -26,7 +26,7 @@ exports.paths = {
  */
 exports.wiredep = {
   exclude: [/\/bootstrap\.js$/, /\/bootstrap-sass\/.*\.js/, /\/require\.js/],
-  directory: 'src/bower_components'
+  directory: 'bower_components'
 };
 
 /**
