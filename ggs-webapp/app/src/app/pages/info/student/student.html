@@ -1,32 +1,37 @@
 <div class="horizontal-scroll">
-    <table class="table table-bordered">
-        <tbody>
-            <tr>
-                <td width="15%">地区</td>
-                <td width="85%"></td>
-            </tr>
-            <tr>
-                <td>类型</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>学校</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>精确搜索</td>
-                <td>
-                    <div class="input-group">
-                        <input type="text" class="form-control with-primary-addon" placeholder="搜索学生学籍号">
-                        <span class="input-group-btn">
+    <div ba-panel ba-panel-title="" ba-panel-class="with-scroll">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td width="15%">地区</td>
+                    <td width="85%"></td>
+                </tr>
+                <tr>
+                    <td>类型</td>
+                    <td>
+                        <a href="">类型1</a>
+                        <a href="">类型1</a>
+                        <a href="">类型1</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>学校</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>精确搜索</td>
+                    <td>
+                        <div class="input-group">
+                            <input type="text" class="form-control with-primary-addon" placeholder="搜索学生学籍号">
+                            <span class="input-group-btn">
                                     <button class="btn btn-primary" type="button">查询</button>
                                 </span>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <!-->
     <!-->
 
@@ -58,23 +63,29 @@
             </tr>
         </tbody>
         <tfoot>
+           
             <tr>
                 <td colspan="4">
-                    
-                        <label>共{{total}}条数据  每页显示
-                                <select ng-model="smartTablePageSize" >
+
+                    <label>共{{total}}条数据  每页显示
+                                <select ng-model="pageSize" ng-change="pageSizeChanged()">
                                         <option value="5" ng-selected = "1">5</option>
                                         <option value="10">10</option>
                                         <option value="15">15</option>
                                         <option value="20">20</option>
                                         </select>  条
                                             </label>
-                    
+
                 </td>
-                <td colspan="6" class="text-center">
-                    <div st-pagination="" st-items-by-page="smartTablePageSize" st-displayed-pages="10"></div>
-                </td>
+
+                <tr colspan="6">
+                        <ul uib-pagination ng-change="pageChanged()" total-items="80" ng-model="currentPage" max-size="10" class="pagination-sm" boundary-links="true" rotate="false"
+                        first-text="<<" last-text=">>" next-text=">" previous-text="<"></ul>
+                </tr>
             </tr>
+            
         </tfoot>
+        
     </table>
+
 </div>
