@@ -33,3 +33,4 @@ ggs-webapp/app/node_modules/**
 ggs-webapp/app/src/bower_components/**
 ggs-webapp/app/.tmp/**
 ggs-webapp/app/static/**
+/ggs-webapp/src/main/resources/application.properties
