@@ -26,9 +26,9 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public Result login(String username, String password, HttpServletRequest request, HttpServletResponse response) {
-        logger.info("username=" + username + ", pwd =" + password);
-        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+    public Result login(String account, String password, HttpServletRequest request, HttpServletResponse response) {
+        logger.info("account=" + account + ", pwd =" + password);
+        if (StringUtils.isEmpty(account) || StringUtils.isEmpty(password)) {
             return new Result<>(ResultCode.PARAMETER_EMPTY);
         }
 

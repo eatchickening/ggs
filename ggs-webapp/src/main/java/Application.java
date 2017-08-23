@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ComponentScan(basePackages ={"io.chicken.ggs"})
 //mybatis路劲自动扫面
 @MapperScan("io.chicken.ggs.dal")
-@ServletComponentScan(value = "io.chicken.ggs.web.filter")
+// @ServletComponentScan(value = "io.chicken.ggs.web.filter")
 // @ImportResource({"classpath:spring-bean.xml""})
 public class Application extends SpringBootServletInitializer {
 

@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * @author wungmc 2017/6/28.
  */
-@WebFilter(filterName="optionsFilter", urlPatterns="/*")
+// @WebFilter(filterName="optionsFilter", urlPatterns="/*")
 public class OptionsFilter implements Filter {
 
     @Override
