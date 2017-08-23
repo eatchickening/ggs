@@ -3,6 +3,7 @@ package io.checken.ggs.web;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -10,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class MvcConfigurer extends WebMvcConfigurerAdapter {
 
     /**
-     * 静态资源访问
+     * 首页跳转
      * @param registry
      */
     @Override
@@ -19,6 +20,17 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         super.addViewControllers(registry);
     }
+
+    /**
+     * 静态资源访问
+     * @param registry
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/app/**").addResourceLocations("/app/");
+        super.addResourceHandlers(registry);
+    }
+
     //
     // @Override
     // public void configurePathMatch(PathMatchConfigurer configurer) {
