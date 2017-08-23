@@ -33,6 +33,10 @@ public enum ResultCode {
     LOGIN_NO_LOGIN(304, "用户未登录或登录超时"),
     LOGIN_NO_AUTH(305, "权限不够"),
 
+    /**
+     * 数据库操作相关 400
+     */
+    DB_EXCEPTION(401, "数据库操作异常");
 
     ;
 

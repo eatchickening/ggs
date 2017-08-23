@@ -23,7 +23,7 @@
 			<property name="suppressAllComments" value="true" />
 		</commentGenerator>
 		<!--数据库链接URL，用户名、密码 -->
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/renren-security"
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/ggs"
 						userId="root" password="root">
 		</jdbcConnection>
 		<javaTypeResolver>
@@ -45,7 +45,7 @@
 
 
 
-        <table tableName="inter_log" domainObjectName="InterLog" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="user_info" domainObjectName="UserInfo" enableCountByExample="false" enableUpdateByExample="false"
            enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 
 	</context>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="io.chicken.ggs.dal.dao.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="io.chicken.ggs.dal.model.UserInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <!--<result column="password" property="password" jdbcType="VARCHAR" />-->
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="areacode" property="areacode" jdbcType="VARCHAR" />
+    <result column="departcode" property="departcode" jdbcType="VARCHAR" />
+    <result column="postcode" property="postcode" jdbcType="VARCHAR" />
+    <result column="organcode" property="organcode" jdbcType="VARCHAR" />
+    <result column="create_account" property="createAccount" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_delete" property="isDelete" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, account, username, email, mobile, areacode, departcode, postcode, organcode,
+    create_account, create_time, update_time, is_delete
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where is_delete = 0
+    and id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_info
+    where is_delete = 0
+    and id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="io.chicken.ggs.dal.model.UserInfo" >
+    insert into user_info (account, username,
+      password, email, mobile, 
+      areacode, departcode, postcode, 
+      organcode, create_account,
+      update_time)
+    values (#{account,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{areacode,jdbcType=VARCHAR}, #{departcode,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, 
+      #{organcode,jdbcType=VARCHAR}, #{createAccount,jdbcType=VARCHAR},
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.UserInfo" >
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="areacode != null" >
+        areacode,
+      </if>
+      <if test="departcode != null" >
+        departcode,
+      </if>
+      <if test="postcode != null" >
+        postcode,
+      </if>
+      <if test="organcode != null" >
+        organcode,
+      </if>
+      <if test="createAccount != null" >
+        create_account,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="areacode != null" >
+        #{areacode,jdbcType=VARCHAR},
+      </if>
+      <if test="departcode != null" >
+        #{departcode,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="organcode != null" >
+        #{organcode,jdbcType=VARCHAR},
+      </if>
+      <if test="createAccount != null" >
+        #{createAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="io.chicken.ggs.dal.model.UserInfo" >
+    update user_info
+    <set >
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="areacode != null" >
+        areacode = #{areacode,jdbcType=VARCHAR},
+      </if>
+      <if test="departcode != null" >
+        departcode = #{departcode,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null" >
+        postcode = #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="organcode != null" >
+        organcode = #{organcode,jdbcType=VARCHAR},
+      </if>
+      <if test="createAccount != null" >
+        create_account = #{createAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+    </set>
+    where is_delete = 0
+    and id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.chicken.ggs.dal.model.UserInfo" >
+    update user_info
+    set account = #{account,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      areacode = #{areacode,jdbcType=VARCHAR},
+      departcode = #{departcode,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      organcode = #{organcode,jdbcType=VARCHAR},
+      create_account = #{createAccount,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=BIT}
+    where is_delete = 0
+    and id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
