@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="io.chicken.ggs.dal.dao.DictionaryMapper" >
+  <resultMap id="BaseResultMap" type="io.chicken.ggs.dal.model.Dictionary" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="biztype" property="biztype" jdbcType="VARCHAR" />
+    <result column="bizcode" property="bizcode" jdbcType="VARCHAR" />
+    <result column="datavalue" property="datavalue" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, biztype, bizcode, datavalue, status, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dictionary
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dictionary
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="io.chicken.ggs.dal.model.Dictionary" >
+    insert into dictionary (id, biztype, bizcode, 
+      datavalue, status, remark
+      )
+    values (#{id,jdbcType=BIGINT}, #{biztype,jdbcType=VARCHAR}, #{bizcode,jdbcType=VARCHAR}, 
+      #{datavalue,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.Dictionary" >
+    insert into dictionary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="biztype != null" >
+        biztype,
+      </if>
+      <if test="bizcode != null" >
+        bizcode,
+      </if>
+      <if test="datavalue != null" >
+        datavalue,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="biztype != null" >
+        #{biztype,jdbcType=VARCHAR},
+      </if>
+      <if test="bizcode != null" >
+        #{bizcode,jdbcType=VARCHAR},
+      </if>
+      <if test="datavalue != null" >
+        #{datavalue,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="io.chicken.ggs.dal.model.Dictionary" >
+    update dictionary
+    <set >
+      <if test="biztype != null" >
+        biztype = #{biztype,jdbcType=VARCHAR},
+      </if>
+      <if test="bizcode != null" >
+        bizcode = #{bizcode,jdbcType=VARCHAR},
+      </if>
+      <if test="datavalue != null" >
+        datavalue = #{datavalue,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.chicken.ggs.dal.model.Dictionary" >
+    update dictionary
+    set biztype = #{biztype,jdbcType=VARCHAR},
+      bizcode = #{bizcode,jdbcType=VARCHAR},
+      datavalue = #{datavalue,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

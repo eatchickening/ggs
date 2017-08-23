@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="io.chicken.ggs.dal.dao.StudentMapper" >
+  <resultMap id="BaseResultMap" type="io.chicken.ggs.dal.model.Student" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="studentid" property="studentid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="award" property="award" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="VARCHAR" />
+    <result column="moral" property="moral" jdbcType="VARCHAR" />
+    <result column="intellectual" property="intellectual" jdbcType="VARCHAR" />
+    <result column="physical" property="physical" jdbcType="VARCHAR" />
+    <result column="schoolid" property="schoolid" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, studentid, name, sex, award, score, moral, intellectual, physical, schoolid, 
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from student
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="io.chicken.ggs.dal.model.Student" >
+    insert into student (id, studentid, name, 
+      sex, award, score, 
+      moral, intellectual, physical, 
+      schoolid, remark)
+    values (#{id,jdbcType=BIGINT}, #{studentid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{award,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR}, 
+      #{moral,jdbcType=VARCHAR}, #{intellectual,jdbcType=VARCHAR}, #{physical,jdbcType=VARCHAR}, 
+      #{schoolid,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.Student" >
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="studentid != null" >
+        studentid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="award != null" >
+        award,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="moral != null" >
+        moral,
+      </if>
+      <if test="intellectual != null" >
+        intellectual,
+      </if>
+      <if test="physical != null" >
+        physical,
+      </if>
+      <if test="schoolid != null" >
+        schoolid,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="studentid != null" >
+        #{studentid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="award != null" >
+        #{award,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="moral != null" >
+        #{moral,jdbcType=VARCHAR},
+      </if>
+      <if test="intellectual != null" >
+        #{intellectual,jdbcType=VARCHAR},
+      </if>
+      <if test="physical != null" >
+        #{physical,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolid != null" >
+        #{schoolid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="io.chicken.ggs.dal.model.Student" >
+    update student
+    <set >
+      <if test="studentid != null" >
+        studentid = #{studentid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="award != null" >
+        award = #{award,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="moral != null" >
+        moral = #{moral,jdbcType=VARCHAR},
+      </if>
+      <if test="intellectual != null" >
+        intellectual = #{intellectual,jdbcType=VARCHAR},
+      </if>
+      <if test="physical != null" >
+        physical = #{physical,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolid != null" >
+        schoolid = #{schoolid,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.chicken.ggs.dal.model.Student" >
+    update student
+    set studentid = #{studentid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      award = #{award,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR},
+      moral = #{moral,jdbcType=VARCHAR},
+      intellectual = #{intellectual,jdbcType=VARCHAR},
+      physical = #{physical,jdbcType=VARCHAR},
+      schoolid = #{schoolid,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

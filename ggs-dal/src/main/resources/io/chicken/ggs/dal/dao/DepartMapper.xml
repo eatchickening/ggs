@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="io.chicken.ggs.dal.dao.DepartMapper" >
+  <resultMap id="BaseResultMap" type="io.chicken.ggs.dal.model.Depart" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="departcode" property="departcode" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="organcode" property="organcode" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, departcode, name, organcode, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from depart
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from depart
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="io.chicken.ggs.dal.model.Depart" >
+    insert into depart (id, departcode, name, 
+      organcode, remark)
+    values (#{id,jdbcType=BIGINT}, #{departcode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{organcode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.Depart" >
+    insert into depart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="departcode != null" >
+        departcode,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="organcode != null" >
+        organcode,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="departcode != null" >
+        #{departcode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="organcode != null" >
+        #{organcode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="io.chicken.ggs.dal.model.Depart" >
+    update depart
+    <set >
+      <if test="departcode != null" >
+        departcode = #{departcode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="organcode != null" >
+        organcode = #{organcode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.chicken.ggs.dal.model.Depart" >
+    update depart
+    set departcode = #{departcode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      organcode = #{organcode,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
