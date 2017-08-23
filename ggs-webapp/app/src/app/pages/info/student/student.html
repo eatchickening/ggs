@@ -1,1 +1,80 @@
-<h1>学生信息查询</h1>
+<div class="horizontal-scroll">
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td width="15%">地区</td>
+                <td width="85%"></td>
+            </tr>
+            <tr>
+                <td>类型</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>学校</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>精确搜索</td>
+                <td>
+                    <div class="input-group">
+                        <input type="text" class="form-control with-primary-addon" placeholder="搜索学生学籍号">
+                        <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button">查询</button>
+                                </span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-->
+    <!-->
+
+    <table class="table" st-table="smartTableData">
+        <thead>
+            <th></th>
+            <th>学籍号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>表彰信息</th>
+            <th>成绩评估</th>
+            <th>德育评估</th>
+            <th>智育评估</th>
+            <th>体育评估</th>
+            <th>操作</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in smartTableData">
+                <td class="table-id">{{item.id}}</td>
+                <td>{{item.firstName}}</td>
+                <td>{{item.lastName}}</td>
+                <td>{{item.username}}</td>
+                <td><a class="email-link" ng-href="mailto:{{item.email}}">{{item.email}}</a></td>
+                <td>{{item.age}}</td>
+                <td>{{item.firstName}}</td>
+                <td>{{item.lastName}}</td>
+                <td>{{item.username}}</td>
+                <td>{{item.age}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    
+                        <label>共{{total}}条数据  每页显示
+                                <select ng-model="smartTablePageSize" >
+                                        <option value="5" ng-selected = "1">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                        </select>  条
+                                            </label>
+                    
+                </td>
+                <td colspan="6" class="text-center">
+                    <div st-pagination="" st-items-by-page="smartTablePageSize" st-displayed-pages="10"></div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
