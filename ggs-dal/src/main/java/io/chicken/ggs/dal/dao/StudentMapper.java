@@ -2,7 +2,7 @@ package io.chicken.ggs.dal.dao;
 
 import io.chicken.ggs.dal.model.Student;
 
-public interface StudentMapper {
+public interface StudentMapper extends BaseDao<Student>{
     int deleteByPrimaryKey(Long id);
 
     int insert(Student record);
@@ -14,4 +14,5 @@ public interface StudentMapper {
     int updateByPrimaryKeySelective(Student record);
 
     int updateByPrimaryKey(Student record);
+
 }

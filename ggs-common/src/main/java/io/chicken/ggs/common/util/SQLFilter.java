@@ -1,6 +1,8 @@
 package io.chicken.ggs.common.util;
 
 
+import io.chicken.ggs.common.GGSException;
+import io.chicken.ggs.common.ResultCode;
 import org.springframework.util.StringUtils;
 
 /**
@@ -34,7 +36,7 @@ public class SQLFilter {
         //判断是否包含非法字符
         for(String keyword : keywords){
             if(str.indexOf(keyword) != -1){
-               // throw new RRException("包含非法字符");
+                throw new GGSException(ResultCode.PARAMETER_INVALID,"非法字符");
             }
         }
 
