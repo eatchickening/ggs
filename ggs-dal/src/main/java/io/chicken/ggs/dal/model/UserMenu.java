@@ -1,6 +1,6 @@
 package io.chicken.ggs.dal.model;
 
-public class User_menu {
+public class UserMenu {
     private Long id;
 
     private Long userId;

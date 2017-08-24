@@ -20,10 +20,35 @@
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
-    <include refid="Base_Column_List" />
+     id, studentid, name, sex, award, score, moral, intellectual, physical, schoolid,
+    remark
     from student
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="queryList" resultType="BaseResultMap">
+    select * from sys_user
+    <where>
+      <if test="createUserId != null">
+        and `create_user_id` = #{createUserId}
+      </if>
+      <if test="username != null and username.trim() != ''">
+        and `username` like concat('%',#{username},'%')
+      </if>
+    </where>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by user_id desc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from student
     where id = #{id,jdbcType=BIGINT}
