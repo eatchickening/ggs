@@ -21,6 +21,10 @@
         <module>ggs-webapp</module>
     </modules>
 
+    <properties>
+        <commons-lang-version>2.6</commons-lang-version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -88,6 +92,11 @@
                 <version>1.16.8</version>
             </dependency>
 
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons-lang-version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

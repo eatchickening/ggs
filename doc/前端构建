@@ -1,4 +1,10 @@
 准备工作：安装nodejs
-1，全局安装：npm install -g gulp, npm install -g bower
-2，在manager-web/src/main/webapp/目录下执行，npm install和 bower install
-3，前端开发者模式运行命令：gulp serve
+1: npm install cnpm -g --registry=https://registry.npm.taobao.org 安装阿里镜像
+执行cnpm -v 显示版本号即安装成功
+
+2，全局安装：cnpm install -g gulp
+执行gulp -v 显示版本号即安装成功
+安装 cnpm install -g bower
+执行bower -v 显示版本号即安装成功
+3，在manager-web/src/main/webapp/目录下执行，cnpm install和 bower install
+4，前端开发者模式运行命令：gulp serve

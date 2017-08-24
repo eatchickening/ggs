@@ -81,12 +81,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- commons-lang -->
-        <dependency>
-            <artifactId>commons-lang</artifactId>
-            <groupId>commons-lang</groupId>
-            <version>2.4</version>
-        </dependency>
+
 
     </dependencies>
 </project>
