@@ -1,22 +1,101 @@
+<style>
+    .f-cb {
+        zoom: 1;
+    }
+
+    .f-cb:after {
+        display: block;
+        clear: both;
+        visibility: hidden;
+        height: 0;
+        overflow: hidden;
+        content: ".";
+    }
+
+    .m-sku li {
+        line-height: 28px;
+        float: left;
+        position: relative;
+        margin: 0 4px 4px 0;
+        vertical-align: middle;
+        padding: 1px;
+    }
+
+    .m-sku li span {
+        float: left;
+        cursor: pointer;
+        background-color: #fff;
+        white-space: nowrap;
+        width: auto!important;
+        min-width: 10px;
+        padding: 0 9px;
+        text-align: center;
+        border: 1px solid #b8b7bd;
+        color: #000;
+        text-decoration: none;
+    }
+
+    .m-sku li span.js-seleted {
+        border: 2px solid #219E91;
+        margin: -1px;
+    }
+
+    .m-sku li span.js-disabled {
+        border: 1px dashed #D6D6D8;
+        color: #CDCDCD;
+    }
+
+    li {
+        list-style: none;
+    }
+
+</style
+
 <div class="horizontal-scroll">
     <div ba-panel ba-panel-title="" ba-panel-class="with-scroll">
-        <table class="table table-bordered">
+        <table class="table table-bordered ">
             <tbody>
                 <tr>
                     <td width="15%">地区</td>
-                    <td width="85%"></td>
+                    <td width="85%">
+                        <div class="r-col">
+                            <ul class="m-sku f-cb">
+                                <li><span ng-class="{'js-seleted': true}" ng-click="">全部</span></li>
+                                <li><span ng-class="{'js-disabled': true}" ng-click="">街道1</span></li>
+                                <li><span ng-class="{'js-disabled': true}" ng-click="">街道2</span></li>
+                                <li><span ng-class="{'js-disabled': true}" ng-click="">街道3</span></li>
+                                <li><span ng-class="{'js-disabled': true}" ng-click="">街道4</span></li>
+                            </ul>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td>类型</td>
                     <td>
-                        <a href="">类型1</a>
-                        <a href="">类型1</a>
-                        <a href="">类型1</a>
+                        <div class="r-col">
+                            <ul class="m-sku f-cb">
+                                <li><span ng-class="{'js-seleted': true}" ng-click="">全部</span></li>
+                                <li><span ng-class="{'js-disabled':true}" ng-click="">高职</span></li>
+                                <li><span ng-class="{'js-disabled': true}" ng-click="">高中</span></li>
+                                <li><span ng-class="{'js-disabled': true}" ng-click="">初中</span></li>
+                                <li><span ng-class="{'js-disabled': true}" ng-click="">小学</span></li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <td>学校</td>
-                    <td></td>
+                    <td>
+                        <div class="r-col">
+                            <ul class="m-sku f-cb">
+                                <li><span ng-class="{'js-seleted': true}" ng-click="">全部</span></li>
+                                <li><span ng-class="{'js-disabled': true}" ng-click="">学校1</span></li>
+                                <li><span ng-class="{'js-disabled': true}" ng-click="">学校2</span></li>
+                                <li><span ng-class="{'js-disabled': true}" ng-click="">学校3</span></li>
+                                <li><span ng-class="{'js-disabled': true}" ng-click="">学校4</span></li>
+                            </ul>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td>精确搜索</td>
@@ -32,7 +111,6 @@
             </tbody>
         </table>
     </div>
-    <!-->
     <!-->
 
     <table class="table" st-table="smartTableData">

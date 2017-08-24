@@ -5,8 +5,8 @@
         return {
             login: function (username, password) {
                 var deferred = $q.defer();
-                $http.post('http://localhost:8080/sys/login', {
-                    username: username,
+                $http.post('http://localhost:8080/ggs/auth/login', {
+                    account: username,
                     password: password
                 }).then(function (response) {
                     deferred.resolve(response);
