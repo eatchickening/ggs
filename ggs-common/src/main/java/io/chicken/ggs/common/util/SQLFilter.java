@@ -15,11 +15,11 @@ public class SQLFilter {
      * @param str  待验证的字符串
      */
     public static String sqlInject(String str){
-        if(StringUtil.isBlank(str)){
+        if(StringUtils.isBlank(str)){
             return null;
         }
         //去掉'|"|;|\字符
-        str = StringUtil.replace(str, "'", "");
+        str = StringUtils.replace(str, "'", "");
         str = StringUtils.replace(str, "\"", "");
         str = StringUtils.replace(str, ";", "");
         str = StringUtils.replace(str, "\\", "");
@@ -33,7 +33,7 @@ public class SQLFilter {
         //判断是否包含非法字符
         for(String keyword : keywords){
             if(str.indexOf(keyword) != -1){
-                throw new RRException("包含非法字符");
+               // throw new RRException("包含非法字符");
             }
         }
 

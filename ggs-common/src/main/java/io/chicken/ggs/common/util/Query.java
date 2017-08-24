@@ -1,6 +1,5 @@
 package io.chicken.ggs.common.util;
 
-import io.renren.xss.SQLFilter;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
