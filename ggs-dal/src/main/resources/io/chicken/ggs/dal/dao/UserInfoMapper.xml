@@ -178,4 +178,21 @@
     where is_delete = 0
     and id = #{id,jdbcType=INTEGER}
   </update>
+
+
+    <select id="login" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_info
+        where is_delete = 0
+        and account = #{account}
+        and password = #{pwd}
+    </select>
+    <update id="resetPwdByAccount">
+        update user_info
+        set password = #{newPwd}
+        where is_delete = 0
+        and account = #{account}
+    </update>
+
 </mapper>

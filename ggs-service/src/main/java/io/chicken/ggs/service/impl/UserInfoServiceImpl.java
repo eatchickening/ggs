@@ -11,6 +11,7 @@ import io.chicken.ggs.service.UserInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -47,5 +48,15 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public UserInfo query(Integer id) {
         return userInfoMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public UserInfo login(String account, String pwd) throws DataAccessException {
+        return userInfoMapper.login(account, pwd);
+    }
+
+    @Override
+    public Boolean updatePwd(String account, String newPwd) throws DataAccessException {
+        return userInfoMapper.resetPwdByAccount(account, newPwd);
     }
 }
