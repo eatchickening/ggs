@@ -33,7 +33,7 @@ ggs-webapp/app/node_modules/**
 ggs-webapp/app/src/bower_components/**
 ggs-webapp/app/.tmp/**
 ggs-webapp/app/static/**
-#/ggs-webapp/src/main/resources/application.properties
+/ggs-webapp/src/main/resources/application.properties
 /ggs-dal/src/test/java/generatorConfig.xml
-#/ggs-service/src/test/resources/application.properties
+/ggs-service/src/test/resources/application.properties
 *.DS_Store
