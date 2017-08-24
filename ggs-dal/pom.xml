@@ -19,12 +19,7 @@
 
 
     <dependencies>
-        <!-- test start -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
+       
 
         <!-- mysql、mybatis -->
         <dependency>

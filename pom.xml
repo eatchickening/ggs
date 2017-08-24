@@ -21,9 +21,6 @@
         <module>ggs-webapp</module>
     </modules>
 
-    <properties>
-        <commons-lang-version>2.6</commons-lang-version>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -34,7 +31,9 @@
 
     <properties>
         <java.version>1.7</java.version>
-
+        <commons-lang-version>2.6</commons-lang-version>
+        <commons-io-version>2.5</commons-io-version>
+        <junit-version>4.12</junit-version>
         <!-- 自动生成bean -->
         <mybatis.generator.configurationFile>${basedir}/src/test/java/generatorConfig.xml</mybatis.generator.configurationFile>
     </properties>
@@ -96,6 +95,17 @@
                 <groupId>commons-lang</groupId>
                 <artifactId>commons-lang</artifactId>
                 <version>${commons-lang-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit-version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
