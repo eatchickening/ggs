@@ -29,22 +29,24 @@ public class TeacherBusinessImpl implements TeacherBusiness{
     public Result queryTeacherList(Map<String, Object> teaMap) {
         //查询列表数据
         Query query=null;
-        try{
+        try {
             query = new Query(teaMap);
-        }catch(Exception e)
-        {
+        } catch(Exception e) {
             logger.error("参数异常",e);
             return new Result<>(ResultCode.PARAMETER_INVALID);
         }
         List<Teacher> teacherList=null;
+        long total=0;
         try {
             teacherList = teacherService.queryTeacherList(query);
+            total = teacherService.queryTotal(query);
         }catch(Exception e)
         {
             logger.error("数据库操作异常",e);
             return new Result<>(ResultCode.DB_EXCEPTION);
         }
         Result result=  new Result<>(ResultCode.SUCCESS);
+        result.setTotal(total);
         result.setData(teacherList);
         return result;
     }

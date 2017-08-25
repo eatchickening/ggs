@@ -2,7 +2,7 @@ package io.chicken.ggs.dal.dao;
 
 import io.chicken.ggs.dal.model.Dictionary;
 
-public interface DictionaryMapper {
+public interface DictionaryMapper  extends BaseDao<Dictionary>{
     int deleteByPrimaryKey(Long id);
 
     int insert(Dictionary record);

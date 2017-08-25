@@ -96,6 +96,7 @@ CREATE TABLE user_menu (
 DROP  TABLE  IF EXISTS teacher;
 CREATE TABLE teacher (
     id bigint NOT NULL AUTO_INCREMENT,
+    teacherid VARCHAR(50) COMMENT '教师编号',
     name varchar(50) COMMENT '教师姓名',
     sex  varchar(2) COMMENT '教师姓别',
     classname varchar(100) COMMENT '任课班级',

@@ -36,7 +36,7 @@
     </properties>
 
     <!-- 阿里云maven仓库 -->
-    <repositories>
+    <!--repositories>
         <repository>
             <id>public</id>
             <name>aliyun nexus</name>
@@ -45,8 +45,8 @@
                 <enabled>true</enabled>
             </releases>
         </repository>
-    </repositories>
-    <pluginRepositories>
+    </repositories-->
+    <!--pluginRepositories>
         <pluginRepository>
             <id>public</id>
             <name>aliyun nexus</name>
@@ -58,7 +58,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
-    </pluginRepositories>
+    </pluginRepositories-->
 
     <dependencyManagement>
         <dependencies>
@@ -143,7 +143,7 @@
             </plugin>
 
             <!--mybatis 自动生成mapper时打开-->
-            <!--<plugin>
+            <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.2</version>
@@ -162,7 +162,7 @@
                         <version>5.1.33</version>
                     </dependency>
                 </dependencies>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 
