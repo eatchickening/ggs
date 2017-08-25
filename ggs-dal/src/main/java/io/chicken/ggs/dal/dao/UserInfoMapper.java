@@ -17,7 +17,7 @@ public interface UserInfoMapper {
     int updateByPrimaryKey(UserInfo record);
 
 
-    UserInfo login(@Param("account") String account, @Param("password") String password);
+    UserInfo login(@Param("account") String account, @Param("pwd") String password);
     Boolean resetPwdByAccount(@Param("account") String account, @Param("newPwd") String newPwd);
 
 }
