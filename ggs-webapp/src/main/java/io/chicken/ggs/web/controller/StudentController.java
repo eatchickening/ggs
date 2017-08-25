@@ -1,5 +1,6 @@
 package io.chicken.ggs.web.controller;
 
+import io.chicken.ggs.business.impl.StudentBusinessImpl;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.util.Query;
@@ -25,21 +26,12 @@ import java.util.Map;
 public class StudentController {
 
     private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
-
     @Autowired
-    private StudentService studentService;
+    private StudentBusinessImpl studentBusiness;
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result list(@RequestParam Map<String, Object> params){
         logger.info(params.toString());
-        //查询列表数据
-        Query query = new Query(params);
-        List<Student> listStudent = studentService.queryList(query);
-        long total = studentService.queryTotal(query);
-        Result result=  new Result<>(ResultCode.SUCCESS);
-        result.setTotal(total);
-        result.setData(listStudent);
-        return  result;
-
+        return studentBusiness.getStudentList(params);
     }
 }
