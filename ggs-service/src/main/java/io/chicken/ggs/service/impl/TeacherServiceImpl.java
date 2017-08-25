@@ -20,4 +20,8 @@ public class TeacherServiceImpl implements TeacherService {
     public List<Teacher> queryTeacherList(Map<String, Object> teaMap) {
         return teacherMapper.queryList(teaMap);
     }
+
+    public long queryTotal(Map<String, Object> teaMap) {
+        return teacherMapper.queryTotal(teaMap);
+    }
 }

@@ -11,4 +11,5 @@ import java.util.Map;
  */
 public interface TeacherService {
     List<Teacher> queryTeacherList(Map<String, Object> teaMap);
+    long queryTotal(Map<String, Object> teaMap);
 }

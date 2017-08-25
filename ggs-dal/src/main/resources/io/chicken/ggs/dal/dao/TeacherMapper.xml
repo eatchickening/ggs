@@ -3,67 +3,36 @@
 <mapper namespace="io.chicken.ggs.dal.dao.TeacherMapper" >
   <resultMap id="BaseResultMap" type="io.chicken.ggs.dal.model.Teacher" >
     <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="teacherid" property="teacherid" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="classname" property="classname" jdbcType="VARCHAR" />
-    <result column="schoolcode" property="schoolcode" jdbcType="VARCHAR" />
+    <result column="school_id" property="schoolId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, sex, classname, schoolcode
+    id, teacherid, name, sex, classname, school_id
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from teacher
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <select id="queryList" resultType="io.chicken.ggs.dal.model.Teacher">
-    select * from teacher
-    where
-    name = name
-    and school_id
-    IN (
-      select school_id
-      from school
-      where
-      name=schoolename
-      and areacode
-      in(
-        select areacode
-        from ba_area
-        where
-        name = areaname
-      )
-      and school_type_id
-      IN (
-        select school_type_id
-        from schooltype
-        where schooltype=schooltype
-      )
-    )
-
+  <select id="queryList" resultType="io.chicken.ggs.dal.model.Student">
     select * from teacher
     <where>
-      <if test="name != null">
-        and `name` = #{name}
+      <if test="name != null and name.trim() != ''">
+        and `name` like concat('%',#{name},'%')
       </if>
 
       <if test="(
-      (areaname != null and areaname.trim() != '' )
-      or
-      (schooltype !=null and schooltype.trim() != '')
-      or
-      (schoolname !=null and schoolname.trim() != '')
+      (schoolname != null and schoolname.trim() != '')
+      or (areacode != null and areacode.trim() != '')
+      or (schooltype != null and schooltype.trim() != '')
       ) ">
-        and `schoolid`in
+        and `schoolcode`in
         (
-        select schoolid from school
+        select schoolcode from school
         <where>
           <if test="schoolname != null">
             and `name` = #{schoolname}
           </if>
-          <if test="areaname != null">
-            and `areacode` = #{areaname}
+          <if test="areacode != null">
+            and `areacode` = #{areacode}
           </if>
           <if test="schooltype != null">
             and `schooltype` = #{schooltype}
@@ -73,25 +42,87 @@
       </if>
 
     </where>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by teacherid asc
+      </otherwise>
+    </choose>
     <if test="offset != null and limit != null">
       limit #{offset}, #{limit}
     </if>
+  </select>
+
+  <select id="queryTotal" resultType="java.lang.Long" >
+    select count(*) from teacher
+    <where>
+      <if test="name != null and name.trim() != ''">
+        and `name` like concat('%',#{name},'%')
+      </if>
+
+      <if test="(
+      (schoolname != null and schoolname.trim() != '')
+      or (areacode != null and areacode.trim() != '')
+      or (schooltype != null and schooltype.trim() != '')
+      ) ">
+        and `schoolcode`in
+        (
+        select schoolcode from school
+        <where>
+          <if test="schoolname != null">
+            and `name` = #{schoolname}
+          </if>
+          <if test="areacode != null">
+            and `areacode` = #{areacode}
+          </if>
+          <if test="schooltype != null">
+            and `schooltype` = #{schooltype}
+          </if>
+        </where>
+        )
+      </if>
+
+    </where>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by teacherid asc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from teacher
+    where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from teacher
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="io.chicken.ggs.dal.model.Teacher" >
-    insert into teacher (id, name, sex, 
-      classname, schoolcode)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
-      #{classname,jdbcType=VARCHAR}, #{schoolcode,jdbcType=VARCHAR})
+    insert into teacher (id, teacherid, name, 
+      sex, classname, school_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{teacherid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{classname,jdbcType=VARCHAR}, #{schoolId,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.Teacher" >
     insert into teacher
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="teacherid != null" >
+        teacherid,
       </if>
       <if test="name != null" >
         name,
@@ -102,13 +133,16 @@
       <if test="classname != null" >
         classname,
       </if>
-      <if test="schoolcode != null" >
-        schoolcode,
+      <if test="schoolId != null" >
+        school_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
+      </if>
+      <if test="teacherid != null" >
+        #{teacherid,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -119,14 +153,17 @@
       <if test="classname != null" >
         #{classname,jdbcType=VARCHAR},
       </if>
-      <if test="schoolcode != null" >
-        #{schoolcode,jdbcType=VARCHAR},
+      <if test="schoolId != null" >
+        #{schoolId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="io.chicken.ggs.dal.model.Teacher" >
     update teacher
     <set >
+      <if test="teacherid != null" >
+        teacherid = #{teacherid,jdbcType=VARCHAR},
+      </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
@@ -136,18 +173,19 @@
       <if test="classname != null" >
         classname = #{classname,jdbcType=VARCHAR},
       </if>
-      <if test="schoolcode != null" >
-        schoolcode = #{schoolcode,jdbcType=VARCHAR},
+      <if test="schoolId != null" >
+        school_id = #{schoolId,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="io.chicken.ggs.dal.model.Teacher" >
     update teacher
-    set name = #{name,jdbcType=VARCHAR},
+    set teacherid = #{teacherid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       classname = #{classname,jdbcType=VARCHAR},
-      schoolcode = #{schoolcode,jdbcType=VARCHAR}
+      school_id = #{schoolId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
