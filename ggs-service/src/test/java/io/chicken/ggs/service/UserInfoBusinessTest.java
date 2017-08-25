@@ -1,6 +1,8 @@
 
 package io.chicken.ggs.service;
 
+import io.chicken.ggs.business.UserInfoBusiness;
+import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.vo.UserInfoQueryParam;
 import io.chicken.ggs.common.vo.UserInfoVO;
 import io.chicken.ggs.dal.model.UserInfo;
@@ -17,35 +19,10 @@ import java.util.List;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = AppTest.class)
-public class UserInfoServiceTest {
+public class UserInfoBusinessTest {
 
     @Autowired
-    private UserInfoService userInfoService;
-
-    @Test
-    public void save() {
-        UserInfo userInfo = new UserInfo();
-        userInfo.setAccount("test2");
-        userInfo.setUsername("李四");
-        userInfoService.save(userInfo);
-    }
-
-
-    @Test
-    public void update() {
-        UserInfo userInfo = new UserInfo();
-        userInfo.setId(1);
-        userInfo.setAccount("test1");
-        userInfo.setUsername("李四");
-        userInfoService.update(userInfo);
-    }
-
-    @Test
-    public void query() {
-        Integer id = 1;
-        UserInfo user = userInfoService.query(id);
-        System.out.println(user);
-    }
+    private UserInfoBusiness userInfoBusiness;
 
     @Test
     public void queryList() {
@@ -53,8 +30,8 @@ public class UserInfoServiceTest {
         param.setPageNum(1);
         param.setPageSize(10);
         param.setAccount("test1");
-        List<UserInfoVO> list = userInfoService.queryList(param);
-        System.out.println(list);
+        Result<List<UserInfoVO>> list = userInfoBusiness.queryList(param);
+        System.out.println(list.isSuccess());
     }
 
     @Test
@@ -62,11 +39,11 @@ public class UserInfoServiceTest {
         UserInfoQueryParam param = new UserInfoQueryParam();
         param.setPageSize(10);
         param.setPageNum(1);
-        param.setAccount("test1");
+        // param.setAccount("test1");
         // param.setOrganName("教育局");
-        param.setDepartName("办公公司");
-        param.setPostName("教师");
-        Long count = userInfoService.queryCount(param);
-        System.out.println(count);
+        // param.setDepartName("办公公司");
+        // param.setPostName("教师");
+        Result<Long> count = userInfoBusiness.queryCount(param);
+        System.out.println(count.getData());
     }
 }

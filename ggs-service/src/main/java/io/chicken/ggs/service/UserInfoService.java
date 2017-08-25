@@ -3,8 +3,13 @@
  */
 package io.chicken.ggs.service;
 
+import io.chicken.ggs.common.vo.UserInfoQueryParam;
+import io.chicken.ggs.common.vo.UserInfoVO;
 import io.chicken.ggs.dal.model.UserInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.dao.DataAccessException;
+
+import java.util.List;
 
 /**
  *
@@ -21,5 +26,9 @@ public interface UserInfoService {
     UserInfo login(String account, String pwd) throws DataAccessException;
 
     Boolean updatePwd(String account, String newPwd) throws DataAccessException;
+
+    List<UserInfoVO> queryList(UserInfoQueryParam param);
+
+    Long queryCount(UserInfoQueryParam param);
 
 }

@@ -5,6 +5,8 @@ package io.chicken.ggs.service.impl;
 
 import io.chicken.ggs.common.GGSException;
 import io.chicken.ggs.common.ResultCode;
+import io.chicken.ggs.common.vo.UserInfoQueryParam;
+import io.chicken.ggs.common.vo.UserInfoVO;
 import io.chicken.ggs.dal.dao.UserInfoMapper;
 import io.chicken.ggs.dal.model.UserInfo;
 import io.chicken.ggs.service.UserInfoService;
@@ -13,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 系统用户操作接口
@@ -58,5 +62,16 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public Boolean updatePwd(String account, String newPwd) throws DataAccessException {
         return userInfoMapper.resetPwdByAccount(account, newPwd);
+    }
+
+    @Override
+    public List<UserInfoVO> queryList(UserInfoQueryParam param) {
+        Integer start = (param.getPageNum() - 1) * param.getPageSize();
+        return userInfoMapper.queryList(param, start, param.getPageSize());
+    }
+
+    @Override
+    public Long queryCount(UserInfoQueryParam param) {
+        return userInfoMapper.queryCount(param);
     }
 }

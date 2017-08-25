@@ -28,6 +28,51 @@
     where is_delete = 0
     and id = #{id,jdbcType=INTEGER}
   </select>
+
+    <select id="queryList" resultMap="BaseResultMap">
+        select
+        a.id, a.account, a.username, a.organcode, a.departcode, a.postcode
+        from user_info a
+        where a.is_delete = 0
+        <if test="param.account != null and param.account != ''" >
+            and a.account = #{param.account}
+        </if>
+        <if test="param.username != null and param.username != ''" >
+            and a.username = #{param.username}
+        </if>
+        ORDER by a.create_time desc
+        limit #{start}, #{pageSize}
+    </select>
+    <select id="queryCount" resultType="java.lang.Long">
+        select count(1)
+        from user_info a
+        where a.is_delete = 0
+        <if test="param.account != null and param.account != ''" >
+            and a.account = #{param.account}
+        </if>
+        <if test="param.username != null and param.username != ''" >
+            and a.username = #{param.username}
+        </if>
+        <if test="param.organName != null and param.organName != ''" >
+            and exists(
+                select 1 from organization b where b.organcode = a.organcode
+                and b.name = #{param.organName}
+            )
+        </if>
+        <if test="param.departName != null and param.departName != ''" >
+            and exists(
+                select 1 from depart b where b.departcode = a.departcode
+                and b.name = #{param.departName}
+            )
+        </if>
+        <if test="param.postName != null and param.postName != ''" >
+            and exists(
+                select 1 from post b where b.postcode = a.postcode
+                and b.name = #{param.postName}
+            )
+        </if>
+
+    </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user_info
     where is_delete = 0

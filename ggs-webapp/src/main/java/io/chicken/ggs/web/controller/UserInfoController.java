@@ -9,19 +9,15 @@ import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.vo.UserInfoQueryParam;
 import io.chicken.ggs.common.vo.UserInfoVO;
-import io.chicken.ggs.service.UserInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.List;
 
@@ -53,7 +49,7 @@ public class UserInfoController {
             params.setPageSize(CommonConstant.PAGE_SIZE);
         }
 
-        // 查询总条数
+        //查询总条数
         Result<Long> countResult = userInfoBusiness.queryCount(params);
         if (!countResult.isSuccess()) {
             return new Result<>(countResult.getCode(), countResult.getMessage());
@@ -72,5 +68,6 @@ public class UserInfoController {
         }
         listResult.setTotal(countResult.getData());
         return listResult;
+
     }
 }

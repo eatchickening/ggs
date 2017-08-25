@@ -75,7 +75,16 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>ggs-common</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>ggs-common</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
 
 
     </dependencies>
