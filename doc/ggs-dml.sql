@@ -6,3 +6,5 @@ INSERT INTO `dictionary` (`id`, `biztype`, `bizcode`, `datavalue`, `status`, `re
 INSERT INTO `student` (`id`, `studentid`, `name`, `sex`, `award`, `score`, `moral`, `intellectual`, `physical`, `schoolid`, `remark`) VALUES ('1', '12354562', '孟祥祥', '男', NULL, NULL, NULL, NULL, NULL, '1', NULL);
 INSERT INTO `school` (`id`, `name`, `areacode`, `schooltype`) VALUES ('1', '家里蹲大学', '2', 'zhongzhuan');
 INSERT INTO `school` (`id`, `name`, `areacode`, `schooltype`) VALUES ('2', '山东农大', '1', 'gaozhi');
+
+insert into teacher values(1,"teacher1","xiaofeng","1","1ban","school1");

@@ -17,6 +17,66 @@
     from teacher
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="queryList" resultType="io.chicken.ggs.dal.model.Teacher">
+    select * from teacher
+    where
+    name = name
+    and school_id
+    IN (
+      select school_id
+      from school
+      where
+      name=schoolename
+      and areacode
+      in(
+        select areacode
+        from ba_area
+        where
+        name = areaname
+      )
+      and school_type_id
+      IN (
+        select school_type_id
+        from schooltype
+        where schooltype=schooltype
+      )
+    )
+
+    select * from teacher
+    <where>
+      <if test="name != null">
+        and `name` = #{name}
+      </if>
+
+      <if test="(
+      (areaname != null and areaname.trim() != '' )
+      or
+      (schooltype !=null and schooltype.trim() != '')
+      or
+      (schoolname !=null and schoolname.trim() != '')
+      ) ">
+        and `schoolid`in
+        (
+        select schoolid from school
+        <where>
+          <if test="schoolname != null">
+            and `name` = #{schoolname}
+          </if>
+          <if test="areaname != null">
+            and `areacode` = #{areaname}
+          </if>
+          <if test="schooltype != null">
+            and `schooltype` = #{schooltype}
+          </if>
+        </where>
+        )
+      </if>
+
+    </where>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from teacher
     where id = #{id,jdbcType=BIGINT}
