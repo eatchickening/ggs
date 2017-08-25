@@ -1,1 +1,72 @@
-<h1>用户管理</h1>
+<div class="widgets">
+    <div class="row">
+        <div class="col-md-12">
+            <div ba-panel ba-panel-class="with-scroll">
+                <div class="horizontal-scroll">
+                    <table class="table table-hover" st-table="smartTableData">
+                        <thead>
+                            <tr class="sortable ">
+                                <th class="table-id" st-sort="id" st-sort-default="true">#</th>
+                                <th st-sort="firstName">账号</th>
+                                <th st-sort="lastName">昵称</th>
+                                <th st-sort="username">机构</th>
+                                <th st-sort="email">部门</th>
+                                <th st-sort="age">岗位</th>
+                                <th>操作</th>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <th><input st-search="firstName" placeholder="搜索帐号" class="input-sm form-control search-input"
+                                        type="search" /></th>
+                                <th><input st-search="lastName" placeholder="搜索昵称" class="input-sm form-control search-input"
+                                        type="search" /></th>
+                                <th><input st-search="username" placeholder="搜索机构" class="input-sm form-control search-input"
+                                        type="search" /></th>
+                                <th><input st-search="email" placeholder="搜索部门" class="input-sm form-control search-input" type="search"
+                                    />
+                                </th>
+                                <th><input st-search="age" placeholder="搜索岗位" class="input-sm form-control search-input" type="search"
+                                    />
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in smartTableData">
+                                <td class="table-id">{{item.id}}</td>
+                                <td>{{item.firstName}}</td>
+                                <td>{{item.lastName}}</td>
+                                <td>{{item.username}}</td>
+                                <td><a class="email-link" ng-href="mailto:{{item.email}}">{{item.email}}</a></td>
+                                <td>{{item.age}}</td>
+                                <td>
+                                    <div class="btn-group" uib-dropdown dropdown-append-to-body>
+                                        <button type="button" class="btn btn-info " uib-dropdown-toggle>
+                                                  操作 <span class="caret"></span>
+                                                </button>
+                                        <ul uib-dropdown-menu>
+                                            <li><a href>编辑</a></li>
+                                            <li><a href>删除</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6" class="text-center">
+
+                                    <div style="float: left">
+                                        <span class="page-items">共{{totalItems}}条&nbsp&nbsp每页显示&nbsp</span>
+                                        <select class="page-size" title="Rows on page" ng-model="smartTablePageSize" ng-options="rowNum for rowNum in rowNums"></select>
+                                        <span class="page-items">&nbsp条</span>
+                                    </div>
+                                    <div st-pagination="" st-items-by-page="smartTablePageSize" st-displayed-pages="5" st-page-change="pageChange(newPage)" st-template="app/pages/common/pagination.html"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
