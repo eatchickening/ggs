@@ -1,5 +1,6 @@
 package io.chicken.ggs.web.controller;
 
+import io.chicken.ggs.business.impl.StudentBusinessImpl;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.util.Query;
@@ -10,7 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Map;
@@ -23,19 +26,12 @@ import java.util.Map;
 public class StudentController {
 
     private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
-
     @Autowired
-    private StudentService studentService;
-    @RequestMapping("/list")
+    private StudentBusinessImpl studentBusiness;
+    @ResponseBody
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result list(@RequestParam Map<String, Object> params){
-        //查询列表数据
-        Query query = new Query(params);
-        List<Student> listStudent = studentService.queryList(query);
-        int total = studentService.queryTotal(query);
-        Result result=  new Result<>(ResultCode.SUCCESS);
-        result.setTotal((long)total);
-        result.setData(listStudent);
-        return  result;
-
+        logger.info(params.toString());
+        return studentBusiness.getStudentList(params);
     }
 }
