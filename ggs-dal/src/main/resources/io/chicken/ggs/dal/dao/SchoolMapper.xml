@@ -3,27 +3,89 @@
 <mapper namespace="io.chicken.ggs.dal.dao.SchoolMapper" >
   <resultMap id="BaseResultMap" type="io.chicken.ggs.dal.model.School" >
     <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="schoolcode" property="schoolcode" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="areacode" property="areacode" jdbcType="VARCHAR" />
     <result column="schooltype" property="schooltype" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, areacode, schooltype
+    id, name, schoolcode,areacode, schooltype
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
-     id, name, areacode, schooltype
+     id, name,schoolcode, areacode, schooltype
     from school
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="queryList" resultType="io.chicken.ggs.dal.model.School">
+    select * from school
+    <where>
+      <if test="schoolcode != null">
+        and `schoolcode` = #{schoolcode}
+      </if>
+      <if test="areacode != null">
+        and `areacode` = #{areacode}
+      </if>
+      <if test="schooltype != null">
+        and `schooltype` = #{schooltype}
+      </if>
+      <if test="name != null and name.trim() != ''">
+        and `name` like concat('%',#{name},'%')
+      </if>
+
+    </where>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by id asc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+  <select id="queryTotal" resultType="java.lang.Long" >
+    select count(*) from school
+    <where>
+      <if test="areacode != null">
+        and `areacode` = #{areacode}
+      </if>
+      <if test="schoolcode != null">
+        and `schoolcode` = #{schoolcode}
+      </if>
+      <if test="schooltype != null">
+        and `schooltype` = #{schooltype}
+      </if>
+      <if test="name != null and name.trim() != ''">
+        and `name` like concat('%',#{name},'%')
+      </if>
+
+    </where>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by id asc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from school
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="io.chicken.ggs.dal.model.School" >
-    insert into school (id, name, areacode, 
+    insert into school (id, name, schoolcode,areacode,
       schooltype)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{areacode,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},#{schoolcode,jdbcType=VARCHAR}, #{areacode,jdbcType=VARCHAR},
       #{schooltype,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.School" >
@@ -34,6 +96,9 @@
       </if>
       <if test="name != null" >
         name,
+      </if>
+      <if test="schoolcode != null" >
+        schoolcode,
       </if>
       <if test="areacode != null" >
         areacode,
@@ -49,6 +114,9 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="schoolcode != null" >
+        #{schoolcode,jdbcType=VARCHAR},
+      </if>
       <if test="areacode != null" >
         #{areacode,jdbcType=VARCHAR},
       </if>
@@ -63,6 +131,9 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="schoolcode != null" >
+        schoolcode= #{schoolcode,jdbcType=VARCHAR},
+      </if>
       <if test="areacode != null" >
         areacode = #{areacode,jdbcType=VARCHAR},
       </if>
@@ -76,6 +147,7 @@
     update school
     set name = #{name,jdbcType=VARCHAR},
       areacode = #{areacode,jdbcType=VARCHAR},
+       schoolcode=#{schoolcode,jdbcType=VARCHAR},
       schooltype = #{schooltype,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
