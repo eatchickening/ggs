@@ -36,9 +36,11 @@
         and `name` like concat('%',#{name},'%')
       </if>
 
-      <if test="schoolname != null and schoolname.trim() != ''
-      and areacode != null and areacode.trim() != ''
-      and schooltype != null and schooltype.trim() != '' ">
+      <if test="(
+      (schoolname != null and schoolname.trim() != '')
+      or (areacode != null and areacode.trim() != '')
+      or (schooltype != null and schooltype.trim() != '')
+      ) ">
         and `schoolid`in
         (
           select id from school
@@ -53,6 +55,52 @@
               and `schooltype` = #{schooltype}
             </if>
           </where>
+        )
+      </if>
+
+    </where>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by studentid asc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+  <select id="queryTotal" resultType="java.lang.Long" >
+    select count(*) from student
+    <where>
+      <if test="studentid != null">
+        and `studentid` = #{studentid}
+      </if>
+      <if test="name != null and name.trim() != ''">
+        and `name` like concat('%',#{name},'%')
+      </if>
+
+      <if test="(
+      (schoolname != null and schoolname.trim() != '')
+      or (areacode != null and areacode.trim() != '')
+      or (schooltype != null and schooltype.trim() != '')
+      ) ">
+        and `schoolid`in
+        (
+        select id from school
+        <where>
+          <if test="schoolname != null">
+            and `name` = #{schoolname}
+          </if>
+          <if test="areacode != null">
+            and `areacode` = #{areacode}
+          </if>
+          <if test="schooltype != null">
+            and `schooltype` = #{schooltype}
+          </if>
+        </where>
         )
       </if>
 
