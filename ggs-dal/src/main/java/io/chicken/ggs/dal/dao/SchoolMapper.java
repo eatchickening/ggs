@@ -2,7 +2,7 @@ package io.chicken.ggs.dal.dao;
 
 import io.chicken.ggs.dal.model.School;
 
-public interface SchoolMapper {
+public interface SchoolMapper extends BaseDao<School>{
     int deleteByPrimaryKey(Long id);
 
     int insert(School record);

@@ -9,7 +9,7 @@ public class Teacher {
 
     private String classname;
 
-    private Long schoolId;
+    private String schoolcode;
 
     public Long getId() {
         return id;
@@ -43,11 +43,11 @@ public class Teacher {
         this.classname = classname == null ? null : classname.trim();
     }
 
-    public Long getSchoolId() {
-        return schoolId;
+    public String getSchoolcode() {
+        return schoolcode;
     }
 
-    public void setSchoolId(Long schoolId) {
-        this.schoolId = schoolId;
+    public void setSchoolcode(String schoolcode) {
+        this.schoolcode = schoolcode;
     }
 }
