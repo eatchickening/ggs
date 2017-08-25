@@ -4,28 +4,22 @@
 package io.chicken.ggs.common.vo;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
+ * 用户列表查询条件
  *
- * @author wung 2017/8/24.
+ * @author wung 2017/8/25.
  */
-public class UserInfoVO implements Serializable {
-    private static final long serialVersionUID = -6397638642733642819L;
+public class UserInfoQueryParam implements Serializable {
+    private static final long serialVersionUID = -794023287671347775L;
 
-    private Integer id;
+    private Integer pageNum;
+
+    private Integer pageSize;
 
     private String account;
 
     private String username;
-
-    private String password;
-
-    private String email;
-
-    private String mobile;
-
-    private String areacode;
 
     private String departcode;
 
@@ -39,16 +33,20 @@ public class UserInfoVO implements Serializable {
 
     private String organName;
 
-    private Date createTime;
-
-    private Date updateTime;
-
-    public Integer getId() {
-        return id;
+    public Integer getPageNum() {
+        return pageNum;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 
     public String getAccount() {
@@ -65,38 +63,6 @@ public class UserInfoVO implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getAreacode() {
-        return areacode;
-    }
-
-    public void setAreacode(String areacode) {
-        this.areacode = areacode;
     }
 
     public String getDepartcode() {
@@ -147,40 +113,19 @@ public class UserInfoVO implements Serializable {
         this.organName = organName;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
     @Override
     public String toString() {
-        return "UserInfoVO{" +
-                "id=" + id +
+        return "UserInfoQueryParam{" +
+                "pageNum=" + pageNum +
+                ", pageSize=" + pageSize +
                 ", account='" + account + '\'' +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", areacode='" + areacode + '\'' +
                 ", departcode='" + departcode + '\'' +
                 ", departName='" + departName + '\'' +
                 ", postcode='" + postcode + '\'' +
                 ", postName='" + postName + '\'' +
                 ", organcode='" + organcode + '\'' +
                 ", organName='" + organName + '\'' +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
                 '}';
     }
 }

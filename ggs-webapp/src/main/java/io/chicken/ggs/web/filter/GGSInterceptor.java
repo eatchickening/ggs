@@ -9,17 +9,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  *
  * Created by wungmc on 2017/6/27.
  */
-// @Configuration
-public class FinancialPCInterceptor extends WebMvcConfigurerAdapter {
+// @Configuration //todo
+public class GGSInterceptor extends WebMvcConfigurerAdapter {
 
     // @Bean
-    public AuthHandlerInterceptor getRedisService() {
+    public AuthHandlerInterceptor getHandlerInterceptor() {
         return new AuthHandlerInterceptor();
     }
 
     // @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(getRedisService())
+        registry.addInterceptor(getHandlerInterceptor())
                 .addPathPatterns(
                         "/**"
                 )
