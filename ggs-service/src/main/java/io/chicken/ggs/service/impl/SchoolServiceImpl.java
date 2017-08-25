@@ -23,5 +23,9 @@ public class SchoolServiceImpl implements SchoolService {
         return schoolMapper.queryTotal(map);
     }
 
-
+    @Override
+    public List<School> getSchoolByCondition(Map<String, Object> map)
+    {
+        return schoolMapper.queryListByCondition(map);
+     }
 }

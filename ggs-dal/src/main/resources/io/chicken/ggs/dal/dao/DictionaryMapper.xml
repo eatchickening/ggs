@@ -18,6 +18,33 @@
     from dictionary
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+
+  <select id="queryList" resultType="io.chicken.ggs.dal.model.Dictionary">
+    select * from dictionary
+    <where>
+      <if test="biztype != null">
+        and `biztype` = #{biztype}
+      </if>
+      <if test="bizcode != null">
+        and `bizcode` = #{bizcode}
+      </if>
+    </where>
+
+  </select>
+
+  <select id="queryTotal" resultType="java.lang.Long" >
+    select count(*) from dictionary
+    <where>
+      <if test="biztype != null">
+        and `biztype` = #{biztype}
+      </if>
+      <if test="bizcode != null">
+        and `bizcode` = #{bizcode}
+      </if>
+    </where>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from dictionary
     where id = #{id,jdbcType=BIGINT}

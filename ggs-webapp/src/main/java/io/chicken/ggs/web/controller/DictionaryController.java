@@ -1,7 +1,7 @@
 package io.chicken.ggs.web.controller;
 
+import io.chicken.ggs.business.impl.DictionaryBusinessImpl;
 import io.chicken.ggs.business.impl.SchoolBusinessImpl;
-import io.chicken.ggs.business.impl.StudentBusinessImpl;
 import io.chicken.ggs.common.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,22 +18,16 @@ import java.util.Map;
  *
  */
 @Controller
-@RequestMapping("/ggs/school")
-public class SchoolController {
+@RequestMapping("/ggs/dictionary")
+public class DictionaryController {
 
-    private static final Logger logger = LoggerFactory.getLogger(SchoolController.class);
+    private static final Logger logger = LoggerFactory.getLogger(DictionaryController.class);
     @Autowired
-    private SchoolBusinessImpl schoolBusiness;
+    private DictionaryBusinessImpl dictionaryBusiness;
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result list(@RequestParam Map<String, Object> params){
         logger.info(params.toString());
-        return schoolBusiness.getSchoolList(params);
-    }
-    @ResponseBody
-    @RequestMapping(value = "/listbyCondition", method = RequestMethod.POST)
-    public Result listbyCondition(@RequestParam Map<String, Object> params){
-        logger.info(params.toString());
-        return schoolBusiness.getSchoolByCondition(params);
+        return dictionaryBusiness.getDictionaryList(params);
     }
 }

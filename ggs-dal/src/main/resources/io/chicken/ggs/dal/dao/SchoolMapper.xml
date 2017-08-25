@@ -48,6 +48,27 @@
     </if>
   </select>
 
+
+  <select id="queryListByCondition" resultType="io.chicken.ggs.dal.model.School">
+    select * from school
+    <where>
+      <if test="schoolcode != null">
+        and `schoolcode` = #{schoolcode}
+      </if>
+      <if test="areacode != null">
+        and `areacode` = #{areacode}
+      </if>
+      <if test="schooltype != null">
+        and `schooltype` = #{schooltype}
+      </if>
+      <if test="name != null and name.trim() != ''">
+        and `name` like concat('%',#{name},'%')
+      </if>
+
+    </where>
+
+  </select>
+
   <select id="queryTotal" resultType="java.lang.Long" >
     select count(*) from school
     <where>
