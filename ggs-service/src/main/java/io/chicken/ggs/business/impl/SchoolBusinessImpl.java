@@ -50,4 +50,23 @@ public class SchoolBusinessImpl implements SchoolBusiness {
         result.setData(listSchool);
         return result;
     }
+    @Override
+    public Result getSchoolByCondition(Map<String, Object> params) {
+        //查询列表数据
+        List<School> listSchool=null;
+        long total=0;
+        try
+        {
+            listSchool = schoolService.queryList(params);
+        }catch(Exception e)
+        {
+            logger.error("数据库操作异常",e);
+            return new Result<>(ResultCode.DB_EXCEPTION);
+        }
+        Result result=  new Result<>(ResultCode.SUCCESS);
+        result.setTotal((long)listSchool.size());
+        result.setData(listSchool);
+        return result;
+    }
+
 }

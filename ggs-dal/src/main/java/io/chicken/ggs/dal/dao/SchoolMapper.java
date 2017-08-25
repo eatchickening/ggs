@@ -2,6 +2,9 @@ package io.chicken.ggs.dal.dao;
 
 import io.chicken.ggs.dal.model.School;
 
+import java.util.List;
+import java.util.Map;
+
 public interface SchoolMapper extends BaseDao<School>{
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +17,6 @@ public interface SchoolMapper extends BaseDao<School>{
     int updateByPrimaryKeySelective(School record);
 
     int updateByPrimaryKey(School record);
+
+    List<School> queryListByCondition(Map<String, Object> map);
 }

@@ -154,7 +154,7 @@ input.search-input {
 }
 
 .table .pagination {
-  margin: 4px 0 -12px 0;
+  margin: 0px 0 -12px 0;
   a {
     cursor: pointer;
   }
@@ -206,9 +206,9 @@ input.search-input {
 .table {
   & > thead {
     & > tr {
-      & > th {
-        border-bottom: none;
-      }
+      // & > th {
+      //   border-bottom: none;
+      // }
     }
   }
   & > tbody {
