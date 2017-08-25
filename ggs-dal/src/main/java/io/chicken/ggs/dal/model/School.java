@@ -4,7 +4,7 @@ public class School {
     private Long id;
 
     private String name;
-
+    private String schoolcode;
     private String areacode;
 
     private String schooltype;
@@ -19,6 +19,14 @@ public class School {
 
     public String getName() {
         return name;
+    }
+
+    public String getSchoolcode() {
+        return schoolcode;
+    }
+
+    public void setSchoolcode(String schoolcode) {
+        this.schoolcode = schoolcode;
     }
 
     public void setName(String name) {
