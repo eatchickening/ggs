@@ -1,5 +1,6 @@
 package io.chicken.ggs.web.controller;
 
+import io.chicken.ggs.business.impl.SchoolBusinessImpl;
 import io.chicken.ggs.business.impl.StudentBusinessImpl;
 import io.chicken.ggs.common.Result;
 import org.slf4j.Logger;
@@ -22,11 +23,11 @@ public class SchoolController {
 
     private static final Logger logger = LoggerFactory.getLogger(SchoolController.class);
     @Autowired
-    private StudentBusinessImpl studentBusiness;
+    private SchoolBusinessImpl schoolBusiness;
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result list(@RequestParam Map<String, Object> params){
         logger.info(params.toString());
-        return studentBusiness.getStudentList(params);
+        return schoolBusiness.getSchoolList(params);
     }
 }
