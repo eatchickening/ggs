@@ -93,20 +93,23 @@ CREATE TABLE user_menu (
 
 
 --  教师表
+DROP  TABLE  IF EXISTS teacher;
 CREATE TABLE teacher (
     id bigint NOT NULL AUTO_INCREMENT,
     name varchar(50) COMMENT '教师姓名',
     sex  varchar(2) COMMENT '教师姓别',
     classname varchar(100) COMMENT '任课班级',
-    school_id bigint COMMENT '所属学校',
+    schoolcode varchar(50) COMMENT '学校编码',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='教师表';
 
 
 
 --  学校表
+DROP  TABLE  IF EXISTS school;
 CREATE TABLE school (
     id bigint NOT NULL AUTO_INCREMENT,
+    schoolcode varchar(50) COMMENT '学校编码',
     name varchar(50) COMMENT '学校名',
     areacode varchar(50) COMMENT '所属地区',
     schooltype varchar(50) COMMENT '学校类型',
@@ -116,6 +119,7 @@ CREATE TABLE school (
 
 
 --  学生表
+DROP  TABLE  IF EXISTS student;
 CREATE TABLE student (
     id bigint NOT NULL AUTO_INCREMENT,
     studentid varchar(50) COMMENT '学籍号',
@@ -126,7 +130,7 @@ CREATE TABLE student (
     moral varchar(50) COMMENT '德育评估',
     intellectual varchar(50) COMMENT '智育评估',
     physical varchar(50) COMMENT '体育评估',
-    schoolid varchar(50) COMMENT '学校ID',
+    schoolcode varchar(50) COMMENT '学校编码',
     remark varchar(500) COMMENT '备注',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='学生表';

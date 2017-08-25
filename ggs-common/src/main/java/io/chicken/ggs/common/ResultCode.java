@@ -36,7 +36,10 @@ public enum ResultCode {
     /**
      * 数据库操作相关 400
      */
-    DB_EXCEPTION(401, "数据库操作异常");
+    DB_EXCEPTION(401, "数据库操作异常"),
+    DB_UPDATE_FAIL(402, "更新失败"),
+    DB_QUERY_FAIL(403, "查询失败"),
+    DB_DELETE_FAIL(404, "删除失败"),
 
     ;
 

@@ -19,7 +19,7 @@ public class Student {
 
     private String physical;
 
-    private String schoolid;
+    private String schoolcode;
 
     private String remark;
 
@@ -95,12 +95,12 @@ public class Student {
         this.physical = physical == null ? null : physical.trim();
     }
 
-    public String getSchoolid() {
-        return schoolid;
+    public String getSchoolcode() {
+        return schoolcode;
     }
 
-    public void setSchoolid(String schoolid) {
-        this.schoolid = schoolid == null ? null : schoolid.trim();
+    public void setSchoolcode(String schoolcode) {
+        this.schoolcode = schoolcode;
     }
 
     public String getRemark() {

@@ -9,8 +9,14 @@ package io.chicken.ggs.common;
 public class CommonConstant {
 
     /** 默认的当前页数 */
-    public static final Integer PAGE_NO = 1;
+    public static final Integer PAGE_NUM = 1;
     /** 默认的每页条数 */
-    public static final Integer PAGE_SIZE = 20;
+    public static final Integer PAGE_SIZE = 10;
 
+    /** 用户账号的 cookie 名 */
+    public static final String ACCOUNT_COOKIE = "_GGSA";
+    /** token 的 cookie 名 */
+    public static final String TOKEN_COOKIE = "_GGST";
+    /** 账号cookie的存活时间（秒） */
+    public static final int ACCOUNT_COOKIE_EXPIRED = 30 * 24 * 60 * 60;
 }

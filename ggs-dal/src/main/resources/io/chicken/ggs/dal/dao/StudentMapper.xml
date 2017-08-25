@@ -11,19 +11,113 @@
     <result column="moral" property="moral" jdbcType="VARCHAR" />
     <result column="intellectual" property="intellectual" jdbcType="VARCHAR" />
     <result column="physical" property="physical" jdbcType="VARCHAR" />
-    <result column="schoolid" property="schoolid" jdbcType="VARCHAR" />
+    <result column="schoolcode" property="schoolcode" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, studentid, name, sex, award, score, moral, intellectual, physical, schoolid, 
+    id, studentid, name, sex, award, score, moral, intellectual, physical, schoolcode,
     remark
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
-    <include refid="Base_Column_List" />
+     id, studentid, name, sex, award, score, moral, intellectual, physical, schoolcode,
+    remark
     from student
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="queryList" resultType="io.chicken.ggs.dal.model.Student">
+    select * from student
+    <where>
+      <if test="studentid != null">
+        and `studentid` = #{studentid}
+      </if>
+      <if test="name != null and name.trim() != ''">
+        and `name` like concat('%',#{name},'%')
+      </if>
+
+      <if test="(
+      (schoolname != null and schoolname.trim() != '')
+      or (areacode != null and areacode.trim() != '')
+      or (schooltype != null and schooltype.trim() != '')
+      ) ">
+        and `schoolcode`in
+        (
+          select schoolcode from school
+          <where>
+            <if test="schoolname != null">
+              and `name` = #{schoolname}
+            </if>
+            <if test="areacode != null">
+              and `areacode` = #{areacode}
+            </if>
+            <if test="schooltype != null">
+              and `schooltype` = #{schooltype}
+            </if>
+          </where>
+        )
+      </if>
+
+    </where>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by studentid asc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+  <select id="queryTotal" resultType="java.lang.Long" >
+    select count(*) from student
+    <where>
+      <if test="studentid != null">
+        and `studentid` = #{studentid}
+      </if>
+      <if test="name != null and name.trim() != ''">
+        and `name` like concat('%',#{name},'%')
+      </if>
+
+      <if test="(
+      (schoolname != null and schoolname.trim() != '')
+      or (areacode != null and areacode.trim() != '')
+      or (schooltype != null and schooltype.trim() != '')
+      ) ">
+        and `schoolcode`in
+        (
+        select schoolcode from school
+        <where>
+          <if test="schoolname != null">
+            and `name` = #{schoolname}
+          </if>
+          <if test="areacode != null">
+            and `areacode` = #{areacode}
+          </if>
+          <if test="schooltype != null">
+            and `schooltype` = #{schooltype}
+          </if>
+        </where>
+        )
+      </if>
+
+    </where>
+    <choose>
+      <when test="sidx != null and sidx.trim() != ''">
+        order by ${sidx} ${order}
+      </when>
+      <otherwise>
+        order by studentid asc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from student
     where id = #{id,jdbcType=BIGINT}
@@ -32,11 +126,11 @@
     insert into student (id, studentid, name, 
       sex, award, score, 
       moral, intellectual, physical, 
-      schoolid, remark)
+      schoolcode, remark)
     values (#{id,jdbcType=BIGINT}, #{studentid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{sex,jdbcType=VARCHAR}, #{award,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR}, 
       #{moral,jdbcType=VARCHAR}, #{intellectual,jdbcType=VARCHAR}, #{physical,jdbcType=VARCHAR}, 
-      #{schoolid,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+      #{schoolcode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.Student" >
     insert into student
@@ -68,8 +162,8 @@
       <if test="physical != null" >
         physical,
       </if>
-      <if test="schoolid != null" >
-        schoolid,
+      <if test="schoolcode != null" >
+        schoolcode,
       </if>
       <if test="remark != null" >
         remark,
@@ -103,8 +197,8 @@
       <if test="physical != null" >
         #{physical,jdbcType=VARCHAR},
       </if>
-      <if test="schoolid != null" >
-        #{schoolid,jdbcType=VARCHAR},
+      <if test="schoolcode != null" >
+        #{schoolcode,jdbcType=VARCHAR},
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
@@ -138,8 +232,8 @@
       <if test="physical != null" >
         physical = #{physical,jdbcType=VARCHAR},
       </if>
-      <if test="schoolid != null" >
-        schoolid = #{schoolid,jdbcType=VARCHAR},
+      <if test="schoolcode != null" >
+        schoolcode = #{schoolcode,jdbcType=VARCHAR},
       </if>
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
@@ -157,7 +251,7 @@
       moral = #{moral,jdbcType=VARCHAR},
       intellectual = #{intellectual,jdbcType=VARCHAR},
       physical = #{physical,jdbcType=VARCHAR},
-      schoolid = #{schoolid,jdbcType=VARCHAR},
+      schoolcode = #{schoolcode,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>

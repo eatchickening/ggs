@@ -4,6 +4,7 @@
 package io.chicken.ggs.service;
 
 import io.chicken.ggs.dal.model.UserInfo;
+import org.springframework.dao.DataAccessException;
 
 /**
  *
@@ -16,5 +17,9 @@ public interface UserInfoService {
     void update(UserInfo userInfo);
 
     UserInfo query(Integer id);
+
+    UserInfo login(String account, String pwd) throws DataAccessException;
+
+    Boolean updatePwd(String account, String newPwd) throws DataAccessException;
 
 }

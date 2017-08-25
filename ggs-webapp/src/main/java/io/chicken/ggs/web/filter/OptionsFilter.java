@@ -10,6 +10,7 @@ import java.io.IOException;
 /**
  * @author wungmc 2017/6/28.
  */
+@Deprecated
 // @WebFilter(filterName="optionsFilter", urlPatterns="/*")
 public class OptionsFilter implements Filter {
 
