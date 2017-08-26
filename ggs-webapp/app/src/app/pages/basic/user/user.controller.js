@@ -16,7 +16,7 @@
             $scope.smartTablePageSize = 10;
 
             $scope.rowNums = [5, 10, 15, 20, 25];
-
+            $scope.rowNum = 5;
             $scope.pageChange = function (p) {
                 console.log(p);
             };

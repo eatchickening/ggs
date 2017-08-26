@@ -23,7 +23,7 @@
 }
 
 .user-form-control {
-    width: 250px;
+    width: 70%;
     height: 34px; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
     padding: 6px 12px;
     font-size: 14px;
@@ -46,4 +46,14 @@
 
 .user-form-check {
     padding-left: 20px;
+    padding-top: 9px;
+
+    .user-form-width {
+        width: 30%;
+        font-size: 12px;
+    }
+}
+
+.left-line {
+    border-left: 1px solid #ccc
 }
