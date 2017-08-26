@@ -41,17 +41,17 @@
         <result column="postName" property="postName" jdbcType="VARCHAR" />
     </resultMap>
 
-  <sql id="Base_Column_List" >
-    id, account, username, email, mobile, areacode, departcode, postcode, organcode,
-    create_account, create_time, update_time, is_delete
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from user_info
-    where is_delete = 0
-    and id = #{id,jdbcType=INTEGER}
-  </select>
+      <sql id="Base_Column_List" >
+        id, account, username, email, mobile, areacode, departcode, postcode, organcode,
+        create_account, create_time, update_time, is_delete
+      </sql>
+      <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from user_info
+        where is_delete = 0
+        and id = #{id,jdbcType=INTEGER}
+      </select>
 
     <select id="queryList" resultMap="UserInfoVOResultMap">
         select
@@ -130,7 +130,7 @@
       #{organcode,jdbcType=VARCHAR}, #{createAccount,jdbcType=VARCHAR},
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.UserInfo" >
+  <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.UserInfo" useGeneratedKeys="true" keyProperty="id" >
     insert into user_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="account != null" >

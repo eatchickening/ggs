@@ -10,8 +10,8 @@
 	<!-- <classPathEntry location="mysql-connector-java-5.1.35.jar" /> -->
 
 	<!-- 根据自己本地实际的jar位置修改 -->
-	<classPathEntry
-		location="/home/nyh/.m2/repository/mysql/mysql-connector-java/5.1.33/mysql-connector-java-5.1.33.jar" />
+	<!--<classPathEntry location="/home/nyh/.m2/repository/mysql/mysql-connector-java/5.1.33/mysql-connector-java-5.1.33.jar" />-->
+	<classPathEntry location="/Users/wungmc/mvn_repository/mysql/mysql-connector-java/5.1.33/mysql-connector-java-5.1.33.jar" />
 
 	<!-- maven 自动生成代码  命令(在 ggs-dal 目录下)：
 			mvn mybatis-generator:generate
@@ -45,7 +45,7 @@
 
 
 
-        <table tableName="teacher" domainObjectName="Teacher" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="user_menu" domainObjectName="UserMenu" enableCountByExample="false" enableUpdateByExample="false"
            enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 
 	</context>

@@ -3,9 +3,9 @@ package io.chicken.ggs.dal.model;
 public class UserMenu {
     private Long id;
 
-    private Long userId;
+    private String userAccount;
 
-    private Long menuId;
+    private String menuId;
 
     public Long getId() {
         return id;
@@ -15,19 +15,19 @@ public class UserMenu {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getUserAccount() {
+        return userAccount;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserAccount(String userAccount) {
+        this.userAccount = userAccount == null ? null : userAccount.trim();
     }
 
-    public Long getMenuId() {
+    public String getMenuId() {
         return menuId;
     }
 
-    public void setMenuId(Long menuId) {
-        this.menuId = menuId;
+    public void setMenuId(String menuId) {
+        this.menuId = menuId == null ? null : menuId.trim();
     }
 }
