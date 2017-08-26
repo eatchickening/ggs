@@ -4,6 +4,7 @@ package io.chicken.ggs.web.controller;
 import io.chicken.ggs.business.LoginBusiness;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
+import io.chicken.ggs.common.util.LoginUtil;
 import io.chicken.ggs.common.vo.UserInfoVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -139,9 +140,7 @@ public class LoginController {
     @ResponseBody
     public Result logout(HttpServletRequest request, HttpServletResponse response) {
         // 清除登录状态
-        // 这个时候redis 删除登录状态
-        // clearUserInfoFromCache();
-        // LoginUtil.setCookieInvalid(request, response);
+        LoginUtil.setCookieInvalid(request, response);
         System.out.println("logout...");
 
         return new Result(ResultCode.SUCCESS);
