@@ -62,9 +62,9 @@ public class UserInfoServiceTest {
         UserInfoQueryParam param = new UserInfoQueryParam();
         param.setPageNum(1);
         param.setPageSize(10);
-        // param.setAccount("test1");
-        param.setOrganName("机构");
-        param.setDepartName("部门");
+        param.setAccount("test20");
+        // param.setOrganName("机构");
+        // param.setDepartName("部门");
         List<UserInfoVO> list = userInfoService.queryList(param);
         System.out.println(list);
     }

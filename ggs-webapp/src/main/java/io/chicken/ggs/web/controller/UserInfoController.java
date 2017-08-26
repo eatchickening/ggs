@@ -101,4 +101,26 @@ public class UserInfoController {
 
         return new Result<>(listResult.getData().get(0));
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Result<Boolean> update(UserInfoVO userInfoVO) {
+        logger.info("update(), param = " + userInfoVO);
+        if (userInfoVO == null || userInfoVO.getId() == null) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+
+        return userInfoBusiness.update(userInfoVO);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public Result<Boolean> delete(Integer userId) {
+        logger.info("delete(), param = " + userId);
+        if (userId == null) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+
+        return userInfoBusiness.delete(userId);
+    }
 }

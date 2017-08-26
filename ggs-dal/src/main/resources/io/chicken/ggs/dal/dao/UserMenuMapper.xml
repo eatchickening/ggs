@@ -53,14 +53,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="io.chicken.ggs.dal.model.UserMenu" >
     update user_menu
     <set >
-      <if test="userAccount != null" >
-        user_account = #{userAccount,jdbcType=VARCHAR},
-      </if>
       <if test="menuId != null" >
         menu_id = #{menuId,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where user_account = #{userAccount,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="io.chicken.ggs.dal.model.UserMenu" >
     update user_menu

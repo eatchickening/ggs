@@ -29,7 +29,7 @@ public class UserInfo {
 
     private Date updateTime;
 
-    private Boolean isDelete;
+    private Integer isDelete;
 
     public Integer getId() {
         return id;
@@ -135,11 +135,11 @@ public class UserInfo {
         this.updateTime = updateTime;
     }
 
-    public Boolean getIsDelete() {
+    public Integer getIsDelete() {
         return isDelete;
     }
 
-    public void setIsDelete(Boolean isDelete) {
+    public void setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
     }
 

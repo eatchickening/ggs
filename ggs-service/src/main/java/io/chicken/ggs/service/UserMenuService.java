@@ -10,4 +10,6 @@ import io.chicken.ggs.dal.model.UserMenu;
  */
 public interface UserMenuService {
     Integer save(UserMenu userMenu);
+
+    void update(UserMenu userMenu);
 }
