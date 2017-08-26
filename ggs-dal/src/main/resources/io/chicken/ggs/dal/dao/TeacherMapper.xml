@@ -7,10 +7,11 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="classname" property="classname" jdbcType="VARCHAR" />
-    <result column="school_id" property="schoolId" jdbcType="VARCHAR" />
+    <result column="schoolcode" property="schoolcode" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, teacherid, name, sex, classname, school_id
+    id, teacherid, name, sex, classname, schoolcode,remark
   </sql>
   <select id="queryList" resultType="io.chicken.ggs.dal.model.Student">
     select * from teacher
@@ -56,7 +57,7 @@
   </select>
 
   <select id="queryTotal" resultType="java.lang.Long" >
-    select count(*) from teacher
+    select COALESCE(count(*),0) from teacher
     <where>
       <if test="name != null and name.trim() != ''">
         and `name` like concat('%',#{name},'%')
