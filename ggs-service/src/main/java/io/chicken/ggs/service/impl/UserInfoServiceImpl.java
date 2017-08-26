@@ -33,12 +33,12 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserInfoMapper userInfoMapper;
 
     @Override
-    public void save(UserInfo userInfo) {
+    public Integer save(UserInfo userInfo) {
         if (userInfo == null) {
             LOGGER.error("userInfo 参数为空");
             throw new GGSException(ResultCode.PARAMETER_EMPTY);
         }
-        userInfoMapper.insertSelective(userInfo);
+        return userInfoMapper.insertSelective(userInfo);
     }
 
     @Override

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.security.PublicKey;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class UserInfoBusinessTest {
         UserInfoQueryParam param = new UserInfoQueryParam();
         param.setPageNum(1);
         param.setPageSize(10);
-        param.setAccount("test1");
+        param.setAccount("test");
         Result<List<UserInfoVO>> list = userInfoBusiness.queryList(param);
         System.out.println(list.isSuccess());
     }
@@ -45,5 +46,21 @@ public class UserInfoBusinessTest {
         // param.setPostName("教师");
         Result<Long> count = userInfoBusiness.queryCount(param);
         System.out.println(count.getData());
+    }
+
+    @Test
+    public void save() {
+        UserInfoVO userInfoVO = new UserInfoVO();
+        userInfoVO.setAccount("test20");
+        userInfoVO.setPassword("12345");
+        userInfoVO.setUsername("李四20");
+        userInfoVO.setAreacode("QY001");
+        userInfoVO.setOrgancode("JG001");
+        userInfoVO.setDepartcode("BM001");
+        userInfoVO.setPostcode("GW001");
+        userInfoVO.setMenuId("1,2");
+
+        Result<Boolean> result = userInfoBusiness.save(userInfoVO);
+        System.out.println(result.isSuccess());
     }
 }

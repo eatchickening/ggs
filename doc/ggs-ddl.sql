@@ -84,11 +84,11 @@ CREATE TABLE sysmenu (
 
 
 --  用户菜单表
-CREATE TABLE user_menu (
-    id bigint NOT NULL AUTO_INCREMENT,
-    user_id bigint COMMENT '用户ID',
-    menu_id bigint COMMENT '角色ID',
-    PRIMARY KEY (id)
+CREATE TABLE `user_menu` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `user_account` varchar(50) DEFAULT NULL COMMENT '用户账号',
+    `menu_id` varchar(500) DEFAULT NULL COMMENT '菜单ID，逗号分隔',
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户与菜单对应关系';
 
 

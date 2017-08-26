@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface UserInfoService {
 
-    void save(UserInfo userInfo);
+    Integer save(UserInfo userInfo);
 
     void update(UserInfo userInfo);
 

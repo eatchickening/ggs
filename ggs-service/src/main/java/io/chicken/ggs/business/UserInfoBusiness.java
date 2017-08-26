@@ -31,4 +31,11 @@ public interface UserInfoBusiness {
      * @return
      */
     Result<Long> queryCount(UserInfoQueryParam param);
+
+    /**
+     * 添加用户
+     * @param userInfoVO
+     * @return
+     */
+    Result<Boolean> save(UserInfoVO userInfoVO);
 }

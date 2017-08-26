@@ -4,13 +4,18 @@
 package io.chicken.ggs.business.impl;
 
 import io.chicken.ggs.business.UserInfoBusiness;
+import io.chicken.ggs.common.GGSException;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.vo.UserInfoQueryParam;
 import io.chicken.ggs.common.vo.UserInfoVO;
+import io.chicken.ggs.dal.model.UserInfo;
+import io.chicken.ggs.dal.model.UserMenu;
 import io.chicken.ggs.service.UserInfoService;
+import io.chicken.ggs.service.UserMenuService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +31,8 @@ public class UserInfoBusinessImpl implements UserInfoBusiness {
 
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private UserMenuService userMenuService;
 
     @Override
     public Result<List<UserInfoVO>> queryList(UserInfoQueryParam param) {
@@ -48,4 +55,28 @@ public class UserInfoBusinessImpl implements UserInfoBusiness {
             return new Result<>(ResultCode.DB_QUERY_FAIL);
         }
     }
+
+    @Override
+    public Result<Boolean> save(UserInfoVO userInfoVO) {
+        UserInfo userInfo = new UserInfo();
+        BeanUtils.copyProperties(userInfoVO, userInfo);
+
+        try {
+            userInfoService.save(userInfo);
+
+            // 权限处理
+            UserMenu userMenu = new UserMenu();
+            userMenu.setUserAccount(userInfoVO.getAccount());
+            userMenu.setMenuId(userInfoVO.getMenuId());
+            userMenuService.save(userMenu);
+
+            return new Result<>(ResultCode.SUCCESS);
+        } catch (GGSException e) {
+            return new Result<>(e.getCode(), e.getMessage());
+        } catch (Exception e1) {
+            LOGGER.error(userInfo.getAccount() + ", save() 异常：" + e1.getMessage());
+            return new Result<>(ResultCode.SYS_EXCEPTION);
+        }
+    }
+
 }

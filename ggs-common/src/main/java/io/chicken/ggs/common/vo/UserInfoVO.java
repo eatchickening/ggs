@@ -3,6 +3,9 @@
  */
 package io.chicken.ggs.common.vo;
 
+import io.chicken.ggs.common.validator.groups.UserInfoControllerSave;
+
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,8 +18,10 @@ public class UserInfoVO implements Serializable {
 
     private Integer id;
 
+    @NotNull(message = "账号不能为空", groups = {UserInfoControllerSave.class})
     private String account;
 
+    @NotNull(message = "昵称不能为空", groups = {UserInfoControllerSave.class})
     private String username;
 
     private String password;
@@ -42,6 +47,10 @@ public class UserInfoVO implements Serializable {
     private Date createTime;
 
     private Date updateTime;
+
+    // 权限
+    @NotNull(message = "权限不能为空", groups = {UserInfoControllerSave.class})
+    private String menuId;
 
     public Integer getId() {
         return id;
@@ -163,6 +172,14 @@ public class UserInfoVO implements Serializable {
         this.updateTime = updateTime;
     }
 
+    public String getMenuId() {
+        return menuId;
+    }
+
+    public void setMenuId(String menuId) {
+        this.menuId = menuId;
+    }
+
     @Override
     public String toString() {
         return "UserInfoVO{" +
@@ -181,6 +198,7 @@ public class UserInfoVO implements Serializable {
                 ", organName='" + organName + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", menuId=" + menuId +
                 '}';
     }
 }
