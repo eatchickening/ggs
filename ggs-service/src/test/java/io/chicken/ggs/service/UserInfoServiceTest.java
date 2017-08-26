@@ -30,6 +30,16 @@ public class UserInfoServiceTest {
         userInfoService.save(userInfo);
     }
 
+    @Test
+    public void saveBatch() {
+        for (int i = 3; i < 20; i++) {
+            UserInfo userInfo = new UserInfo();
+            userInfo.setAccount("test" + i);
+            userInfo.setUsername("李四" + i);
+            userInfoService.save(userInfo);
+        }
+    }
+
 
     @Test
     public void update() {
@@ -52,7 +62,9 @@ public class UserInfoServiceTest {
         UserInfoQueryParam param = new UserInfoQueryParam();
         param.setPageNum(1);
         param.setPageSize(10);
-        param.setAccount("test1");
+        // param.setAccount("test1");
+        param.setOrganName("机构");
+        param.setDepartName("部门");
         List<UserInfoVO> list = userInfoService.queryList(param);
         System.out.println(list);
     }
