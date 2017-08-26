@@ -4,6 +4,7 @@
 package io.chicken.ggs.business.impl;
 
 import io.chicken.ggs.business.UserInfoBusiness;
+import io.chicken.ggs.common.CommonConstant;
 import io.chicken.ggs.common.GGSException;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
@@ -36,6 +37,13 @@ public class UserInfoBusinessImpl implements UserInfoBusiness {
 
     @Override
     public Result<List<UserInfoVO>> queryList(UserInfoQueryParam param) {
+        if (param.getPageNum() == null || param.getPageNum() == 0) {
+            param.setPageNum(CommonConstant.PAGE_NUM);
+        }
+        if (param.getPageSize() == null || param.getPageSize() == 0) {
+            param.setPageSize(CommonConstant.PAGE_SIZE);
+        }
+
         try {
             List<UserInfoVO> userInfoVOS = userInfoService.queryList(param);
             return new Result<>(userInfoVOS);

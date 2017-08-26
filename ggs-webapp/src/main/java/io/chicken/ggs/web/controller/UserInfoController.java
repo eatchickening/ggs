@@ -48,12 +48,6 @@ public class UserInfoController {
         if (params == null) {
             return new Result<>(ResultCode.PARAMETER_EMPTY);
         }
-        if (params.getPageNum() == null || params.getPageNum() == 0) {
-            params.setPageNum(CommonConstant.PAGE_NUM);
-        }
-        if (params.getPageSize() == null || params.getPageSize() == 0) {
-            params.setPageSize(CommonConstant.PAGE_SIZE);
-        }
 
         //查询总条数
         Result<Long> countResult = userInfoBusiness.queryCount(params);
