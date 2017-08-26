@@ -3,6 +3,7 @@
  */
 package io.chicken.ggs.service.impl;
 
+import io.chicken.ggs.common.CommonConstant;
 import io.chicken.ggs.common.GGSException;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.vo.UserInfoQueryParam;
@@ -67,7 +68,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public List<UserInfoVO> queryList(UserInfoQueryParam param) {
         Integer start = (param.getPageNum() - 1) * param.getPageSize();
-        return userInfoMapper.queryList(param, start, param.getPageSize());
+        return userInfoMapper.queryList(param, start, param.getPageSize() * CommonConstant.PAGE_PRE);
     }
 
     @Override

@@ -16,7 +16,31 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="is_delete" property="isDelete" jdbcType="BIT" />
+      <result column="organName" property="organName" jdbcType="VARCHAR" />
+      <result column="departName" property="departName" jdbcType="VARCHAR" />
+      <result column="postName" property="postName" jdbcType="VARCHAR" />
   </resultMap>
+
+    <!--用户列表字段-->
+    <resultMap id="UserInfoVOResultMap" type="io.chicken.ggs.common.vo.UserInfoVO" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="account" property="account" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="areacode" property="areacode" jdbcType="VARCHAR" />
+        <result column="departcode" property="departcode" jdbcType="VARCHAR" />
+        <result column="postcode" property="postcode" jdbcType="VARCHAR" />
+        <result column="organcode" property="organcode" jdbcType="VARCHAR" />
+        <result column="create_account" property="createAccount" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="is_delete" property="isDelete" jdbcType="BIT" />
+        <result column="organName" property="organName" jdbcType="VARCHAR" />
+        <result column="departName" property="departName" jdbcType="VARCHAR" />
+        <result column="postName" property="postName" jdbcType="VARCHAR" />
+    </resultMap>
+
   <sql id="Base_Column_List" >
     id, account, username, email, mobile, areacode, departcode, postcode, organcode,
     create_account, create_time, update_time, is_delete
@@ -29,16 +53,32 @@
     and id = #{id,jdbcType=INTEGER}
   </select>
 
-    <select id="queryList" resultMap="BaseResultMap">
+    <select id="queryList" resultMap="UserInfoVOResultMap">
         select
-        a.id, a.account, a.username, a.organcode, a.departcode, a.postcode
+        a.id, a.account, a.username, a.organcode, c.name organName,
+        a.departcode, b.name departName, a.postcode, d.name postName
         from user_info a
+        left join depart b
+        on (a.departcode = b.departcode)
+        left join organization c
+        on (a.organcode = c.organcode)
+        left join post d
+        on (a.postcode = d.postcode)
         where a.is_delete = 0
         <if test="param.account != null and param.account != ''" >
             and a.account = #{param.account}
         </if>
         <if test="param.username != null and param.username != ''" >
             and a.username = #{param.username}
+        </if>
+        <if test="param.departName != null and param.departName != ''">
+            and b.name like concat(#{param.departName},'%')
+        </if>
+        <if test="param.organName != null and param.organName != ''">
+            and c.name like concat(#{param.organName},'%')
+        </if>
+        <if test="param.postName != null and param.postName != ''">
+            and d.name like concat(#{param.postName},'%')
         </if>
         ORDER by a.create_time desc
         limit #{start}, #{pageSize}
@@ -56,19 +96,19 @@
         <if test="param.organName != null and param.organName != ''" >
             and exists(
                 select 1 from organization b where b.organcode = a.organcode
-                and b.name = #{param.organName}
+                and b.name like concat(#{param.organName},'%')
             )
         </if>
         <if test="param.departName != null and param.departName != ''" >
             and exists(
                 select 1 from depart b where b.departcode = a.departcode
-                and b.name = #{param.departName}
+                and b.name like concat(#{param.departName},'%')
             )
         </if>
         <if test="param.postName != null and param.postName != ''" >
             and exists(
                 select 1 from post b where b.postcode = a.postcode
-                and b.name = #{param.postName}
+                and b.name like concat(#{param.postName},'%')
             )
         </if>
 
