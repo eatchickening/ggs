@@ -5,15 +5,6 @@
                 <div class="horizontal-scroll">
                     <table class="table table-hover" st-table="smartTableData">
                         <thead>
-                            <tr class="sortable ">
-                                <th class="table-id" st-sort="id" st-sort-default="true">#</th>
-                                <th st-sort="firstName">账号</th>
-                                <th st-sort="lastName">昵称</th>
-                                <th st-sort="username">机构</th>
-                                <th st-sort="email">部门</th>
-                                <th st-sort="age">岗位</th>
-                                <th>操作</th>
-                            </tr>
                             <tr>
                                 <th></th>
                                 <th><input st-search="firstName" placeholder="搜索帐号" class="input-sm form-control search-input"
@@ -28,6 +19,18 @@
                                 <th><input st-search="age" placeholder="搜索岗位" class="input-sm form-control search-input" type="search"
                                     />
                                 </th>
+                                <th>
+                                    <div><button type="button" class="btn btn-info" ng-click="addUser()">添加</button></div>
+                                </th>
+                            </tr>
+                            <tr class="sortable ">
+                                <th class="table-id" st-sort="id" st-sort-default="true">#</th>
+                                <th st-sort="firstName">账号</th>
+                                <th st-sort="lastName">昵称</th>
+                                <th st-sort="username">机构</th>
+                                <th st-sort="email">部门</th>
+                                <th st-sort="age">岗位</th>
+                                <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>

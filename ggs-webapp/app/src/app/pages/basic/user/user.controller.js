@@ -2,12 +2,22 @@
     'use strict';
 
     angular.module('chicken.pages.basic')
-        .controller('UserCtrl', function ($scope) {
+        .controller('UserCtrl', function ($scope, $uibModal, baProgressModal, BasicService, toastr) {
+
+            BasicService.listuser().then(function (data) {
+                if (data && data.status === 200 && data.data.code === 0) {
+                    console.log(data.data);
+
+                }
+            }).catch(function (err) {
+                toastr.error(err);
+            });
+
             $scope.smartTablePageSize = 10;
 
-            $scope.rowNums = [5,10,15,20,25];
+            $scope.rowNums = [5, 10, 15, 20, 25];
 
-            $scope.pageChange = function(p){
+            $scope.pageChange = function (p) {
                 console.log(p);
             };
 
@@ -493,5 +503,29 @@
                 }
             ];
             $scope.totalItems = $scope.smartTableData.length;
+
+            $scope.addUser = function () {
+                var model = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'app/pages/basic/user/adduser.html',
+                    size: 'lg',
+                    scope: $scope,
+                    resolve: {
+                        items: function () {
+                            return $scope.items;
+                        }
+                    }
+                });
+                model.result.then(
+                    //close
+                    function (result) {
+                        var a = result;
+                    },
+                    //dismiss
+                    function (result) {
+                        var a = result;
+                    });
+            };
+
         });
 })();
