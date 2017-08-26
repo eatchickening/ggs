@@ -18,7 +18,8 @@ public class TeacherServiceImpl implements TeacherService {
     private TeacherMapper teacherMapper;
 
     public List<Teacher> queryTeacherList(Map<String, Object> teaMap) {
-        return teacherMapper.queryList(teaMap);
+        List<Teacher> li = teacherMapper.queryList(teaMap);
+        return li;
     }
 
     public long queryTotal(Map<String, Object> teaMap) {

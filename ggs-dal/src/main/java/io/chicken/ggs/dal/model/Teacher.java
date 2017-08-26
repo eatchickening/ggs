@@ -13,6 +13,8 @@ public class Teacher {
 
     private String schoolId;
 
+    private String remark;
+
     public Long getId() {
         return id;
     }
@@ -59,5 +61,13 @@ public class Teacher {
 
     public void setSchoolId(String schoolId) {
         this.schoolId = schoolId == null ? null : schoolId.trim();
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }
