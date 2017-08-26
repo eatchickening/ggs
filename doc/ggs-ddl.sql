@@ -101,6 +101,7 @@ CREATE TABLE teacher (
     sex  varchar(2) COMMENT '教师姓别',
     classname varchar(100) COMMENT '任课班级',
     schoolcode varchar(50) COMMENT '学校编码',
+    remark VARCHAR(100) COMMENT '备注',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='教师表';
 

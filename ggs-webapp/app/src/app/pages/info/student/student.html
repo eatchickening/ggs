@@ -16,9 +16,14 @@
         line-height: 28px;
         float: left;
         position: relative;
-        margin: 0 4px 4px 0;
+        margin: 0 4px 0 0;
         vertical-align: middle;
         padding: 1px;
+        list-style: none;
+    }
+
+    .ul-center{
+        margin: 5px 0 6px 0;
     }
 
     .m-sku li span {
@@ -45,125 +50,136 @@
         color: #CDCDCD;
     }
 
-    li {
-        list-style: none;
-    }
+</style>
+<div class="widgets">
+	<div class="row">
+		<div class="col-md-12">
+			<div ba-panel ba-panel-class="with-scroll">
+				<div class="horizontal-scroll">
+					<table class="table table-bordered ">
+						<tbody>
+							<tr>
+								<td width="15%">地区</td>
+								<td width="85%">
+									<ul class="m-sku f-cb ul-center">
+										<li><span ng-class="{'js-seleted': true}" ng-click="">全部</span></li>
+										<li><span ng-class="{'js-disabled': true}" ng-click="">街道1</span></li>
+										<li><span ng-class="{'js-disabled': true}" ng-click="">街道2</span></li>
+										<li><span ng-class="{'js-disabled': true}" ng-click="">街道3</span></li>
+										<li><span ng-class="{'js-disabled': true}" ng-click="">街道4</span></li>
+									</ul>
+								</td>
+							</tr>
+							<tr>
+								<td>类型</td>
+								<td>
+									<ul class="m-sku f-cb ul-center">
+										<li><span ng-class="{'js-seleted': true}" ng-click="">全部</span></li>
+										<li><span ng-class="{'js-disabled':true}" ng-click="">高职</span></li>
+										<li><span ng-class="{'js-disabled': true}" ng-click="">高中</span></li>
+										<li><span ng-class="{'js-disabled': true}" ng-click="">初中</span></li>
+										<li><span ng-class="{'js-disabled': true}" ng-click="">小学</span></li>
+									</ul>
+								</td>
+							</tr>
+							<tr>
+								<td>学校</td>
+								<td>
 
-</style
-
-<div class="horizontal-scroll">
-    <div ba-panel ba-panel-title="" ba-panel-class="with-scroll">
-        <table class="table table-bordered ">
-            <tbody>
-                <tr>
-                    <td width="15%">地区</td>
-                    <td width="85%">
-                        <div class="r-col">
-                            <ul class="m-sku f-cb">
-                                <li><span ng-class="{'js-seleted': true}" ng-click="">全部</span></li>
-                                <li><span ng-class="{'js-disabled': true}" ng-click="">街道1</span></li>
-                                <li><span ng-class="{'js-disabled': true}" ng-click="">街道2</span></li>
-                                <li><span ng-class="{'js-disabled': true}" ng-click="">街道3</span></li>
-                                <li><span ng-class="{'js-disabled': true}" ng-click="">街道4</span></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>类型</td>
-                    <td>
-                        <div class="r-col">
-                            <ul class="m-sku f-cb">
-                                <li><span ng-class="{'js-seleted': true}" ng-click="">全部</span></li>
-                                <li><span ng-class="{'js-disabled':true}" ng-click="">高职</span></li>
-                                <li><span ng-class="{'js-disabled': true}" ng-click="">高中</span></li>
-                                <li><span ng-class="{'js-disabled': true}" ng-click="">初中</span></li>
-                                <li><span ng-class="{'js-disabled': true}" ng-click="">小学</span></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>学校</td>
-                    <td>
-                        <div class="r-col">
-                            <ul class="m-sku f-cb">
-                                <li><span ng-class="{'js-seleted': true}" ng-click="">全部</span></li>
-                                <li><span ng-class="{'js-disabled': true}" ng-click="">学校1</span></li>
-                                <li><span ng-class="{'js-disabled': true}" ng-click="">学校2</span></li>
-                                <li><span ng-class="{'js-disabled': true}" ng-click="">学校3</span></li>
-                                <li><span ng-class="{'js-disabled': true}" ng-click="">学校4</span></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>精确搜索</td>
-                    <td>
-                        <div class="input-group">
-                            <input type="text" class="form-control with-primary-addon" placeholder="搜索学生学籍号">
-                            <span class="input-group-btn">
+								</td>
+							</tr>
+							<tr>
+								<td>精确搜索</td>
+								<td>
+									<div class="input-group ul-center">
+										<input type="text" class="form-control with-primary-addon" placeholder="搜索学生学籍号">
+										<span class="input-group-btn">
                                     <button class="btn btn-primary" type="button">查询</button>
                                 </span>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <!-->
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 
-    <table class="table" st-table="smartTableData">
-        <thead>
-            <th></th>
-            <th>学籍号</th>
-            <th>姓名</th>
-            <th>性别</th>
-            <th>表彰信息</th>
-            <th>成绩评估</th>
-            <th>德育评估</th>
-            <th>智育评估</th>
-            <th>体育评估</th>
-            <th>操作</th>
-        </thead>
-        <tbody>
-            <tr ng-repeat="item in smartTableData">
-                <td class="table-id">{{item.id}}</td>
-                <td>{{item.firstName}}</td>
-                <td>{{item.lastName}}</td>
-                <td>{{item.username}}</td>
-                <td><a class="email-link" ng-href="mailto:{{item.email}}">{{item.email}}</a></td>
-                <td>{{item.age}}</td>
-                <td>{{item.firstName}}</td>
-                <td>{{item.lastName}}</td>
-                <td>{{item.username}}</td>
-                <td>{{item.age}}</td>
-            </tr>
-        </tbody>
-        <tfoot>
-           
-            <tr>
-                <td colspan="4">
 
-                    <label>共{{total}}条数据  每页显示
-                                <select ng-model="pageSize" ng-change="pageSizeChanged()">
-                                        <option value="5" ng-selected = "1">5</option>
-                                        <option value="10">10</option>
-                                        <option value="15">15</option>
-                                        <option value="20">20</option>
-                                        </select>  条
-                                            </label>
-
-                </td>
-
-                <tr colspan="6">
-                        <ul uib-pagination ng-change="pageChanged()" total-items="80" ng-model="currentPage" max-size="10" class="pagination-sm" boundary-links="true" rotate="false"
-                        first-text="<<" last-text=">>" next-text=">" previous-text="<"></ul>
-                </tr>
-            </tr>
-            
-        </tfoot>
-        
-    </table>
-
+					<table class="table" st-table="smartTableData">
+						<thead>
+							<tr class="sortable ">
+								<th class="table-id" st-sort="id" st-sort-default="true">#</th>
+								<th st-sort="firstName">学籍号</th>
+								<th st-sort="lastName">姓名</th>
+								<th>性别</th>
+								<th>表彰信息</th>
+								<th>成绩评估</th>
+								<th>德育评估</th>
+								<th>智育评估</th>
+								<th>体育评估</th>
+								<th>操作</th>
+							</tr>
+							<tr>
+                                <th></th>
+                                <th><input st-search="firstName" placeholder="搜索帐号" class="input-sm form-control search-input"
+                                        type="search" /></th>
+                                <th><input st-search="lastName" placeholder="搜索昵称" class="input-sm form-control search-input"
+                                        type="search" /></th>
+                                <th><input st-search="username" placeholder="搜索机构" class="input-sm form-control search-input"
+                                        type="search" /></th>
+                                <th><input st-search="email" placeholder="搜索部门" class="input-sm form-control search-input" type="search"
+                                    />
+                                </th>
+                                <th><input st-search="age" placeholder="搜索岗位" class="input-sm form-control search-input" type="search"
+                                    />
+								</th>
+								<th><input st-search="email" placeholder="搜索部门" class="input-sm form-control search-input" type="search"
+                                    />
+                                </th>
+                                <th><input st-search="age" placeholder="搜索岗位" class="input-sm form-control search-input" type="search"
+                                    />
+								</th>
+								<th><input st-search="age" placeholder="搜索岗位" class="input-sm form-control search-input" type="search"
+                                    />
+                                </th>
+                            </tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in smartTableData">
+								<td class="table-id">{{item.id}}</td>
+								<td>{{item.firstName}}</td>
+								<td>{{item.lastName}}</td>
+								<td>{{item.username}}</td>
+								<td><a class="email-link" ng-href="mailto:{{item.email}}">{{item.email}}</a></td>
+								<td>{{item.age}}</td>
+								<td>{{item.firstName}}</td>
+								<td>{{item.lastName}}</td>
+								<td>{{item.username}}</td>
+								<td>
+									<div class="btn-group" uib-dropdown dropdown-append-to-body>
+										<button type="button" class="btn btn-info " uib-dropdown-toggle>
+                                                  操作 <span class="caret"></span>
+                                                </button>
+										<ul uib-dropdown-menu>
+											<li><a href>详细</a></li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="6" class="text-center">
+									<div style="float: left">
+										<span class="page-items">共{{totalItems}}条&nbsp&nbsp每页显示&nbsp</span>
+										<select class="page-size" title="Rows on page" ng-model="smartTablePageSize" ng-options="rowNum for rowNum in rowNums"></select>
+										<span class="page-items">&nbsp条</span>
+									</div>
+									<div st-pagination="" st-items-by-page="smartTablePageSize" st-displayed-pages="5" st-page-change="pageChange(newPage)" st-template="app/pages/common/pagination.html"></div>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
