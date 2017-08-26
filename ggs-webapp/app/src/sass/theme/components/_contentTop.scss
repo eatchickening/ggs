@@ -1,6 +1,13 @@
 .content-top {
-  padding-top: 13px;
-  padding-bottom: 27px;
+  // padding-top: 13px;
+  // padding-bottom: 27px;
+  z-index: 2;
+  position: relative;
+  width: 100%;
+  min-height: 51px;
+  padding: 8px 32px 8px 40px;
+  background: #fafafa;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 h1.al-title {
@@ -20,7 +27,6 @@ h1.al-title {
   color: $default-text;
   padding: 0;
   margin: 0;
-  float: right;
   padding-top: 11px;
   li {
     font-size: 18px;
