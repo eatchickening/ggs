@@ -5,16 +5,18 @@ import io.chicken.ggs.business.LoginBusiness;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.vo.UserInfoVO;
-import io.chicken.ggs.dal.model.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,7 +33,7 @@ public class LoginController {
 
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Result login(String account, String password, HttpServletRequest request, HttpServletResponse response) {
+    public Result<UserInfoVO> login(String account, String password, HttpServletRequest request, HttpServletResponse response) {
         logger.info("account=" + account + ", pwd =" + password);
         if (StringUtils.isEmpty(account) || StringUtils.isEmpty(password)) {
             return new Result<>(ResultCode.PARAMETER_EMPTY);
@@ -41,6 +43,16 @@ public class LoginController {
         // 处理逻辑
 
         Result<UserInfoVO> result = loginBusiness.login(account, password);
+        if (!result.isSuccess()) {
+            logger.error(account + ", 登录失败:" + result.getMessage());
+            return new Result<>(result.getCode(), result.getMessage());
+        }
+
+        HttpSession session = request.getSession(true);
+        System.out.println("sessionId = " + session.getId());
+        session.setAttribute(session.getId(), result.getData());
+        System.out.println("getSession:" + session.getAttribute(account));
+
         // UserVO userVO = result.getData();
         // if (!result.isSuccess() || userVO == null) {
         //     return new RpcResult<>(result.getCode(), result.getMessage());
@@ -65,8 +77,8 @@ public class LoginController {
         // redisService.set(userKey, userVO, Constant.ACCOUNT_EXPIRED);
         // redisService.set(Constant.REDIS_PREFIX + account, userKey, Constant.ACCOUNT_EXPIRED);
 
-
-        return new Result<>(ResultCode.SUCCESS);
+        return result;
+        // return new Result<>(ResultCode.SUCCESS);
     }
 
 
