@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping("/ggs/auth")
-public class LoginController {
+public class LoginController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
@@ -115,9 +115,11 @@ public class LoginController {
         if (StringUtils.isEmpty(oldPassword) || StringUtils.isEmpty(newPassword)) {
             return new Result<>(ResultCode.PARAMETER_EMPTY);
         }
+        System.out.println(oldPassword);
+        System.out.println(newPassword);
 
-        // String account = getUserInfo().getAccount();
-        String account = "test1"; //todo
+        UserInfoVO userInfoVO = getUserInfo();
+        String account = userInfoVO.getAccount();
 
         return loginBusiness.updatePwd(account, oldPassword, newPassword);
     }
