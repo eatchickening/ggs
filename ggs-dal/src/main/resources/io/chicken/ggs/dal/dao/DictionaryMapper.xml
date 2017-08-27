@@ -34,7 +34,7 @@
   </select>
 
   <select id="queryTotal" resultType="java.lang.Long" >
-    select count(*) from dictionary
+    select count(1) from dictionary
     <where>
       <if test="biztype != null">
         and `biztype` = #{biztype}

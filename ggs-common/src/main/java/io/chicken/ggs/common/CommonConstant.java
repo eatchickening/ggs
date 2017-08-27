@@ -24,4 +24,10 @@ public class CommonConstant {
 
     /** 用户删除状态 */
     public static final int USER_STATUS_DELETE = 1;
+
+
+    // 字典表类型编码
+    public static final String DIC_AREA_CODE = "areacode";
+    public static final String DIC_SCHOOL_TYPE = "schooltype";
+
 }

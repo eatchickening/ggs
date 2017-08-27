@@ -38,4 +38,19 @@ public class DictionaryBusinessImpl implements DictionaryBusiness {
         result.setData(listDictionary);
         return result;
     }
+
+    @Override
+    public Result<List<Dictionary>> queryList(Map<String, Object> params) {
+        if (params == null || params.isEmpty()) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+
+        try {
+            List<Dictionary> list = dictionaryService.queryList(params);
+            return new Result<>(list);
+        } catch (Exception e) {
+            logger.error("queryList() 异常：" + e.getMessage());
+            return new Result<>(ResultCode.SYS_EXCEPTION);
+        }
+    }
 }

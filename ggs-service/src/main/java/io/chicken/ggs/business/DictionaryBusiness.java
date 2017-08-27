@@ -1,7 +1,9 @@
 package io.chicken.ggs.business;
 
 import io.chicken.ggs.common.Result;
+import io.chicken.ggs.dal.model.Dictionary;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -10,4 +12,5 @@ import java.util.Map;
 public interface DictionaryBusiness {
     public Result getDictionaryList(Map<String, Object> params);
 
+    Result<List<Dictionary>> queryList(Map<String, Object> params);
 }
