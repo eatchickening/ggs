@@ -3,23 +3,26 @@
 
     angular.module('chicken.pages.basic')
         .controller('UserCtrl', function ($scope, $uibModal, BasicService, toastr) {
-            $scope.userList = [];
-            $scope.displayed = [];
-            BasicService.listuser().then(function (data) {
-                if (data.code === 0 && data.data && data.data instanceof Array) {
-                    $scope.userList = data.data;
-                    $scope.totalItems = $scope.userList.length;
-                }
-            }).catch(function (err) {
-                toastr.error(err);
-            });
-            
-            $scope.pageSize = 10;
 
-            $scope.rowNums = [10, 15, 20, 25];
-            $scope.rowNum = 10;
+            function init () {
+                $scope.userList = [];
+                $scope.displayed = [];
+                $scope.pageSizes = [10, 15, 20, 25];
+                $scope.pageSize = 10;
+                BasicService.listuser(1, 10).then(function (data) {
+                    if (data.code === 0 && data.data && data.data instanceof Array) {
+                        $scope.userList = data.data;
+                        $scope.totalItems = data.data.length;
+                    }
+                }).catch(function (err) {
+                    toastr.error(err);
+                });
+            }
+
+            init();
+                       
             $scope.pageChange = function (p) {
-                console.log(p);
+                
             };
 
             $scope.addUser = function () {
