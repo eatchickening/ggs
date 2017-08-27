@@ -17,6 +17,14 @@
     from organization
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+    <select id="queryByAreacode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from organization
+        where areacode = #{areacode,jdbcType=VARCHAR}
+    </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from organization
     where id = #{id,jdbcType=BIGINT}

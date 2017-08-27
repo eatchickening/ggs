@@ -2,6 +2,8 @@ package io.chicken.ggs.dal.dao;
 
 import io.chicken.ggs.dal.model.Organization;
 
+import java.util.List;
+
 public interface OrganizationMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,6 @@ public interface OrganizationMapper {
     int updateByPrimaryKeySelective(Organization record);
 
     int updateByPrimaryKey(Organization record);
+
+    List<Organization> queryByAreacode(String areacode);
 }

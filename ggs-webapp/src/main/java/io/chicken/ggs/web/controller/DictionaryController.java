@@ -34,7 +34,7 @@ public class DictionaryController {
 
     @ResponseBody
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public Result get(@RequestBody Dictionary dictionary) {
+    public Result get(Dictionary dictionary) {
         logger.info("get() " + dictionary);
 
         Map<String, Object>  params = new HashMap<>(2);
