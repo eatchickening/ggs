@@ -3,14 +3,14 @@
 
     angular.module('chicken.pages.basic').factory('BasicService', ['$http', '$q', function ($http, $q) {
         return {
-            listuser: function () {
+            listuser: function (pageNum, pageSize) {
                 var deferred = $q.defer();
                 $http({
                     method: 'POST',
                     url: 'http://localhost:8080/ggs/userInfo/list',
                     data: {
-                        pageNum: 1,
-                        pageSize: 10
+                        pageNum: pageNum,
+                        pageSize: pageSize
                     }
                 }).then(function (response) {
                     deferred.resolve(response.data);
