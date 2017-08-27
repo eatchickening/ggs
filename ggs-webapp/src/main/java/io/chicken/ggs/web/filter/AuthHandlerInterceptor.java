@@ -4,23 +4,19 @@
 package io.chicken.ggs.web.filter;
 
 import com.alibaba.fastjson.JSON;
-import io.chicken.ggs.common.CommonConstant;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.util.LoginUtil;
-import io.chicken.ggs.common.util.Md5Util;
 import io.chicken.ggs.common.util.MenuUtil;
 import io.chicken.ggs.common.vo.UserInfoVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Map;
 
 /**
  * 权限拦截器
@@ -31,10 +27,7 @@ import java.util.Map;
 public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
     static final Logger LOGGER = LoggerFactory.getLogger(AuthHandlerInterceptor.class);
 
-    private static ThreadLocal<String> threadLocal = new ThreadLocal<>();
-
-    // @Autowired
-    // private RedisService redisService;
+    private static ThreadLocal<HttpSession> threadLocal = new ThreadLocal<>();
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -65,6 +58,7 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
         session.setAttribute(sessionId, userVO);
+        threadLocal.set(session);
         return true;
 
         // if (account.equals(userVO.getAccount()) && MenuUtil.getMenu(userVO.getId()) != null) {
@@ -117,7 +111,7 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
         super.afterCompletion(request, response, handler, ex);
     }
 
-    public static String getUserInfoRedisKey() {
+    public static HttpSession getHttpSession() {
         return threadLocal.get();
     }
 }

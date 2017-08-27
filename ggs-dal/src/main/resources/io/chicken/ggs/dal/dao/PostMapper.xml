@@ -17,6 +17,13 @@
     from post
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="queryByDepartcode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from post
+    where departcode = #{departcode,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from post
     where id = #{id,jdbcType=BIGINT}

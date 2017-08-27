@@ -2,6 +2,8 @@ package io.chicken.ggs.dal.dao;
 
 import io.chicken.ggs.dal.model.Post;
 
+import java.util.List;
+
 public interface PostMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,8 @@ public interface PostMapper {
     int updateByPrimaryKeySelective(Post record);
 
     int updateByPrimaryKey(Post record);
+
+
+    List<Post> queryByDepartcode(String departcode);
+
 }

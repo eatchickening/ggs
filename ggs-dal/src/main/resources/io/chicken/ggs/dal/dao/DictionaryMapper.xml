@@ -9,6 +9,25 @@
     <result column="status" property="status" jdbcType="TINYINT" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
+
+    <resultMap id="AreaDetailResultMap" type="io.chicken.ggs.common.vo.AreaDetailVO" >
+        <id column="areaId" property="areaId" jdbcType="BIGINT" />
+        <result column="areacode" property="areacode" jdbcType="VARCHAR" />
+        <result column="areaName" property="areaName" jdbcType="VARCHAR" />
+
+        <result column="organId" property="organId" jdbcType="BIGINT" />
+        <result column="organcode" property="organcode" jdbcType="VARCHAR" />
+        <result column="organName" property="organName" jdbcType="VARCHAR" />
+
+        <result column="departId" property="departId" jdbcType="BIGINT" />
+        <result column="departcode" property="departcode" jdbcType="VARCHAR" />
+        <result column="departName" property="departName" jdbcType="VARCHAR" />
+
+        <result column="postId" property="postId" jdbcType="BIGINT" />
+        <result column="postcode" property="postcode" jdbcType="VARCHAR" />
+        <result column="postName" property="postName" jdbcType="VARCHAR" />
+    </resultMap>
+
   <sql id="Base_Column_List" >
     id, biztype, bizcode, datavalue, status, remark
   </sql>
@@ -30,11 +49,10 @@
         and `bizcode` = #{bizcode}
       </if>
     </where>
-
   </select>
 
   <select id="queryTotal" resultType="java.lang.Long" >
-    select count(*) from dictionary
+    select count(1) from dictionary
     <where>
       <if test="biztype != null">
         and `biztype` = #{biztype}
@@ -44,6 +62,24 @@
       </if>
     </where>
   </select>
+
+    <select id="queryAreaDetail" resultMap="AreaDetailResultMap" parameterType="java.lang.String">
+        select d.id areaId, d.bizcode areacode, d.datavalue areaName,
+        org.id organId, org.organcode, org.`name` organName,
+        dep.id departId, dep.departcode, dep.`name` departName,
+        po.id postId, po.postcode, po.`name` postName
+        from `dictionary` d
+        left join organization org
+        on d.bizcode = org.areacode
+        left join depart dep
+        on org.organcode = dep.organcode
+        left join post po
+        on dep.departcode = po.departcode
+        where
+        d.biztype = 'areacode'
+        and d.bizcode = #{bizcode};
+    </select>
+
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from dictionary

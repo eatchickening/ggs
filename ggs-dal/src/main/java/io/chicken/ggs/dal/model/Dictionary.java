@@ -60,4 +60,16 @@ public class Dictionary {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Dictionary{" +
+                "id=" + id +
+                ", biztype='" + biztype + '\'' +
+                ", bizcode='" + bizcode + '\'' +
+                ", datavalue='" + datavalue + '\'' +
+                ", status=" + status +
+                ", remark='" + remark + '\'' +
+                '}';
+    }
 }

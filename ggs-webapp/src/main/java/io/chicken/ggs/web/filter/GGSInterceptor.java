@@ -17,7 +17,7 @@ public class GGSInterceptor extends WebMvcConfigurerAdapter {
         return new AuthHandlerInterceptor();
     }
 
-    // @Override
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(getHandlerInterceptor())
                 .addPathPatterns(
