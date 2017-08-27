@@ -5,13 +5,14 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="angular_state" property="angularState" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="perms" property="perms" jdbcType="VARCHAR" />
     <result column="order_num" property="orderNum" jdbcType="INTEGER" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, parent_id, name, url, perms, order_num, remark
+    id, parent_id, name, angular_state, url, perms, order_num, remark
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -25,11 +26,11 @@
   </delete>
   <insert id="insert" parameterType="io.chicken.ggs.dal.model.SysMenu" >
     insert into sysmenu (id, parent_id, name, 
-      url, perms, order_num, 
-      remark)
+      angular_state, url, perms, 
+      order_num, remark)
     values (#{id,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR}, #{perms,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR})
+      #{angularState,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{perms,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.SysMenu" >
     insert into sysmenu
@@ -42,6 +43,9 @@
       </if>
       <if test="name != null" >
         name,
+      </if>
+      <if test="angularState != null" >
+        angular_state,
       </if>
       <if test="url != null" >
         url,
@@ -66,6 +70,9 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="angularState != null" >
+        #{angularState,jdbcType=VARCHAR},
+      </if>
       <if test="url != null" >
         #{url,jdbcType=VARCHAR},
       </if>
@@ -89,6 +96,9 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="angularState != null" >
+        angular_state = #{angularState,jdbcType=VARCHAR},
+      </if>
       <if test="url != null" >
         url = #{url,jdbcType=VARCHAR},
       </if>
@@ -108,6 +118,7 @@
     update sysmenu
     set parent_id = #{parentId,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
+      angular_state = #{angularState,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       perms = #{perms,jdbcType=VARCHAR},
       order_num = #{orderNum,jdbcType=INTEGER},

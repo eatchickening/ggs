@@ -74,6 +74,7 @@ CREATE TABLE `sysmenu` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `parent_id` int(11) DEFAULT NULL COMMENT '父菜单ID，一级菜单为0',
     `name` varchar(50) DEFAULT NULL COMMENT '菜单名称',
+    `angular_state` varchar(50) DEFAULT NULL COMMENT '菜单在前端对应的angular的state',
     `url` varchar(200) DEFAULT NULL COMMENT '菜单URL',
     `perms` varchar(500) DEFAULT NULL COMMENT '授权（api），以逗号分隔',
     `order_num` int(11) DEFAULT NULL COMMENT '排序号',

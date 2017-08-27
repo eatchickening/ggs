@@ -23,3 +23,24 @@ insert into `ggs`.`depart` ( `organcode`, `departcode`, `name`, `remark`) values
 insert into `ggs`.`post` ( `departcode`, `postcode`, `name`, `remark`) values ( 'BM001', 'GW001', '岗位1', null);
 insert into `ggs`.`post` ( `departcode`, `postcode`, `name`, `remark`) values ( 'BM001', 'GW002', '岗位2', null);
 
+
+-- 基础设置
+insert into `ggs`.`sysmenu` ( `order_num`, `remark`, `perms`, `parent_id`, `angular_state`, `name`, `url`)
+values ( null, null, null, '0', 'root.basic', '基础设置', null);
+
+insert into `ggs`.`sysmenu` ( `order_num`, `remark`, `perms`, `parent_id`, `angular_state`, `name`, `url`)
+select null, null, '', (select id from `ggs`.`sysmenu` where angular_state = 'root.basic'),'root.basic.department', '部门与岗位设置', null from dual
+union all
+select null, null, '', (select id from `ggs`.`sysmenu` where angular_state = 'root.basic'),'root.basic.user', '用户管理', null from dual;
+
+-- 信息查询
+insert into `ggs`.`sysmenu` ( `order_num`, `remark`, `perms`, `parent_id`, `angular_state`, `name`, `url`)
+values ( null, null, null, '0', 'root.info', '信息查询', null);
+
+insert into `ggs`.`sysmenu` ( `order_num`, `remark`, `perms`, `parent_id`, `angular_state`, `name`, `url`)
+select null, null, '', (select id from `ggs`.`sysmenu` where angular_state = 'root.info'),'root.info.student', '学生信息查询', null from dual
+union all
+select null, null, '', (select id from `ggs`.`sysmenu` where angular_state = 'root.info'),'root.info.teacher', '教师信息查询', null from dual
+union all
+select null, null, '', (select id from `ggs`.`sysmenu` where angular_state = 'root.info'),'root.info.school', '学校信息查询', null from dual;
+

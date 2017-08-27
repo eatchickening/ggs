@@ -7,6 +7,8 @@ public class SysMenu {
 
     private String name;
 
+    private String angularState;
+
     private String url;
 
     private String perms;
@@ -37,6 +39,14 @@ public class SysMenu {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getAngularState() {
+        return angularState;
+    }
+
+    public void setAngularState(String angularState) {
+        this.angularState = angularState == null ? null : angularState.trim();
     }
 
     public String getUrl() {
