@@ -17,6 +17,14 @@
     from depart
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+    <select id="queryByOrgancode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from depart
+        where organcode = #{organcode,jdbcType=BIGINT}
+    </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from depart
     where id = #{id,jdbcType=BIGINT}

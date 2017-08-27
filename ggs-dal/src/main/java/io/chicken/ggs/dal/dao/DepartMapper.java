@@ -2,6 +2,8 @@ package io.chicken.ggs.dal.dao;
 
 import io.chicken.ggs.dal.model.Depart;
 
+import java.util.List;
+
 public interface DepartMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,7 @@ public interface DepartMapper {
     int updateByPrimaryKeySelective(Depart record);
 
     int updateByPrimaryKey(Depart record);
+
+
+    List<Depart> queryByOrgancode(String organcode);
 }
