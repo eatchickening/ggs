@@ -3,6 +3,7 @@
  */
 package io.chicken.ggs.service;
 
+import io.chicken.ggs.common.vo.AreaDetailVO;
 import io.chicken.ggs.dal.model.Dictionary;
 import io.chicken.ggs.dal.model.School;
 
@@ -18,4 +19,5 @@ public interface DictionaryService {
 
     long queryTotal(Map<String, Object> map);
 
+    List<AreaDetailVO> queryAreaDetail(String bizcode);
 }

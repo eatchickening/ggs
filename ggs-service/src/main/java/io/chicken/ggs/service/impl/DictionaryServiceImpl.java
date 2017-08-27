@@ -1,5 +1,6 @@
 package io.chicken.ggs.service.impl;
 
+import io.chicken.ggs.common.vo.AreaDetailVO;
 import io.chicken.ggs.dal.dao.DictionaryMapper;
 import io.chicken.ggs.dal.model.Dictionary;
 import io.chicken.ggs.service.DictionaryService;
@@ -23,5 +24,8 @@ public class DictionaryServiceImpl implements DictionaryService {
         return dictionaryMapper.queryTotal(map);
     }
 
-
+    @Override
+    public List<AreaDetailVO> queryAreaDetail(String bizcode) {
+        return dictionaryMapper.queryAreaDetail(bizcode);
+    }
 }

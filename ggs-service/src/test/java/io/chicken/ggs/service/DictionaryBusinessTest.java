@@ -4,6 +4,7 @@ import io.chicken.ggs.business.DictionaryBusiness;
 import io.chicken.ggs.business.TeacherBusiness;
 import io.chicken.ggs.common.CommonConstant;
 import io.chicken.ggs.common.Result;
+import io.chicken.ggs.common.vo.AreaDetailVO;
 import io.chicken.ggs.dal.model.Dictionary;
 import io.chicken.ggs.dal.model.Teacher;
 import org.junit.Test;
@@ -32,11 +33,18 @@ public class DictionaryBusinessTest {
     @Test
     public void queryList() {
 
-        Map<String, Object> teaMap =  new HashMap<>();
+        Map<String, Object> teaMap = new HashMap<>();
         teaMap.put("biztype", CommonConstant.DIC_AREA_CODE);
         teaMap.put("bizcode", "QY001");
 
         Result<List<Dictionary>> count = dictionaryBusiness.queryList(teaMap);
         System.out.println(count.getData().size());
+    }
+
+    @Test
+    public void areaDetail() {
+        String areacode = "QY001";
+        Result<List<AreaDetailVO>> list = dictionaryBusiness.queryAreaDetail(areacode);
+        System.out.println(list.isSuccess());
     }
 }

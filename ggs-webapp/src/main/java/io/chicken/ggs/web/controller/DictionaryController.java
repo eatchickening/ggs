@@ -1,16 +1,19 @@
 package io.chicken.ggs.web.controller;
 
 import io.chicken.ggs.business.impl.DictionaryBusinessImpl;
-import io.chicken.ggs.business.impl.SchoolBusinessImpl;
 import io.chicken.ggs.common.Result;
+import io.chicken.ggs.common.ResultCode;
+import io.chicken.ggs.common.vo.AreaDetailVO;
 import io.chicken.ggs.dal.model.Dictionary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,17 +34,37 @@ public class DictionaryController {
         return dictionaryBusiness.getDictionaryList(params);
     }
 
-
     @ResponseBody
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public Result get(Dictionary dictionary) {
+    public Result<List<Dictionary>> get(Dictionary dictionary) {
         logger.info("get() " + dictionary);
+        if (StringUtils.isEmpty(dictionary.getBiztype())) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
 
         Map<String, Object>  params = new HashMap<>(2);
         params.put("biztype", dictionary.getBiztype());
-        params.put("bizcode", dictionary.getBizcode());
+        if (dictionary.getBizcode() != null) {
+            params.put("bizcode", dictionary.getBizcode());
+        }
         return dictionaryBusiness.queryList(params);
     }
+
+
+    /**
+     * 根据区域编码查询其下面的机构、部门、岗位的信息
+     *
+     * @param bizcode
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/areaDetail", method = RequestMethod.POST)
+    public Result<List<AreaDetailVO>> areaDetail(String bizcode) {
+        logger.info("areaDetail() " + bizcode);
+
+        return dictionaryBusiness.queryAreaDetail(bizcode);
+    }
+
 
 
 }
