@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('chicken.pages.info').factory('StudentService', ['$http', '$q' ,function ($http, $q) {
+    angular.module('chicken.pages.info').factory('TeacherService', ['$http', '$q' ,function ($http, $q) {
         return {
             query: function (username, password) {
                 var deferred = $q.defer();

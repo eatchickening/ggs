@@ -1,1 +1,121 @@
-<h1>教师信息查询</h1>
+<div class="widgets">
+	<div class="row">
+		<div class="col-md-12">
+			<div ba-panel ba-panel-class="with-scroll">
+				<div class="horizontal-scroll">
+					<table class="table table-bordered ">
+						<tbody>
+								<tr>
+										<td width="15%">地区</td>
+										<td width="85%">
+												<div ng-class="{'hotel-filter-list':true,'filter-list-has-more':true,'hotel-filter-list-min':isShowMoreRegion}"><strong class="tit"></strong>
+													<div class="con radio">
+														<ul class="list">
+															<li ng-repeat="type in regions" ng-click="onRegionChanged(type.value)"><a ng-class="{true:'filter-tag selected',false:'filter-tag'}[type.value==curRegion]">{{type.name}}<i></i></a></li>
+														</ul> 
+														<span class="filter-more">
+															<span class="filter-open"  ng-click="showMoreRegion(false)">更多</span>
+															<span class="filter-close" ng-click="showMoreRegion(true)">收起</span>
+														</span>
+													</div>
+												</div>
+										</td>
+									</tr>
+									<tr>
+										<td>类型</td>
+										<td>
+												<div ng-class="{'hotel-filter-list':true,'filter-list-has-more':true,'hotel-filter-list-min':isShowMoreSchoolType}"><strong class="tit"></strong>
+													<div class="con radio">
+														<ul class="list">
+															<li ng-repeat="type in schoolTypes" ng-click="onSchoolTypeChanged(type.value)"><a ng-class="{true:'filter-tag selected',false:'filter-tag'}[type.value==curSchoolType]">{{type.name}}<i></i></a></li>
+														</ul> 
+														<span class="filter-more">
+															<span class="filter-open"  ng-click="showMoreSchoolType(false)">更多</span>
+															<span class="filter-close" ng-click="showMoreSchoolType(true)">收起</span>
+														</span>
+													</div>
+												</div>
+										</td>
+									</tr>
+									<tr>
+										<td>学校</td>
+										<td>
+											<div ng-class="{'hotel-filter-list':true,'filter-list-has-more':true,'hotel-filter-list-min':isShowMoreSchool}"><strong class="tit"></strong>
+												<div class="con radio">
+													<ul class="list">
+														<li ng-repeat="type in schools" ng-click="onSchoolChanged(type.value)"><a ng-class="{true:'filter-tag selected',false:'filter-tag'}[type.value==curSchool]">{{type.name}}<i></i></a></li>
+													</ul> 
+													<span class="filter-more">
+														<span class="filter-open"  ng-click="showMoreSchool(false)">更多</span>
+														<span class="filter-close" ng-click="showMoreSchool(true)">收起</span>
+													</span>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td><div class="ul-center">精确搜索</div></td>
+										<td>
+											<form class="row form-inline ul-center">
+												<div class="form-group col-sm-6 col-xs-6">
+													<input type="text" class="form-control" ng-model="teacherName" placeholder="搜索教师姓名"/>
+												</div>
+												<div class="form-group col-sm-3 col-xs-6">
+													<button type="submit" class="btn btn-primary" ng-click="queryTeacherInfo(teacherName)">查询</button>
+												</div>
+											</form>
+										</td>
+									</tr>
+						</tbody>
+					</table>
+
+
+					<table class="table" st-safe-src="teacherList" st-table="displayed">
+						<thead>
+							<tr class="sortable ">
+								<th class="table-id" st-sort="id" st-sort-default="true">#</th>
+								<th st-sort="firstName">教师姓名</th>
+								<th st-sort="lastName">性别</th>
+								<th>所属学校</th>
+								<th>任课班级</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in displayed">
+								<td class="table-id">{{item.id}}</td>
+								<td>{{item.firstName}}</td>
+								<td>{{item.lastName}}</td>
+								<td>{{item.username}}</td>
+								<td><a class="email-link" ng-href="mailto:{{item.email}}">{{item.email}}</a></td>
+								<td>
+									<div class="btn-group" uib-dropdown dropdown-append-to-body>
+										<button type="button" class="btn btn-info " uib-dropdown-toggle>
+                                                  操作 <span class="caret"></span>
+                                                </button>
+										<ul uib-dropdown-menu>
+											<li ng-click="openDetail(item)"><a href>详细</a></li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="10" class="text-center">
+									<div style="float: left">
+                                        <span class="page-items">共{{totalItems}}条&nbsp&nbsp每页显示&nbsp</span>
+                                        <select class="page-size" title="Rows on page" ng-model="pageSize" ng-options="pageSize for pageSize in pageSizes" ng-change="changePageSize(pageSize)"></select>
+                                        <span class="page-items">&nbsp条</span>
+                                    </div>
+                                    <div st-pagination="" st-total-items="totalItems" st-items-by-page="pageSize" st-displayed-pages="5" st-page-change="pageChange(newPage)"
+                                        st-template="app/pages/common/pagination.html"></div>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
