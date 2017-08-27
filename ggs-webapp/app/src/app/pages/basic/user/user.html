@@ -60,10 +60,10 @@
 
                                     <div style="float: left">
                                         <span class="page-items">共{{totalItems}}条&nbsp&nbsp每页显示&nbsp</span>
-                                        <select class="page-size" title="Rows on page" ng-model="pageSize" ng-options="pageSize for pageSize in pageSizes"></select>
+                                        <select class="page-size" title="Rows on page" ng-model="pageSize" ng-options="pageSize for pageSize in pageSizes" ng-change="changePageSize(pageSize)"></select>
                                         <span class="page-items">&nbsp条</span>
                                     </div>
-                                    <div st-pagination="" st-items-by-page="pageSize" st-displayed-pages="5" st-page-change="pageChange(newPage)" st-template="app/pages/common/pagination.html"></div>
+                                    <div st-pagination="" st-total-items="totalItems" st-items-by-page="pageSize" st-displayed-pages="5" st-page-change="pageChange(newPage)" st-template="app/pages/common/pagination.html"></div>
                                 </td>
                             </tr>
                         </tfoot>
