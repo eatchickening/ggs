@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="io.chicken.ggs.dal.dao.SysmenuMapper" >
-  <resultMap id="BaseResultMap" type="io.chicken.ggs.dal.model.Sysmenu" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+<mapper namespace="io.chicken.ggs.dal.dao.SysMenuMapper" >
+  <resultMap id="BaseResultMap" type="io.chicken.ggs.dal.model.SysMenu" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="perms" property="perms" jdbcType="VARCHAR" />
     <result column="order_num" property="orderNum" jdbcType="INTEGER" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, parent_id, name, url, order_num, remark
+    id, parent_id, name, url, perms, order_num, remark
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from sysmenu
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from sysmenu
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="io.chicken.ggs.dal.model.Sysmenu" >
+  <insert id="insert" parameterType="io.chicken.ggs.dal.model.SysMenu" >
     insert into sysmenu (id, parent_id, name, 
-      url, order_num, remark
-      )
-    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
-      )
+      url, perms, order_num, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{perms,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.Sysmenu" >
+  <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.SysMenu" >
     insert into sysmenu
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -45,6 +46,9 @@
       <if test="url != null" >
         url,
       </if>
+      <if test="perms != null" >
+        perms,
+      </if>
       <if test="orderNum != null" >
         order_num,
       </if>
@@ -54,16 +58,19 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=BIGINT},
+        #{id,jdbcType=INTEGER},
       </if>
       <if test="parentId != null" >
-        #{parentId,jdbcType=BIGINT},
+        #{parentId,jdbcType=INTEGER},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="url != null" >
         #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="perms != null" >
+        #{perms,jdbcType=VARCHAR},
       </if>
       <if test="orderNum != null" >
         #{orderNum,jdbcType=INTEGER},
@@ -73,17 +80,20 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="io.chicken.ggs.dal.model.Sysmenu" >
+  <update id="updateByPrimaryKeySelective" parameterType="io.chicken.ggs.dal.model.SysMenu" >
     update sysmenu
     <set >
       <if test="parentId != null" >
-        parent_id = #{parentId,jdbcType=BIGINT},
+        parent_id = #{parentId,jdbcType=INTEGER},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="url != null" >
         url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="perms != null" >
+        perms = #{perms,jdbcType=VARCHAR},
       </if>
       <if test="orderNum != null" >
         order_num = #{orderNum,jdbcType=INTEGER},
@@ -92,15 +102,16 @@
         remark = #{remark,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="io.chicken.ggs.dal.model.Sysmenu" >
+  <update id="updateByPrimaryKey" parameterType="io.chicken.ggs.dal.model.SysMenu" >
     update sysmenu
-    set parent_id = #{parentId,jdbcType=BIGINT},
+    set parent_id = #{parentId,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
+      perms = #{perms,jdbcType=VARCHAR},
       order_num = #{orderNum,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

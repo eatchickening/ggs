@@ -45,7 +45,7 @@
 
 
 
-        <table tableName="user_menu" domainObjectName="UserMenu" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="sysmenu" domainObjectName="SysMenu" enableCountByExample="false" enableUpdateByExample="false"
            enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 
 	</context>

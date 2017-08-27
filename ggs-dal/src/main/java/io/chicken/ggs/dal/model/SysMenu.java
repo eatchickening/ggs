@@ -1,31 +1,33 @@
 package io.chicken.ggs.dal.model;
 
-public class Sysmenu {
-    private Long id;
+public class SysMenu {
+    private Integer id;
 
-    private Long parentId;
+    private Integer parentId;
 
     private String name;
 
     private String url;
 
+    private String perms;
+
     private Integer orderNum;
 
     private String remark;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentId(Long parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 
@@ -43,6 +45,14 @@ public class Sysmenu {
 
     public void setUrl(String url) {
         this.url = url == null ? null : url.trim();
+    }
+
+    public String getPerms() {
+        return perms;
+    }
+
+    public void setPerms(String perms) {
+        this.perms = perms == null ? null : perms.trim();
     }
 
     public Integer getOrderNum() {
