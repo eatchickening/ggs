@@ -13,7 +13,7 @@ public class CommonConstant {
     /** 默认的每页条数 */
     public static final Integer PAGE_SIZE = 10;
     /** 一次查询取多少页 */
-    public static final Integer PAGE_PRE = 5;
+    public static final Integer PAGE_PRE = 10;
 
     /** 用户账号的 cookie 名 */
     public static final String ACCOUNT_COOKIE = "_GGSA";

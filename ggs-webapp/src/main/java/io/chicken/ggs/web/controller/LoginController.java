@@ -117,7 +117,7 @@ public class LoginController {
         }
 
         // String account = getUserInfo().getAccount();
-        String account = "test"; //todo
+        String account = "test1"; //todo
 
         return loginBusiness.updatePwd(account, oldPassword, newPassword);
     }
