@@ -63,4 +63,24 @@ public class UserInfoBusinessTest {
         Result<Boolean> result = userInfoBusiness.save(userInfoVO);
         System.out.println(result.isSuccess());
     }
+
+    @Test
+    public void update() {
+        UserInfoVO userInfoVO = new UserInfoVO();
+        userInfoVO.setId(20);
+        userInfoVO.setAccount("test20");
+        userInfoVO.setPassword("1234");
+        userInfoVO.setUsername("李四20");
+        userInfoVO.setMenuId("1,2,3");
+
+        Result<Boolean> result = userInfoBusiness.update(userInfoVO);
+        System.out.println(result.isSuccess());
+    }
+
+    @Test
+    public void delete() {
+        Integer userId = 20;
+        Result<Boolean> result = userInfoBusiness.delete(userId);
+        System.out.println(result.isSuccess());
+    }
 }

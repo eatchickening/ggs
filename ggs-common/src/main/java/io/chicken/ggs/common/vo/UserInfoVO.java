@@ -52,6 +52,8 @@ public class UserInfoVO implements Serializable {
     @NotNull(message = "权限不能为空", groups = {UserInfoControllerSave.class})
     private String menuId;
 
+    private Integer isDelete;
+
     public Integer getId() {
         return id;
     }
@@ -180,6 +182,14 @@ public class UserInfoVO implements Serializable {
         this.menuId = menuId;
     }
 
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
+
     @Override
     public String toString() {
         return "UserInfoVO{" +
@@ -199,6 +209,7 @@ public class UserInfoVO implements Serializable {
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", menuId=" + menuId +
+                ", isDelete=" + isDelete +
                 '}';
     }
 }

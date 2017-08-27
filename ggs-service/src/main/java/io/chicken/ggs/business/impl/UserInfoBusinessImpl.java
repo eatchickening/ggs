@@ -87,4 +87,42 @@ public class UserInfoBusinessImpl implements UserInfoBusiness {
         }
     }
 
+    @Override
+    public Result<Boolean> update(UserInfoVO userInfoVO) {
+        UserInfo userInfo = new UserInfo();
+        BeanUtils.copyProperties(userInfoVO, userInfo);
+
+        try {
+            userInfoService.update(userInfo);
+
+            // 权限更新
+            UserMenu userMenu = new UserMenu();
+            userMenu.setUserAccount(userInfoVO.getAccount());
+            userMenu.setMenuId(userInfoVO.getMenuId());
+            userMenuService.update(userMenu);
+
+            return new Result<>(ResultCode.SUCCESS);
+        } catch (GGSException e) {
+            return new Result<>(e.getCode(), e.getMessage());
+        } catch (Exception e1) {
+            LOGGER.error(userInfo.getAccount() + ", update() 异常：" + e1.getMessage());
+            return new Result<>(ResultCode.SYS_EXCEPTION);
+        }
+    }
+
+    @Override
+    public Result<Boolean> delete(Integer userId) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(userId);
+        userInfo.setIsDelete(CommonConstant.USER_STATUS_DELETE);
+        try {
+            userInfoService.update(userInfo);
+            return new Result<>(ResultCode.SUCCESS);
+        } catch (GGSException e) {
+            return new Result<>(e.getCode(), e.getMessage());
+        } catch (Exception e1) {
+            LOGGER.error(userInfo.getAccount() + ", delete() 异常：" + e1.getMessage());
+            return new Result<>(ResultCode.SYS_EXCEPTION);
+        }
+    }
 }

@@ -21,4 +21,7 @@ public class CommonConstant {
     public static final String TOKEN_COOKIE = "_GGST";
     /** 账号cookie的存活时间（秒） */
     public static final int ACCOUNT_COOKIE_EXPIRED = 30 * 24 * 60 * 60;
+
+    /** 用户删除状态 */
+    public static final int USER_STATUS_DELETE = 1;
 }

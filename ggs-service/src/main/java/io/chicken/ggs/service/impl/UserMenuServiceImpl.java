@@ -23,4 +23,9 @@ public class UserMenuServiceImpl implements UserMenuService {
     public Integer save(UserMenu userMenu) {
         return userMenuMapper.insert(userMenu);
     }
+
+    @Override
+    public void update(UserMenu userMenu) {
+        userMenuMapper.updateByPrimaryKeySelective(userMenu);
+    }
 }

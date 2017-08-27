@@ -38,4 +38,18 @@ public interface UserInfoBusiness {
      * @return
      */
     Result<Boolean> save(UserInfoVO userInfoVO);
+
+    /**
+     * 更新用户信息
+     * @param userInfoVO
+     * @return
+     */
+    Result<Boolean> update(UserInfoVO userInfoVO);
+
+    /**
+     * 删除用户（改变状态）
+     * @param userId
+     * @return
+     */
+    Result<Boolean> delete(Integer userId);
 }
