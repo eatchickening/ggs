@@ -3,20 +3,20 @@
         <div class="col-md-12">
             <div ba-panel ba-panel-class="with-scroll">
                 <div class="horizontal-scroll">
-                    <table class="table table-hover" st-table="smartTableData">
+                    <table class="table table-hover" st-safe-src="userList" st-table="displayed">
                         <thead>
                             <tr>
                                 <th></th>
-                                <th><input st-search="firstName" placeholder="搜索帐号" class="input-sm form-control search-input"
+                                <th><input st-search="account" placeholder="搜索帐号" class="input-sm form-control search-input"
                                         type="search" /></th>
-                                <th><input st-search="lastName" placeholder="搜索昵称" class="input-sm form-control search-input"
+                                <th><input st-search="username" placeholder="搜索昵称" class="input-sm form-control search-input"
                                         type="search" /></th>
-                                <th><input st-search="username" placeholder="搜索机构" class="input-sm form-control search-input"
+                                <th><input st-search="organName" placeholder="搜索机构" class="input-sm form-control search-input"
                                         type="search" /></th>
-                                <th><input st-search="email" placeholder="搜索部门" class="input-sm form-control search-input" type="search"
+                                <th><input st-search="departName" placeholder="搜索部门" class="input-sm form-control search-input" type="search"
                                     />
                                 </th>
-                                <th><input st-search="age" placeholder="搜索岗位" class="input-sm form-control search-input" type="search"
+                                <th><input st-search="postName" placeholder="搜索岗位" class="input-sm form-control search-input" type="search"
                                     />
                                 </th>
                                 <th>
@@ -25,22 +25,22 @@
                             </tr>
                             <tr class="sortable ">
                                 <th class="table-id" st-sort="id" st-sort-default="true">#</th>
-                                <th st-sort="firstName">账号</th>
-                                <th st-sort="lastName">昵称</th>
-                                <th st-sort="username">机构</th>
-                                <th st-sort="email">部门</th>
-                                <th st-sort="age">岗位</th>
+                                <th st-sort="account">账号</th>
+                                <th st-sort="username">昵称</th>
+                                <th st-sort="organName">机构</th>
+                                <th st-sort="departName">部门</th>
+                                <th st-sort="postName">岗位</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="item in smartTableData">
+                            <tr ng-repeat="item in displayed">
                                 <td class="table-id">{{item.id}}</td>
-                                <td>{{item.firstName}}</td>
-                                <td>{{item.lastName}}</td>
+                                <td>{{item.account}}</td>
                                 <td>{{item.username}}</td>
-                                <td><a class="email-link" ng-href="mailto:{{item.email}}">{{item.email}}</a></td>
-                                <td>{{item.age}}</td>
+                                <td>{{item.organName}}</td>
+                                <td>{{item.departName}}</a></td>
+                                <td>{{item.postName}}</td>
                                 <td>
                                     <div class="btn-group" uib-dropdown dropdown-append-to-body>
                                         <button type="button" class="btn btn-info " uib-dropdown-toggle>
@@ -60,10 +60,10 @@
 
                                     <div style="float: left">
                                         <span class="page-items">共{{totalItems}}条&nbsp&nbsp每页显示&nbsp</span>
-                                        <select class="page-size" title="Rows on page" ng-model="smartTablePageSize" ng-options="rowNum for rowNum in rowNums"></select>
+                                        <select class="page-size" title="Rows on page" ng-model="pageSize" ng-options="rowNum for rowNum in rowNums"></select>
                                         <span class="page-items">&nbsp条</span>
                                     </div>
-                                    <div st-pagination="" st-items-by-page="smartTablePageSize" st-displayed-pages="5" st-page-change="pageChange(newPage)" st-template="app/pages/common/pagination.html"></div>
+                                    <div st-pagination="" st-items-by-page="pageSize" st-displayed-pages="5" st-page-change="pageChange(newPage)" st-template="app/pages/common/pagination.html"></div>
                                 </td>
                             </tr>
                         </tfoot>
