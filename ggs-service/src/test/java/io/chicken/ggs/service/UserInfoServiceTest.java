@@ -32,7 +32,7 @@ public class UserInfoServiceTest {
 
     @Test
     public void saveBatch() {
-        for (int i = 3; i < 20; i++) {
+        for (int i = 3; i < 500; i++) {
             UserInfo userInfo = new UserInfo();
             userInfo.setAccount("test" + i);
             userInfo.setUsername("李四" + i);
