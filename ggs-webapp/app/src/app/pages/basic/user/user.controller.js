@@ -45,34 +45,108 @@
                 getUserList(1, pageSize);
             };
 
+            // add new user
+
+            $scope.menus = [{
+                id: 1,
+                name: '基础设置',
+                submenus: [{
+                    id: 1,
+                    name: '部门与岗位设置'
+                },{
+                    id: 2,
+                    name: '用户管理'
+                }]
+            },{
+                id: 2,
+                name: '信息查询',
+                submenus: [{
+                    id: 3,
+                    name: '学生信息查询'
+                },
+                {
+                    id: 4,
+                    name: '教师信息查询'
+                },{
+                    id: 5,
+                    name: '学校信息查询'
+                }]
+            },{
+                id: 3,
+                name: '教育局评优活动',
+                submenus: [{
+                    id: 6,
+                    name: '评优奖项设置'
+                },{
+                    id: 7,
+                    name: '评选活动管理'
+                },{
+                    id: 8,
+                    name: '优评评定活动列表'
+                }]
+            },{
+                id: 4,
+                name: '学校评优活动',
+                submenus: [{
+                    id: 9,
+                    name: '评优奖项设置'
+                },{
+                    id: 10,
+                    name: '评选活动管理'
+                },{
+                    id: 11,
+                    name: '优评评定活动列表'
+                }]
+            },{
+                id: 5,
+                name: '系统管理',
+                submenus: [{
+                    id: 12,
+                    name: '日志管理'
+                },{
+                    id: 13,
+                    name: '通知信息管理'
+                },{
+                    id: 14,
+                    name: '通知信息'
+                }]
+            }];
+
+            $scope.selectMenu = function () {
+                
+            };
+
             $scope.addUser = function () {
-                var model = $uibModal.open({
+                $scope.user = {
+                    account: '',
+                    password: '',
+                    username: '',
+                    areas: '',
+                    organs: '',
+                    departs: '',
+                    posts: '',
+                    selectedMenus: ''
+                };
+                
+                var addUserModel = $uibModal.open({
                     animation: true,
                     templateUrl: 'app/pages/basic/user/adduser.html',
                     size: 'lg',
-                    scope: $scope,
-                    resolve: {
-                        items: function () {
-                            return $scope.items;
-                        }
-                    }
+                    scope: $scope
                 });
-                model.result.then(
-                    //close
-                    function (result) {
-                        var a = result;
-                    },
-                    //dismiss
-                    function (result) {
-                        var a = result;
-                    });
-            };
+                addUserModel.result.then(function(result){
+                    if (result && result === 'OK') {
+                        console.log($scope.user);
+                        return BasicService.adduser().then(function(response){
+                            if (response) {
 
-            $scope.insertUser = function() {
-                BasicService.adduser().then(function (data) {
-                    console.log(data);
-                }).catch(function (err) {
-                    toastr.error(err);
+                            }
+                        });
+                    }
+                }).catch(function(err){
+                    if (err) {
+                        console.log(err);
+                    }
                 });
             };
 

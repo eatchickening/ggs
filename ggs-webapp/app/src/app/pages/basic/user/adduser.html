@@ -10,122 +10,50 @@
                 </div>
                 <div class="form-group">
                     <span class="page-items">账号：</span>
-                    <input type="text" class="user-form-control">
+                    <input type="text" class="user-form-control" ng-model="user.account">
                     <span class="user-form-red">*</span>
                 </div>
                 <div class="form-group">
                     <span class="page-items">密码：</span>
-                    <input type="password" class="user-form-control" ng-click="defaultPassword=!defaultPassword" ng-model="password">
+                    <input type="password" class="user-form-control" ng-click="defaultPassword=!defaultPassword" ng-model="user.password">
                     <span class="user-form-red">*</span>
                     <label class="radio-inline custom-radio nowrap">
-                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" ng-model="defaultPassword" ng-click="password=123456">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" ng-model="defaultPassword" ng-click="user.password=123456">
                         <span>默认</span>
                     </label>
                 </div>
                 <div class="form-group">
                     <span class="page-items">昵称：</span>
-                    <input type="text" class="user-form-control">
+                    <input type="text" class="user-form-control" ng-model="user.username">
                     <span class="user-form-red">*</span>
                 </div>
                 <div class="form-group">
                     <span class="page-items">区域：</span>
-                    <select class="user-form-control" ng-model="rowNum" ng-options="rowNum for rowNum in rowNums"></select>
+                    <select class="user-form-control" ng-model="user.area" ng-options="area.name for area in user.areas"></select>
                 </div>
                 <div class="form-group">
                     <span class="page-items">机构：</span>
-                    <select class="user-form-control" ng-model="rowNum" ng-options="rowNum for rowNum in rowNums"></select>
+                    <select class="user-form-control" ng-model="organ" ng-options="organs.name for organs in user.organs"></select>
                 </div>
                 <div class="form-group">
                     <span class="page-items">部门：</span>
-                    <select class="user-form-control" ng-model="rowNum" ng-options="rowNum for rowNum in rowNums"></select>
+                    <select class="user-form-control" ng-model="depart" ng-options="depart.name for depart in user.departs"></select>
                 </div>
                 <div class="form-group">
                     <span class="page-items">岗位：</span>
-                    <select class="user-form-control" ng-model="rowNum" ng-options="rowNum for rowNum in rowNums"></select>
+                    <select class="user-form-control" ng-model="post" ng-options="post.name for post in user.posts"></select>
                 </div>
             </div>
             <div class="col-md-6 left-line">
                 <div class="form-group text-center">
                     <span>权限设置</span>
                 </div>
-                <div class="form-group">
-                    <span class="page-items">基础设置：</span>
+                <div class="form-group" ng-repeat="menu in menus">
+                    <span class="page-items">{{ menu.name }}</span>
                     <div class="user-form-check">
-                        <label class="user-form-width">
-                            <input type="checkbox" id="inlineCheckbox01" value="option1">
-                            <span>部门与岗位设置</span>
-                        </label>
-                        <label class="user-form-width">
-                            <input type="checkbox" id="inlineCheckbox02" value="option2">
-                            <span>用户管理</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <span class="page-items">信息查询：</span>
-                    <div class="user-form-check">
-                        <label class="user-form-width">
-                            <input type="checkbox" id="inlineCheckbox01" value="option1">
-                            <span>学生信息查询</span>
-                        </label>
-                        <label class="user-form-width">
-                            <input type="checkbox" id="inlineCheckbox02" value="option2">
-                            <span>教师信息查询</span>
-                        </label>
-                        <label class="user-form-width">
-                            <input type="checkbox" id="inlineCheckbox02" value="option2">
-                            <span>学校信息查询</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <span class="page-items">教育局评优活动：</span>
-                    <div class="user-form-check">
-                        <label class="user-form-width">
-                            <input type="checkbox" id="inlineCheckbox01" value="option1">
-                            <span>评优奖项设置</span>
-                        </label>
-                        <label class="user-form-width">
-                            <input type="checkbox" id="inlineCheckbox02" value="option2">
-                            <span>评优活动管理</span>
-                        </label>
-                            <label class="user-form-width">
-                            <input type="checkbox" id="inlineCheckbox02" value="option2">
-                            <span>优评评定活动列表</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <span class="page-items">学校评优活动：</span>
-                    <div class="user-form-check">
-                        <label class="user-form-width">
-                            <input type="checkbox" id="inlineCheckbox01" value="option1">
-                            <span>评优奖项设置</span>
-                        </label>
-                        <label class="user-form-width">
-                            <input type="checkbox" id="inlineCheckbox02" value="option2">
-                            <span>评优活动管理</span>
-                        </label>
-                        <label class="user-form-width">
-                            <input type="checkbox" id="inlineCheckbox02" value="option2">
-                            <span>优评评定活动列表</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <span class="page-items">系统管理：</span>
-                    <div class="user-form-check">
-                        <label class="user-form-width">
-                            <input type="checkbox" id="inlineCheckbox01" value="option1">
-                            <span>日志管理</span>
-                        </label>
-                        <label class="user-form-width">
-                            <input type="checkbox" id="inlineCheckbox02" value="option2">
-                            <span>通知信息管理</span>
-                        </label>
-                        <label class="user-form-width">
-                            <input type="checkbox" id="inlineCheckbox02" value="option2">
-                            <span>通知信息</span>
+                        <label class="user-form-width" ng-repeat="submenu in menu.submenus track by $index">
+                            <input type="checkbox" id="{{submenu.id}}" name="{{submenu.name}}" ng-click="selectMenu(submenu.id)">
+                            <span>{{ submenu.name }}</span>
                         </label>
                     </div>
                 </div>
@@ -134,6 +62,6 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" ng-click="$dismiss()">取消</button>
-        <button type="button" class="btn btn-info" ng-click="insertUser()">提交</button>
+        <button type="button" class="btn btn-info" ng-click="$close('OK')">提交</button>
     </div>
 </div>
