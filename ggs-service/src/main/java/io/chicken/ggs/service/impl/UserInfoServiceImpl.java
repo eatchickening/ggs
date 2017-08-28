@@ -56,7 +56,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public UserInfo login(String account, String pwd) throws DataAccessException {
+    public UserInfoVO login(String account, String pwd) throws DataAccessException {
         return userInfoMapper.login(account, pwd);
     }
 

@@ -2,6 +2,8 @@ package io.chicken.ggs.dal.dao;
 
 import io.chicken.ggs.dal.model.SysMenu;
 
+import java.util.List;
+
 public interface SysMenuMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface SysMenuMapper {
     int updateByPrimaryKeySelective(SysMenu record);
 
     int updateByPrimaryKey(SysMenu record);
+
+    List<SysMenu> queryList(List<Integer> ids);
 }

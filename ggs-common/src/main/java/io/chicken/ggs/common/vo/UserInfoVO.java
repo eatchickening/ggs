@@ -8,6 +8,7 @@ import io.chicken.ggs.common.validator.groups.UserInfoControllerSave;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -53,6 +54,8 @@ public class UserInfoVO implements Serializable {
     private String menuId;
 
     private Integer isDelete;
+
+    private List<String> angularState;
 
     public Integer getId() {
         return id;
@@ -190,6 +193,14 @@ public class UserInfoVO implements Serializable {
         this.isDelete = isDelete;
     }
 
+    public List<String> getAngularState() {
+        return angularState;
+    }
+
+    public void setAngularState(List<String> angularState) {
+        this.angularState = angularState;
+    }
+
     @Override
     public String toString() {
         return "UserInfoVO{" +
@@ -208,8 +219,9 @@ public class UserInfoVO implements Serializable {
                 ", organName='" + organName + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
-                ", menuId=" + menuId +
+                ", menuId='" + menuId + '\'' +
                 ", isDelete=" + isDelete +
+                ", angularState=" + angularState +
                 '}';
     }
 }

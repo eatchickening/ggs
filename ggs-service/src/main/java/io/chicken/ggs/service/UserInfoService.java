@@ -23,7 +23,7 @@ public interface UserInfoService {
 
     UserInfo query(Integer id);
 
-    UserInfo login(String account, String pwd) throws DataAccessException;
+    UserInfoVO login(String account, String pwd) throws DataAccessException;
 
     Boolean updatePwd(String account, String newPwd) throws DataAccessException;
 

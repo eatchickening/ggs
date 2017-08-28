@@ -39,6 +39,7 @@
         <result column="organName" property="organName" jdbcType="VARCHAR" />
         <result column="departName" property="departName" jdbcType="VARCHAR" />
         <result column="postName" property="postName" jdbcType="VARCHAR" />
+        <result column="menu_id" property="menuId" jdbcType="VARCHAR" />
     </resultMap>
 
       <sql id="Base_Column_List" >
@@ -265,12 +266,12 @@
   </update>
 
 
-    <select id="login" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user_info
+    <select id="login" resultMap="UserInfoVOResultMap">
+        select u.*, m.menu_id from user_info u
+        left join user_menu m
+        on u.account = m.user_account
         where is_delete = 0
-        and account = #{account}
+        and u.account = #{account}
         and password = #{pwd}
     </select>
     <update id="resetPwdByAccount">

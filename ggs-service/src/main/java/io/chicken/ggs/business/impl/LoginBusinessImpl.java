@@ -10,7 +10,9 @@ import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.util.LoginUtil;
 import io.chicken.ggs.common.vo.UserInfoVO;
 import io.chicken.ggs.dal.model.Organization;
+import io.chicken.ggs.dal.model.SysMenu;
 import io.chicken.ggs.dal.model.UserInfo;
+import io.chicken.ggs.service.SysMenuService;
 import io.chicken.ggs.service.UserInfoService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -19,6 +21,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -31,6 +37,8 @@ public class LoginBusinessImpl implements LoginBusiness {
 
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private SysMenuService sysMenuService;
 
     @Override
     public Result<UserInfoVO> login(String account, String pwd) {
@@ -41,13 +49,12 @@ public class LoginBusinessImpl implements LoginBusiness {
 
         try {
             // pwd = LoginUtil.md5(LoginUtil.decryptByPrivateKeyForPC(pwd));
-            UserInfo user = userInfoService.login(account, pwd);
+            UserInfoVO user = userInfoService.login(account, pwd);
             if (user == null) {
                 return new Result<>(ResultCode.LOGIN_FAIL);
             }
 
-            UserInfoVO userVO = new UserInfoVO();
-            BeanUtils.copyProperties(user, userVO);
+
 
             // Organization organization = organizationService.query(user.getOrgaAccount());
             // if (organization == null) {
@@ -66,7 +73,7 @@ public class LoginBusinessImpl implements LoginBusiness {
             // userVO.setRoleName(RoleEnum.getDescByCode(userRole.getRoleCode()));
             //
             // userVO.setPassword(null);
-            return new Result<UserInfoVO>(userVO);
+            return new Result<>(user);
         }catch (GGSException e) {
             LOGGER.error(account + " : " + e.getMessage());
             return new Result<>(e.getCode(), e.getMessage());
@@ -88,7 +95,7 @@ public class LoginBusinessImpl implements LoginBusiness {
 
         try {
             // oldPwd = LoginUtil.md5(LoginUtil.decryptByPrivateKeyForPC(oldPwd));
-            UserInfo user = userInfoService.login(account, oldPwd);
+            UserInfoVO user = userInfoService.login(account, oldPwd);
             if (user == null) {
                 return new Result<>(ResultCode.LOGIN_OLDPWD_ERROR);
             }

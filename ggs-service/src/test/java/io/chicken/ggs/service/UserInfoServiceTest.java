@@ -81,4 +81,12 @@ public class UserInfoServiceTest {
         Long count = userInfoService.queryCount(param);
         System.out.println(count);
     }
+
+    @Test
+    public void login() {
+        String account = "test20";
+        String password = "1234";
+        UserInfoVO userInfoVO = userInfoService.login(account, password);
+        System.out.println(userInfoVO);
+    }
 }

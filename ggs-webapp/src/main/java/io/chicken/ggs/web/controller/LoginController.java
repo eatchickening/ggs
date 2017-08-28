@@ -2,10 +2,12 @@
 package io.chicken.ggs.web.controller;
 
 import io.chicken.ggs.business.LoginBusiness;
+import io.chicken.ggs.business.SysMenuBusiness;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.util.LoginUtil;
 import io.chicken.ggs.common.vo.UserInfoVO;
+import io.chicken.ggs.dal.model.SysMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -31,6 +35,8 @@ public class LoginController extends BaseController {
 
     @Autowired
     private LoginBusiness loginBusiness;
+    @Autowired
+    private SysMenuBusiness sysMenuBusiness;
 
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -41,70 +47,64 @@ public class LoginController extends BaseController {
         }
         System.out.println(account);
         System.out.println(password);
-        // 处理逻辑
 
+        // 登录
         Result<UserInfoVO> result = loginBusiness.login(account, password);
         if (!result.isSuccess()) {
             logger.error(account + ", 登录失败:" + result.getMessage());
             return new Result<>(result.getCode(), result.getMessage());
         }
 
+        // 保存到 session
         HttpSession session = request.getSession(true);
         System.out.println("sessionId = " + session.getId());
-        session.setAttribute(session.getId(), result.getData());
-        System.out.println("getSession:" + session.getAttribute(account));
+        UserInfoVO user = result.getData();
+        session.setAttribute(session.getId(), user);
+        System.out.println("getSession:" + session.getAttribute(session.getId()));
 
-        // UserVO userVO = result.getData();
-        // if (!result.isSuccess() || userVO == null) {
-        //     return new RpcResult<>(result.getCode(), result.getMessage());
-        // }
-        // System.out.println(result.isSuccess());
-        // System.out.println(result.getMessage());
-        // System.out.println(result.getData());
-        //
-        // if (MenuUtil.getEnum(userVO.getRoleCode()) == null) {
-        //     logger.error("非pc用户登录: roleName=" + userVO.getRoleName());
-        //     return new RpcResult(ResultCode.LOGIN_FAIL);
-        // }
-        //
-        // // cookie 设置和 redis 保存用户信息
-        // String token = LoginUtil.setCookieValueAndReturnToken(request, response, userVO.getAccount());
-        // // String ip = LoginUtil.getClientIP(request);
-        // if (StringUtils.isEmpty(token) /*|| StringUtils.isEmpty(ip)*/) {
-        //     logger.error("login(), token=" + token/* + ", ip =" + ip*/);
-        //     return new RpcResult();
-        // }
-        // String userKey = Md5Util.Md5(token + account);
-        // redisService.set(userKey, userVO, Constant.ACCOUNT_EXPIRED);
-        // redisService.set(Constant.REDIS_PREFIX + account, userKey, Constant.ACCOUNT_EXPIRED);
-
-        return result;
-        // return new Result<>(ResultCode.SUCCESS);
+        return new Result<>(ResultCode.SUCCESS);
     }
 
 
     /**
      * 获取登录用户信息和菜单
      */
-    // @RequestMapping(value = "/userInfo", method = RequestMethod.POST)
-    // @ResponseBody
-    // public RpcResult<UserVOAndEnumNodeVO> userInfo() {
-    //     // 从redis 中取用户信息
-    //     UserVO userVO = getUserInfo();
-    //     String account = userVO.getAccount();
-    //     logger.info("account=" + account);
-    //
-    //     if (StringUtils.isEmpty(account)) {
-    //         return new RpcResult<>(ResultCode.PARAMETER_EMPTY);
-    //     }
-    //
-    //     UserVOAndEnumNodeVO vo = new UserVOAndEnumNodeVO();
-    //     vo.setUserVO(userVO);
-    //     EnumNode enumNode = MenuUtil.getEnum(userVO.getRoleCode());
-    //     vo.setEnumNode(enumNode);
-    //
-    //     return new RpcResult<>(vo);
-    // }
+    @RequestMapping(value = "/userInfo", method = RequestMethod.POST)
+    @ResponseBody
+    public Result<UserInfoVO> userInfo(HttpServletRequest request) {
+        UserInfoVO user = getUserInfo();
+
+        // 查询菜单
+        String menuId = user.getMenuId();
+        if (StringUtils.isEmpty(menuId)) {
+            logger.error(user.getAccount() + ", 没有菜单信息");
+            return new Result<>(user);
+        }
+        String[] ids = menuId.split(",");
+        List<Integer> idList = new ArrayList<>(ids.length);
+        for (String id : ids) {
+            idList.add(Integer.parseInt(id));
+        }
+        Result<List<SysMenu>> menuResult = sysMenuBusiness.queryList(idList);
+        if (!menuResult.isSuccess()) {
+            logger.error(user.getAccount() + ", 获取菜单失败:" + menuResult.getMessage());
+            return new Result<>(ResultCode.SYS_EXCEPTION);
+        }
+
+        List<String> angularStateList = new ArrayList<>();
+        List<SysMenu> sysMenuList = menuResult.getData();
+        for (SysMenu sysMenu : sysMenuList) {
+            angularStateList.add(sysMenu.getAngularState());
+        }
+        user.setAngularState(angularStateList);
+
+        // 保存菜单信息
+        HttpSession session = request.getSession();
+        String sessionId = session.getId();
+        session.setAttribute(sessionId + "_menu", sysMenuList); //todo
+
+        return new Result<>(user);
+    }
 
     /**
      * 修改密码
