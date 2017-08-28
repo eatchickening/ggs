@@ -27,10 +27,10 @@
         and tea.name like concat('%',#{name},'%')
       </if>
       <if test="schoolname != null">
-        and school.name = #{schoolname}
+        and sch.name = #{schoolname}
       </if>
       <if test="areaname != null">
-        and dic.datavalue = areaname
+        and dic.datavalue = #{areaname}
       </if>
       <if test="schooltype != null" >
         and 1=1
