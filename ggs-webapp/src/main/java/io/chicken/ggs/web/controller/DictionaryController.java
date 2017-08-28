@@ -36,7 +36,7 @@ public class DictionaryController {
 
     @ResponseBody
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public Result<List<Dictionary>> get(Dictionary dictionary) {
+    public Result<List<Dictionary>> get(@RequestBody Dictionary dictionary) {
         logger.info("get() " + dictionary);
         if (StringUtils.isEmpty(dictionary.getBiztype())) {
             return new Result<>(ResultCode.PARAMETER_EMPTY);
@@ -58,7 +58,7 @@ public class DictionaryController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/areaDetail", method = RequestMethod.POST)
+    @RequestMapping(value = "/areaDetail", method = RequestMethod.GET)
     public Result<List<AreaDetailVO>> areaDetail(String bizcode) {
         logger.info("areaDetail() " + bizcode);
 

@@ -29,19 +29,19 @@
                 </div>
                 <div class="form-group">
                     <span class="page-items">区域：</span>
-                    <select class="user-form-control" ng-model="user.area" ng-options="area.name for area in user.areas"></select>
+                    <select class="user-form-control" ng-model="user.area" ng-options="area.datavalue for area in areas"></select>
                 </div>
                 <div class="form-group">
                     <span class="page-items">机构：</span>
-                    <select class="user-form-control" ng-model="organ" ng-options="organs.name for organs in user.organs"></select>
+                    <select class="user-form-control" ng-model="organ" ng-options="organs.name for organs in organs"></select>
                 </div>
                 <div class="form-group">
                     <span class="page-items">部门：</span>
-                    <select class="user-form-control" ng-model="depart" ng-options="depart.name for depart in user.departs"></select>
+                    <select class="user-form-control" ng-model="depart" ng-options="depart.name for depart in departs"></select>
                 </div>
                 <div class="form-group">
                     <span class="page-items">岗位：</span>
-                    <select class="user-form-control" ng-model="post" ng-options="post.name for post in user.posts"></select>
+                    <select class="user-form-control" ng-model="post" ng-options="post.name for post in posts"></select>
                 </div>
             </div>
             <div class="col-md-6 left-line">

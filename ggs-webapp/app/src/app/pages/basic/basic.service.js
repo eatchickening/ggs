@@ -39,6 +39,36 @@
                     deferred.reject(response);
                 });
                 return deferred.promise;
+            },
+            listArea: function () {
+                var deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: 'http://localhost:8080/ggs/dictionary/get',
+                    data: {
+                        biztype: 'areacode'
+                    }
+                }).then(function(response) {
+                    deferred.resolve(response.data);
+                }).catch(function(response) {
+                    deferred.reject(response);
+                });
+                return deferred.promise;
+            },
+            listAreaDetail: function(bizcode) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/ggs/dictionary/areaDetail',
+                    params: {
+                        bizcode: bizcode
+                    }
+                }).then(function(response) {
+                    deferred.resolve(response.data);
+                }).catch(function(response) {
+                    deferred.reject(response);
+                });
+                return deferred.promise;
             }
         };
     }]);
