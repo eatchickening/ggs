@@ -58,7 +58,7 @@ public class DictionaryController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/areaDetail", method = RequestMethod.POST)
+    @RequestMapping(value = "/areaDetail", method = RequestMethod.GET)
     public Result<List<AreaDetailVO>> areaDetail(String bizcode) {
         logger.info("areaDetail() " + bizcode);
 
