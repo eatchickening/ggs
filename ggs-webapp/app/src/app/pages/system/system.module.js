@@ -10,7 +10,7 @@
                 title: '系统管理',
                 sidebarMeta: {
                     icon: 'ion-gear-a',
-                    order: 4,
+                    order: 7,
                 }
             }).state('root.system.log', {
                 url: '/log',

@@ -116,6 +116,20 @@
                 
             };
 
+            function transformData(data) {
+                
+            }
+
+            function listAreaDetail(bizcode) {
+                BasicService.listAreaDetail(bizcode).then(function(data) {
+                    if (data.code === 0 && data.data && data.data instanceof Array) {
+                        transformData(data.data);
+                    }
+                }).catch(function(err){
+                    console.log(err);
+                });
+            }
+
             $scope.addUser = function () {
                 $scope.user = {
                     account: '',
@@ -130,7 +144,11 @@
 
                 BasicService.listArea().then(function(data){
                     if (data.code === 0 && data.data && data.data instanceof Array) {
-                        
+                        $scope.areas = data.data;
+                        if (data.data.length > 0) {
+                            $scope.user.area = data.data[0];
+                        }
+                        listAreaDetail($scope.user.area.bizcode);
                     }
                 }).catch(function(err){
                     console.log(err);

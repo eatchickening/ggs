@@ -5,7 +5,7 @@
         .controller('TeacherCtrl', function ($scope, $uibModal, toastr, TeacherService) {
 
           $scope.regions = [
-            {name:'全部', value:'0'},
+            {name:'全部', value:''},
             {name:'地区1', value:'1'},
             {name:'地区2', value:'2'},
             {name:'地区3', value:'3'},
@@ -14,7 +14,7 @@
           ];
     
           $scope.schoolTypes = [
-            {name:'全部', value:'1'},
+            {name:'全部', value:''},
             {name:'高职', value:'2'},
             {name:'高中', value:'3'},
             {name:'初中', value:'4'},
@@ -22,7 +22,7 @@
           ];
     
           $scope.schools = [
-            {name:'全部', value:'1'},
+            {name:'全部', value:''},
             {name:'学校1', value:'2'},
             {name:'学校2', value:'3'},
             {name:'学校3', value:'4'},
@@ -166,10 +166,10 @@
        //根据查询条件加载教师数据
        $scope.queryTeacherInfo = function(teacherName){
 
-         if(!teacherName){
-           toastr.error('请输入教师姓名!', '精确查询', {});
-           return;
-         }
+        //  if(!teacherName){
+        //    toastr.error('请输入教师姓名!', '精确查询', {});
+        //    return;
+        //  }
          getTeacherList(1, $scope.tempPageSize, $scope.curRegion, $scope.curSchoolType, $scope.curSchool, teacherName);
        };
  
@@ -178,9 +178,16 @@
        $scope.pageSize = 5;
 
        function getTeacherList(pageNum, pageSize, region, schoolType, schoolName, teacherName){
-        $scope.totalItems = 10;
-        
-        $scope.teacherList = $scope.smartTableData;
+        // $scope.totalItems = 10;
+        // $scope.teacherList = $scope.smartTableData;
+        TeacherService.query(pageNum, pageSize, teacherName, schoolName, region, schoolType).then(function(data) {
+          if (data.code === 0 && data.data && data.data instanceof Array) {
+              $scope.teacherList = data.data;
+              $scope.totalItems = data.total;
+          }
+      }).catch(function(err) {
+          toastr.error(err);
+      });
        }
 
        function init() {
