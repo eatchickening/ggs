@@ -36,7 +36,7 @@ public class DictionaryController {
 
     @ResponseBody
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public Result<List<Dictionary>> get(Dictionary dictionary) {
+    public Result<List<Dictionary>> get(@RequestBody Dictionary dictionary) {
         logger.info("get() " + dictionary);
         if (StringUtils.isEmpty(dictionary.getBiztype())) {
             return new Result<>(ResultCode.PARAMETER_EMPTY);
