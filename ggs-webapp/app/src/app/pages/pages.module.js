@@ -11,7 +11,10 @@
       'chicken.pages.home',
       'chicken.pages.basic',
       'chicken.pages.info',
-      'chicken.pages.system'
+      'chicken.pages.system',
+      'chicken.pages.awardApply',
+      'chicken.pages.ratingBureau',
+      'chicken.pages.ratingSchool'
     ])
     .config(routeConfig);
 

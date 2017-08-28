@@ -3,24 +3,21 @@
 
     angular.module('chicken.pages.info').factory('TeacherService', ['$http', '$q' ,function ($http, $q) {
         return {
-            query: function (username, password) {
+            query: function (pageNum, pageSize, teacherName, schoolName,areaName,schoolType ) {
                 var deferred = $q.defer();
                 $http({
                     method: 'POST',
-                    url: 'http://localhost:8080/ggs/student/list',
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    transformRequest: function(obj) {
-                        var str = [];
-                        for (var p in obj)
-                            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                        return str.join("&");
-                    },
+                    url: 'http://localhost:8080/ggs/teacher/list',
                     data: {
-                        account: username,
-                        password: password
+                        pageNum: pageNum,
+                        pageSize: pageSize,
+                        name:teacherName,
+                        schoolname:schoolName,
+                        areaname:areaName,
+                        schooltype:schoolType
                     }
                 }).then(function (response) {
-                    deferred.resolve(response);
+                    deferred.resolve(response.data);
                 }).catch(function (response) {
                     deferred.reject(response);
                 });
