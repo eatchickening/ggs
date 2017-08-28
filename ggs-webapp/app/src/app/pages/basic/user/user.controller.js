@@ -127,6 +127,14 @@
                     posts: '',
                     selectedMenus: ''
                 };
+
+                BasicService.listArea().then(function(data){
+                    if (data.code === 0 && data.data && data.data instanceof Array) {
+                        
+                    }
+                }).catch(function(err){
+                    console.log(err);
+                });
                 
                 var addUserModel = $uibModal.open({
                     animation: true,

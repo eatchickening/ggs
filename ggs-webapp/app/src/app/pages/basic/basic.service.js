@@ -39,6 +39,21 @@
                     deferred.reject(response);
                 });
                 return deferred.promise;
+            },
+            listArea: function () {
+                var deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: 'http://localhost:8080/ggs/dictionary/get',
+                    data: {
+                        biztype: 'areacode'
+                    }
+                }).then(function(response) {
+                    deferred.resolve(response);
+                }).catch(function(response) {
+                    deferred.reject(response);
+                });
+                return deferred.promise;
             }
         };
     }]);
