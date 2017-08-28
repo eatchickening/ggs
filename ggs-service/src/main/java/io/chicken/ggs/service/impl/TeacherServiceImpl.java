@@ -1,5 +1,6 @@
 package io.chicken.ggs.service.impl;
 
+import io.chicken.ggs.common.vo.TeacherList;
 import io.chicken.ggs.dal.dao.TeacherMapper;
 import io.chicken.ggs.dal.model.Teacher;
 import io.chicken.ggs.service.TeacherService;
@@ -17,8 +18,8 @@ public class TeacherServiceImpl implements TeacherService {
     @Autowired
     private TeacherMapper teacherMapper;
 
-    public List<Teacher> queryTeacherList(Map<String, Object> teaMap) {
-        List<Teacher> li = teacherMapper.queryList(teaMap);
+    public List<TeacherList> queryTeacherList(Map<String, Object> teaMap) {
+        List<TeacherList> li = teacherMapper.queryList(teaMap);
         return li;
     }
 

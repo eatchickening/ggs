@@ -7,9 +7,12 @@ insert into `ggs`.`dictionary` ( `bizcode`, `status`, `remark`, `biztype`, `data
 
 
 INSERT INTO `student` (`id`, `studentid`, `name`, `sex`, `award`, `score`, `moral`, `intellectual`, `physical`, `schoolcode`, `remark`) VALUES ('1', '12354562', '孟祥祥', '男', NULL, NULL, NULL, NULL, NULL, 'jialidun', NULL);
-INSERT INTO `school` (`id`, `schoolcode`, `name`, `areacode`, `schooltype`) VALUES ('1', 'jialidun', '家里蹲大学', '2', 'zhongzhuan');
-INSERT INTO  `school` (`id`, `schoolcode`, `name`, `areacode`, `schooltype`) VALUES ('2', 'shannongnongda', '山东农大', '1', 'gaozhi');
 
+INSERT INTO `school` VALUES ('1', 'jialidun', '家里蹲大学', '2', 'zhongzhuan');
+INSERT INTO `school` VALUES ('2', 'shannongnongda', '山东农大', '1', 'gaozhi');
+
+INSERT INTO `teacher` VALUES ('1', 'a1', ' 宋', '男', '1年级1班', 'shannongnongda', 'wwwwwwwwwwwwwwwww');
+INSERT INTO `teacher` VALUES ('2', 'a2', 'xiaofeng', '女', '1年级2班', 'shannongnongda', 'dfasdfasfsdf');
 
 insert into `ggs`.`organization` ( `organcode`, `areacode`, `name`, `remark`) values ( 'JG001', 'QY001', '机构1', null);
 insert into `ggs`.`organization` ( `organcode`, `areacode`, `name`, `remark`) values ( 'JG002', 'QY002', '机构2', null);

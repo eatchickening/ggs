@@ -3,6 +3,7 @@ package io.chicken.ggs.service;
 import io.chicken.ggs.business.TeacherBusiness;
 import io.chicken.ggs.business.UserInfoBusiness;
 import io.chicken.ggs.common.Result;
+import io.chicken.ggs.common.vo.TeacherList;
 import io.chicken.ggs.common.vo.UserInfoQueryParam;
 import io.chicken.ggs.common.vo.UserInfoVO;
 import io.chicken.ggs.dal.model.Teacher;
@@ -38,7 +39,7 @@ public class TeacherBusinessTest {
         teaMap.put("pageSize", pageSize);
         teaMap.put("name", "xiao");
 
-        Result<Teacher> count = teacherBusiness.queryTeacherList(teaMap);
+        Result<TeacherList> count = teacherBusiness.queryTeacherList(teaMap);
         System.out.println(count.getData());
     }
 }

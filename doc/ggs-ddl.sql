@@ -1,3 +1,4 @@
+USE ggs;
 -- 用户表
 CREATE TABLE `user_info` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
