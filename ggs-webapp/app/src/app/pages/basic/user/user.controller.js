@@ -116,14 +116,10 @@
                 
             };
 
-            function transformData(data) {
-                
-            }
-
             function listAreaDetail(bizcode) {
                 BasicService.listAreaDetail(bizcode).then(function(data) {
                     if (data.code === 0 && data.data && data.data instanceof Array) {
-                        transformData(data.data);
+                        $scope.organs = data.data;
                     }
                 }).catch(function(err){
                     console.log(err);
