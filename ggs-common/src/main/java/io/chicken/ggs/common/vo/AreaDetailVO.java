@@ -4,6 +4,7 @@
 package io.chicken.ggs.common.vo;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 区域的详细信息，包括：机构，部门，岗位
@@ -26,20 +27,12 @@ public class AreaDetailVO implements Serializable {
 
     private String organName;
 
-
-    private Integer departId;
-
-    private String departcode;
-
-    private String departName;
+    List<DepartVo> departVoList;
 
 
-    private Integer postId;
-
-    private String postcode;
-
-    private String postName;
-
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public Integer getAreaId() {
         return areaId;
@@ -89,52 +82,12 @@ public class AreaDetailVO implements Serializable {
         this.organName = organName;
     }
 
-    public Integer getDepartId() {
-        return departId;
+    public List<DepartVo> getDepartVoList() {
+        return departVoList;
     }
 
-    public void setDepartId(Integer departId) {
-        this.departId = departId;
-    }
-
-    public String getDepartcode() {
-        return departcode;
-    }
-
-    public void setDepartcode(String departcode) {
-        this.departcode = departcode;
-    }
-
-    public String getDepartName() {
-        return departName;
-    }
-
-    public void setDepartName(String departName) {
-        this.departName = departName;
-    }
-
-    public Integer getPostId() {
-        return postId;
-    }
-
-    public void setPostId(Integer postId) {
-        this.postId = postId;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
-    public String getPostName() {
-        return postName;
-    }
-
-    public void setPostName(String postName) {
-        this.postName = postName;
+    public void setDepartVoList(List<DepartVo> departVoList) {
+        this.departVoList = departVoList;
     }
 
     @Override
@@ -146,12 +99,7 @@ public class AreaDetailVO implements Serializable {
                 ", organId=" + organId +
                 ", organcode='" + organcode + '\'' +
                 ", organName='" + organName + '\'' +
-                ", departId=" + departId +
-                ", departcode='" + departcode + '\'' +
-                ", departName='" + departName + '\'' +
-                ", postId=" + postId +
-                ", postcode='" + postcode + '\'' +
-                ", postName='" + postName + '\'' +
+                ", departVoList=" + departVoList +
                 '}';
     }
 }

@@ -15,17 +15,23 @@
         <result column="areacode" property="areacode" jdbcType="VARCHAR" />
         <result column="areaName" property="areaName" jdbcType="VARCHAR" />
 
+
+
+
         <result column="organId" property="organId" jdbcType="BIGINT" />
         <result column="organcode" property="organcode" jdbcType="VARCHAR" />
         <result column="organName" property="organName" jdbcType="VARCHAR" />
 
+      <collection property="departVoList" ofType="io.chicken.ggs.common.vo.DepartVo">
         <result column="departId" property="departId" jdbcType="BIGINT" />
         <result column="departcode" property="departcode" jdbcType="VARCHAR" />
         <result column="departName" property="departName" jdbcType="VARCHAR" />
-
-        <result column="postId" property="postId" jdbcType="BIGINT" />
-        <result column="postcode" property="postcode" jdbcType="VARCHAR" />
-        <result column="postName" property="postName" jdbcType="VARCHAR" />
+        <collection property="post" ofType="io.chicken.ggs.common.vo.Post">
+          <result column="postId" property="postId" jdbcType="BIGINT" />
+          <result column="postcode" property="postcode" jdbcType="VARCHAR" />
+          <result column="postName" property="postName" jdbcType="VARCHAR" />
+        </collection>
+      </collection>
     </resultMap>
 
   <sql id="Base_Column_List" >
@@ -76,8 +82,9 @@
         left join post po
         on dep.departcode = po.departcode
         where
-        d.biztype = 'areacode'
-        and d.bizcode = #{bizcode};
+         d.biztype = 'areacode'
+
+          and d.bizcode = #{bizcode};
     </select>
 
 

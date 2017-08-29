@@ -58,9 +58,6 @@ public class DictionaryBusinessImpl implements DictionaryBusiness {
 
     @Override
     public Result<List<AreaDetailVO>> queryAreaDetail(String bizcode) {
-        if (StringUtils.isEmpty(bizcode)) {
-            return new Result<>(ResultCode.PARAMETER_EMPTY);
-        }
 
         try {
             List<AreaDetailVO> list = dictionaryService.queryAreaDetail(bizcode);

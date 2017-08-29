@@ -1,5 +1,6 @@
 package io.chicken.ggs.web.controller;
 
+import com.alibaba.fastjson.JSON;
 import io.chicken.ggs.business.impl.DictionaryBusinessImpl;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
@@ -29,7 +30,7 @@ public class DictionaryController {
 
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result list(@RequestParam Map<String, Object> params){
+    public Result list(@RequestBody Map<String, Object> params){
         logger.info(params.toString());
         return dictionaryBusiness.getDictionaryList(params);
     }
@@ -54,15 +55,18 @@ public class DictionaryController {
     /**
      * 根据区域编码查询其下面的机构、部门、岗位的信息
      *
-     * @param bizcode
+     * @param dictionary
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/areaDetail", method = RequestMethod.GET)
-    public Result<List<AreaDetailVO>> areaDetail(String bizcode) {
-        logger.info("areaDetail() " + bizcode);
+    @RequestMapping(value = "/areaDetail", method = RequestMethod.POST)
+    public Result<List<AreaDetailVO>> areaDetail(@RequestBody Dictionary dictionary) {
+        logger.info("areaDetail() " + dictionary);
+       /* if (StringUtils.isEmpty(dictionary.getBizcode())) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }*/
 
-        return dictionaryBusiness.queryAreaDetail(bizcode);
+        return dictionaryBusiness.queryAreaDetail(dictionary.getBizcode());
     }
 
 

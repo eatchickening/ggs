@@ -4,6 +4,7 @@
 package io.chicken.ggs.web.filter;
 
 import com.alibaba.fastjson.JSON;
+import io.chicken.ggs.common.CommonConstant;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.util.LoginUtil;
@@ -50,14 +51,17 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
 
-        UserInfoVO userVO = (UserInfoVO) obj;
-        if (!MenuUtil.hasAuth(userVO.getId(), request.getRequestURL().toString())) {
+        String[] perms = (String[]) session.getAttribute(sessionId + CommonConstant.PERMS_KEY_SUFFIX);
+        if (!MenuUtil.hasAuth(perms, request.getRequestURL().toString())) {
             //返回无权限提示
             Result<String> result = new Result<>(ResultCode.LOGIN_NO_AUTH);
             response.getWriter().write(JSON.toJSONString(result));
             return false;
         }
+
+        UserInfoVO userVO = (UserInfoVO) obj;
         session.setAttribute(sessionId, userVO);
+        session.setAttribute(sessionId + CommonConstant.PERMS_KEY_SUFFIX, perms);
         threadLocal.set(session);
         return true;
 
