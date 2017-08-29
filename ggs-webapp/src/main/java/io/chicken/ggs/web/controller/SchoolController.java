@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -26,13 +23,13 @@ public class SchoolController {
     private SchoolBusinessImpl schoolBusiness;
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result list(@RequestParam Map<String, Object> params){
+    public Result list(@RequestBody Map<String, Object> params){
         logger.info(params.toString());
         return schoolBusiness.getSchoolList(params);
     }
     @ResponseBody
     @RequestMapping(value = "/listbyCondition", method = RequestMethod.POST)
-    public Result listbyCondition(@RequestParam Map<String, Object> params){
+    public Result listbyCondition(@RequestBody Map<String, Object> params){
         logger.info(params.toString());
         return schoolBusiness.getSchoolByCondition(params);
     }
