@@ -26,24 +26,20 @@
   </sql>
   <select id="queryList" resultMap="BaseResultMap">
     select tea.id, tea.teacherid, tea.name teaname, tea.sex teasex, tea.classname teaclass, sch.name teaschool,tea.remark teacomment
-    from teacher tea
-    left join school sch
-    on tea.schoolcode=sch.schoolcode
-    left join dictionary dic
-    on sch.areacode=dic.bizcode or sch.schooltype=dic.bizcode
-      <where>
-          1=1
-          <if test="teaMap.name != null and teaMap.name.trim() != ''">
-              and tea.name like concat('%',#{teaMap.name},'%')
-          </if>
-          <if test="teaMap.schoolname != null and teaMap.schoolname != ''">
+    from (teacher tea, school sch)
+    <where>
+        tea.schoolcode=sch.schoolcode
+        <if test="teaMap.name != null and teaMap.name.trim() != ''">
+            and tea.name like concat('%',#{teaMap.name},'%')
+        </if>
+        <if test="teaMap.schoolname != null and teaMap.schoolname != ''">
               and sch.name = #{teaMap.schoolname}
           </if>
           <if test="teaMap.areaname != null and teaMap.areaname != ''">
-              and dic.datavalue = #{teaMap.areaname}
+              and sch.areacode = #{teaMap.areaname}
           </if>
           <if test="teaMap.schooltype != null and teaMap.schooltype != ''" >
-              and 1=1
+              and sch.schooltype = #{teaMap.schooltype}
           </if>
       </where>
       order by teacherid asc
@@ -54,13 +50,9 @@
 
   <select id="queryTotal" resultType="java.lang.Long" >
     select COALESCE(count(*),0)
-    from teacher tea
-    left join school sch
-    on tea.schoolcode=sch.schoolcode
-    left join dictionary dic
-    on sch.areacode=dic.bizcode or sch.schooltype=dic.bizcode
+      from (teacher tea, school sch)
       <where>
-          1=1
+          tea.schoolcode=sch.schoolcode
           <if test="teaMap.name != null and teaMap.name.trim() != ''">
               and tea.name like concat('%',#{teaMap.name},'%')
           </if>
@@ -68,10 +60,10 @@
               and sch.name = #{teaMap.schoolname}
           </if>
           <if test="teaMap.areaname != null and teaMap.areaname != ''">
-              and dic.datavalue = #{teaMap.areaname}
+              and sch.areacode = #{teaMap.areaname}
           </if>
           <if test="teaMap.schooltype != null and teaMap.schooltype != ''" >
-              and 1=1
+              and sch.schooltype = #{teaMap.schooltype}
           </if>
       </where>
       order by teacherid asc
