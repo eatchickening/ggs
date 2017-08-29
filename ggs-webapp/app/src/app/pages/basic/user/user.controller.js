@@ -130,17 +130,18 @@
                 });
             }
 
+            $scope.user = {
+                account: '',
+                password: '',
+                username: '',
+                areas: '',
+                organs: '',
+                departs: '',
+                posts: '',
+                selectedMenus: ''
+            };
+
             $scope.addUser = function () {
-                $scope.user = {
-                    account: '',
-                    password: '',
-                    username: '',
-                    areas: '',
-                    organs: '',
-                    departs: '',
-                    posts: '',
-                    selectedMenus: ''
-                };
 
                 BasicService.listArea().then(function(data){
                     if (data.code === 0 && data.data && data.data instanceof Array) {
@@ -163,7 +164,7 @@
                 addUserModel.result.then(function(result){
                     if (result && result === 'OK') {
                         console.log($scope.user);
-                        return BasicService.adduser().then(function(response){
+                        return BasicService.adduser($scope.user).then(function(response){
                             if (response) {
 
                             }
