@@ -29,15 +29,7 @@ public class DictionaryController {
 
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result list(@RequestBody Dictionary dictionary){
-        logger.info("list() " + dictionary);
-        if (StringUtils.isEmpty(dictionary.getBiztype())) {
-            return new Result<>(ResultCode.PARAMETER_EMPTY);
-        }
-
-        Map<String, Object>  params = new HashMap<>();
-        params.put("biztype", dictionary.getBiztype());
-
+    public Result list(@RequestParam Map<String, Object> params){
         logger.info(params.toString());
         return dictionaryBusiness.getDictionaryList(params);
     }
