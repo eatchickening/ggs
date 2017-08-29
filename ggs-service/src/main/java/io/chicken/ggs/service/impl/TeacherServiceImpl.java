@@ -1,6 +1,8 @@
 package io.chicken.ggs.service.impl;
 
+import io.chicken.ggs.common.CommonConstant;
 import io.chicken.ggs.common.vo.TeacherList;
+import io.chicken.ggs.common.vo.TeacherQueryParam;
 import io.chicken.ggs.dal.dao.TeacherMapper;
 import io.chicken.ggs.dal.model.Teacher;
 import io.chicken.ggs.service.TeacherService;
@@ -18,12 +20,13 @@ public class TeacherServiceImpl implements TeacherService {
     @Autowired
     private TeacherMapper teacherMapper;
 
-    public List<TeacherList> queryTeacherList(Map<String, Object> teaMap) {
-        List<TeacherList> li = teacherMapper.queryList(teaMap);
-        return li;
+    public List<TeacherList> queryTeacherList(TeacherQueryParam teaParam) {
+        Integer start = (teaParam.getPageNum() - 1) * teaParam.getPageSize();
+        return teacherMapper.queryList(teaParam, start, teaParam.getPageSize() * CommonConstant.PAGE_PRE);
     }
 
-    public long queryTotal(Map<String, Object> teaMap) {
-        return teacherMapper.queryTotal(teaMap);
+    public long queryTotal(TeacherQueryParam teaParam) {
+        Integer start = (teaParam.getPageNum() - 1) * teaParam.getPageSize();
+        return teacherMapper.queryTotal(teaParam, start, teaParam.getPageSize() * CommonConstant.PAGE_PRE);
     }
 }

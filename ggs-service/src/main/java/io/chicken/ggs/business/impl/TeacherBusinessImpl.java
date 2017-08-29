@@ -5,6 +5,7 @@ import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.util.Query;
 import io.chicken.ggs.common.vo.TeacherList;
+import io.chicken.ggs.common.vo.TeacherQueryParam;
 import io.chicken.ggs.dal.model.Teacher;
 import io.chicken.ggs.service.TeacherService;
 import org.slf4j.Logger;
@@ -29,20 +30,13 @@ public class TeacherBusinessImpl implements TeacherBusiness{
     private TeacherService teacherService;
 
     @Override
-    public Result queryTeacherList(Map<String, Object> teaMap) {
+    public Result queryTeacherList(TeacherQueryParam teaParam) {
         //查询列表数据
-        Query query=null;
-        try {
-            query = new Query(teaMap);
-        } catch(Exception e) {
-            logger.error("参数异常",e);
-            return new Result<>(ResultCode.PARAMETER_INVALID);
-        }
         List<TeacherList> teacherList=null;
         long total=0;
         try {
-            teacherList = teacherService.queryTeacherList(query);
-            total = teacherService.queryTotal(query);
+            teacherList = teacherService.queryTeacherList(teaParam);
+            total = teacherService.queryTotal(teaParam);
         }catch(Exception e)
         {
             logger.error("数据库操作异常",e);
