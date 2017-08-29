@@ -1,22 +1,18 @@
-package io.chicken.ggs.dal.model;
+package io.chicken.ggs.common.vo;
 
 public class Post {
-    private Long id;
+    private Long postId;
 
     private String postcode;
 
-    private String name;
+    private String postName;
 
-    private String departcode;
-
-    private String remark;
-
-    public Long getId() {
-        return id;
+    public Long getPostId() {
+        return postId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPostId(Long postId) {
+        this.postId = postId;
     }
 
     public String getPostcode() {
@@ -24,30 +20,23 @@ public class Post {
     }
 
     public void setPostcode(String postcode) {
-        this.postcode = postcode == null ? null : postcode.trim();
+        this.postcode = postcode;
     }
 
-    public String getName() {
-        return name;
+    public String getPostName() {
+        return postName;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setPostName(String postName) {
+        this.postName = postName;
     }
 
-    public String getDepartcode() {
-        return departcode;
-    }
-
-    public void setDepartcode(String departcode) {
-        this.departcode = departcode == null ? null : departcode.trim();
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+    @Override
+    public String toString() {
+        return "Post{" +
+                "postId=" + postId +
+                ", postcode='" + postcode + '\'' +
+                ", postName='" + postName + '\'' +
+                '}';
     }
 }
