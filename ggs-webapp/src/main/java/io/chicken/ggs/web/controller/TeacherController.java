@@ -4,6 +4,7 @@ import io.chicken.ggs.business.TeacherBusiness;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.util.Query;
+import io.chicken.ggs.common.vo.TeacherQueryParam;
 import io.chicken.ggs.dal.model.Student;
 import io.chicken.ggs.dal.model.Teacher;
 import io.chicken.ggs.service.TeacherService;
@@ -11,10 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -29,8 +27,9 @@ public class TeacherController {
   @Autowired
   private TeacherBusiness teacherBusiness;
 
+  @ResponseBody
   @RequestMapping(value="/list", method = RequestMethod.POST)
-  public Result teacherList(@RequestParam Map<String,Object> teaMap){
-    return teacherBusiness.queryTeacherList(teaMap);
+  public Result teacherList(@RequestBody TeacherQueryParam teaParam){
+    return teacherBusiness.queryTeacherList(teaParam);
   }
 }

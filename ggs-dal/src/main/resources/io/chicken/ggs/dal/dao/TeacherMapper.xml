@@ -1,95 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="io.chicken.ggs.dal.dao.TeacherMapper" >
-  <resultMap id="BaseResultMap" type="io.chicken.ggs.dal.model.Teacher" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="teacherid" property="teacherid" jdbcType="VARCHAR" />
-    <result column="teaname" property="teaname" jdbcType="VARCHAR" />
-    <result column="teasex" property="teasex" jdbcType="VARCHAR" />
-    <result column="teaclass" property="teaclass" jdbcType="VARCHAR" />
-    <result column="teaschool" property="teaschool" jdbcType="VARCHAR" />
-    <result column="teacomment" property="teacomment" jdbcType="VARCHAR" />
-  </resultMap>
+    <!-- 返回结果表-->
+    <resultMap id="BaseResultMap" type="io.chicken.ggs.common.vo.TeacherList" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="teacherid" property="teacherid" jdbcType="VARCHAR" />
+        <result column="teaname" property="teaname" jdbcType="VARCHAR" />
+        <result column="teasex" property="teasex" jdbcType="VARCHAR" />
+        <result column="teaclass" property="teaclass" jdbcType="VARCHAR" />
+        <result column="teaschool" property="teaschool" jdbcType="VARCHAR" />
+        <result column="teacomment" property="teacomment" jdbcType="VARCHAR" />
+    </resultMap>
+    <!-- 参数表-->
+    <resultMap id="TeacherQueryParamMap" type="io.chicken.ggs.common.vo.TeacherQueryParam" >
+        <result column="pageNum" property="pageNum" jdbcType="VARCHAR" />
+        <result column="pageSize" property="pageSize" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="schoolname" property="schoolname" jdbcType="VARCHAR" />
+        <result column="areaname" property="areaname" jdbcType="VARCHAR" />
+        <result column="schooltype" property="schooltype" jdbcType="VARCHAR" />
+    </resultMap>
 
-  <sql id="Base_Column_List" >
+    <sql id="Base_Column_List" >
     id, teacherid, name, sex, classname, schoolcode,remark
   </sql>
-  <select id="queryList" resultType="io.chicken.ggs.common.vo.TeacherList">
+  <select id="queryList" resultMap="BaseResultMap">
     select tea.id, tea.teacherid, tea.name teaname, tea.sex teasex, tea.classname teaclass, sch.name teaschool,tea.remark teacomment
     from teacher tea
     left join school sch
     on tea.schoolcode=sch.schoolcode
     left join dictionary dic
     on sch.areacode=dic.bizcode or sch.schooltype=dic.bizcode
-    <where>
-      1=1
-      <if test="name != null and name.trim() != ''">
-        and tea.name like concat('%',#{name},'%')
+      <where>
+          1=1
+          <if test="teaMap.name != null and teaMap.name.trim() != ''">
+              and tea.name like concat('%',#{teaMap.name},'%')
+          </if>
+          <if test="teaMap.schoolname != null and teaMap.schoolname != ''">
+              and sch.name = #{teaMap.schoolname}
+          </if>
+          <if test="teaMap.areaname != null and teaMap.areaname != ''">
+              and dic.datavalue = #{teaMap.areaname}
+          </if>
+          <if test="teaMap.schooltype != null and teaMap.schooltype != ''" >
+              and 1=1
+          </if>
+      </where>
+      order by teacherid asc
+      <if test="start != null and last != null">
+          limit #{start}, #{last}
       </if>
-      <if test="schoolname != null">
-        and sch.name = #{schoolname}
-      </if>
-      <if test="areaname != null">
-        and dic.datavalue = #{areaname}
-      </if>
-      <if test="schooltype != null" >
-        and 1=1
-      </if>
-    </where>
-    <choose>
-      <when test="sidx != null and sidx.trim() != ''">
-        order by ${sidx} ${order}
-      </when>
-      <otherwise>
-        order by teacherid asc
-      </otherwise>
-    </choose>
-    <if test="offset != null and limit != null">
-      limit #{offset}, #{limit}
-    </if>
   </select>
 
   <select id="queryTotal" resultType="java.lang.Long" >
-    select COALESCE(count(*),0) from teacher
-    <where>
-      <if test="name != null and name.trim() != ''">
-        and `name` like concat('%',#{name},'%')
+    select COALESCE(count(*),0)
+    from teacher tea
+    left join school sch
+    on tea.schoolcode=sch.schoolcode
+    left join dictionary dic
+    on sch.areacode=dic.bizcode or sch.schooltype=dic.bizcode
+      <where>
+          1=1
+          <if test="teaMap.name != null and teaMap.name.trim() != ''">
+              and tea.name like concat('%',#{teaMap.name},'%')
+          </if>
+          <if test="teaMap.schoolname != null and teaMap.schoolname != ''">
+              and sch.name = #{teaMap.schoolname}
+          </if>
+          <if test="teaMap.areaname != null and teaMap.areaname != ''">
+              and dic.datavalue = #{teaMap.areaname}
+          </if>
+          <if test="teaMap.schooltype != null and teaMap.schooltype != ''" >
+              and 1=1
+          </if>
+      </where>
+      order by teacherid asc
+      <if test="start != null and last != null">
+          limit #{start}, #{last}
       </if>
-
-      <if test="(
-      (schoolname != null and schoolname.trim() != '')
-      or (areacode != null and areacode.trim() != '')
-      or (schooltype != null and schooltype.trim() != '')
-      ) ">
-        and `schoolcode`in
-        (
-        select schoolcode from school
-        <where>
-          <if test="schoolname != null">
-            and `name` = #{schoolname}
-          </if>
-          <if test="areacode != null">
-            and `areacode` = #{areacode}
-          </if>
-          <if test="schooltype != null">
-            and `schooltype` = #{schooltype}
-          </if>
-        </where>
-        )
-      </if>
-
-    </where>
-    <choose>
-      <when test="sidx != null and sidx.trim() != ''">
-        order by ${sidx} ${order}
-      </when>
-      <otherwise>
-        order by teacherid asc
-      </otherwise>
-    </choose>
-    <if test="offset != null and limit != null">
-      limit #{offset}, #{limit}
-    </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 

@@ -7,10 +7,10 @@ public class TeacherList {
     private Integer id;
     private String teacherid;
     private String teaname;
-    private String reasex;
-    private String reaclass;
+    private String teasex;
+    private String teaclass;
     private String teaschool;
-    private String comment;
+    private String teacomment;
 
     public Integer getId() {
         return id;
@@ -36,20 +36,20 @@ public class TeacherList {
         this.teaname = teaname;
     }
 
-    public String getReasex() {
-        return reasex;
+    public String getTeasex() {
+        return teasex;
     }
 
-    public void setReasex(String reasex) {
-        this.reasex = reasex;
+    public void setTeasex(String teasex) {
+        this.teasex = teasex;
     }
 
-    public String getReaclass() {
-        return reaclass;
+    public String getTeaclass() {
+        return teaclass;
     }
 
-    public void setReaclass(String reaclass) {
-        this.reaclass = reaclass;
+    public void setTeaclass(String teaclass) {
+        this.teaclass = teaclass;
     }
 
     public String getTeaschool() {
@@ -60,11 +60,11 @@ public class TeacherList {
         this.teaschool = teaschool;
     }
 
-    public String getComment() {
-        return comment;
+    public String getTeacomment() {
+        return teacomment;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setTeacomment(String teacomment) {
+        this.teacomment = teacomment;
     }
 }
