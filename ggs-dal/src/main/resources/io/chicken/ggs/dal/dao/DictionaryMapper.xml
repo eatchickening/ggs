@@ -80,7 +80,10 @@
         on dep.departcode = po.departcode
         where
          d.biztype = 'areacode'
-        and d.bizcode = #{bizcode};
+        <if test="bizcode != null" >
+          and d.bizcode = #{bizcode};
+        </if>
+
     </select>
 
 

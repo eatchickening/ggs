@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 @Component("dictionaryBusiness")
@@ -60,7 +61,9 @@ public class DictionaryBusinessImpl implements DictionaryBusiness {
     public Result<List<AreaDetailVO>> queryAreaDetail(String bizcode) {
 
         try {
-            List<AreaDetailVO> list = dictionaryService.queryAreaDetail(bizcode);
+            Map<String, Object> params=new HashMap<String, Object>();
+            params.put("bizcode",bizcode);
+            List<AreaDetailVO> list = dictionaryService.queryAreaDetail(params);
             return new Result<>(list);
         } catch (Exception e) {
             logger.error(bizcode + ", queryAreaDetail() 异常：" + e.getMessage());
