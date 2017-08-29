@@ -21,13 +21,13 @@
   <select id="queryList" resultType="io.chicken.ggs.dal.model.School">
     select * from school
     <where>
-      <if test="schoolcode != null">
+      <if test="schoolcode != null and schoolcode.trim() != ''">
         and `schoolcode` = #{schoolcode}
       </if>
-      <if test="areacode != null">
+      <if test="areacode != null and areacode.trim() != ''">
         and `areacode` = #{areacode}
       </if>
-      <if test="schooltype != null">
+      <if test="schooltype != null and schooltype.trim() != ''">
         and `schooltype` = #{schooltype}
       </if>
       <if test="name != null and name.trim() != ''">
@@ -52,13 +52,13 @@
   <select id="queryListByCondition" resultType="io.chicken.ggs.dal.model.School">
     select * from school
     <where>
-      <if test="schoolcode != null">
+      <if test="schoolcode != null and schoolcode.trim() != ''">
         and `schoolcode` = #{schoolcode}
       </if>
-      <if test="areacode != null">
+      <if test="areacode != null and areacode.trim() != ''">
         and `areacode` = #{areacode}
       </if>
-      <if test="schooltype != null">
+      <if test="schooltype != null and schooltype.trim() != ''">
         and `schooltype` = #{schooltype}
       </if>
       <if test="name != null and name.trim() != ''">
@@ -72,13 +72,13 @@
   <select id="queryTotal" resultType="java.lang.Long" >
     select count(*) from school
     <where>
-      <if test="areacode != null">
-        and `areacode` = #{areacode}
-      </if>
-      <if test="schoolcode != null">
+      <if test="schoolcode != null and schoolcode.trim() != ''">
         and `schoolcode` = #{schoolcode}
       </if>
-      <if test="schooltype != null">
+      <if test="areacode != null and areacode.trim() != ''">
+        and `areacode` = #{areacode}
+      </if>
+      <if test="schooltype != null and schooltype.trim() != ''">
         and `schooltype` = #{schooltype}
       </if>
       <if test="name != null and name.trim() != ''">
