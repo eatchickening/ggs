@@ -1,5 +1,6 @@
-USE ggs;
+
 -- 用户表
+DROP  TABLE  IF EXISTS user_info;
 CREATE TABLE `user_info` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `account` varchar(30) NOT NULL COMMENT '登录账户	',
@@ -21,6 +22,7 @@ CREATE TABLE `user_info` (
 ;
 
 --   字典表(存储类型和固定的数据)
+DROP  TABLE  IF EXISTS dictionary;
 CREATE TABLE dictionary (
     id bigint NOT NULL AUTO_INCREMENT,
     biztype varchar(50) COMMENT '业务类型',
@@ -34,6 +36,7 @@ CREATE TABLE dictionary (
 
 
 --   机构表
+DROP  TABLE  IF EXISTS organization;
 CREATE TABLE organization (
     id bigint NOT NULL AUTO_INCREMENT,
     organcode varchar(50) COMMENT '机构编码',
@@ -46,6 +49,7 @@ CREATE TABLE organization (
 
 
 --   部门表
+DROP  TABLE  IF EXISTS depart;
 CREATE TABLE depart (
     id bigint NOT NULL AUTO_INCREMENT,
     departcode varchar(50) COMMENT '部门编码',
@@ -58,6 +62,7 @@ CREATE TABLE depart (
 
 
 --   岗位表
+DROP  TABLE  IF EXISTS post;
 CREATE TABLE post (
     id bigint NOT NULL AUTO_INCREMENT,
     postcode varchar(50) COMMENT '岗位编码',
@@ -71,6 +76,7 @@ CREATE TABLE post (
 
 
 --  菜单表
+DROP  TABLE  IF EXISTS sysmenu;
 CREATE TABLE `sysmenu` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `parent_id` int(11) DEFAULT NULL COMMENT '父菜单ID，一级菜单为0',
@@ -87,6 +93,7 @@ CREATE TABLE `sysmenu` (
 
 
 --  用户菜单表
+DROP  TABLE  IF EXISTS user_menu;
 CREATE TABLE `user_menu` (
     `id` bigint(20) NOT NULL AUTO_INCREMENT,
     `user_account` varchar(50) DEFAULT NULL COMMENT '用户账号',
