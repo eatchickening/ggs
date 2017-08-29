@@ -20,14 +20,8 @@ public class AreaDetailVO implements Serializable {
 
     private String areaName;
 
+    List<OrganVo> organVoList;
 
-    private Integer organId;
-
-    private String organcode;
-
-    private String organName;
-
-    List<DepartVo> departVoList;
 
 
     public static long getSerialVersionUID() {
@@ -58,36 +52,12 @@ public class AreaDetailVO implements Serializable {
         this.areaName = areaName;
     }
 
-    public Integer getOrganId() {
-        return organId;
+    public List<OrganVo> getOrganVoList() {
+        return organVoList;
     }
 
-    public void setOrganId(Integer organId) {
-        this.organId = organId;
-    }
-
-    public String getOrgancode() {
-        return organcode;
-    }
-
-    public void setOrgancode(String organcode) {
-        this.organcode = organcode;
-    }
-
-    public String getOrganName() {
-        return organName;
-    }
-
-    public void setOrganName(String organName) {
-        this.organName = organName;
-    }
-
-    public List<DepartVo> getDepartVoList() {
-        return departVoList;
-    }
-
-    public void setDepartVoList(List<DepartVo> departVoList) {
-        this.departVoList = departVoList;
+    public void setOrganVoList(List<OrganVo> organVoList) {
+        this.organVoList = organVoList;
     }
 
     @Override
@@ -96,10 +66,7 @@ public class AreaDetailVO implements Serializable {
                 "areaId=" + areaId +
                 ", areacode='" + areacode + '\'' +
                 ", areaName='" + areaName + '\'' +
-                ", organId=" + organId +
-                ", organcode='" + organcode + '\'' +
-                ", organName='" + organName + '\'' +
-                ", departVoList=" + departVoList +
+                ", organVoList=" + organVoList +
                 '}';
     }
 }
