@@ -22,6 +22,9 @@ public class CommonConstant {
     /** 账号cookie的存活时间（秒） */
     public static final int ACCOUNT_COOKIE_EXPIRED = 30 * 24 * 60 * 60;
 
+    /** 权限在 session 中的key 的后缀 */
+    public static final String PERMS_KEY_SUFFIX = "_perms";
+
     /** 用户删除状态 */
     public static final int USER_STATUS_DELETE = 1;
 

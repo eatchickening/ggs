@@ -3,6 +3,7 @@ package io.chicken.ggs.web.controller;
 
 import io.chicken.ggs.business.LoginBusiness;
 import io.chicken.ggs.business.SysMenuBusiness;
+import io.chicken.ggs.common.CommonConstant;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.util.LoginUtil;
@@ -92,16 +93,24 @@ public class LoginController extends BaseController {
         }
 
         List<String> angularStateList = new ArrayList<>();
+        StringBuffer perms = new StringBuffer();
         List<SysMenu> sysMenuList = menuResult.getData();
-        for (SysMenu sysMenu : sysMenuList) {
+        for (int i = 0; i < sysMenuList.size(); i++) {
+            SysMenu sysMenu = sysMenuList.get(i);
             angularStateList.add(sysMenu.getAngularState());
+            if (i == 0) {
+                perms.append(sysMenu.getPerms());
+            }
+            else {
+                perms.append(",").append(sysMenu.getPerms());
+            }
         }
         user.setAngularState(angularStateList);
 
         // 保存菜单信息
         HttpSession session = request.getSession();
         String sessionId = session.getId();
-        session.setAttribute(sessionId + "_menu", sysMenuList); //todo
+        session.setAttribute(sessionId + CommonConstant.PERMS_KEY_SUFFIX, perms.toString().split(","));
 
         return new Result<>(user);
     }
