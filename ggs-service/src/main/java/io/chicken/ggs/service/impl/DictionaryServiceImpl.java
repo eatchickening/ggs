@@ -25,7 +25,7 @@ public class DictionaryServiceImpl implements DictionaryService {
     }
 
     @Override
-    public List<AreaDetailVO> queryAreaDetail(String bizcode) {
-        return dictionaryMapper.queryAreaDetail(bizcode);
+    public List<AreaDetailVO> queryAreaDetail(Map<String, Object> map) {
+        return dictionaryMapper.queryAreaDetail(map);
     }
 }
