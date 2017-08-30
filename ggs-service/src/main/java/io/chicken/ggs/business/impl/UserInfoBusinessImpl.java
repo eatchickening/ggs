@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -96,10 +97,12 @@ public class UserInfoBusinessImpl implements UserInfoBusiness {
             userInfoService.update(userInfo);
 
             // 权限更新
-            UserMenu userMenu = new UserMenu();
-            userMenu.setUserAccount(userInfoVO.getAccount());
-            userMenu.setMenuId(userInfoVO.getMenuId());
-            userMenuService.update(userMenu);
+            if (!StringUtils.isEmpty(userInfoVO.getAccount()) && !StringUtils.isEmpty(userInfoVO.getMenuId())) {
+                UserMenu userMenu = new UserMenu();
+                userMenu.setUserAccount(userInfoVO.getAccount());
+                userMenu.setMenuId(userInfoVO.getMenuId());
+                userMenuService.update(userMenu);
+            }
 
             return new Result<>(ResultCode.SUCCESS);
         } catch (GGSException e) {

@@ -66,6 +66,9 @@
         left join post d
         on (a.postcode = d.postcode)
         where a.is_delete = 0
+        <if test="param.id != null" >
+            and a.id = #{param.id}
+        </if>
         <if test="param.account != null and param.account != ''" >
             and a.account = #{param.account}
         </if>
@@ -88,6 +91,9 @@
         select count(1)
         from user_info a
         where a.is_delete = 0
+        <if test="param.id != null" >
+            and a.id = #{param.id}
+        </if>
         <if test="param.account != null and param.account != ''" >
             and a.account = #{param.account}
         </if>
@@ -207,7 +213,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="io.chicken.ggs.dal.model.UserInfo" >
     update user_info
     <set >
-      <if test="account != null" >
+        update_time = now(),
+        <if test="account != null" >
         account = #{account,jdbcType=VARCHAR},
       </if>
       <if test="username != null" >
@@ -237,9 +244,6 @@
       <if test="createAccount != null" >
         create_account = #{createAccount,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="isDelete != null" >
         is_delete = #{isDelete,jdbcType=BIT},
       </if>
@@ -259,7 +263,7 @@
       postcode = #{postcode,jdbcType=VARCHAR},
       organcode = #{organcode,jdbcType=VARCHAR},
       create_account = #{createAccount,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_time = now(),
       is_delete = #{isDelete,jdbcType=BIT}
     where is_delete = 0
     and id = #{id,jdbcType=INTEGER}

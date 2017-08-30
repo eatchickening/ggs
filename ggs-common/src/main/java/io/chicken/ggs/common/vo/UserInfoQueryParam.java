@@ -13,6 +13,8 @@ import java.io.Serializable;
 public class UserInfoQueryParam implements Serializable {
     private static final long serialVersionUID = -794023287671347775L;
 
+    private Integer id;
+
     private Integer pageNum;
 
     private Integer pageSize;
@@ -32,6 +34,14 @@ public class UserInfoQueryParam implements Serializable {
     private String organcode;
 
     private String organName;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getPageNum() {
         return pageNum;
@@ -116,7 +126,8 @@ public class UserInfoQueryParam implements Serializable {
     @Override
     public String toString() {
         return "UserInfoQueryParam{" +
-                "pageNum=" + pageNum +
+                "id=" + id +
+                ", pageNum=" + pageNum +
                 ", pageSize=" + pageSize +
                 ", account='" + account + '\'' +
                 ", username='" + username + '\'' +
