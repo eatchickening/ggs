@@ -47,76 +47,6 @@
             };
 
             // add new user
-
-            $scope.menus = [{
-                id: 1,
-                name: '基础设置',
-                submenus: [{
-                    id: 1,
-                    name: '部门与岗位设置'
-                },{
-                    id: 2,
-                    name: '用户管理'
-                }]
-            },{
-                id: 2,
-                name: '信息查询',
-                submenus: [{
-                    id: 3,
-                    name: '学生信息查询'
-                },
-                {
-                    id: 4,
-                    name: '教师信息查询'
-                },{
-                    id: 5,
-                    name: '学校信息查询'
-                }]
-            },{
-                id: 3,
-                name: '教育局评优活动',
-                submenus: [{
-                    id: 6,
-                    name: '评优奖项设置'
-                },{
-                    id: 7,
-                    name: '评选活动管理'
-                },{
-                    id: 8,
-                    name: '优评评定活动列表'
-                }]
-            },{
-                id: 4,
-                name: '学校评优活动',
-                submenus: [{
-                    id: 9,
-                    name: '评优奖项设置'
-                },{
-                    id: 10,
-                    name: '评选活动管理'
-                },{
-                    id: 11,
-                    name: '优评评定活动列表'
-                }]
-            },{
-                id: 5,
-                name: '系统管理',
-                submenus: [{
-                    id: 12,
-                    name: '日志管理'
-                },{
-                    id: 13,
-                    name: '通知信息管理'
-                },{
-                    id: 14,
-                    name: '通知信息'
-                }]
-            }];
-
-            $scope.selectMenu = function () {
-                
-            };
-
             function listAreaDetail(bizcode) {
                 BasicService.listAreaDetail(bizcode).then(function(data) {
                     if (data.code === 0 && data.data && data.data instanceof Array && data.data.length > 0) {
@@ -127,21 +57,76 @@
                 });
             }
 
+            function transformMenus(data) {
+                var menus = [];
+                data.forEach(function(item) {
+                    if (item.parentId === 0) {
+                        menus.push({
+                            id: item.id,
+                            name: item.name,
+                            state: item.angularState,
+                            submenus: []
+                        });
+                    }
+                });
+                data.forEach(function(item) {
+                    menus.forEach(function(menu) {
+                        if (item.parentId !== 0 && item.parentId === menu.id) {
+                            menu.submenus.push({
+                                id: item.id,
+                                name: item.name,
+                                state: item.angularState
+                            });
+                        }
+                    });
+                });
+                return menus;
+            }
+
             $scope.changeArea = function () {
                 listAreaDetail($scope.user.area.bizcode);
+            };
+            var selectedMenus = [];
+            $scope.selectMenu = function (select, id) {
+                if (select === true) {
+                    var exit = false;
+                    selectedMenus.forEach(function(item) {
+                        if (item === id) {
+                            exit = true;
+                        }
+                    });
+                    if (exit === false) {
+                        selectedMenus.push(id);
+                    }
+                }
+                if (select === false) {
+                    for (var i=0;i<selectedMenus.length;i++) {
+                        if (selectedMenus[i] === id) {
+                            selectedMenus.splice(i, 1);
+                        }
+                    }
+                }
+                console.log(selectedMenus);
             };
 
             $scope.addUser = function () {
                 $scope.user = {
                     account: '',
                     password: '',
+                    defaultPassword: false,
                     username: '',
                     areas: '',
                     organs: '',
                     departs: '',
-                    posts: '',
-                    selectedMenus: ''
+                    posts: ''
                 };
+                BasicService.listMenus().then(function(data){
+                    if (data.code === 0 && data.data && data.data instanceof Array) {
+                        $scope.menus = transformMenus(data.data);
+                    }
+                }).catch(function(err){
+                    console.log(err);
+                });
 
                 BasicService.listArea().then(function(data){
                     if (data.code === 0 && data.data && data.data instanceof Array) {
@@ -160,9 +145,9 @@
                 addUserModal.result.then(function(result){
                     if (result && result === 'OK') {
                         console.log($scope.user);
-                        return BasicService.addUser($scope.user).then(function(response){
-                            if (response) {
-
+                        return BasicService.addUser($scope.user, selectedMenus.join(',')).then(function(response){
+                            if (response.code === 0) {
+                                toastr.success('添加用户：'+$scope.user.username+'成功！', '成功');
                             }
                         });
                     }
@@ -191,7 +176,7 @@
                             }
                         });
                     }
-                }) 
+                }); 
             };
 
         });

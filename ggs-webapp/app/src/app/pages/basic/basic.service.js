@@ -19,22 +19,22 @@
                 });
                 return deferred.promise;
             },
-            addUser: function() {
+            addUser: function(user, menus) {
                 var deferred = $q.defer();
                 $http({
                     method: 'POST',
                     url: 'http://localhost:8080/ggs/userInfo/save',
                     data: {
-                        account: 'testyw',
-                        username: '张三',
-                        password: '123456',
-                        departname: '信息学院',
-                        postname: '教授',
-                        organname: '山农大',
-                        menuId: '1,2'
+                        account: user.account,
+                        username: user.username,
+                        password: user.defaultPassword?user.password:'',
+                        organName: user.organ?user.organ.organName:'',
+                        departName: user.depart?user.depart.departName:'',
+                        postName: user.post?user.post.postName:'',
+                        menuId: menus
                     }
                 }).then(function (response) {
-                    deferred.resolve(response);
+                    deferred.resolve(response.data);
                 }).catch(function(response) {
                     deferred.reject(response);
                 });
@@ -78,6 +78,19 @@
                     data: {
                         bizcode: bizcode
                     }
+                }).then(function(response) {
+                    deferred.resolve(response.data);
+                }).catch(function(response) {
+                    deferred.reject(response);
+                });
+                return deferred.promise;
+            },
+            listMenus: function() {
+                var deferred = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/ggs/sysMenu/list',
+
                 }).then(function(response) {
                     deferred.resolve(response.data);
                 }).catch(function(response) {

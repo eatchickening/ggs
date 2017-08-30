@@ -15,10 +15,10 @@
                 </div>
                 <div class="form-group">
                     <span class="page-items">密码：</span>
-                    <input type="password" class="user-form-control" ng-click="defaultPassword=!defaultPassword" ng-model="user.password">
+                    <input type="password" class="user-form-control" ng-click="user.defaultPassword=!user.defaultPassword;defaultpw()" ng-model="user.password">
                     <span class="user-form-red">*</span>
                     <label class="radio-inline custom-radio nowrap">
-                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" ng-model="defaultPassword" ng-click="user.password=123456">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" ng-model="user.defaultPassword" ng-click="user.password='qwerty';defaultpw()">
                         <span>默认</span>
                     </label>
                 </div>
@@ -52,7 +52,7 @@
                     <span class="page-items">{{ menu.name }}</span>
                     <div class="user-form-check">
                         <label class="user-form-width" ng-repeat="submenu in menu.submenus track by $index">
-                            <input type="checkbox" id="{{submenu.id}}" name="{{submenu.name}}" ng-click="selectMenu(submenu.id)">
+                            <input type="checkbox" id="{{submenu.id}}" name="{{submenu.name}}" ng-model="toggle[$index]" ng-click="selectMenu(toggle[$index],submenu.id)">
                             <span>{{ submenu.name }}</span>
                         </label>
                     </div>
