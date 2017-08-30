@@ -13,15 +13,15 @@ public class MenuUtil {
      * 判断请求的 url 是否有权限（含有 perms 里的值即可）
      *
      * @param perms
-     * @param url
+     * @param uri
      * @return
      */
-    public static boolean hasAuth(String[] perms, String url) {
-        if (perms == null || perms.length == 0 || url == null) {
+    public static boolean hasAuth(String[] perms, String uri) {
+        if (perms == null || perms.length == 0 || uri == null) {
             return false;
         }
         for (String perm : perms) {
-            if (url.contains(perm)) { // 有漏洞不？ todo
+            if (uri.startsWith(perm)) {
                 return true;
             }
         }
