@@ -6,6 +6,8 @@
     <result column="schoolcode" property="schoolcode" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="areacode" property="areacode" jdbcType="VARCHAR" />
+    <result column="areaname" property="areaname" jdbcType="VARCHAR" />
+    <result column="schoolname" property="schoolname" jdbcType="VARCHAR" />
     <result column="schooltype" property="schooltype" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -19,8 +21,13 @@
   </select>
 
   <select id="queryList" resultType="io.chicken.ggs.dal.model.School">
-    select * from school
+    select d.*,c.datavalue schoolname  from (select a.*,b.datavalue  areaname  from school  a
+    left JOIN dictionary  b  on (a.areacode=b.bizcode )
+    where b.biztype='areacode'
+    ) d
+    LEFT JOIN dictionary  c  on (d.schooltype=c.bizcode)
     <where>
+      c.biztype='schootype'
       <if test="schoolcode != null and schoolcode.trim() != ''">
         and `schoolcode` = #{schoolcode}
       </if>
@@ -33,7 +40,6 @@
       <if test="name != null and name.trim() != ''">
         and `name` like concat('%',#{name},'%')
       </if>
-
     </where>
     <choose>
       <when test="sidx != null and sidx.trim() != ''">
@@ -50,8 +56,13 @@
 
 
   <select id="queryListByCondition" resultType="io.chicken.ggs.dal.model.School">
-    select * from school
+    select d.*,c.datavalue schoolname  from (select a.*,b.datavalue  areaname  from school  a
+    left JOIN dictionary  b  on (a.areacode=b.bizcode )
+    where b.biztype='areacode'
+    ) d
+    LEFT JOIN dictionary  c  on (d.schooltype=c.bizcode)
     <where>
+      c.biztype='schootype'
       <if test="schoolcode != null and schoolcode.trim() != ''">
         and `schoolcode` = #{schoolcode}
       </if>
@@ -64,13 +75,12 @@
       <if test="name != null and name.trim() != ''">
         and `name` like concat('%',#{name},'%')
       </if>
-
     </where>
 
   </select>
 
   <select id="queryTotal" resultType="java.lang.Long" >
-    select count(*) from school
+    select count(1) from school
     <where>
       <if test="schoolcode != null and schoolcode.trim() != ''">
         and `schoolcode` = #{schoolcode}
@@ -84,19 +94,8 @@
       <if test="name != null and name.trim() != ''">
         and `name` like concat('%',#{name},'%')
       </if>
-
     </where>
-    <choose>
-      <when test="sidx != null and sidx.trim() != ''">
-        order by ${sidx} ${order}
-      </when>
-      <otherwise>
-        order by id asc
-      </otherwise>
-    </choose>
-    <if test="offset != null and limit != null">
-      limit #{offset}, #{limit}
-    </if>
+
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >

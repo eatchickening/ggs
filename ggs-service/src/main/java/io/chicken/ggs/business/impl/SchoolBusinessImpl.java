@@ -57,7 +57,7 @@ public class SchoolBusinessImpl implements SchoolBusiness {
         long total=0;
         try
         {
-            listSchool = schoolService.queryList(params);
+            listSchool = schoolService.getSchoolByCondition(params);
         }catch(Exception e)
         {
             logger.error("数据库操作异常",e);

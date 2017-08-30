@@ -11,6 +11,7 @@
     <result column="moral" property="moral" jdbcType="VARCHAR" />
     <result column="intellectual" property="intellectual" jdbcType="VARCHAR" />
     <result column="physical" property="physical" jdbcType="VARCHAR" />
+    <result column="schoolname" property="schoolname" jdbcType="VARCHAR" />
     <result column="schoolcode" property="schoolcode" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
@@ -27,7 +28,7 @@
   </select>
 
   <select id="queryList" resultType="io.chicken.ggs.dal.model.Student">
-    select * from student
+    select a.*,b.name schoolname from student a left join school b on a.schoolcode=b.schoolcode
     <where>
       <if test="studentid != null and studentid.trim() != ''">
         and `studentid` = #{studentid}

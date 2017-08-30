@@ -7,8 +7,9 @@ public class School {
     private String schoolcode;
     private String areacode;
 
+    private String areaname;
     private String schooltype;
-
+    private String schoolname;
     public Long getId() {
         return id;
     }
@@ -47,5 +48,21 @@ public class School {
 
     public void setSchooltype(String schooltype) {
         this.schooltype = schooltype == null ? null : schooltype.trim();
+    }
+
+    public String getAreaname() {
+        return areaname;
+    }
+
+    public void setAreaname(String areaname) {
+        this.areaname = areaname;
+    }
+
+    public String getSchoolname() {
+        return schoolname;
+    }
+
+    public void setSchoolname(String schoolname) {
+        this.schoolname = schoolname;
     }
 }

@@ -20,6 +20,7 @@ public class Student {
     private String physical;
 
     private String schoolcode;
+    private String  schoolname;
 
     private String remark;
 
@@ -109,5 +110,13 @@ public class Student {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public String getSchoolname() {
+        return schoolname;
+    }
+
+    public void setSchoolname(String schoolname) {
+        this.schoolname = schoolname;
     }
 }
