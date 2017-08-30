@@ -4,25 +4,18 @@
 package io.chicken.ggs.web.controller;
 
 import io.chicken.ggs.business.SysMenuBusiness;
-import io.chicken.ggs.business.UserInfoBusiness;
 import io.chicken.ggs.common.Result;
-import io.chicken.ggs.common.ResultCode;
-import io.chicken.ggs.common.util.ValidateErrorResult;
-import io.chicken.ggs.common.util.ValidatorUtils;
-import io.chicken.ggs.common.validator.groups.UserInfoControllerSave;
-import io.chicken.ggs.common.vo.UserInfoQueryParam;
-import io.chicken.ggs.common.vo.UserInfoVO;
 import io.chicken.ggs.dal.model.SysMenu;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Collections;
 import java.util.List;
 
 /**

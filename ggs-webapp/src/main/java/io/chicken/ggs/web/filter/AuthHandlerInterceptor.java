@@ -52,7 +52,7 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
         }
 
         String[] perms = (String[]) session.getAttribute(sessionId + CommonConstant.PERMS_KEY_SUFFIX);
-        if (!MenuUtil.hasAuth(perms, request.getRequestURL().toString())) {
+        if (!MenuUtil.hasAuth(perms, request.getRequestURI())) {
             //返回无权限提示
             Result<String> result = new Result<>(ResultCode.LOGIN_NO_AUTH);
             response.getWriter().write(JSON.toJSONString(result));
