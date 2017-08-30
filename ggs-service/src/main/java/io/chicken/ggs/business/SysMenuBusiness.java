@@ -15,4 +15,6 @@ import java.util.List;
 public interface SysMenuBusiness {
 
     Result<List<SysMenu>> queryList(List<Integer> ids);
+
+    Result<List<SysMenu>> queryAllList();
 }

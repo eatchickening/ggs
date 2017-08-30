@@ -28,4 +28,9 @@ public class SysMenuServiceImpl implements SysMenuService {
     public List<SysMenu> queryList(List<Integer> ids) {
         return sysMenuMapper.queryList(ids);
     }
+
+    @Override
+    public List<SysMenu> queryAllList() {
+        return sysMenuMapper.queryAllList();
+    }
 }

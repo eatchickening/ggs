@@ -18,4 +18,6 @@ public interface SysMenuMapper {
     int updateByPrimaryKey(SysMenu record);
 
     List<SysMenu> queryList(List<Integer> ids);
+
+    List<SysMenu> queryAllList();
 }
