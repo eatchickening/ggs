@@ -42,7 +42,7 @@
       or (areacode != null and areacode.trim() != '')
       or (schooltype != null and schooltype.trim() != '')
       ) ">
-        and `schoolcode`in
+        and a.`schoolcode`in
         (
           select schoolcode from school
           <where>

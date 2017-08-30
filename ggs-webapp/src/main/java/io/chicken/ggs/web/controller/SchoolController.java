@@ -5,6 +5,7 @@ import io.chicken.ggs.business.impl.StudentBusinessImpl;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.util.BeanUtilTest;
 import io.chicken.ggs.common.vo.SchoolVo;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import java.util.Map;
 /**
  *
  */
+@Api(description = "学校表相关操作")
 @Controller
 @RequestMapping("/ggs/school")
 public class SchoolController {
