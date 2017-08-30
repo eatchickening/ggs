@@ -6,6 +6,8 @@ import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.vo.AreaDetailVO;
 import io.chicken.ggs.dal.model.Dictionary;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ *mengxiangxiang
  */
+
+@Api(description = "字典表相关操作")
 @Controller
 @RequestMapping("/ggs/dictionary")
 public class DictionaryController {
@@ -28,13 +32,20 @@ public class DictionaryController {
     @Autowired
     private DictionaryBusinessImpl dictionaryBusiness;
 
+    @ApiOperation(value = "根据类型获取字典表该类型数据接口")
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result list(@RequestBody Map<String, Object> params){
+    public Result list(@RequestBody String biztype){
+        if(biztype==null)
+        {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+        Map<String, Object> params=new HashMap<String, Object>();
+        params.put("biztype",biztype);
         logger.info(params.toString());
         return dictionaryBusiness.getDictionaryList(params);
     }
-
+    @ApiOperation(value = "根据类型和业务编码获取字典表数据")
     @ResponseBody
     @RequestMapping(value = "/get", method = RequestMethod.POST)
     public Result<List<Dictionary>> get(@RequestBody Dictionary dictionary) {
@@ -58,14 +69,11 @@ public class DictionaryController {
      * @param dictionary
      * @return
      */
+    @ApiOperation(value = "根据区域编码查询其下面的机构、部门、岗位的信息,为空的话返回所有")
     @ResponseBody
     @RequestMapping(value = "/areaDetail", method = RequestMethod.POST)
     public Result<List<AreaDetailVO>> areaDetail(@RequestBody Dictionary dictionary) {
         logger.info("areaDetail() " + dictionary);
-       /* if (StringUtils.isEmpty(dictionary.getBizcode())) {
-            return new Result<>(ResultCode.PARAMETER_EMPTY);
-        }*/
-
         return dictionaryBusiness.queryAreaDetail(dictionary.getBizcode());
     }
 

@@ -3,7 +3,7 @@
 
     angular.module('chicken.pages.basic').factory('BasicService', ['$http', '$q', function ($http, $q) {
         return {
-            listuser: function (pageNum, pageSize) {
+            listUser: function (pageNum, pageSize) {
                 var deferred = $q.defer();
                 $http({
                     method: 'POST',
@@ -19,7 +19,7 @@
                 });
                 return deferred.promise;
             },
-            adduser: function() {
+            addUser: function() {
                 var deferred = $q.defer();
                 $http({
                     method: 'POST',
@@ -34,6 +34,21 @@
                         menuId: '1,2'
                     }
                 }).then(function (response) {
+                    deferred.resolve(response);
+                }).catch(function(response) {
+                    deferred.reject(response);
+                });
+                return deferred.promise;
+            },
+            deleteUser: function(id) {
+                var deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    url: 'http://localhost:8080/ggs/userInfo/delete',
+                    params: {
+                        id: id
+                    }
+                }).then(function(response) {
                     deferred.resolve(response);
                 }).catch(function(response) {
                     deferred.reject(response);
