@@ -29,7 +29,7 @@
   <select id="queryList" resultType="io.chicken.ggs.dal.model.Student">
     select * from student
     <where>
-      <if test="studentid != null">
+      <if test="studentid != null and studentid.trim() != ''">
         and `studentid` = #{studentid}
       </if>
       <if test="name != null and name.trim() != ''">
@@ -45,13 +45,13 @@
         (
           select schoolcode from school
           <where>
-            <if test="schoolname != null">
+            <if test="schoolname != null and schoolname.trim() != ''">
               and `name` = #{schoolname}
             </if>
-            <if test="areacode != null">
+            <if test="areacode != null and areacode.trim() != ''">
               and `areacode` = #{areacode}
             </if>
-            <if test="schooltype != null">
+            <if test="schooltype != null  and schooltype.trim() != ''">
               and `schooltype` = #{schooltype}
             </if>
           </where>
@@ -75,7 +75,7 @@
   <select id="queryTotal" resultType="java.lang.Long" >
     select count(*) from student
     <where>
-      <if test="studentid != null">
+      <if test="studentid != null  and studentid.trim() != ''">
         and `studentid` = #{studentid}
       </if>
       <if test="name != null and name.trim() != ''">
@@ -91,13 +91,13 @@
         (
         select schoolcode from school
         <where>
-          <if test="schoolname != null">
+          <if test="schoolname != null and schoolname.trim() != ''">
             and `name` = #{schoolname}
           </if>
-          <if test="areacode != null">
+          <if test="areacode != null and areacode.trim() != '' " >
             and `areacode` = #{areacode}
           </if>
-          <if test="schooltype != null">
+          <if test="schooltype != null and schooltype.trim() != ''">
             and `schooltype` = #{schooltype}
           </if>
         </where>

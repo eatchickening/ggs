@@ -116,19 +116,19 @@
                 
             };
 
-            function transformData(data) {
-                
-            }
-
             function listAreaDetail(bizcode) {
                 BasicService.listAreaDetail(bizcode).then(function(data) {
-                    if (data.code === 0 && data.data && data.data instanceof Array) {
-                        transformData(data.data);
+                    if (data.code === 0 && data.data && data.data instanceof Array && data.data.length > 0) {
+                        $scope.organs = data.data[0].organVoList;
                     }
                 }).catch(function(err){
                     console.log(err);
                 });
             }
+
+            $scope.changeArea = function () {
+                listAreaDetail($scope.user.area.bizcode);
+            };
 
             $scope.addUser = function () {
                 $scope.user = {
@@ -145,10 +145,6 @@
                 BasicService.listArea().then(function(data){
                     if (data.code === 0 && data.data && data.data instanceof Array) {
                         $scope.areas = data.data;
-                        if (data.data.length > 0) {
-                            $scope.user.area = data.data[0];
-                        }
-                        listAreaDetail($scope.user.area.bizcode);
                     }
                 }).catch(function(err){
                     console.log(err);
@@ -163,7 +159,7 @@
                 addUserModel.result.then(function(result){
                     if (result && result === 'OK') {
                         console.log($scope.user);
-                        return BasicService.adduser().then(function(response){
+                        return BasicService.adduser($scope.user).then(function(response){
                             if (response) {
 
                             }

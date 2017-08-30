@@ -19,5 +19,5 @@ public interface DictionaryService {
 
     long queryTotal(Map<String, Object> map);
 
-    List<AreaDetailVO> queryAreaDetail(String bizcode);
+    List<AreaDetailVO> queryAreaDetail(Map<String, Object> map);
 }

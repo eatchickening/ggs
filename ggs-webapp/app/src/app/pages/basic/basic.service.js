@@ -58,9 +58,9 @@
             listAreaDetail: function(bizcode) {
                 var deferred = $q.defer();
                 $http({
-                    method: 'GET',
+                    method: 'POST',
                     url: 'http://localhost:8080/ggs/dictionary/areaDetail',
-                    params: {
+                    data: {
                         bizcode: bizcode
                     }
                 }).then(function(response) {
