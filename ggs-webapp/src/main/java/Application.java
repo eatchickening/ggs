@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  *
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 // @ServletComponentScan(value = "io.chicken.ggs.web.filter")
 // @ImportResource({"classpath:spring-bean.xml""})
 //@EnableWebMvc
+@EnableSwagger2
 public class Application extends SpringBootServletInitializer {
 
     // @RequestMapping("/")
