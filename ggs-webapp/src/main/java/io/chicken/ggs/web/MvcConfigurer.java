@@ -26,11 +26,17 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
      * 静态资源访问
      * @param registry
      */
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/app/**").addResourceLocations("/app/");
-        super.addResourceHandlers(registry);
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("swagger-ui.html")
+//                .addResourceLocations("classpath:/swagger/");
+//
+//        registry.addResourceHandler("/webjars/**")
+//                .addResourceLocations("classpath:/swagger/webjars/");
+//
+//        registry.addResourceHandler("/app/**").addResourceLocations("/app/");
+//        super.addResourceHandlers(registry);
+//    }
 
     /**
      * 跨域
