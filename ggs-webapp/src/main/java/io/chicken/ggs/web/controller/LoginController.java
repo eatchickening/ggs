@@ -9,6 +9,10 @@ import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.util.LoginUtil;
 import io.chicken.ggs.common.vo.UserInfoVO;
 import io.chicken.ggs.dal.model.SysMenu;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +32,7 @@ import java.util.List;
  *
  * @author wung 2017/8/22.
  */
+@Api(description = "用户登录相关：登录、获取用户信息、登出、修改密码")
 @Controller
 @RequestMapping("/ggs/auth")
 public class LoginController extends BaseController {
@@ -39,6 +44,13 @@ public class LoginController extends BaseController {
     @Autowired
     private SysMenuBusiness sysMenuBusiness;
 
+    @ApiOperation(value = "登录")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "account", value = "账号", required = true,
+                    dataType = "string", paramType = "form"),
+            @ApiImplicitParam(name = "password", value = "密码", required = true,
+                    dataType = "string", paramType = "form")
+    })
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result<UserInfoVO> login(String account, String password, HttpServletRequest request, HttpServletResponse response) {
@@ -70,6 +82,7 @@ public class LoginController extends BaseController {
     /**
      * 获取登录用户信息和菜单
      */
+    @ApiOperation(value = "获取登录用户信息和菜单")
     @RequestMapping(value = "/userInfo", method = RequestMethod.POST)
     @ResponseBody
     public Result<UserInfoVO> userInfo(HttpServletRequest request) {
@@ -118,6 +131,13 @@ public class LoginController extends BaseController {
     /**
      * 修改密码
      */
+    @ApiOperation(value = "修改密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "oldPassword", value = "旧密码", required = true,
+                    dataType = "string", paramType = "form"),
+            @ApiImplicitParam(name = "newPassword", value = "新密码", required = true,
+                    dataType = "string", paramType = "form")
+    })
     @RequestMapping(value = "/updatePwd", method = RequestMethod.POST)
     @ResponseBody
     public Result<Boolean> updatePwd(String oldPassword, String newPassword) {
@@ -147,8 +167,9 @@ public class LoginController extends BaseController {
         return new Result<>(ResultCode.SUCCESS);
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.POST)
     @ResponseBody
+    @ApiOperation(value = "登出")
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public Result logout(HttpServletRequest request, HttpServletResponse response) {
         // 清除登录状态
         LoginUtil.setCookieInvalid(request, response);
