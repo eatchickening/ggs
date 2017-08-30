@@ -32,11 +32,11 @@
         <if test="teaMap.name != null and teaMap.name.trim() != ''">
             and tea.name like concat('%',#{teaMap.name},'%')
         </if>
-        <if test="teaMap.schoolname != null and teaMap.schoolname != ''">
-              and sch.name = #{teaMap.schoolname}
+        <if test="teaMap.schoolcode != null and teaMap.schoolcode != ''">
+              and sch.name = #{teaMap.schoolcode}
           </if>
-          <if test="teaMap.areaname != null and teaMap.areaname != ''">
-              and sch.areacode = #{teaMap.areaname}
+          <if test="teaMap.areacode != null and teaMap.areacode != ''">
+              and sch.areacode = #{teaMap.areacode}
           </if>
           <if test="teaMap.schooltype != null and teaMap.schooltype != ''" >
               and sch.schooltype = #{teaMap.schooltype}
@@ -56,11 +56,11 @@
           <if test="teaMap.name != null and teaMap.name.trim() != ''">
               and tea.name like concat('%',#{teaMap.name},'%')
           </if>
-          <if test="teaMap.schoolname != null and teaMap.schoolname != ''">
-              and sch.name = #{teaMap.schoolname}
+          <if test="teaMap.schoolcode != null and teaMap.schoolcode != ''">
+              and sch.name = #{teaMap.schoolcode}
           </if>
-          <if test="teaMap.areaname != null and teaMap.areaname != ''">
-              and sch.areacode = #{teaMap.areaname}
+          <if test="teaMap.areacode != null and teaMap.areacode != ''">
+              and sch.areacode = #{teaMap.areacode}
           </if>
           <if test="teaMap.schooltype != null and teaMap.schooltype != ''" >
               and sch.schooltype = #{teaMap.schooltype}
