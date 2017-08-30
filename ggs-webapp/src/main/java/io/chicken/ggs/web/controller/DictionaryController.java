@@ -7,6 +7,7 @@ import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.vo.AreaDetailVO;
 import io.chicken.ggs.dal.model.Dictionary;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,8 @@ public class DictionaryController {
     @ApiOperation(value = "根据类型获取字典表该类型数据接口")
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result list(@RequestBody String biztype){
+    @ApiImplicitParam(name = "biztype", value = "业务类型", required = true, paramType = "form")
+    public Result list(String biztype){
         if(biztype==null)
         {
             return new Result<>(ResultCode.PARAMETER_EMPTY);
