@@ -53,7 +53,7 @@ public class LoginController extends BaseController {
     })
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Result<UserInfoVO> login(String account, String password, HttpServletRequest request, HttpServletResponse response) {
+    public Result<Boolean> login(String account, String password, HttpServletRequest request, HttpServletResponse response) {
         logger.info("account=" + account + ", pwd =" + password);
         if (StringUtils.isEmpty(account) || StringUtils.isEmpty(password)) {
             return new Result<>(ResultCode.PARAMETER_EMPTY);
