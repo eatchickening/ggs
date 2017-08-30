@@ -18,7 +18,9 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.print.attribute.standard.MediaSize;
@@ -37,6 +39,9 @@ import java.util.List;
 public class UserInfoController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
+    @Value(value = "${password.default}")
+    private String passwordDefault;
 
     @Autowired
     private UserInfoBusiness userInfoBusiness;
@@ -78,6 +83,10 @@ public class UserInfoController {
         logger.info("save(), param = " + userInfoVO);
         if (userInfoVO == null) {
             return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+
+        if (StringUtils.isEmpty(userInfoVO.getPassword())) {
+            userInfoVO.setPassword(passwordDefault);
         }
 
         ValidateErrorResult errorResult = ValidatorUtils.validateEntityLazy(userInfoVO, UserInfoControllerSave.class);
