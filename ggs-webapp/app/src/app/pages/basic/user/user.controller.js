@@ -4,11 +4,12 @@
     angular.module('chicken.pages.basic')
         .controller('UserCtrl', function ($scope, $uibModal, BasicService, toastr) {
 
+            // list user by page
             var currentScope = 1;
             var tempPageSize = 10;
 
             function getUserList (pageNum, pageSize) {
-                BasicService.listuser(pageNum, pageSize).then(function(data) {
+                BasicService.listUser(pageNum, pageSize).then(function(data) {
                     if (data.code === 0 && data.data && data.data instanceof Array) {
                         $scope.userList = data.data;
                         $scope.totalItems = data.total;
@@ -150,16 +151,16 @@
                     console.log(err);
                 });
                 
-                var addUserModel = $uibModal.open({
+                var addUserModal = $uibModal.open({
                     animation: true,
                     templateUrl: 'app/pages/basic/user/adduser.html',
                     size: 'lg',
                     scope: $scope
                 });
-                addUserModel.result.then(function(result){
+                addUserModal.result.then(function(result){
                     if (result && result === 'OK') {
                         console.log($scope.user);
-                        return BasicService.adduser($scope.user).then(function(response){
+                        return BasicService.addUser($scope.user).then(function(response){
                             if (response) {
 
                             }
@@ -170,6 +171,27 @@
                         console.log(err);
                     }
                 });
+            };
+
+            //delete user
+            $scope.deleteUser = function(user){
+                $scope.delusername = user.username;
+                var delUserModal = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'app/pages/basic/user/deluser.html',
+                    size: 'sm',
+                    scope: $scope
+                });
+                delUserModal.result.then(function(result){
+                    if (result && result === 'OK') {
+                        return BasicService.deleteUser(user.id).then(function(response) {
+                            if (response.data && response.data.code === 0) {
+                                getUserList(1, tempPageSize);
+                                toastr.success('删除用户'+user.username+'成功！', '成功');
+                            }
+                        });
+                    }
+                }) 
             };
 
         });

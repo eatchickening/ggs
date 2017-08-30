@@ -21,13 +21,19 @@ import java.util.List;
 public class SysMenuServiceTest {
 
     @Autowired
-    SysMenuService sysMenuService;
+    private SysMenuService sysMenuService;
 
     @Test
     public void queryList() {
         List<Integer> ids = Arrays.asList(1,2,3);
         System.out.println(ids);
         List<SysMenu> list = sysMenuService.queryList(ids);
+        System.out.println(list.size());
+    }
+
+    @Test
+    public void queryAllList() {
+        List<SysMenu> list = sysMenuService.queryAllList();
         System.out.println(list.size());
     }
 }

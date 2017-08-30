@@ -42,4 +42,14 @@ public class SysMenuBusinessImpl implements SysMenuBusiness {
             return  new Result<>(ResultCode.SYS_EXCEPTION);
         }
     }
+
+    @Override
+    public Result<List<SysMenu>> queryAllList() {
+        try {
+            return new Result<>(sysMenuService.queryAllList());
+        } catch (Exception e) {
+            LOGGER.error("queryList(), 异常：" + e.getMessage());
+            return new Result<>(ResultCode.DB_QUERY_FAIL);
+        }
+    }
 }
