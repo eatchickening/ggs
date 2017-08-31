@@ -10,8 +10,8 @@ public class TeacherQueryParam implements Serializable {
     private Integer pageNum = 1;
     private Integer pageSize = 5;
     private String name;
-    private String schoolname;
-    private String areaname;
+    private String schoolcode;
+    private String areacode;
     private String schooltype;
 
     public Integer getPageNum() {
@@ -38,20 +38,20 @@ public class TeacherQueryParam implements Serializable {
         this.name = name.trim();
     }
 
-    public String getSchoolname() {
-        return schoolname;
+    public String getSchoolcode() {
+        return schoolcode;
     }
 
-    public void setSchoolname(String schoolname) {
-        this.schoolname = schoolname;
+    public void setSchoolcode(String schoolcode) {
+        this.schoolcode = schoolcode;
     }
 
-    public String getAreaname() {
-        return areaname;
+    public String getAreacode() {
+        return areacode;
     }
 
-    public void setAreaname(String areaname) {
-        this.areaname = areaname;
+    public void setAreacode(String areacode) {
+        this.areacode = areacode;
     }
 
     public String getSchooltype() {
