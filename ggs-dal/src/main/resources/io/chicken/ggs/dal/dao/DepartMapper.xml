@@ -29,10 +29,10 @@
     delete from depart
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="io.chicken.ggs.dal.model.Depart" >
-    insert into depart (id, departcode, name, 
+  <insert id="insert" parameterType="io.chicken.ggs.dal.model.Depart" useGeneratedKeys="true" keyProperty="id" >
+    insert into depart (departcode, name,
       organcode, remark)
-    values (#{id,jdbcType=BIGINT}, #{departcode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+    values (#{departcode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
       #{organcode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.Depart" >

@@ -1,6 +1,10 @@
 package io.chicken.ggs.dal.model;
 
-public class Post {
+import java.io.Serializable;
+
+public class Post implements Serializable {
+    private static final long serialVersionUID = -9132709922943299800L;
+
     private Long id;
 
     private String postcode;

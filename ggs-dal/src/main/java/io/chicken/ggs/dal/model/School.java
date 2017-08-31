@@ -1,6 +1,10 @@
 package io.chicken.ggs.dal.model;
 
-public class School {
+import java.io.Serializable;
+
+public class School implements Serializable {
+    private static final long serialVersionUID = 9121850720687353644L;
+
     private Long id;
 
     private String name;
@@ -64,5 +68,18 @@ public class School {
 
     public void setSchoolname(String schoolname) {
         this.schoolname = schoolname;
+    }
+
+    @Override
+    public String toString() {
+        return "School{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", schoolcode='" + schoolcode + '\'' +
+                ", areacode='" + areacode + '\'' +
+                ", areaname='" + areaname + '\'' +
+                ", schooltype='" + schooltype + '\'' +
+                ", schoolname='" + schoolname + '\'' +
+                '}';
     }
 }

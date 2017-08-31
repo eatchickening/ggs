@@ -1,6 +1,10 @@
 package io.chicken.ggs.dal.model;
 
-public class Teacher {
+import java.io.Serializable;
+
+public class Teacher implements Serializable {
+    private static final long serialVersionUID = -5248840726391286939L;
+
     private Long id;
 
     private String teacherid;
@@ -69,5 +73,18 @@ public class Teacher {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "id=" + id +
+                ", teacherid='" + teacherid + '\'' +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", classname='" + classname + '\'' +
+                ", schoolId='" + schoolId + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }

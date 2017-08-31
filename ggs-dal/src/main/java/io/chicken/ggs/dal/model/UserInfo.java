@@ -1,8 +1,11 @@
 package io.chicken.ggs.dal.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserInfo {
+public class UserInfo implements Serializable {
+    private static final long serialVersionUID = -4200325187476187130L;
+
     private Integer id;
 
     private String account;

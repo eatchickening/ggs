@@ -40,6 +40,7 @@ public enum ResultCode {
     DB_UPDATE_FAIL(402, "更新失败"),
     DB_QUERY_FAIL(403, "查询失败"),
     DB_DELETE_FAIL(404, "删除失败"),
+    DB_ADD_FAIL(405, "添加失败"),
 
     ;
 

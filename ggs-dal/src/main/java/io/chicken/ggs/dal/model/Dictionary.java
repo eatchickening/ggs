@@ -1,6 +1,10 @@
 package io.chicken.ggs.dal.model;
 
-public class Dictionary {
+import java.io.Serializable;
+
+public class Dictionary implements Serializable {
+    private static final long serialVersionUID = -5914042674694609306L;
+
     private Long id;
 
     private String biztype;

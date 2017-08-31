@@ -43,4 +43,31 @@ public class DepartBusinessImpl implements DepartBusiness {
             return  new Result<>(ResultCode.SYS_EXCEPTION);
         }
     }
+
+    @Override
+    public Result<Long> save(Depart depart) {
+        try {
+            return new Result<>(departService.save(depart));
+        } catch (Exception e) {
+            LOGGER.error(depart.getName() + ", 保存部门异常：" + e.getMessage());
+            return new Result<>(ResultCode.DB_ADD_FAIL);
+        }
+    }
+
+    @Override
+    public Result<Boolean> delete(Long id) {
+        if (id == null) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+
+        try {
+            // 是否需要删除其下的岗位和用户 todo
+
+            departService.delete(id);
+            return new Result<>(true);
+        } catch (Exception e) {
+            LOGGER.error(id + "，删除部门异常：" + e.getMessage());
+            return new Result<>(ResultCode.DB_DELETE_FAIL);
+        }
+    }
 }
