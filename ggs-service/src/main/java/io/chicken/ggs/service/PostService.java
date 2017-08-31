@@ -15,6 +15,7 @@ public interface PostService {
 
     List<Post> queryByDepartcode(String departcode);
 
+    Post query(Long id);
 
     Long save(Post post);
 

@@ -16,8 +16,9 @@ public interface PostBusiness {
 
     Result<List<Post>> queryByDepartcode(String departcode);
 
+    Result<Post> query(Long id);
 
     Result<Long> save(Post post);
 
-    Result<Boolean> delete(Long id);
+    Result<Boolean> delete(Post post);
 }

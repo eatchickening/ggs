@@ -35,6 +35,10 @@ public class PostServiceImpl implements PostService {
         return postMapper.queryByDepartcode(departcode);
     }
 
+    @Override
+    public Post query(Long id) {
+        return postMapper.selectByPrimaryKey(id);
+    }
 
     /**
      * 添加岗位

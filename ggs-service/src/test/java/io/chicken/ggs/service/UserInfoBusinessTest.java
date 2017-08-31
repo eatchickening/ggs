@@ -35,6 +35,16 @@ public class UserInfoBusinessTest {
         System.out.println(list.isSuccess());
     }
 
+
+    @Test
+    public void queryListByUserInfo() {
+        UserInfo userInfo = new UserInfo();
+        // userInfo.setId(1);
+        userInfo.setPostcode("GW001");
+        Result<List<UserInfo>> list = userInfoBusiness.queryListByUserInfo(userInfo);
+        System.out.println(list.getData());
+    }
+
     @Test
     public void queryCount() {
         UserInfoQueryParam param = new UserInfoQueryParam();

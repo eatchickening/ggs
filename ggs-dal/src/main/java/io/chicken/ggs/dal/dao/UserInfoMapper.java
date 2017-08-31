@@ -28,4 +28,6 @@ public interface UserInfoMapper {
     List<UserInfoVO> queryList(@Param("param") UserInfoQueryParam param, @Param("start") Integer start, @Param("pageSize") Integer pageSize);
 
     Long queryCount(@Param("param") UserInfoQueryParam param);
+
+    List<UserInfo> queryListByUserInfo(@Param("param") UserInfo userInfo);
 }

@@ -3,8 +3,12 @@
  */
 package io.chicken.ggs.web.controller;
 
+import com.sun.org.apache.regexp.internal.RE;
+import io.chicken.ggs.business.DepartBusiness;
 import io.chicken.ggs.business.PostBusiness;
+import io.chicken.ggs.business.UserInfoBusiness;
 import io.chicken.ggs.common.Result;
+import io.chicken.ggs.common.vo.UserInfoQueryParam;
 import io.chicken.ggs.dal.model.Post;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -28,6 +32,8 @@ public class PostController {
 
     @Autowired
     private PostBusiness postBusiness;
+    @Autowired
+    private UserInfoBusiness userInfoBusiness;
 
 
     @ApiOperation(value = "获取部门下的岗位")
@@ -60,7 +66,13 @@ public class PostController {
     public Result<Boolean> delete(Long id) {
         LOGGER.info("delete() " + id);
 
-        return postBusiness.delete(id);
+        Result<Post> postResult = postBusiness.query(id);
+        if (!postResult.isSuccess() || postResult.getData() == null) {
+            return new Result<>(postResult.getCode(), postResult.getMessage());
+        }
+
+        Post post = postResult.getData();
+        return postBusiness.delete(post);
     }
 
 }

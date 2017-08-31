@@ -38,13 +38,6 @@ public class UserInfoBusinessImpl implements UserInfoBusiness {
 
     @Override
     public Result<List<UserInfoVO>> queryList(UserInfoQueryParam param) {
-        if (param.getPageNum() == null || param.getPageNum() == 0) {
-            param.setPageNum(CommonConstant.PAGE_NUM);
-        }
-        if (param.getPageSize() == null || param.getPageSize() == 0) {
-            param.setPageSize(CommonConstant.PAGE_SIZE);
-        }
-
         try {
             List<UserInfoVO> userInfoVOS = userInfoService.queryList(param);
             return new Result<>(userInfoVOS);
@@ -61,6 +54,21 @@ public class UserInfoBusinessImpl implements UserInfoBusiness {
             return new Result<>(count);
         } catch (Exception e) {
             LOGGER.error("queryCount() exception : " + e.getMessage());
+            return new Result<>(ResultCode.DB_QUERY_FAIL);
+        }
+    }
+
+    @Override
+    public Result<List<UserInfo>> queryListByUserInfo(UserInfo userInfo) {
+        if (userInfo == null) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+
+        try {
+            List<UserInfo> userInfoList = userInfoService.queryListByUserInfo(userInfo);
+            return new Result<>(userInfoList);
+        } catch (Exception e) {
+            LOGGER.error("queryListByUserInfo(),查询用户异常：" + e.getMessage());
             return new Result<>(ResultCode.DB_QUERY_FAIL);
         }
     }

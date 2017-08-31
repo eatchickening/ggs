@@ -120,6 +120,44 @@
         </if>
 
     </select>
+
+    <select id="queryListByUserInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from user_info
+        where is_delete = 0
+        <if test="param.id != null" >
+            and id = #{param.id}
+        </if>
+        <if test="param.account != null" >
+            and account = #{param.account}
+        </if>
+        <if test="param.username != null" >
+            and username = #{param.username}
+        </if>
+        <if test="param.email != null" >
+            and email = #{param.email}
+        </if>
+        <if test="param.mobile != null" >
+            and mobile = #{param.mobile}
+        </if>
+        <if test="param.areacode != null" >
+            and areacode = #{param.areacode}
+        </if>
+        <if test="param.departcode != null" >
+            and departcode = #{param.departcode}
+        </if>
+        <if test="param.postcode != null" >
+            and postcode = #{param.postcode}
+        </if>
+        <if test="param.organcode != null" >
+            and organcode = #{param.organcode}
+        </if>
+        <if test="param.createAccount != null" >
+            and create_account = #{param.createAccount}
+        </if>
+    </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user_info
     where is_delete = 0

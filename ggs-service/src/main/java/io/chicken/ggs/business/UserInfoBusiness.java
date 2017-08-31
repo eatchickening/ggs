@@ -6,6 +6,7 @@ package io.chicken.ggs.business;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.vo.UserInfoQueryParam;
 import io.chicken.ggs.common.vo.UserInfoVO;
+import io.chicken.ggs.dal.model.UserInfo;
 
 import java.util.List;
 
@@ -31,6 +32,9 @@ public interface UserInfoBusiness {
      * @return
      */
     Result<Long> queryCount(UserInfoQueryParam param);
+
+
+    Result<List<UserInfo>> queryListByUserInfo(UserInfo userInfo);
 
     /**
      * 添加用户

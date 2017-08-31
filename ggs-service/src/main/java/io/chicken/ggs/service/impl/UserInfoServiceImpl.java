@@ -6,6 +6,7 @@ package io.chicken.ggs.service.impl;
 import io.chicken.ggs.common.CommonConstant;
 import io.chicken.ggs.common.GGSException;
 import io.chicken.ggs.common.ResultCode;
+import io.chicken.ggs.common.util.PropertiesUtils;
 import io.chicken.ggs.common.vo.UserInfoQueryParam;
 import io.chicken.ggs.common.vo.UserInfoVO;
 import io.chicken.ggs.dal.dao.UserInfoMapper;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -67,12 +69,33 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public List<UserInfoVO> queryList(UserInfoQueryParam param) {
+        if (PropertiesUtils.isEmpty(param)) {
+            return Collections.emptyList();
+        }
+
+        if (param.getPageNum() == null || param.getPageNum() == 0) {
+            param.setPageNum(CommonConstant.PAGE_NUM);
+        }
+        if (param.getPageSize() == null || param.getPageSize() == 0) {
+            param.setPageSize(CommonConstant.PAGE_SIZE);
+        }
         Integer start = (param.getPageNum() - 1) * param.getPageSize();
         return userInfoMapper.queryList(param, start, param.getPageSize() * CommonConstant.PAGE_PRE);
     }
 
     @Override
     public Long queryCount(UserInfoQueryParam param) {
+        if (PropertiesUtils.isEmpty(param)) {
+            return 0L;
+        }
         return userInfoMapper.queryCount(param);
+    }
+
+    @Override
+    public List<UserInfo> queryListByUserInfo(UserInfo userInfo) {
+        if (PropertiesUtils.isEmpty(userInfo)) {
+            return Collections.emptyList();
+        }
+        return userInfoMapper.queryListByUserInfo(userInfo);
     }
 }
