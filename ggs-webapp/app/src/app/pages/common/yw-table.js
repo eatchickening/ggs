@@ -5,18 +5,18 @@
 (function (ng, undefined){
     'use strict';
 
-ng.module('smart-table', []).run(['$templateCache', function ($templateCache) {
-    $templateCache.put('template/smart-table/pagination.html',
+ng.module('yw-table', []).run(['$templateCache', function ($templateCache) {
+    $templateCache.put('template/yw-table/pagination.html',
         '<nav ng-if="numPages && pages.length >= 2"><ul class="pagination">' +
         '<li ng-repeat="page in pages" ng-class="{active: page==currentPage}"><a href="javascript: void(0);" ng-click="selectPage(page)">{{page}}</a></li>' +
         '</ul></nav>');
 }]);
 
 
-ng.module('smart-table')
-  .constant('stConfig', {
+ng.module('yw-table')
+  .constant('ywConfig', {
     pagination: {
-      template: 'template/smart-table/pagination.html',
+      template: 'template/yw-table/pagination.html',
       itemsByPage: 10,
       displayedPages: 5
     },
@@ -26,11 +26,11 @@ ng.module('smart-table')
     },
     select: {
       mode: 'single',
-      selectedClass: 'st-selected'
+      selectedClass: 'yw-selected'
     },
     sort: {
-      ascentClass: 'st-sort-ascent',
-      descentClass: 'st-sort-descent',
+      ascentClass: 'yw-sort-ascent',
+      descentClass: 'yw-sort-descent',
       descendingFirst: false,
       skipNatural: false,
       delay:300
@@ -39,9 +39,9 @@ ng.module('smart-table')
       delay: 100 //ms
     }
   });
-ng.module('smart-table')
-  .controller('stTableController', ['$scope', '$parse', '$filter', '$attrs', function StTableController ($scope, $parse, $filter, $attrs) {
-    var propertyName = $attrs.stTable;
+ng.module('yw-table')
+  .controller('ywTableController', ['$scope', '$parse', '$filter', '$attrs', function YwTableController ($scope, $parse, $filter, $attrs) {
+    var propertyName = $attrs.ywTable;
     var displayGetter = $parse(propertyName);
     var displaySetter = displayGetter.assign;
     var safeGetter;
@@ -87,8 +87,8 @@ ng.module('smart-table')
       }
     }
 
-    if ($attrs.stSafeSrc) {
-      safeGetter = $parse($attrs.stSafeSrc);
+    if ($attrs.ywSafeSrc) {
+      safeGetter = $parse($attrs.ywSafeSrc);
       $scope.$watch(function () {
         var safeSrc = safeGetter($scope);
         return safeSrc && safeSrc.length ? safeSrc[0] : undefined;
@@ -242,34 +242,34 @@ ng.module('smart-table')
       pipeAfterSafeCopy = false;
     };
   }])
-  .directive('stTable', function () {
+  .directive('ywTable', function () {
     return {
       restrict: 'A',
-      controller: 'stTableController',
+      controller: 'ywTableController',
       link: function (scope, element, attr, ctrl) {
 
-        if (attr.stSetFilter) {
-          ctrl.setFilterFunction(attr.stSetFilter);
+        if (attr.ywSetFilter) {
+          ctrl.setFilterFunction(attr.ywSetFilter);
         }
 
-        if (attr.stSetSort) {
-          ctrl.setSortFunction(attr.stSetSort);
+        if (attr.ywSetSort) {
+          ctrl.setSortFunction(attr.ywSetSort);
         }
       }
     };
   });
 
-ng.module('smart-table')
-  .directive('stSearch', ['stConfig', '$timeout','$parse', function (stConfig, $timeout, $parse) {
+ng.module('yw-table')
+  .directive('ywSearch', ['ywConfig', '$timeout','$parse', function (ywConfig, $timeout, $parse) {
     return {
-      require: '^stTable',
+      require: '^ywTable',
       link: function (scope, element, attr, ctrl) {
         var tableCtrl = ctrl;
         var promise = null;
-        var throttle = attr.stDelay || stConfig.search.delay;
-        var event = attr.stInputEvent || stConfig.search.inputEvent;
+        var throttle = attr.ywDelay || ywConfig.search.delay;
+        var event = attr.ywInputEvent || ywConfig.search.inputEvent;
 
-        attr.$observe('stSearch', function (newValue, oldValue) {
+        attr.$observe('ywSearch', function (newValue, oldValue) {
           var input = element[0].value;
           if (newValue !== oldValue && input) {
             ctrl.tableState().search = {};
@@ -281,7 +281,7 @@ ng.module('smart-table')
         scope.$watch(function () {
           return ctrl.tableState().search;
         }, function (newValue, oldValue) {
-          var predicateExpression = attr.stSearch || '$';
+          var predicateExpression = attr.ywSearch || '$';
           if (newValue.predicateObject && $parse(predicateExpression)(newValue.predicateObject) !== element[0].value) {
             element[0].value = $parse(predicateExpression)(newValue.predicateObject) || '';
           }
@@ -295,7 +295,7 @@ ng.module('smart-table')
           }
 
           promise = $timeout(function () {
-            tableCtrl.search(evt.target.value, attr.stSearch || '');
+            tableCtrl.search(evt.target.value, attr.ywSearch || '');
             promise = null;
           }, throttle);
         });
@@ -303,16 +303,16 @@ ng.module('smart-table')
     };
   }]);
 
-ng.module('smart-table')
-  .directive('stSelectRow', ['stConfig', function (stConfig) {
+ng.module('yw-table')
+  .directive('ywSelectRow', ['ywConfig', function (ywConfig) {
     return {
       restrict: 'A',
-      require: '^stTable',
+      require: '^ywTable',
       scope: {
-        row: '=stSelectRow'
+        row: '=ywSelectRow'
       },
       link: function (scope, element, attr, ctrl) {
-        var mode = attr.stSelectMode || stConfig.select.mode;
+        var mode = attr.ywSelectMode || ywConfig.select.mode;
         element.bind('click', function () {
           scope.$apply(function () {
             ctrl.select(scope.row, mode);
@@ -321,36 +321,36 @@ ng.module('smart-table')
 
         scope.$watch('row.isSelected', function (newValue) {
           if (newValue === true) {
-            element.addClass(stConfig.select.selectedClass);
+            element.addClass(ywConfig.select.selectedClass);
           } else {
-            element.removeClass(stConfig.select.selectedClass);
+            element.removeClass(ywConfig.select.selectedClass);
           }
         });
       }
     };
   }]);
 
-ng.module('smart-table')
-  .directive('stSort', ['stConfig', '$parse', '$timeout', function (stConfig, $parse, $timeout) {
+ng.module('yw-table')
+  .directive('ywSort', ['ywConfig', '$parse', '$timeout', function (ywConfig, $parse, $timeout) {
     return {
       restrict: 'A',
-      require: '^stTable',
+      require: '^ywTable',
       link: function (scope, element, attr, ctrl) {
 
-        var predicate = attr.stSort;
+        var predicate = attr.ywSort;
         var getter = $parse(predicate);
         var index = 0;
-        var classAscent = attr.stClassAscent || stConfig.sort.ascentClass;
-        var classDescent = attr.stClassDescent || stConfig.sort.descentClass;
+        var classAscent = attr.ywClassAscent || ywConfig.sort.ascentClass;
+        var classDescent = attr.ywClassDescent || ywConfig.sort.descentClass;
         var stateClasses = [classAscent, classDescent];
         var sortDefault;
-        var skipNatural = attr.stSkipNatural !== undefined ? attr.stSkipNatural : stConfig.sort.skipNatural;
-        var descendingFirst = attr.stDescendingFirst !== undefined ? attr.stDescendingFirst : stConfig.sort.descendingFirst;
+        var skipNatural = attr.ywSkipNatural !== undefined ? attr.ywSkipNatural : ywConfig.sort.skipNatural;
+        var descendingFirst = attr.ywDescendingFirst !== undefined ? attr.ywDescendingFirst : ywConfig.sort.descendingFirst;
         var promise = null;
-        var throttle = attr.stDelay || stConfig.sort.delay;
+        var throttle = attr.ywDelay || ywConfig.sort.delay;
 
-        if (attr.stSortDefault) {
-          sortDefault = scope.$eval(attr.stSortDefault) !== undefined ? scope.$eval(attr.stSortDefault) : attr.stSortDefault;
+        if (attr.ywSortDefault) {
+          sortDefault = scope.$eval(attr.ywSortDefault) !== undefined ? scope.$eval(attr.ywSortDefault) : attr.ywSortDefault;
         }
 
         //view --> table state
@@ -362,7 +362,7 @@ ng.module('smart-table')
           }
 
           var func;
-          predicate = ng.isFunction(getter(scope)) || ng.isArray(getter(scope)) ? getter(scope) : attr.stSort;
+          predicate = ng.isFunction(getter(scope)) || ng.isArray(getter(scope)) ? getter(scope) : attr.ywSort;
           if (index % 3 === 0 && !!skipNatural !== true) {
             //manual reset
             index = 0;
@@ -413,35 +413,35 @@ ng.module('smart-table')
     };
   }]);
 
-ng.module('smart-table')
-  .directive('stPagination', ['stConfig', function (stConfig) {
+ng.module('yw-table')
+  .directive('ywPagination', ['ywConfig', function (ywConfig) {
     return {
       restrict: 'EA',
-      require: '^stTable',
+      require: '^ywTable',
       scope: {
-        stItemsByPage: '=?',
-        stDisplayedPages: '=?',
-        stTotalItems: '=?',
-        stPageChange: '&'
+        ywItemsByPage: '=?',
+        ywDisplayedPages: '=?',
+        ywTotalItems: '=?',
+        ywPageChange: '&'
       },
       templateUrl: function (element, attrs) {
-        if (attrs.stTemplate) {
-          return attrs.stTemplate;
+        if (attrs.ywTemplate) {
+          return attrs.ywTemplate;
         }
-        return stConfig.pagination.template;
+        return ywConfig.pagination.template;
       },
       link: function (scope, element, attrs, ctrl) {
 
-        scope.stItemsByPage = scope.stItemsByPage ? +(scope.stItemsByPage) : stConfig.pagination.itemsByPage;
-        scope.stDisplayedPages = scope.stDisplayedPages ? +(scope.stDisplayedPages) : stConfig.pagination.displayedPages;
+        scope.ywItemsByPage = scope.ywItemsByPage ? +(scope.ywItemsByPage) : ywConfig.pagination.itemsByPage;
+        scope.ywDisplayedPages = scope.ywDisplayedPages ? +(scope.ywDisplayedPages) : ywConfig.pagination.displayedPages;
 
         scope.currentPage = 1;
         scope.pages = [];
         scope.tempCurrentPage = 1;
         function redraw () {
           var paginationState = ctrl.tableState().pagination;
-          if (scope.stTotalItems) {
-            paginationState.numberOfPages = Math.ceil(scope.stTotalItems/scope.stItemsByPage);
+          if (scope.ywTotalItems) {
+            paginationState.numberOfPages = Math.ceil(scope.ywTotalItems/scope.ywItemsByPage);
           }
           var start = 1;
           var end;
@@ -450,12 +450,12 @@ ng.module('smart-table')
           scope.totalItemCount = paginationState.totalItemCount;
           // scope.currentPage = Math.floor(paginationState.start / paginationState.number) + 1;
           scope.currentPage = scope.tempCurrentPage;
-          start = Math.max(start, scope.currentPage - Math.abs(Math.floor(scope.stDisplayedPages / 2)));
-          end = start + scope.stDisplayedPages;
+          start = Math.max(start, scope.currentPage - Math.abs(Math.floor(scope.ywDisplayedPages / 2)));
+          end = start + scope.ywDisplayedPages;
 
           if (end > paginationState.numberOfPages) {
             end = paginationState.numberOfPages + 1;
-            start = Math.max(1, end - scope.stDisplayedPages);
+            start = Math.max(1, end - scope.ywDisplayedPages);
           }
 
           scope.pages = [];
@@ -466,7 +466,7 @@ ng.module('smart-table')
           }
 
           if (prevPage !== scope.currentPage) {
-            scope.stPageChange({newPage: scope.currentPage});
+            scope.ywPageChange({newPage: scope.currentPage});
           }
         }
 
@@ -476,35 +476,35 @@ ng.module('smart-table')
         }, redraw, true);
 
         //scope --> table state  (--> view)
-        scope.$watch('stItemsByPage', function (newValue, oldValue) {
+        scope.$watch('ywItemsByPage', function (newValue, oldValue) {
           if (newValue !== oldValue) {
             scope.selectPage(1);
           }
         });
 
-        scope.$watch('stDisplayedPages', redraw);
+        scope.$watch('ywDisplayedPages', redraw);
 
         //view -> table state
         scope.selectPage = function (page) {
           if (page > 0 && page <= scope.numPages) {
             scope.tempCurrentPage = page;
-            ctrl.slice(((page - 1) % 10) * scope.stItemsByPage, scope.stItemsByPage);
+            ctrl.slice(((page - 1) % 10) * scope.ywItemsByPage, scope.ywItemsByPage);
           }
         };
 
         if (!ctrl.tableState().pagination.number) {
-          ctrl.slice(0, scope.stItemsByPage);
+          ctrl.slice(0, scope.ywItemsByPage);
         }
       }
     };
   }]);
 
-ng.module('smart-table')
-  .directive('stPipe', ['stConfig', '$timeout', function (config, $timeout) {
+ng.module('yw-table')
+  .directive('ywPipe', ['ywConfig', '$timeout', function (config, $timeout) {
     return {
-      require: 'stTable',
+      require: 'ywTable',
       scope: {
-        stPipe: '='
+        ywPipe: '='
       },
       link: {
 
@@ -512,7 +512,7 @@ ng.module('smart-table')
 
           var pipePromise = null;
 
-          if (ng.isFunction(scope.stPipe)) {
+          if (ng.isFunction(scope.ywPipe)) {
             ctrl.preventPipeOnWatch();
             ctrl.pipe = function () {
 
@@ -521,7 +521,7 @@ ng.module('smart-table')
               }
 
               pipePromise = $timeout(function () {
-                scope.stPipe(ctrl.tableState(), ctrl);
+                scope.ywPipe(ctrl.tableState(), ctrl);
               }, config.pipe.delay);
 
               return pipePromise;
