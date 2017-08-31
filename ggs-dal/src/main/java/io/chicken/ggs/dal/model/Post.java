@@ -1,6 +1,10 @@
 package io.chicken.ggs.dal.model;
 
-public class Post {
+import java.io.Serializable;
+
+public class Post implements Serializable {
+    private static final long serialVersionUID = -9132709922943299800L;
+
     private Long id;
 
     private String postcode;
@@ -49,5 +53,16 @@ public class Post {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", postcode='" + postcode + '\'' +
+                ", name='" + name + '\'' +
+                ", departcode='" + departcode + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }

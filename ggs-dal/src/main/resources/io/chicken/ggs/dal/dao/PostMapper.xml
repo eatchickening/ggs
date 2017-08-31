@@ -28,10 +28,10 @@
     delete from post
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="io.chicken.ggs.dal.model.Post" >
-    insert into post (id, postcode, name, 
+  <insert id="insert" parameterType="io.chicken.ggs.dal.model.Post" useGeneratedKeys="true" keyProperty="id">
+    insert into post (postcode, name,
       departcode, remark)
-    values (#{id,jdbcType=BIGINT}, #{postcode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+    values (#{postcode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
       #{departcode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.Post" >

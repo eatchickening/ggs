@@ -34,9 +34,7 @@ public class TeacherController {
 
   @ApiOperation(value="获取教师列表", notes="默认参数为空\"\"")
   @ApiImplicitParams({
-          @ApiImplicitParam(name = "name", value = "教师姓名", required = true, dataType = "String"),
-          @ApiImplicitParam(name = "pageNum", value = "单页个数", required = true, dataType = "String"),
-          @ApiImplicitParam(name = "pageSize", value = "页数", required = true, dataType = "String"),
+          @ApiImplicitParam(name = "name", value = "教师姓名", required = false, dataType = "String")
   })
   @RequestMapping(value="/list", method = RequestMethod.POST)
   public Result teacherList(@RequestBody TeacherQueryParam teaParam){

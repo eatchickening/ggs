@@ -3,20 +3,20 @@
         <div class="col-md-12">
             <div ba-panel ba-panel-class="with-scroll">
                 <div class="horizontal-scroll">
-                    <table class="table table-hover" st-safe-src="userList" st-table="displayed">
+                    <table class="table table-hover" yw-safe-src="userList" yw-table="displayed">
                         <thead>
                             <tr>
                                 <th></th>
-                                <th><input st-search="account" placeholder="搜索帐号" class="input-sm form-control search-input"
+                                <th><input yw-search="account" placeholder="搜索帐号" class="input-sm form-control search-input"
                                         type="search" /></th>
-                                <th><input st-search="username" placeholder="搜索昵称" class="input-sm form-control search-input"
+                                <th><input yw-search="username" placeholder="搜索昵称" class="input-sm form-control search-input"
                                         type="search" /></th>
-                                <th><input st-search="organName" placeholder="搜索机构" class="input-sm form-control search-input"
+                                <th><input yw-search="organName" placeholder="搜索机构" class="input-sm form-control search-input"
                                         type="search" /></th>
-                                <th><input st-search="departName" placeholder="搜索部门" class="input-sm form-control search-input" type="search"
+                                <th><input yw-search="departName" placeholder="搜索部门" class="input-sm form-control search-input" type="search"
                                     />
                                 </th>
-                                <th><input st-search="postName" placeholder="搜索岗位" class="input-sm form-control search-input" type="search"
+                                <th><input yw-search="postName" placeholder="搜索岗位" class="input-sm form-control search-input" type="search"
                                     />
                                 </th>
                                 <th>
@@ -24,12 +24,12 @@
                                 </th>
                             </tr>
                             <tr class="sortable ">
-                                <th class="table-id" st-sort="id" st-sort-default="true">#</th>
-                                <th st-sort="account">账号</th>
-                                <th st-sort="username">昵称</th>
-                                <th st-sort="organName">机构</th>
-                                <th st-sort="departName">部门</th>
-                                <th st-sort="postName">岗位</th>
+                                <th class="table-id" yw-sort="id" yw-sort-default="true">#</th>
+                                <th yw-sort="account">账号</th>
+                                <th yw-sort="username">昵称</th>
+                                <th yw-sort="organName">机构</th>
+                                <th yw-sort="departName">部门</th>
+                                <th yw-sort="postName">岗位</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -39,7 +39,7 @@
                                 <td>{{item.account}}</td>
                                 <td>{{item.username}}</td>
                                 <td>{{item.organName}}</td>
-                                <td>{{item.departName}}</a></td>
+                                <td>{{item.departName}}</td>
                                 <td>{{item.postName}}</td>
                                 <td>
                                     <div class="btn-group" uib-dropdown dropdown-append-to-body>
@@ -63,7 +63,7 @@
                                         <select class="page-size" title="Rows on page" ng-model="pageSize" ng-options="pageSize for pageSize in pageSizes" ng-change="changePageSize(pageSize)"></select>
                                         <span class="page-items">&nbsp条</span>
                                     </div>
-                                    <div st-pagination="" st-total-items="totalItems" st-items-by-page="pageSize" st-displayed-pages="5" st-page-change="pageChange(newPage)" st-template="app/pages/common/pagination.html"></div>
+                                    <div yw-pagination="" yw-total-items="totalItems" yw-items-by-page="pageSize" yw-displayed-pages="5" yw-page-change="pageChange(newPage)" yw-template="app/pages/common/pagination.html"></div>
                                 </td>
                             </tr>
                         </tfoot>

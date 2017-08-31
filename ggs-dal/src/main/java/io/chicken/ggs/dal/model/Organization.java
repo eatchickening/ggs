@@ -1,6 +1,10 @@
 package io.chicken.ggs.dal.model;
 
-public class Organization {
+import java.io.Serializable;
+
+public class Organization implements Serializable {
+    private static final long serialVersionUID = 6382528199140572450L;
+
     private Long id;
 
     private String organcode;
@@ -49,5 +53,16 @@ public class Organization {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Organization{" +
+                "id=" + id +
+                ", organcode='" + organcode + '\'' +
+                ", name='" + name + '\'' +
+                ", areacode='" + areacode + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }

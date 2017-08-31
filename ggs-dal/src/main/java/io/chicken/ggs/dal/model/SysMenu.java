@@ -1,6 +1,10 @@
 package io.chicken.ggs.dal.model;
 
-public class SysMenu {
+import java.io.Serializable;
+
+public class SysMenu implements Serializable {
+    private static final long serialVersionUID = 2845012887735192409L;
+
     private Integer id;
 
     private Integer parentId;
@@ -79,5 +83,19 @@ public class SysMenu {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "SysMenu{" +
+                "id=" + id +
+                ", parentId=" + parentId +
+                ", name='" + name + '\'' +
+                ", angularState='" + angularState + '\'' +
+                ", url='" + url + '\'' +
+                ", perms='" + perms + '\'' +
+                ", orderNum=" + orderNum +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }
