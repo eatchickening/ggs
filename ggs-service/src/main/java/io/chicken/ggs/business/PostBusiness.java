@@ -15,4 +15,9 @@ import java.util.List;
 public interface PostBusiness {
 
     Result<List<Post>> queryByDepartcode(String departcode);
+
+
+    Result<Long> save(Post post);
+
+    Result<Boolean> delete(Long id);
 }

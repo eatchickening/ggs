@@ -54,4 +54,15 @@ public class Post implements Serializable {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", postcode='" + postcode + '\'' +
+                ", name='" + name + '\'' +
+                ", departcode='" + departcode + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
+    }
 }

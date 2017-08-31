@@ -34,4 +34,21 @@ public class PostServiceImpl implements PostService {
     public List<Post> queryByDepartcode(String departcode) {
         return postMapper.queryByDepartcode(departcode);
     }
+
+
+    /**
+     * 添加岗位
+     * @param post
+     * @return 返回自增主键
+     */
+    @Override
+    public Long save(Post post) {
+        postMapper.insert(post);
+        return post.getId();
+    }
+
+    @Override
+    public void delete(Long id) {
+        postMapper.deleteByPrimaryKey(id);
+    }
 }

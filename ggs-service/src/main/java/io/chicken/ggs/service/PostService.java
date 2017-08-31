@@ -14,4 +14,9 @@ import java.util.List;
 public interface PostService {
 
     List<Post> queryByDepartcode(String departcode);
+
+
+    Long save(Post post);
+
+    void delete(Long id);
 }
