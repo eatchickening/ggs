@@ -75,9 +75,9 @@
                 $http({
                     method: 'POST',
                     url: 'http://localhost:8080/ggs/dictionary/areaDetail',
-                    data: {
+                    data: bizcode !== ''?{
                         bizcode: bizcode
-                    }
+                    }:{}
                 }).then(function(response) {
                     deferred.resolve(response.data);
                 }).catch(function(response) {

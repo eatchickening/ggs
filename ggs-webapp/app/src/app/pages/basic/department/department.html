@@ -1,1 +1,43 @@
-<h1>部门和岗位设置</h1>
+<div class="widgets">
+    <div class="row">
+        <div class="col-md-12">
+            <div ba-panel ba-panel-class="with-scroll">
+                <div class="horizontal-scroll">
+                    <table class="table table-hover" st-safe-src="organList" st-table="displayed">
+                        <thead>
+                            <tr>
+                                <th colspan="3">
+                                    <div class="text-right"><button type="button" class="btn btn-info" ng-click="edit()">编辑部门及岗位</button></div>
+                                </th>
+                            </tr>
+                            <tr class="sortable">
+                                <th st-sort="organName">机构</th>
+                                <th st-sort="departName">部门</th>
+                                <th st-sort="postName">岗位</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in displayed">
+                                <td>{{item.organName}}</td>
+                                <td>{{item.departName}}</td>
+                                <td>{{item.postName}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" class="text-center">
+                                    <div style="float: left">
+                                        <span class="page-items">共{{totalItems}}条&nbsp&nbsp每页显示&nbsp</span>
+                                        <select class="page-size" title="Rows on page" ng-model="pageSize" ng-options="pageSize for pageSize in pageSizes"></select>
+                                        <span class="page-items">&nbsp条</span>
+                                    </div>
+                                    <div st-pagination="" st-total-items="totalItems" st-items-by-page="pageSize" st-displayed-pages="5" st-template="app/pages/common/pagination.html"></div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

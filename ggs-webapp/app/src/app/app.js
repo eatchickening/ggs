@@ -7,6 +7,7 @@ angular.module('chicken', [
   'ui.router',
   'ngTouch',
   'toastr',
+  'yw-table',
   'smart-table',
   "xeditable",
   'ui.slimscroll',
