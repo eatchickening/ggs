@@ -14,4 +14,8 @@ import java.util.List;
 public interface DepartService {
 
     List<Depart> queryByOrgancode(String organcode);
+
+    Long save(Depart depart);
+
+    void delete(Long id);
 }

@@ -1,6 +1,10 @@
 package io.chicken.ggs.dal.model;
 
-public class Depart {
+import java.io.Serializable;
+
+public class Depart implements Serializable {
+    private static final long serialVersionUID = 7522962744996835368L;
+
     private Long id;
 
     private String departcode;
@@ -49,5 +53,16 @@ public class Depart {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Depart{" +
+                "id=" + id +
+                ", departcode='" + departcode + '\'' +
+                ", name='" + name + '\'' +
+                ", organcode='" + organcode + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }

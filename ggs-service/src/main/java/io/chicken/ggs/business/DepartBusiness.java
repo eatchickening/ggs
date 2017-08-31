@@ -15,4 +15,9 @@ import java.util.List;
 public interface DepartBusiness {
 
     Result<List<Depart>> queryByOrgancode(String organcode);
+
+    Result<Long> save(Depart depart);
+
+    Result<Boolean> delete(Long id);
+
 }

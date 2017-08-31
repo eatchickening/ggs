@@ -34,4 +34,20 @@ public class DepartServiceImpl implements DepartService {
     public List<Depart> queryByOrgancode(String organcode) {
         return departMapper.queryByOrgancode(organcode);
     }
+
+    /**
+     * 添加部门
+     * @param depart
+     * @return 返回自增主键
+     */
+    @Override
+    public Long save(Depart depart) {
+        departMapper.insert(depart);
+        return depart.getId();
+    }
+
+    @Override
+    public void delete(Long id) {
+        departMapper.deleteByPrimaryKey(id);
+    }
 }

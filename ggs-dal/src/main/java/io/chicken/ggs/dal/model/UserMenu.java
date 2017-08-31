@@ -1,6 +1,10 @@
 package io.chicken.ggs.dal.model;
 
-public class UserMenu {
+import java.io.Serializable;
+
+public class UserMenu implements Serializable {
+    private static final long serialVersionUID = -2730353417764302901L;
+
     private Long id;
 
     private String userAccount;
@@ -29,5 +33,14 @@ public class UserMenu {
 
     public void setMenuId(String menuId) {
         this.menuId = menuId == null ? null : menuId.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "UserMenu{" +
+                "id=" + id +
+                ", userAccount='" + userAccount + '\'' +
+                ", menuId='" + menuId + '\'' +
+                '}';
     }
 }
