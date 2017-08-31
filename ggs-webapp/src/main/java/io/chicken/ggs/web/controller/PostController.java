@@ -32,8 +32,6 @@ public class PostController {
 
     @Autowired
     private PostBusiness postBusiness;
-    @Autowired
-    private UserInfoBusiness userInfoBusiness;
 
 
     @ApiOperation(value = "获取部门下的岗位")
