@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by nyh on 8/31/17.
  */
-public interface AppraiseBussiness {
+public interface AppraiseBusiness {
 
     Result<List<Appraise>> queryList(String appraiseName, Integer pageNum, Integer pageSize);
 }

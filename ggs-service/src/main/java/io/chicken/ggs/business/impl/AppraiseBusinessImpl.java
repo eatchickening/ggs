@@ -1,6 +1,6 @@
 package io.chicken.ggs.business.impl;
 
-import io.chicken.ggs.business.AppraiseBussiness;
+import io.chicken.ggs.business.AppraiseBusiness;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.dal.model.Appraise;
@@ -8,6 +8,7 @@ import io.chicken.ggs.service.AppraiseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +16,8 @@ import java.util.List;
 /**
  * Created by nyh on 8/31/17.
  */
-public class AppraiseBusinessImpl implements AppraiseBussiness {
+@Component("appraiseBusiness")
+public class AppraiseBusinessImpl implements AppraiseBusiness {
 
     private static final Logger logger = LoggerFactory.getLogger(AppraiseBusinessImpl.class);
 
@@ -23,6 +25,9 @@ public class AppraiseBusinessImpl implements AppraiseBussiness {
     private AppraiseService appraiseService;
 
     public Result<List<Appraise>> queryList(String appraiseName, Integer pageNum, Integer pageSize) {
+        if (appraiseName == null) {
+            appraiseName = "";
+        }
         //查询列表数据
         List<Appraise> appraiseList = null;
         long total=0;

@@ -27,10 +27,10 @@
               and ap.appraisename like concat('%', #{appraiseName}, '%')
           </if>
       </where>
-    group by ap.appraisename, ap.appraisecode, ap.create_time, ap.appraiselevel, ap.remark, ap.create_time
-    <if test="start != null and last != null">
-        limit #{start}, #{last}
-    </if>
+      group by ap.appraisename, ap.appraisecode, ap.create_time, ap.appraiselevel, ap.remark, ap.create_time
+      <if test="start != null and last != null">
+          limit #{start}, #{last}
+      </if>
   </select>
   <select id = "queryTotal" resultType="java.lang.Long">
       select count(appraisecode)
