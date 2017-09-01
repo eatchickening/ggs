@@ -14,9 +14,36 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, appraisedate, appraisename, appraisecode, appraiselevel, appraisenumber, appraiseschool, 
+    id, appraisedate, appraisename, appraisecode, appraiselevel, appraisenumber, appraiseschool,
     appraisequota, remark, create_time
   </sql>
+  <select id = "queryList" resultMap="BaseResultMap">
+      select ap.create_time appraisedate, ap.appraisename, ap.appraisecode, ap.appraiselevel,
+      count(distinct(aw.awardcode)) appraisenumber, count(distinct(aw.schoolcode)) appraiseschool,
+      count(schoolquota) appraisequota, ap.remark, ap.create_time
+      from (appraise ap, award_school aw)
+      <where> ap.appraisecode=aw.appraisecode
+          <if test="appraiseName != null or appraiseName !=''">
+              and ap.appraisename like concat('%', #{appraiseName}, '%')
+          </if>
+      </where>
+    group by ap.appraisename, ap.appraisecode, ap.create_time, ap.appraiselevel, ap.remark, ap.create_time
+    <if test="start != null and last != null">
+        limit #{start}, #{last}
+    </if>
+  </select>
+  <select id = "queryTotal" resultType="java.lang.Long">
+      select count(appraisecode)
+      from appraise
+      <where>
+          <if test="appraiseName != null or appraiseName !=''">
+              appraisename like concat('%', #{appraiseName}, '%')
+          </if>
+      </where>
+      <if test="start != null and last != null">
+          limit #{start}, #{last}
+      </if>
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
