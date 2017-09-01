@@ -47,3 +47,23 @@ select null, null, '', (select id from `sysmenu` where angular_state = 'root.inf
 union all
 select null, null, '', (select id from `sysmenu` where angular_state = 'root.info'),'root.info.school', '学校信息查询', null from dual;
 
+-- 评优表信息
+INSERT INTO `appraise` VALUES ('1', '20171005', '装逼大会', '1', '群级', null, null, null, null, '2017-08-31 20:07:44');
+
+INSERT INTO `award_quota` VALUES ('1', '1', '1', '1', null, null, '2017-08-31 20:23:07');
+
+INSERT INTO `award_school` VALUES ('1', '1', '1', 'jialidun', '1', null, '2017-08-31 20:30:10');
+INSERT INTO `award_school` VALUES ('2', '1', '1', 'shannongnongda', '1', null, '2017-08-31 20:30:10');
+INSERT INTO `award_school` VALUES ('3', '1', '2', 'jialidun', '1', null, '2017-08-31 20:30:12');
+INSERT INTO `award_school` VALUES ('4', '1', '2', 'shannongnongda', '1', null, '2017-08-31 20:30:30');
+INSERT INTO `award_school` VALUES ('5', '1', '3', 'jialidun', '1', null, '2017-08-31 20:30:30');
+INSERT INTO `award_school` VALUES ('6', '1', '3', 'shannongnongda', '2', null, '2017-08-31 20:30:30');
+INSERT INTO `award_school` VALUES ('7', '1', '4', 'jialidun', '1', null, '2017-08-31 20:30:32');
+
+INSERT INTO `awardinfo` VALUES ('1', '1', '晒车', '1', '群级', null, '2017-08-31 20:24:01');
+INSERT INTO `awardinfo` VALUES ('2', '2', '晒房', '2', '群级', null, '2017-08-31 20:24:01');
+INSERT INTO `awardinfo` VALUES ('3', '3', '晒户口', '3', '群级', null, '2017-08-31 20:24:01');
+INSERT INTO `awardinfo` VALUES ('4', '4', '晒娃', '4', '群级', null, '2017-08-31 20:24:01');
+INSERT INTO `awardinfo` VALUES ('5', '5', '晒钱', '5', '群级', null, '2017-08-31 20:24:02');
+INSERT INTO `awardinfo` VALUES ('6', '6', '晒老婆', '6', '群级', null, '2017-08-31 20:24:02');
+INSERT INTO `awardinfo` VALUES ('7', '7', '晒装备', '7', '群级', null, '2017-08-31 20:24:06');

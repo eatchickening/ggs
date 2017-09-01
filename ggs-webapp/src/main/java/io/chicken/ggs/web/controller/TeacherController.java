@@ -28,7 +28,7 @@ import java.util.Map;
 @Api(description = "查询教师列表")
 @RequestMapping("/ggs/teacher")
 public class TeacherController {
-  private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+  private static final Logger logger = LoggerFactory.getLogger(TeacherController.class);
   @Autowired
   private TeacherBusiness teacherBusiness;
 
