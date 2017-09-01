@@ -7,9 +7,6 @@ import io.chicken.ggs.business.PostBusiness;
 import io.chicken.ggs.business.UserInfoBusiness;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
-import io.chicken.ggs.common.vo.UserInfoQueryParam;
-import io.chicken.ggs.common.vo.UserInfoVO;
-import io.chicken.ggs.dal.model.Depart;
 import io.chicken.ggs.dal.model.Post;
 import io.chicken.ggs.dal.model.UserInfo;
 import io.chicken.ggs.service.PostService;
@@ -97,7 +94,7 @@ public class PostBusinessImpl implements PostBusiness {
             List<UserInfo> userInfoList = listResult.getData();
             for (UserInfo user : userInfoList) {
                 Result<Boolean> userDeleteResult = userInfoBusiness.delete(user.getId());
-                LOGGER.info(user.getAccount() + ", 删除结果：" + userDeleteResult.getData());
+                LOGGER.info(user.getAccount() + ", 用户删除结果：" + userDeleteResult.getData());
             }
 
             return new Result<>(true);

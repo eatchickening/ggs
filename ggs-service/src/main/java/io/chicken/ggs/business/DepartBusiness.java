@@ -18,6 +18,7 @@ public interface DepartBusiness {
 
     Result<Long> save(Depart depart);
 
-    Result<Boolean> delete(Long id);
+    Result<Boolean> delete(Depart depart);
 
+    Result<Depart> query(Long id);
 }

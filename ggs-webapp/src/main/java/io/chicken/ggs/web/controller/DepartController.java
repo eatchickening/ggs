@@ -61,7 +61,13 @@ public class DepartController {
     public Result<Boolean> delete(Long id) {
         LOGGER.info("delete() " + id);
 
-        return departBusiness.delete(id);
+        Result<Depart> departResult = departBusiness.query(id);
+        if (!departResult.isSuccess() || departResult.getData() == null) {
+            return new Result<>(departResult.getCode(), departResult.getMessage());
+        }
+
+        Depart depart = departResult.getData();
+        return departBusiness.delete(depart);
     }
 
 }

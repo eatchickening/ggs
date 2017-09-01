@@ -50,4 +50,9 @@ public class DepartServiceImpl implements DepartService {
     public void delete(Long id) {
         departMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public Depart query(Long id) {
+        return departMapper.selectByPrimaryKey(id);
+    }
 }

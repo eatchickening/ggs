@@ -4,9 +4,11 @@
 package io.chicken.ggs.business.impl;
 
 import io.chicken.ggs.business.DepartBusiness;
+import io.chicken.ggs.business.PostBusiness;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.dal.model.Depart;
+import io.chicken.ggs.dal.model.Post;
 import io.chicken.ggs.service.DepartService;
 import io.chicken.ggs.service.impl.DepartServiceImpl;
 import org.slf4j.Logger;
@@ -27,6 +29,8 @@ public class DepartBusinessImpl implements DepartBusiness {
 
     @Autowired
     private DepartService departService;
+    @Autowired
+    private PostBusiness postBusiness;
 
     @Override
     public Result<List<Depart>> queryByOrgancode(String organcode) {
@@ -55,19 +59,43 @@ public class DepartBusinessImpl implements DepartBusiness {
     }
 
     @Override
-    public Result<Boolean> delete(Long id) {
+    public Result<Boolean> delete(Depart depart) {
+        if (depart == null) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+
+        try {
+            departService.delete(depart.getId());
+
+            // 需要删除其下的岗位
+            Result<List<Post>> postResult = postBusiness.queryByDepartcode(depart.getDepartcode());
+            if (!postResult.isSuccess()) {
+                return new Result<>(postResult.getCode(), postResult.getMessage());
+            }
+            List<Post> postList = postResult.getData();
+            for (Post post : postList) {
+                Result<Boolean> postDeleteResult = postBusiness.delete(post);
+                LOGGER.info(post.getPostcode() + ", 岗位删除结果：" + postDeleteResult.getData());
+            }
+
+            return new Result<>(true);
+        } catch (Exception e) {
+            LOGGER.error(depart.getDepartcode() + "，删除部门异常：" + e.getMessage());
+            return new Result<>(ResultCode.DB_DELETE_FAIL);
+        }
+    }
+
+    @Override
+    public Result<Depart> query(Long id) {
         if (id == null) {
             return new Result<>(ResultCode.PARAMETER_EMPTY);
         }
 
         try {
-            // 是否需要删除其下的岗位和用户 todo
-
-            departService.delete(id);
-            return new Result<>(true);
+            return new Result<>(departService.query(id));
         } catch (Exception e) {
-            LOGGER.error(id + "，删除部门异常：" + e.getMessage());
-            return new Result<>(ResultCode.DB_DELETE_FAIL);
+            LOGGER.error(id + ", 查询部门异常：" + e.getMessage());
+            return new Result<>(ResultCode.DB_QUERY_FAIL);
         }
     }
 }

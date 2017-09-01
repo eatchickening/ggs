@@ -18,4 +18,6 @@ public interface DepartService {
     Long save(Depart depart);
 
     void delete(Long id);
+
+    Depart query(Long id);
 }
