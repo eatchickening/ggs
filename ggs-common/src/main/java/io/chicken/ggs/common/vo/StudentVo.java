@@ -1,6 +1,10 @@
 package io.chicken.ggs.common.vo;
 
-public class StudentVo {
+import java.io.Serializable;
+
+public class StudentVo implements Serializable{
+
+    private static final long serialVersionUID = 5956193832133631593L;
 
     private Integer pageNum = 1;
     private Integer pageSize = 10;

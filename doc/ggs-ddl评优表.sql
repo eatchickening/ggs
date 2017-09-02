@@ -84,6 +84,7 @@ CREATE TABLE AppraisedActivity (
     signEnddate  varchar(20)  COMMENT '活动报名截止日期',
     remark TEXT COMMENT '备注',
     activitystatus varchar(20)  COMMENT '活动状态 1：未开始 2进行中 3已结束',
+    creator varchar(40)  COMMENT '创建人',
     create_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评优活动表';

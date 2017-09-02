@@ -143,6 +143,30 @@ CREATE TABLE student (
     intellectual varchar(50) COMMENT '智育评估',
     physical varchar(50) COMMENT '体育评估',
     schoolcode varchar(50) COMMENT '学校编码',
+    classcode varchar(50) COMMENT '班级编码',
     remark varchar(500) COMMENT '备注',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='学生表';
+
+
+--  班级信息表
+DROP  TABLE  IF EXISTS classinfo;
+CREATE TABLE classinfo (
+    id bigint NOT NULL AUTO_INCREMENT,
+    classname  varchar(50) COMMENT '班级姓名',
+    schoolcode varchar(50) COMMENT '学校编码',
+    classcode varchar(50) COMMENT '班级编码',
+    remark varchar(500) COMMENT '备注',
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='班级信息表';
+
+--  班主任管理班级表
+DROP  TABLE  IF EXISTS managerclassinfo;
+CREATE TABLE managerclassinfo (
+    id bigint NOT NULL AUTO_INCREMENT,
+    teacherid  varchar(50) COMMENT '教师编号',
+    classcode varchar(50) COMMENT '班级编码',
+    schoolcode varchar(50) COMMENT '学校编码',
+    remark varchar(500) COMMENT '备注',
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='班主任管理班级表';
