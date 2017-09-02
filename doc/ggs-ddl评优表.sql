@@ -10,6 +10,7 @@ CREATE TABLE appraise (
     appraisenumber int  COMMENT '评优奖项',
     appraiseschool int  COMMENT '评优学校数量',
     appraisequota int  COMMENT '评优指标',
+    operator varchar(40) COMMENT '操作人',
     remark varchar(500) COMMENT '备注',
     create_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (id)
@@ -23,7 +24,7 @@ CREATE TABLE awardinfo (
     appraisecode varchar(40)  COMMENT '所属评优编码',
     awardname varchar(200)  COMMENT '奖项名称',
     awardcode varchar(40)  COMMENT '奖项编码',
-    awardlevel varchar(20)  COMMENT '奖项级别',
+    awardlevel  varchar(20)  COMMENT '奖项级别',
     remark varchar(500) COMMENT '备注',
     create_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (id)
@@ -36,7 +37,7 @@ CREATE TABLE award_school (
     appraisecode varchar(40)  COMMENT '所属评优编码',
     awardcode varchar(40)  COMMENT '奖项编码',
     schoolcode varchar(20)  COMMENT '学校代码',
-    schoolquota varchar(20)  COMMENT '学校指标',
+    schoolquota int  COMMENT '学校指标',
     remark varchar(500) COMMENT '备注',
     create_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (id)
