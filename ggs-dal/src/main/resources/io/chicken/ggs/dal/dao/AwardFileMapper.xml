@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="io.chicken.ggs.dal.dao.AwardFileMapper" >
+  <resultMap id="BaseResultMap" type="io.chicken.ggs.dal.model.AwardFile" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="appraisecode" property="appraisecode" jdbcType="VARCHAR" />
+    <result column="awardcode" property="awardcode" jdbcType="VARCHAR" />
+    <result column="filename" property="filename" jdbcType="VARCHAR" />
+    <result column="filetype" property="filetype" jdbcType="VARCHAR" />
+    <result column="filepath" property="filepath" jdbcType="VARCHAR" />
+    <result column="filedetail" property="filedetail" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, appraisecode, awardcode, filename, filetype, filepath, filedetail, remark, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from award_file
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from award_file
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="io.chicken.ggs.dal.model.AwardFile" >
+    insert into award_file (id, appraisecode, awardcode, 
+      filename, filetype, filepath, 
+      filedetail, remark, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{appraisecode,jdbcType=VARCHAR}, #{awardcode,jdbcType=VARCHAR}, 
+      #{filename,jdbcType=VARCHAR}, #{filetype,jdbcType=VARCHAR}, #{filepath,jdbcType=VARCHAR}, 
+      #{filedetail,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.AwardFile" >
+    insert into award_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appraisecode != null" >
+        appraisecode,
+      </if>
+      <if test="awardcode != null" >
+        awardcode,
+      </if>
+      <if test="filename != null" >
+        filename,
+      </if>
+      <if test="filetype != null" >
+        filetype,
+      </if>
+      <if test="filepath != null" >
+        filepath,
+      </if>
+      <if test="filedetail != null" >
+        filedetail,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="appraisecode != null" >
+        #{appraisecode,jdbcType=VARCHAR},
+      </if>
+      <if test="awardcode != null" >
+        #{awardcode,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="filetype != null" >
+        #{filetype,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="filedetail != null" >
+        #{filedetail,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="io.chicken.ggs.dal.model.AwardFile" >
+    update award_file
+    <set >
+      <if test="appraisecode != null" >
+        appraisecode = #{appraisecode,jdbcType=VARCHAR},
+      </if>
+      <if test="awardcode != null" >
+        awardcode = #{awardcode,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="filetype != null" >
+        filetype = #{filetype,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        filepath = #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="filedetail != null" >
+        filedetail = #{filedetail,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.chicken.ggs.dal.model.AwardFile" >
+    update award_file
+    set appraisecode = #{appraisecode,jdbcType=VARCHAR},
+      awardcode = #{awardcode,jdbcType=VARCHAR},
+      filename = #{filename,jdbcType=VARCHAR},
+      filetype = #{filetype,jdbcType=VARCHAR},
+      filepath = #{filepath,jdbcType=VARCHAR},
+      filedetail = #{filedetail,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
