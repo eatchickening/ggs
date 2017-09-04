@@ -3,6 +3,7 @@ package io.chicken.ggs.business;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.vo.AppraiseVo;
 import io.chicken.ggs.dal.model.Appraise;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface AppraiseBusiness {
     Result<List<Appraise>> queryList(String appraiseName, Integer pageNum, Integer pageSize);
 
     Result save(AppraiseVo appraiseVo);
+
+    Result savefile(String appraisecode,String awardcode, MultipartFile file);
 }

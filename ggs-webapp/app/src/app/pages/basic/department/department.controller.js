@@ -2,17 +2,67 @@
     'use strict';
 
     angular.module('chicken.pages.basic')
-        .controller('DepartmentCtrl', function ($scope, $uibModal, BasicService, toastr) {
+        .controller('DepartmentCtrl', function ($scope, $state, $uibModal, BasicService, toastr) {
 
             // list organ by page
-            var currentScope = 1;
-            var tempPageSize = 10;
+            function transformData(data) {
+                var organs = [];
+                data.forEach(function(area) {
+                    if (area.organVoList && area.organVoList.length > 0) {
+                        area.organVoList.forEach(function(organ) {
+                            if (organ.departVoList && organ.departVoList.length > 0){
+                                organ.departVoList.forEach(function(depart){
+                                    if (depart.post && depart.post.length > 0) {
+                                        depart.post.forEach(function(p){
+                                            organs.push({
+                                                areacode: area.areacode,
+                                                areaName: area.areaName,
+                                                organcode: organ.organcode,
+                                                organName: organ.organName,
+                                                departcode: depart.departcode,
+                                                departName: depart.departName,
+                                                postcode: p.postcode,
+                                                postName: p.postName
+                                            });
+                                        });
+                                    } else {
+                                        organs.push({
+                                            areacode: area.areacode,
+                                            areaName: area.areaName,
+                                            organcode: organ.organcode,
+                                            organName: organ.organName,
+                                            departcode: depart.departcode,
+                                            departName: depart.departName,
+                                        });
+                                    }
+                                });
+                            } else {
+                                organs.push({
+                                    areacode: area.areacode,
+                                    areaName: area.areaName,
+                                    organcode: organ.organcode,
+                                    organName: organ.organName
+                                });
+                            }
+                        });
+                    } else {
+                        organs.push({
+                            areacode: area.areacode,
+                            areaName: area.areaName
+                        });
+                    }
+                    
+                });
+                return organs;
+            }
 
+            var organs = '';
             function getOrganList () {
                 BasicService.listAreaDetail('').then(function(data) {
                     if (data.code === 0 && data.data && data.data instanceof Array) {
-                        $scope.organList = data.data;
-                        $scope.totalItems = data.total;
+                        organs = data.data;
+                        $scope.organList = transformData(data.data);
+                        $scope.totalItems = $scope.organList.length;
                     }
                 }).catch(function(err) {
                     toastr.error(err);
@@ -26,28 +76,9 @@
             }
 
             init();
-            
-            $scope.pageChange = function (p) {
-                if (Math.ceil(p/10)!==currentScope) {
-                    $scope.organList = [];
-                    var pageNum = Math.floor(p/10) * 10 + 1;
-                    if (p % 10 === 0) {
-                        pageNum = (Math.floor(p/10) - 1) * 10 + 1;
-                    }
-                    var pageSize = tempPageSize;
-                    getOrganList(pageNum, pageSize);
-                    currentScope = Math.ceil(p/10);
-                }
-            };
-
-            $scope.changePageSize = function(pageSize){
-                $scope.organList = [];
-                tempPageSize = pageSize;
-                getOrganList(1, pageSize);
-            };
 
             $scope.edit = function () {
-
+                $state.go('root.basic.edit', {organs: organs});
             };
 
         });

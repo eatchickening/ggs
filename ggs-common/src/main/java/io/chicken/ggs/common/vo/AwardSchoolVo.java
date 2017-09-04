@@ -4,17 +4,11 @@ import java.util.Date;
 
 public class AwardSchoolVo {
 
-
-
     private String schoolcode;
 
     private Integer schoolquota;
 
     private String remark;
-
-    private Date createTime;
-
-
 
     public String getSchoolcode() {
         return schoolcode;
@@ -40,13 +34,7 @@ public class AwardSchoolVo {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 
     @Override
     public String toString() {
@@ -54,7 +42,7 @@ public class AwardSchoolVo {
                 ", schoolcode='" + schoolcode + '\'' +
                 ", schoolquota=" + schoolquota +
                 ", remark='" + remark + '\'' +
-                ", createTime=" + createTime +
+
                 '}';
     }
 }

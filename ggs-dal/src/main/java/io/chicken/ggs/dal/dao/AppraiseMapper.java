@@ -10,7 +10,7 @@ public interface AppraiseMapper {
 
     int insert(Appraise record);
 
-    int insertSelective(Appraise record);
+    long insertSelective(Appraise record);
 
     Appraise selectByPrimaryKey(Long id);
 
