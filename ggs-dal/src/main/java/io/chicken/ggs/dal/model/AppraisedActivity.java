@@ -1,8 +1,11 @@
 package io.chicken.ggs.dal.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AppraisedActivity {
+public class AppraisedActivity implements Serializable {
+    private static final long serialVersionUID = -4432074529310081852L;
+
     private Long id;
 
     private String activityName;
@@ -111,5 +114,22 @@ public class AppraisedActivity {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "AppraisedActivity{" +
+                "id=" + id +
+                ", activityName='" + activityName + '\'' +
+                ", appraiseId=" + appraiseId +
+                ", beginDate=" + beginDate +
+                ", endDate=" + endDate +
+                ", signEndDate=" + signEndDate +
+                ", activityStatus=" + activityStatus +
+                ", creator='" + creator + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }
