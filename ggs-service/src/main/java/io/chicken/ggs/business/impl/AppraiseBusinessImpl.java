@@ -16,7 +16,9 @@ import io.chicken.ggs.service.AppraiseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,6 +36,8 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
     @Autowired
     private AppraiseService appraiseService;
 
+    @Value(value="file.basepath")
+    private String storefile;
     public Result<List<Appraise>> queryList(String appraiseName, Integer pageNum, Integer pageSize) {
         if (appraiseName == null) {
             appraiseName = "";
@@ -66,11 +70,9 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
         //保存评优表
         Appraise appraise=new Appraise();
         appraise.setAppraisedate(DateUtil.getCurrentTime("yyyy-MM-dd"));
-        appraise.setAppraisecode(appraiseVo.getAppraisecode());
         appraise.setAppraisename(appraiseVo.getAppraisename());
         appraise.setAppraiselevel(appraiseVo.getAppraiselevel());
         appraise.setCreateTime(new Date());
-        appraiseService.save(appraise);
         //保存奖项信息表
         List<AwardInfo> awardInfolist=new ArrayList<AwardInfo>();
 
@@ -85,8 +87,6 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
         for(AwardInfoVo awardInfoVo:awardInfoVoList)
         {
             AwardInfo awardInfo=new AwardInfo();
-            awardInfo.setAppraisecode(appraiseVo.getAppraisecode());
-            awardInfo.setAwardcode(awardInfoVo.getAwardcode());
             awardInfo.setAwardname(awardInfoVo.getAwardname());
             awardInfo.setAwardlevel( awardInfoVo.getAwardlevel());
             awardInfo.setCreateTime(new Date());
@@ -96,7 +96,6 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
             for(AwardSchoolVo awardSchoolVo:awardSchoolList)
             {
                 AwardSchool awardSchool=new AwardSchool();
-                awardSchool.setAppraisecode(appraiseVo.getAppraisecode());
                 awardSchool.setAwardcode(awardInfo.getAwardcode());
                 awardSchool.setCreateTime(new Date());
                 awardSchool.setSchoolcode(awardSchoolVo.getSchoolcode());
@@ -108,7 +107,6 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
             for(AwardQuotaVo awardQuotaVo:awardQuotaVoList)
             {
                 AwardQuota awardQuota=new AwardQuota();
-                awardQuota.setAppraisecode(appraiseVo.getAppraisecode());
                 awardQuota.setAwardcode(awardInfo.getAwardcode());
                 awardQuota.setCreateTime(new Date());
                 awardQuota.setAwardquota(awardQuotaVo.getAwardquota());
@@ -117,9 +115,21 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
                 awardQuotalist.add(awardQuota);
             }
         }
+        appraiseService.save(appraise);
         appraiseService.saveAwardInfo(awardInfolist);
         appraiseService.saveAwardQuotoInfo(awardQuotalist);
         appraiseService.saveAwardSchoolInfo(awardSchoollist);
-        return null;
+        Result result=  new Result<>(ResultCode.SUCCESS);
+        return result;
+    }
+
+    @Override
+    public Result savefile(String appraisecode, String awardcode, MultipartFile file) {
+        if (awardcode == null || awardcode.isEmpty()||appraisecode == null || appraisecode.isEmpty()||file == null ) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+
+        Result result=  new Result<>(ResultCode.SUCCESS);
+        return result;
     }
 }

@@ -45,8 +45,8 @@ public class AppraiseServiceImpl implements AppraiseService {
     }
 
     @Override
-    public void save(Appraise appraise) {
-        appraiseMapper.insertSelective(appraise);
+    public long save(Appraise appraise) {
+        return appraiseMapper.insertSelective(appraise);
     }
 
     @Override

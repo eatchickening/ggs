@@ -7,7 +7,6 @@ public class AwardInfoVo {
 
     private String awardname;
 
-    private String awardcode;
 
     private String awardlevel;
 
@@ -27,13 +26,7 @@ public class AwardInfoVo {
         this.awardname = awardname;
     }
 
-    public String getAwardcode() {
-        return awardcode;
-    }
 
-    public void setAwardcode(String awardcode) {
-        this.awardcode = awardcode;
-    }
 
     public String getAwardlevel() {
         return awardlevel;
@@ -79,7 +72,6 @@ public class AwardInfoVo {
     public String toString() {
         return "AwardInfoVo{" +
                 "awardname='" + awardname + '\'' +
-                ", awardcode='" + awardcode + '\'' +
                 ", awardlevel='" + awardlevel + '\'' +
                 ", remark='" + remark + '\'' +
                 ", awardSchoolList=" + awardSchoolList +

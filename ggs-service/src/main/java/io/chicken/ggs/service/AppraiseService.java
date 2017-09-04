@@ -16,7 +16,7 @@ public interface AppraiseService {
 
     long queryTotal(String appraiseName, Integer pageNum, Integer pageSize);
 
-    void save(Appraise appraise);
+    long save(Appraise appraise);
     void saveAwardInfo(List<AwardInfo> awardInfolist);
 
     void saveAwardSchoolInfo(List<AwardSchool> awardSchoollist);

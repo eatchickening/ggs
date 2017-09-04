@@ -11,7 +11,6 @@ public class AppraiseVo {
 
     private String appraisename;
 
-    private String appraisecode;
 
     private String appraiselevel;
 
@@ -33,13 +32,6 @@ public class AppraiseVo {
         this.appraisename = appraisename;
     }
 
-    public String getAppraisecode() {
-        return appraisecode;
-    }
-
-    public void setAppraisecode(String appraisecode) {
-        this.appraisecode = appraisecode;
-    }
 
     public String getAppraiselevel() {
         return appraiselevel;
@@ -62,7 +54,6 @@ public class AppraiseVo {
         return "AppraiseVo{" +
                 "appraisedate='" + appraisedate + '\'' +
                 ", appraisename='" + appraisename + '\'' +
-                ", appraisecode='" + appraisecode + '\'' +
                 ", appraiselevel='" + appraiselevel + '\'' +
                 ", awardInfoList=" + awardInfoList +
                 '}';

@@ -76,7 +76,7 @@
       #{appraiseschool,jdbcType=INTEGER}, #{appraisequota,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.Appraise" >
+  <insert id="insertSelective"   parameterType="io.chicken.ggs.dal.model.Appraise" useGeneratedKeys="true" keyProperty="id">
     insert into appraise
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
