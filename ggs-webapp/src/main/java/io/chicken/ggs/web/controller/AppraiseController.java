@@ -51,7 +51,7 @@ public class AppraiseController {
     @ApiOperation(value = "评优奖项文件保存")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "appraisename", value = "评优名称", required = true, dataType = "String", paramType = "form"),
-            @ApiImplicitParam(name = "awardname", value = "每页显示个数", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "awardname", value = "奖项名称", required = true, dataType = "String", paramType = "form"),
     })
     @RequestMapping(value = "/savefile", method = RequestMethod.POST)
     @ResponseBody
