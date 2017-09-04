@@ -6,11 +6,12 @@
                     <table class="table table-hover" st-safe-src="organList" st-table="displayed">
                         <thead>
                             <tr>
-                                <th colspan="3">
+                                <th colspan="4">
                                     <div class="text-right"><button type="button" class="btn btn-info" ng-click="edit()">编辑部门及岗位</button></div>
                                 </th>
                             </tr>
                             <tr class="sortable">
+                                <th st-sort="areaName">区域</th>
                                 <th st-sort="organName">机构</th>
                                 <th st-sort="departName">部门</th>
                                 <th st-sort="postName">岗位</th>
@@ -18,6 +19,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="item in displayed">
+                                <td>{{item.areaName}}</td>
                                 <td>{{item.organName}}</td>
                                 <td>{{item.departName}}</td>
                                 <td>{{item.postName}}</td>

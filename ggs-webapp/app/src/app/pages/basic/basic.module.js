@@ -28,6 +28,14 @@
                 sidebarMeta: {
                     order: 2
                 }
+            }).state('root.basic.edit', {
+                url: '/department/edit',
+                templateUrl: 'app/pages/basic/department/edit.html',
+                title: '编辑部门及岗位',
+                controller: 'DepartEditCtrl',
+                params: {
+                    organs: null
+                }
             });
     }
 
