@@ -18,4 +18,6 @@ public interface AppraisedActivityService {
 
     Long queryTotal(AppraisedActivityQueryParam param);
 
+    Long save(AppraisedActivity appraisedActivity);
+
 }

@@ -45,4 +45,11 @@ public class AppraisedActivityServiceImpl implements AppraisedActivityService {
         LOGGER.info("查询活动的数量, param  = " + param);
         return appraisedActivityMapper.queryTotal(param);
     }
+
+    @Override
+    public Long save(AppraisedActivity appraisedActivity) {
+        LOGGER.info("save(), param = " + appraisedActivity);
+        appraisedActivityMapper.insertSelective(appraisedActivity);
+        return appraisedActivity.getId();
+    }
 }

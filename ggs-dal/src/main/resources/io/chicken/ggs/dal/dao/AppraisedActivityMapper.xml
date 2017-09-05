@@ -55,21 +55,18 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="io.chicken.ggs.dal.model.AppraisedActivity" >
-    insert into Appraised_Activity (id, activity_name, appraise_id, 
+    insert into Appraised_Activity (activity_name, appraise_id,
       begin_date, end_date, sign_End_date, 
-      activity_status, creator, create_time, 
+      activity_status, creator,
       update_time, remark)
-    values (#{id,jdbcType=BIGINT}, #{activityName,jdbcType=VARCHAR}, #{appraiseId,jdbcType=BIGINT}, 
+    values (#{activityName,jdbcType=VARCHAR}, #{appraiseId,jdbcType=BIGINT},
       #{beginDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, #{signEndDate,jdbcType=TIMESTAMP}, 
-      #{activityStatus,jdbcType=INTEGER}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{activityStatus,jdbcType=INTEGER}, #{creator,jdbcType=VARCHAR},
       #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.AppraisedActivity" >
+  <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.AppraisedActivity" useGeneratedKeys="true" keyProperty="id" >
     insert into Appraised_Activity
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="activityName != null" >
         activity_name,
       </if>
@@ -91,9 +88,6 @@
       <if test="creator != null" >
         creator,
       </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
       <if test="updateTime != null" >
         update_time,
       </if>
@@ -102,9 +96,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="activityName != null" >
         #{activityName,jdbcType=VARCHAR},
       </if>
@@ -125,9 +116,6 @@
       </if>
       <if test="creator != null" >
         #{creator,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},

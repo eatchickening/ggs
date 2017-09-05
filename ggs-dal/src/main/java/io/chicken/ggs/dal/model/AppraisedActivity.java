@@ -1,5 +1,8 @@
 package io.chicken.ggs.dal.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,14 +11,18 @@ public class AppraisedActivity implements Serializable {
 
     private Long id;
 
+    @NotEmpty(message = "活动名称不能为空")
     private String activityName;
 
     private Long appraiseId;
 
+    @NotNull(message = "开始时间不能为空")
     private Date beginDate;
 
+    @NotNull(message = "结束时间不能为空")
     private Date endDate;
 
+    @NotNull(message = "报名截止时间不能为空")
     private Date signEndDate;
 
     private Integer activityStatus;

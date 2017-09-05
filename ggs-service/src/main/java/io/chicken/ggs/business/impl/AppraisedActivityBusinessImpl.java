@@ -104,4 +104,15 @@ public class AppraisedActivityBusinessImpl implements AppraisedActivityBusiness 
             return new Result<>(ResultCode.DB_QUERY_FAIL);
         }
     }
+
+    @Override
+    public Result<Long> save(AppraisedActivity appraisedActivity) {
+        try {
+            Long id = appraisedActivityService.save(appraisedActivity);
+            return new Result<>(id);
+        } catch (Exception e) {
+            LOGGER.error(appraisedActivity.getActivityName() + " save() 异常：" + e.getMessage());
+            return new Result<>(ResultCode.DB_ADD_FAIL);
+        }
+    }
 }

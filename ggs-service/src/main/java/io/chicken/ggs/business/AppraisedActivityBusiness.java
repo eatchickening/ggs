@@ -6,6 +6,7 @@ package io.chicken.ggs.business;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.vo.AppraisedActivityQueryParam;
 import io.chicken.ggs.common.vo.AppraisedActivityVO;
+import io.chicken.ggs.dal.model.AppraisedActivity;
 
 import java.util.List;
 
@@ -18,4 +19,5 @@ public interface AppraisedActivityBusiness {
 
     Result<Long> queryTotal(AppraisedActivityQueryParam param);
 
+    Result<Long> save(AppraisedActivity appraisedActivity);
 }
