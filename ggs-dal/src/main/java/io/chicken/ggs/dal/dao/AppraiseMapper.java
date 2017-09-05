@@ -26,4 +26,5 @@ public interface AppraiseMapper {
                     @Param("start") Integer start,
                     @Param("last") Integer last);
 
+    List<Appraise> queryListByIds(List<Long> ids);
 }

@@ -132,4 +132,14 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
         Result result=  new Result<>(ResultCode.SUCCESS);
         return result;
     }
+
+    @Override
+    public Result<List<Appraise>> queryListByIds(List<Long> ids) {
+        try {
+            return new Result<>(appraiseService.queryListByIds(ids));
+        } catch (Exception e) {
+            logger.error("queryListByIds() 异常： " + e.getMessage());
+            return new Result<>(ResultCode.DB_QUERY_FAIL);
+        }
+    }
 }

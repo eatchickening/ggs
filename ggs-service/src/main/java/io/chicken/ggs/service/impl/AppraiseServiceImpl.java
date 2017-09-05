@@ -10,9 +10,12 @@ import io.chicken.ggs.dal.model.AwardInfo;
 import io.chicken.ggs.dal.model.AwardQuota;
 import io.chicken.ggs.dal.model.AwardSchool;
 import io.chicken.ggs.service.AppraiseService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -20,6 +23,8 @@ import java.util.List;
  */
 @Service("appraiseService")
 public class AppraiseServiceImpl implements AppraiseService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AppraiseServiceImpl.class);
 
     @Autowired
     private AppraiseMapper appraiseMapper;
@@ -64,5 +69,12 @@ public class AppraiseServiceImpl implements AppraiseService {
         awardQuotaMapper.insertCollection(awardQuotalist);
     }
 
-
+    @Override
+    public List<Appraise> queryListByIds(List<Long> ids) {
+        LOGGER.info("queryListByIds(), ids = " + ids);
+        if (ids == null || ids.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return appraiseMapper.queryListByIds(ids);
+    }
 }

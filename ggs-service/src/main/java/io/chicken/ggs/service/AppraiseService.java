@@ -22,4 +22,6 @@ public interface AppraiseService {
     void saveAwardSchoolInfo(List<AwardSchool> awardSchoollist);
 
     void saveAwardQuotoInfo(List<AwardQuota> awardQuotalist);
+
+    List<Appraise> queryListByIds(List<Long> ids);
 }
