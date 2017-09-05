@@ -20,4 +20,8 @@ public interface AppraisedActivityService {
 
     Long save(AppraisedActivity appraisedActivity);
 
+    void update(AppraisedActivity appraisedActivity);
+
+    void delete(Long id);
+
 }

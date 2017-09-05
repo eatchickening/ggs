@@ -3,7 +3,10 @@
  */
 package io.chicken.ggs.service.impl;
 
+import io.chicken.ggs.common.AppraisedActivityStatusEnum;
 import io.chicken.ggs.common.CommonConstant;
+import io.chicken.ggs.common.GGSException;
+import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.vo.AppraisedActivityQueryParam;
 import io.chicken.ggs.dal.dao.AppraisedActivityMapper;
 import io.chicken.ggs.dal.model.AppraisedActivity;
@@ -13,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,7 +53,27 @@ public class AppraisedActivityServiceImpl implements AppraisedActivityService {
     @Override
     public Long save(AppraisedActivity appraisedActivity) {
         LOGGER.info("save(), param = " + appraisedActivity);
+        appraisedActivity.setActivityStatus(AppraisedActivityStatusEnum.STARTING.getCode());
         appraisedActivityMapper.insertSelective(appraisedActivity);
         return appraisedActivity.getId();
+    }
+
+    @Override
+    public void update(AppraisedActivity appraisedActivity) {
+        LOGGER.info("update(), param = " + appraisedActivity);
+        if (appraisedActivity.getId() == null) {
+            throw new GGSException(ResultCode.PARAMETER_INVALID);
+        }
+        appraisedActivity.setUpdateTime(new Date());
+        appraisedActivityMapper.updateByPrimaryKeySelective(appraisedActivity);
+    }
+
+    @Override
+    public void delete(Long id) {
+        LOGGER.info("delete(), id = " + id);
+        if (id == null) {
+            throw new GGSException(ResultCode.PARAMETER_EMPTY);
+        }
+        appraisedActivityMapper.deleteByPrimaryKey(id);
     }
 }

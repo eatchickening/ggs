@@ -5,6 +5,7 @@ package io.chicken.ggs.business.impl;
 
 import io.chicken.ggs.business.AppraiseBusiness;
 import io.chicken.ggs.business.AppraisedActivityBusiness;
+import io.chicken.ggs.common.GGSException;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.util.PropertiesUtils;
@@ -113,6 +114,32 @@ public class AppraisedActivityBusinessImpl implements AppraisedActivityBusiness 
         } catch (Exception e) {
             LOGGER.error(appraisedActivity.getActivityName() + " save() 异常：" + e.getMessage());
             return new Result<>(ResultCode.DB_ADD_FAIL);
+        }
+    }
+
+    @Override
+    public Result update(AppraisedActivity appraisedActivity) {
+        try {
+            appraisedActivityService.update(appraisedActivity);
+            return new Result(ResultCode.SUCCESS);
+        } catch (GGSException e) {
+            return new Result(e.getCode(), e.getMessage());
+        } catch (Exception e) {
+            LOGGER.error(appraisedActivity + ", update() 异常： " + e.getMessage());
+            return new Result(ResultCode.DB_UPDATE_FAIL);
+        }
+    }
+
+    @Override
+    public Result delete(Long id) {
+        try {
+            appraisedActivityService.delete(id);
+            return new Result(ResultCode.SUCCESS);
+        } catch (GGSException e) {
+            return new Result(e.getCode(), e.getMessage());
+        } catch (Exception e) {
+            LOGGER.error(id + ", delete() 异常： " + e.getMessage());
+            return new Result(ResultCode.DB_DELETE_FAIL);
         }
     }
 }

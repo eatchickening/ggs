@@ -20,4 +20,8 @@ public interface AppraisedActivityBusiness {
     Result<Long> queryTotal(AppraisedActivityQueryParam param);
 
     Result<Long> save(AppraisedActivity appraisedActivity);
+
+    Result update(AppraisedActivity appraisedActivity);
+
+    Result delete(Long id);
 }

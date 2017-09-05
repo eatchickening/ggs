@@ -5,6 +5,7 @@ package io.chicken.ggs.web.controller;
 
 import io.chicken.ggs.business.ActivityFileBusiness;
 import io.chicken.ggs.business.AppraisedActivityBusiness;
+import io.chicken.ggs.common.AppraisedActivityStatusEnum;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.util.ValidateErrorResult;
@@ -101,6 +102,55 @@ public class AppraisedActivityController {
         activityFile.setFileType(fileType);
         activityFile.setActivityId(id);
         return activityFileBusiness.save(activityFile);
+    }
+
+
+    @ApiOperation(value = "更新评优活动")
+    @ResponseBody
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Result update(@RequestBody AppraisedActivity appraisedActivity) {
+        logger.info("update() params = " + appraisedActivity);
+        if (appraisedActivity == null) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+
+        ValidateErrorResult errorResult = ValidatorUtils.validateEntityLazy(appraisedActivity);
+        if (errorResult != null) {
+            return new Result<>(errorResult);
+        }
+
+        return appraisedActivityBusiness.update(appraisedActivity);
+    }
+
+
+    @ApiOperation(value = "删除评优活动")
+    @ApiImplicitParam(value = "评优活动id", name = "id", dataType = "Long", paramType = "form")
+    @ResponseBody
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public Result delete(Long id) {
+        logger.info("delete() id = " + id);
+        if (id == null) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+
+        return appraisedActivityBusiness.delete(id);
+    }
+
+    @ApiOperation(value = "结束评优活动")
+    @ApiImplicitParam(value = "评优活动id", name = "id", dataType = "Long", paramType = "form")
+    @ResponseBody
+    @RequestMapping(value = "/end", method = RequestMethod.POST)
+    public Result end(Long id) {
+        logger.info("end() id = " + id);
+        if (id == null) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+
+        AppraisedActivity appraisedActivity = new AppraisedActivity();
+        appraisedActivity.setId(id);
+        appraisedActivity.setActivityStatus(AppraisedActivityStatusEnum.END.getCode());
+
+        return appraisedActivityBusiness.update(appraisedActivity);
     }
 
 }
