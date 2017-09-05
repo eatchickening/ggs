@@ -12,7 +12,7 @@ CREATE TABLE appraise (
     appraisequota int  COMMENT '评优指标',
     operator varchar(40) COMMENT '操作人',
     remark varchar(500) COMMENT '备注',
-    create_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    create_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评优表';
 
@@ -26,7 +26,7 @@ CREATE TABLE awardinfo (
     awardcode varchar(40)  COMMENT '奖项编码',
     awardlevel  varchar(20)  COMMENT '奖项级别',
     remark varchar(500) COMMENT '备注',
-    create_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    create_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='奖项表';
 
@@ -39,7 +39,7 @@ CREATE TABLE award_school (
     schoolcode varchar(20)  COMMENT '学校代码',
     schoolquota int  COMMENT '学校指标',
     remark varchar(500) COMMENT '备注',
-    create_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    create_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='奖项学校表';
 
@@ -52,7 +52,7 @@ CREATE TABLE award_quota (
     awardquota varchar(200)  COMMENT '奖项指标',
     quotacontent  varchar(200)  COMMENT '指标标准',
     remark varchar(500) COMMENT '备注',
-    create_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    create_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='奖项指标表';
 
@@ -67,7 +67,7 @@ CREATE TABLE award_file (
     filepath  varchar(300)  COMMENT '材料路径',
     filedetail  varchar(300)  COMMENT '材料说明',
     remark varchar(500) COMMENT '备注',
-    create_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    create_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='奖项材料表';
 

@@ -15,13 +15,13 @@ CREATE TABLE candidatestudent (
 	  reviewlevel varchar(10)  COMMENT '评审等级',
 	  isaward varchar(2)  COMMENT '是否获奖',
     operator varchar(40)  COMMENT '操作人',
-    operator_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '操作时间',
+    operator_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '操作时间',
     schoolauditor varchar(40)  COMMENT '审批人',
-    schoolauditor_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '学校审批时间',
+    schoolauditor_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '学校审批时间',
 	  eduauditor varchar(40)  COMMENT '教育局审批人',
-    eduauditor_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '教育局审批时间',
-    create_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    update_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+    eduauditor_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '教育局审批时间',
+    create_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    update_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='学生评优信息表';
 
@@ -38,8 +38,8 @@ CREATE TABLE candidatestudentfille (
     filepath  varchar(300)  COMMENT '材料路径',
     filedetail  varchar(300)  COMMENT '材料说明',
 	  operator varchar(40)  COMMENT '操作人',
-    operator_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '操作时间',
-    create_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    update_time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+    operator_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '操作时间',
+    create_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    update_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评优表';
