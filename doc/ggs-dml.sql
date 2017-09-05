@@ -28,7 +28,7 @@ insert into `post` ( `departcode`, `postcode`, `name`, `remark`) values ( 'BM001
 
 
 -- 基础设置
-INSERT INTO user_info` (`id`, `account`, `username`, `password`, `email`, `mobile`, `areacode`, `departcode`, `postcode`, `organcode`, `create_account`, `create_time`, `update_time`, `is_delete`) VALUES ('1', 'admin', 'admin', 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-02 20:40:21', NULL, '0');
+INSERT INTO `user_info` (`id`, `account`, `username`, `password`, `email`, `mobile`, `areacode`, `departcode`, `postcode`, `organcode`, `create_account`, `create_time`, `update_time`, `is_delete`) VALUES ('1', 'admin', 'admin', 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-02 20:40:21', NULL, '0');
 insert into `sysmenu` ( `order_num`, `remark`, `perms`, `parent_id`, `angular_state`, `name`, `url`)
 values ( null, null, null, '0', 'root.basic', '基础设置', null);
 
@@ -57,3 +57,4 @@ INSERT INTO `award_quota` (`id`, `appraisecode`, `awardcode`, `awardquota`, `quo
 -- 评优活动表
 insert into `ggs`.`Appraised_Activity` ( `remark`, `activity_name`, `activity_status`, `update_time`, `begin_date`, `create_time`, `appraise_id`, `end_date`, `creator`, `sign_End_date`) values ( '美少女评选了！！！', '2017美少女', '1', null, '2017-09-04 11:41:46', '2017-09-05 11:42:33', '1', '2017-09-08 11:41:56', null, '2017-09-06 11:42:02');
 insert into `ggs`.`Appraised_Activity` ( `remark`, `activity_name`, `activity_status`, `update_time`, `begin_date`, `create_time`, `appraise_id`, `end_date`, `creator`, `sign_End_date`) values ( null, '2017美少男', '2', null, '2017-09-05 11:43:00', '2017-09-05 11:43:18', '1', '2017-09-16 11:43:04', null, '2017-09-13 11:43:07');
+INSERT INTO `appraise` ( `appraisedate`, `appraisename`, `appraisecode`, `appraiselevel`, `appraisenumber`, `appraiseschool`, `appraisequota`, `remark`) VALUES ( '2017-09-02', '山东农大垃圾毕业生', 'shandongsuck', 'city', NULL, NULL, NULL, NULL);
