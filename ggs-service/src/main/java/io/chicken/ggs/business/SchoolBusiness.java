@@ -10,4 +10,5 @@ import java.util.Map;
 public interface SchoolBusiness {
     public Result getSchoolList(Map<String, Object> params);
     public Result getSchoolByCondition(Map<String, Object> params);
+    public Result getAllSchool(Map<String, Object> params);
 }

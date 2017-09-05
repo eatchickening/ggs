@@ -4,14 +4,8 @@ import io.chicken.ggs.business.AppraiseBusiness;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.util.DateUtil;
-import io.chicken.ggs.common.vo.AppraiseVo;
-import io.chicken.ggs.common.vo.AwardInfoVo;
-import io.chicken.ggs.common.vo.AwardQuotaVo;
-import io.chicken.ggs.common.vo.AwardSchoolVo;
-import io.chicken.ggs.dal.model.Appraise;
-import io.chicken.ggs.dal.model.AwardInfo;
-import io.chicken.ggs.dal.model.AwardQuota;
-import io.chicken.ggs.dal.model.AwardSchool;
+import io.chicken.ggs.common.vo.*;
+import io.chicken.ggs.dal.model.*;
 import io.chicken.ggs.service.AppraiseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -36,7 +31,7 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
     @Autowired
     private AppraiseService appraiseService;
 
-    @Value(value="file.basepath")
+    @Value("${file.basepath}")
     private String storefile;
     public Result<List<Appraise>> queryList(String appraiseName, Integer pageNum, Integer pageSize) {
         if (appraiseName == null) {
@@ -73,30 +68,37 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
         appraise.setAppraisename(appraiseVo.getAppraisename());
         appraise.setAppraiselevel(appraiseVo.getAppraiselevel());
         appraise.setCreateTime(new Date());
+         appraiseService.save(appraise);
+        long appraiseid =appraise.getId();
         //保存奖项信息表
         List<AwardInfo> awardInfolist=new ArrayList<AwardInfo>();
 
         //保存奖项学校列表
         List<AwardSchool> awardSchoollist=new ArrayList<AwardSchool>();
 
+        //保存指标列表
         List<AwardQuota> awardQuotalist=new ArrayList<AwardQuota>();
-
+        //保存文件列表
+        List<AwardFile> awardFilelist=new ArrayList<AwardFile>();
 
         //循环接收到的奖项信息
         List<AwardInfoVo> awardInfoVoList = appraiseVo.getAwardInfoList();
         for(AwardInfoVo awardInfoVo:awardInfoVoList)
         {
             AwardInfo awardInfo=new AwardInfo();
+            awardInfo.setAppraisecode(""+appraiseid);
             awardInfo.setAwardname(awardInfoVo.getAwardname());
             awardInfo.setAwardlevel( awardInfoVo.getAwardlevel());
             awardInfo.setCreateTime(new Date());
             awardInfo.setRemark(awardInfoVo.getRemark());
-            awardInfolist.add(awardInfo);
+            appraiseService.saveAwardInfo(awardInfo);
+            Long awardInfoId = awardInfo.getId();
             List<AwardSchoolVo> awardSchoolList = awardInfoVo.getAwardSchoolList();
             for(AwardSchoolVo awardSchoolVo:awardSchoolList)
             {
                 AwardSchool awardSchool=new AwardSchool();
-                awardSchool.setAwardcode(awardInfo.getAwardcode());
+                awardSchool.setAwardcode(""+awardInfoId);
+                awardSchool.setAppraisecode(""+appraiseid);
                 awardSchool.setCreateTime(new Date());
                 awardSchool.setSchoolcode(awardSchoolVo.getSchoolcode());
                 awardSchool.setSchoolquota(awardSchoolVo.getSchoolquota());
@@ -107,16 +109,25 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
             for(AwardQuotaVo awardQuotaVo:awardQuotaVoList)
             {
                 AwardQuota awardQuota=new AwardQuota();
-                awardQuota.setAwardcode(awardInfo.getAwardcode());
+                awardQuota.setAwardcode(""+awardInfoId);
+                awardQuota.setAppraisecode(""+appraiseid);
                 awardQuota.setCreateTime(new Date());
                 awardQuota.setAwardquota(awardQuotaVo.getAwardquota());
                 awardQuota.setQuotacontent(awardQuotaVo.getQuotacontent());
                 awardQuota.setRemark(awardQuotaVo.getRemark());
                 awardQuotalist.add(awardQuota);
             }
+            List<AwardFileVo> awardFileList = awardInfoVo.getAwardFileList();
+            for(AwardFileVo awardFileVo:awardFileList)
+            {
+                AwardFile awardFile=new AwardFile();
+                awardFile.setAppraisecode(""+appraiseid);
+                awardFile.setAwardcode(""+awardInfoId);
+                awardFile.setFilename(awardFileVo.getFilename());
+                awardFile.setFiletype(awardFileVo.getFiletype());
+                awardFilelist.add(awardFile);
+            }
         }
-        appraiseService.save(appraise);
-        appraiseService.saveAwardInfo(awardInfolist);
         appraiseService.saveAwardQuotoInfo(awardQuotalist);
         appraiseService.saveAwardSchoolInfo(awardSchoollist);
         Result result=  new Result<>(ResultCode.SUCCESS);
@@ -128,8 +139,29 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
         if (awardcode == null || awardcode.isEmpty()||appraisecode == null || appraisecode.isEmpty()||file == null ) {
             return new Result<>(ResultCode.PARAMETER_EMPTY);
         }
-
+        logger.info("storefilebasepath"+storefile);
+        logger.info("origin:"+file.getOriginalFilename());
+        String parentfile=storefile+appraisecode+"/"+awardcode+"/";
+        File targetFile = new File(parentfile, System.currentTimeMillis()+"_"+file.getOriginalFilename());
+        if (!targetFile.getParentFile().exists()) {
+            targetFile.getParentFile().mkdirs();
+        }
+        // 保存
+        try {
+            file.transferTo(targetFile);
+        } catch (Exception e) {
+            logger.error("保存出错",e);
+            Result result=  new Result<>(ResultCode.SYS_EXCEPTION);
+            return result;
+        }
+        logger.info("targetFile:"+targetFile.getName());
         Result result=  new Result<>(ResultCode.SUCCESS);
+        AwardFileVo awardFileVo=new AwardFileVo();
+        awardFileVo.setFilename(file.getOriginalFilename());
+        awardFileVo.setFiletargetname(targetFile.getName());
+        String fileTyle=targetFile.getName().substring(targetFile.getName().lastIndexOf(".")+1,targetFile.getName().length());
+        awardFileVo.setFiletype(fileTyle);
+        result.setData(awardFileVo);
         return result;
     }
 
