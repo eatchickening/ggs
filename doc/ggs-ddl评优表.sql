@@ -101,5 +101,6 @@ CREATE TABLE `activity_file` (
     `file_detail` varchar(300) DEFAULT NULL COMMENT '材料说明',
     `remark` varchar(500) DEFAULT NULL COMMENT '备注',
     `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    KEY `idx_activity_id` (`activity_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评优活动材料表';

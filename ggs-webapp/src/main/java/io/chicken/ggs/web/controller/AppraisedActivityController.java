@@ -3,6 +3,7 @@
  */
 package io.chicken.ggs.web.controller;
 
+import io.chicken.ggs.business.ActivityFileBusiness;
 import io.chicken.ggs.business.AppraisedActivityBusiness;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
@@ -10,6 +11,7 @@ import io.chicken.ggs.common.util.ValidateErrorResult;
 import io.chicken.ggs.common.util.ValidatorUtils;
 import io.chicken.ggs.common.vo.AppraisedActivityQueryParam;
 import io.chicken.ggs.common.vo.AppraisedActivityVO;
+import io.chicken.ggs.dal.model.ActivityFile;
 import io.chicken.ggs.dal.model.AppraisedActivity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -27,6 +29,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.sound.midi.Soundbank;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * 评优活动接口
@@ -42,6 +45,8 @@ public class AppraisedActivityController {
 
     @Autowired
     private AppraisedActivityBusiness appraisedActivityBusiness;
+    @Autowired
+    private ActivityFileBusiness activityFileBusiness;
 
     @ApiOperation(value = "活动列表")
     @ResponseBody
@@ -70,6 +75,32 @@ public class AppraisedActivityController {
         }
 
         return appraisedActivityBusiness.save(appraisedActivity);
+    }
+
+    @ApiOperation(value = "评优活动的材料上传")
+    @ApiImplicitParam(value = "评优活动id", name = "id", dataType = "Long", paramType = "form")
+    @ResponseBody
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public Result upload(@RequestParam Long id, MultipartFile file) {
+        logger.info("upload() id = " + id);
+        if (id == null || file == null) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+        System.out.println(file.getOriginalFilename());
+
+        // 处理文件 todo
+
+        // 保存路径信息
+        String origFileName = file.getOriginalFilename();
+        String fileType = origFileName.substring(origFileName.lastIndexOf(".")).toLowerCase();
+        String sysFileName = UUID.randomUUID().toString() + fileType;
+
+        ActivityFile activityFile = new ActivityFile();
+        activityFile.setOrigFileName(origFileName);
+        activityFile.setSysFileName(sysFileName);
+        activityFile.setFileType(fileType);
+        activityFile.setActivityId(id);
+        return activityFileBusiness.save(activityFile);
     }
 
 }

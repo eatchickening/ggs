@@ -29,19 +29,16 @@
   <insert id="insert" parameterType="io.chicken.ggs.dal.model.ActivityFile" >
     insert into activity_file (id, activity_id, orig_file_name, 
       sys_file_name, file_type, file_path, 
-      file_detail, remark, create_time
+      file_detail, remark
       )
     values (#{id,jdbcType=BIGINT}, #{activityId,jdbcType=BIGINT}, #{origFileName,jdbcType=VARCHAR}, 
       #{sysFileName,jdbcType=VARCHAR}, #{fileType,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, 
-      #{fileDetail,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      #{fileDetail,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.ActivityFile" >
     insert into activity_file
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="activityId != null" >
         activity_id,
       </if>
@@ -63,14 +60,8 @@
       <if test="remark != null" >
         remark,
       </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="activityId != null" >
         #{activityId,jdbcType=BIGINT},
       </if>
@@ -91,9 +82,6 @@
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>

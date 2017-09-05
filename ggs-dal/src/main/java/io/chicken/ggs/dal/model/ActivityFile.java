@@ -1,8 +1,12 @@
 package io.chicken.ggs.dal.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ActivityFile {
+public class ActivityFile implements Serializable {
+
+    private static final long serialVersionUID = -5549197274699126295L;
+
     private Long id;
 
     private Long activityId;
@@ -91,5 +95,20 @@ public class ActivityFile {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    @Override
+    public String toString() {
+        return "ActivityFile{" +
+                "id=" + id +
+                ", activityId=" + activityId +
+                ", origFileName='" + origFileName + '\'' +
+                ", sysFileName='" + sysFileName + '\'' +
+                ", fileType='" + fileType + '\'' +
+                ", filePath='" + filePath + '\'' +
+                ", fileDetail='" + fileDetail + '\'' +
+                ", remark='" + remark + '\'' +
+                ", createTime=" + createTime +
+                '}';
     }
 }
