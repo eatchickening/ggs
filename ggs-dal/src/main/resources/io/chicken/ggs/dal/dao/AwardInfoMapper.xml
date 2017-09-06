@@ -23,6 +23,12 @@
     delete from awardinfo
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
+  <delete id="deleteByAppraisecode" parameterType="java.lang.String" >
+    delete from awardinfo
+    where appraisecode = #{appraiseid,jdbcType=BIGINT}
+  </delete>
+
   <insert id="insert" parameterType="io.chicken.ggs.dal.model.AwardInfo" >
     insert into awardinfo (id, appraisecode, awardname, 
       awardcode, awardlevel, remark, 

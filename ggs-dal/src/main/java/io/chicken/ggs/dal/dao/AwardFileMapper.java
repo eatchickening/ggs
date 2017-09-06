@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface AwardFileMapper {
     int deleteByPrimaryKey(Long id);
+    int  deleteByAppraisecode(String appraiseid);
 
     int insert(AwardFile record);
 

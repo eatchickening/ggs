@@ -7,6 +7,8 @@ import java.util.List;
 public interface AwardSchoolMapper {
     int deleteByPrimaryKey(Long id);
 
+    int  deleteByAppraisecode(String appraiseid);
+
     int insert(AwardSchool record);
 
     int insertSelective(AwardSchool record);

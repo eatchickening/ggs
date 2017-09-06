@@ -2,6 +2,7 @@ package io.chicken.ggs.web.controller;
 
 import io.chicken.ggs.business.AppraiseBusiness;
 import io.chicken.ggs.common.Result;
+import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.vo.AppraiseVo;
 import io.chicken.ggs.common.vo.AreaDetailVO;
 import io.swagger.annotations.Api;
@@ -68,6 +69,19 @@ public class AppraiseController {
     public Result save(@RequestBody AppraiseVo appraiseVo) throws Exception{
         logger.info("评优奖项信息:"+appraiseVo.toString());
         return appraiseBusiness.save(appraiseVo);
+    }
+
+    @ApiOperation(value = "删除评优奖项")
+    @ApiImplicitParam(value = "评优奖项id", name = "id", dataType = "Long", paramType = "form")
+    @ResponseBody
+    @Transactional(rollbackFor = Exception.class)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public Result delete(Long id) {
+        logger.info("delete() id = " + id);
+        if (id == null) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+        return appraiseBusiness.delete(id);
     }
 
 }

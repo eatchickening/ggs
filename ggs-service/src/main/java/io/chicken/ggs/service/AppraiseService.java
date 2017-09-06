@@ -26,4 +26,6 @@ public interface AppraiseService {
     void saveAwardFileInfo(List<AwardFile> awardFilelist);
 
     List<Appraise> queryListByIds(List<Long> ids);
+
+    void delete(Long id);
 }

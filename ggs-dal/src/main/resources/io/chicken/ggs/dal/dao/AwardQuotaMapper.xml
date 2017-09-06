@@ -23,6 +23,12 @@
     delete from award_quota
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
+  <delete id="deleteByAppraisecode" parameterType="java.lang.String" >
+    delete from award_quota
+    where appraisecode = #{appraiseid,jdbcType=BIGINT}
+  </delete>
+
   <insert id="insert" parameterType="io.chicken.ggs.dal.model.AwardQuota" >
     insert into award_quota (id, appraisecode, awardcode, 
       awardquota, quotacontent, remark, 
