@@ -21,4 +21,6 @@ public interface AppraiseBusiness {
     Result<List<Appraise>> queryListByIds(List<Long> ids);
 
     Result delete(Long id);
+
+    Result getDetail(Long id);
 }

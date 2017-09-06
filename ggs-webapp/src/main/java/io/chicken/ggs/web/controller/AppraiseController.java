@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -83,5 +84,21 @@ public class AppraiseController {
         }
         return appraiseBusiness.delete(id);
     }
+
+    @ApiOperation(value = "查看评优奖项详情")
+    @ApiImplicitParam(value = "评优奖项id", name = "id", dataType = "Long", paramType = "form")
+    @ResponseBody
+    @Transactional(rollbackFor = Exception.class)
+    @RequestMapping(value = "/getDetail", method = RequestMethod.POST)
+    public Result getDetail(Long id) {
+        logger.info("getDetail() id = " + id);
+        if (id == null) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+        return appraiseBusiness.getDetail(id);
+    }
+
+
+
 
 }

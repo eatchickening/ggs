@@ -31,7 +31,7 @@
     on ap.id=aw.appraisecode
     left join
     (
-    select appraisecode, count(distinct(awardcode)) appraisenumber from
+    select appraisecode, count(*) appraisenumber from
     awardinfo group by appraisecode
     ) ai
     on ap.id=ai.appraisecode
@@ -63,8 +63,22 @@
 
   <select id = "queryListByIds" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+    ap.id,
+    ap.appraisedate appraisedate, ap.appraisename, ap.appraisecode, ap.appraiselevel,
+    ai.appraisenumber,aw.appraiseschool,aw.appraisequota,ap.remark, ap.create_time
     from appraise ap
+    left join
+    (
+    select
+    appraisecode, count(distinct(schoolcode)) appraiseschool, sum(schoolquota) appraisequota
+    from award_school group by appraisecode) aw
+    on ap.id=aw.appraisecode
+    left join
+    (
+    select appraisecode, count(*) appraisenumber from
+    awardinfo group by appraisecode
+    ) ai
+    on ap.id=ai.appraisecode
     where ap.id in
     <foreach collection="list" open="(" separator="," close=")" item="id" index="index">
         #{id}

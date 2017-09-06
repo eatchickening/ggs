@@ -181,7 +181,13 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
     @Override
     public Result<List<Appraise>> queryListByIds(List<Long> ids) {
         try {
-            return new Result<>(appraiseService.queryListByIds(ids));
+            List<Appraise> appraises = appraiseService.queryListByIds(ids);
+            for(Appraise appraise:appraises)
+            {
+                AwardLevelEnum byCode = AwardLevelEnum.getByCode(appraise.getAppraiselevel());
+                appraise.setAppraiselevel(byCode==null?null:byCode.getMessage());
+            }
+            return new Result<>(appraises);
         } catch (Exception e) {
             logger.error("queryListByIds() 异常： " + e.getMessage());
             return new Result<>(ResultCode.DB_QUERY_FAIL);
@@ -201,5 +207,10 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
         }
 
 
+    }
+
+    @Override
+    public Result getDetail(Long id) {
+        return null;
     }
 }
