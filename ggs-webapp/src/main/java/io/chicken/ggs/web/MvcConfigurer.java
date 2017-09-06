@@ -46,16 +46,17 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
         registry.addMapping("/**").allowedOrigins("*");
         super.addCorsMappings(registry);
     }
+
     /**
      * 配置上传文件大小
      */
-    @Bean
-    public MultipartConfigElement multipartConfigElement() {
-        MultipartConfigFactory factory = new MultipartConfigFactory();
-        //文件最大
-        factory.setMaxFileSize("10MB");
-        //设置总上传数据总大小
-        factory.setMaxRequestSize("20MB");
-        return factory.createMultipartConfig();
-    }
+    // @Bean
+    // public MultipartConfigElement multipartConfigElement() {
+    //     MultipartConfigFactory factory = new MultipartConfigFactory();
+    //     //文件最大
+    //     factory.setMaxFileSize("10MB");
+    //     //设置总上传数据总大小
+    //     factory.setMaxRequestSize("20MB");
+    //     return factory.createMultipartConfig();
+    // }
 }
