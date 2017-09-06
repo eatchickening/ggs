@@ -16,20 +16,19 @@ import io.chicken.ggs.dal.model.ActivityFile;
 import io.chicken.ggs.dal.model.AppraisedActivity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.sound.midi.Soundbank;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -89,7 +88,25 @@ public class AppraisedActivityController {
         }
         System.out.println(file.getOriginalFilename());
 
-        // 处理文件 todo
+        // 处理文件 (这块可以抽象出来公用)todo
+        BufferedOutputStream stream = null;
+        try {
+            byte[] bytes = file.getBytes();
+            stream = new BufferedOutputStream(new FileOutputStream(new File(file.getOriginalFilename())));
+            stream.write(bytes);
+            stream.close();
+        } catch (Exception e) {
+            logger.error(file.getOriginalFilename() + ", 上传评优活动的材料异常：" + e.getMessage());
+            return new Result(ResultCode.UPLOAD_EXCEPTION);
+        } finally {
+            if (stream != null) {
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         // 保存路径信息
         String origFileName = file.getOriginalFilename();
