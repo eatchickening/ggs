@@ -4,15 +4,15 @@ package io.chicken.ggs.common;
 import org.springframework.util.StringUtils;
 
 /**
- * 账户类型
- * 
- * @author xuliang.will
- * time : 2016年7月8日 下午3:31:54
+ * 奖项枚举
  */
 public enum AwardLevelEnum {
-    CITYLEVEL("1", "市级"),
-    AREALEVEL("2", "区级"),
-	SCHOOLLEVEL("3", "校级");
+    CONTURYLEVEL("1", "国家级"),
+    PROVINCELEVEL("2", "省级"),
+    CITYLEVEL("3", "市级"),
+    AREALEVEL("4", "区级"),
+    SCHOOLLEVEL("5", "校级");
+
 
     /** 代码 */
     private final String code;

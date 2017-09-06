@@ -2,6 +2,7 @@ package io.chicken.ggs.web.controller;
 
 import io.chicken.ggs.business.AppraiseBusiness;
 import io.chicken.ggs.common.Result;
+import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.vo.AppraiseVo;
 import io.chicken.ggs.common.vo.AreaDetailVO;
 import io.swagger.annotations.Api;
@@ -39,8 +40,8 @@ public class AppraiseController {
     @ApiOperation(value = "获取评优奖项列表", notes="默认name参数为空, pageSize pageNum不能为空")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", value = "评优名称", required = false, dataType = "String", paramType = "form"),
-            @ApiImplicitParam(name = "pageNum", value = "每页显示个数", required = true, dataType = "String", paramType = "form"),
-            @ApiImplicitParam(name = "pageSize", value = "显示页数", required = true, dataType = "String", paramType = "form")
+            @ApiImplicitParam(name = "pageNum", value = "页数", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "pageSize", value = "每页条数", required = true, dataType = "String", paramType = "form")
     })
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result appraiseList(String name,
@@ -68,6 +69,19 @@ public class AppraiseController {
     public Result save(@RequestBody AppraiseVo appraiseVo) throws Exception{
         logger.info("评优奖项信息:"+appraiseVo.toString());
         return appraiseBusiness.save(appraiseVo);
+    }
+
+    @ApiOperation(value = "删除评优奖项")
+    @ApiImplicitParam(value = "评优奖项id", name = "id", dataType = "Long", paramType = "form")
+    @ResponseBody
+    @Transactional(rollbackFor = Exception.class)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public Result delete(Long id) {
+        logger.info("delete() id = " + id);
+        if (id == null) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+        return appraiseBusiness.delete(id);
     }
 
 }

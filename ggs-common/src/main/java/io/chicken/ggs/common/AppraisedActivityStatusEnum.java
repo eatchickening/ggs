@@ -30,7 +30,7 @@ public enum AppraisedActivityStatusEnum {
         return this.desc;
     }
 
-    public AppraisedActivityStatusEnum valueOf(Integer code) {
+    public static AppraisedActivityStatusEnum valueOf(Integer code) {
         if (code == null) {
             return null;
         }
@@ -43,7 +43,7 @@ public enum AppraisedActivityStatusEnum {
         return null;
     }
 
-    public String getDesc(Integer code) {
+    public static String getDesc(Integer code) {
         AppraisedActivityStatusEnum appraisedActivityStatusEnum = valueOf(code);
         if (appraisedActivityStatusEnum != null) {
             return appraisedActivityStatusEnum.getDesc();

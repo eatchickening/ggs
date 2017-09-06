@@ -7,6 +7,8 @@ import java.util.List;
 public interface AwardQuotaMapper {
     int deleteByPrimaryKey(Long id);
 
+    int  deleteByAppraisecode(String appraiseid);
+
     int insert(AwardQuota record);
 
     int insertSelective(AwardQuota record);

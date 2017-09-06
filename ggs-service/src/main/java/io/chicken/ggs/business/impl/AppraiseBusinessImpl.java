@@ -2,6 +2,7 @@ package io.chicken.ggs.business.impl;
 
 import io.chicken.ggs.business.AppraiseBusiness;
 import io.chicken.ggs.common.AwardLevelEnum;
+import io.chicken.ggs.common.GGSException;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.util.DateUtil;
@@ -35,9 +36,7 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
     @Value("${file.basepath}")
     private String storefile;
     public Result<List<Appraise>> queryList(String appraiseName, Integer pageNum, Integer pageSize) {
-        if (appraiseName == null) {
-            appraiseName = "";
-        }
+
         //查询列表数据
         List<Appraise> appraiseList = null;
         Long total=new Long(0);
@@ -187,5 +186,20 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
             logger.error("queryListByIds() 异常： " + e.getMessage());
             return new Result<>(ResultCode.DB_QUERY_FAIL);
         }
+    }
+
+    @Override
+    public Result delete(Long id) {
+        try {
+            appraiseService.delete(id);
+            return new Result(ResultCode.SUCCESS);
+        } catch (GGSException e) {
+            return new Result(e.getCode(), e.getMessage());
+        } catch (Exception e) {
+            logger.error(id + ", delete() 异常： " + e.getMessage());
+            return new Result(ResultCode.DB_DELETE_FAIL);
+        }
+
+
     }
 }

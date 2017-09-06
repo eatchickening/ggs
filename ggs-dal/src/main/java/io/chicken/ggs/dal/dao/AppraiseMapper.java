@@ -18,6 +18,7 @@ public interface AppraiseMapper {
 
     int updateByPrimaryKey(Appraise record);
 
+
     List<Appraise> queryList(@Param("appraiseName") String appraiseName,
                              @Param("start") Integer start,
                              @Param("last") Integer last);

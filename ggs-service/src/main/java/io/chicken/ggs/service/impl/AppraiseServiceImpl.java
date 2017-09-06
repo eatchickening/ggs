@@ -84,4 +84,13 @@ public class AppraiseServiceImpl implements AppraiseService {
         }
         return appraiseMapper.queryListByIds(ids);
     }
+
+    @Override
+    public void delete(Long id) {
+        awardFileMapper.deleteByAppraisecode(id+"");
+        awardQuotaMapper.deleteByAppraisecode(id+"");
+        awardSchoolMapper.deleteByAppraisecode(id+"");
+        awardInfoMapper.deleteByAppraisecode(id+"");
+        appraiseMapper.deleteByPrimaryKey(id);
+    }
 }

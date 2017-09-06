@@ -22,6 +22,8 @@ public class AppraisedActivityVO implements Serializable {
 
     private Integer activityStatus;
 
+    private String activityStatusValue;
+
     private String creator;
 
     private Date createTime;
@@ -32,6 +34,8 @@ public class AppraisedActivityVO implements Serializable {
 
     // 评优级别
     private String appraiselevel;
+
+    private String appraiselevelValue;
 
     // 奖项数量
     private Integer appraisenumber;
@@ -95,6 +99,14 @@ public class AppraisedActivityVO implements Serializable {
         this.activityStatus = activityStatus;
     }
 
+    public String getActivityStatusValue() {
+        return activityStatusValue;
+    }
+
+    public void setActivityStatusValue(String activityStatusValue) {
+        this.activityStatusValue = activityStatusValue;
+    }
+
     public String getCreator() {
         return creator;
     }
@@ -135,6 +147,14 @@ public class AppraisedActivityVO implements Serializable {
         this.appraiselevel = appraiselevel;
     }
 
+    public String getAppraiselevelValue() {
+        return appraiselevelValue;
+    }
+
+    public void setAppraiselevelValue(String appraiselevelValue) {
+        this.appraiselevelValue = appraiselevelValue;
+    }
+
     public Integer getAppraisenumber() {
         return appraisenumber;
     }
@@ -161,11 +181,13 @@ public class AppraisedActivityVO implements Serializable {
                 ", endDate=" + endDate +
                 ", signEndDate=" + signEndDate +
                 ", activityStatus=" + activityStatus +
+                ", activityStatusValue='" + activityStatusValue + '\'' +
                 ", creator='" + creator + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", remark='" + remark + '\'' +
                 ", appraiselevel='" + appraiselevel + '\'' +
+                ", appraiselevelValue='" + appraiselevelValue + '\'' +
                 ", appraisenumber=" + appraisenumber +
                 ", appraisequota=" + appraisequota +
                 '}';

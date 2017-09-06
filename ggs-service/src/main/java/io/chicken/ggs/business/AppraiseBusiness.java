@@ -19,4 +19,6 @@ public interface AppraiseBusiness {
     Result savefile(String appraisecode,String awardcode, MultipartFile file);
 
     Result<List<Appraise>> queryListByIds(List<Long> ids);
+
+    Result delete(Long id);
 }
