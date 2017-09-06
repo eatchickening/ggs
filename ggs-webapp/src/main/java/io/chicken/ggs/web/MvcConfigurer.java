@@ -1,6 +1,7 @@
 
 package io.chicken.ggs.web;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +15,11 @@ import javax.servlet.MultipartConfigElement;
 
 @Configuration
 public class MvcConfigurer extends WebMvcConfigurerAdapter {
+    @Value("${file.size}")
+    private String filesize;
 
+    @Value("${request.size}")
+    private String requestsize;
     /**
      * 首页跳转
      * @param registry
@@ -53,9 +58,9 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
         //文件最大
-        factory.setMaxFileSize("10MB");
+        factory.setMaxFileSize(filesize+"");
         //设置总上传数据总大小
-        factory.setMaxRequestSize("20MB");
+        factory.setMaxRequestSize(requestsize+"");
         return factory.createMultipartConfig();
     }
 }
