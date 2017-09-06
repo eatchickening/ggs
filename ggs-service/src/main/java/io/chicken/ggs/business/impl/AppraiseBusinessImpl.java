@@ -61,14 +61,14 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
     }
 
     @Override
-    public Result save(AppraiseVo appraiseVo) {
+    public Result save(AppraiseVo appraiseVo)  throws  RuntimeException{
         //保存评优表
         Appraise appraise=new Appraise();
         appraise.setAppraisedate(DateUtil.getCurrentTime("yyyy-MM-dd"));
         appraise.setAppraisename(appraiseVo.getAppraisename());
         appraise.setAppraiselevel(appraiseVo.getAppraiselevel());
         appraise.setCreateTime(new Date());
-         appraiseService.save(appraise);
+        appraiseService.save(appraise);
         long appraiseid =appraise.getId();
         //保存奖项信息表
         List<AwardInfo> awardInfolist=new ArrayList<AwardInfo>();
@@ -125,9 +125,15 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
                 awardFile.setAwardcode(""+awardInfoId);
                 awardFile.setFilename(awardFileVo.getFilename());
                 awardFile.setFiletype(awardFileVo.getFiletype());
+                awardFile.setCreateTime(new Date());
+                awardFile.setFiledetail(awardFileVo.getFiledetail());
+                awardFile.setRemark(awardFileVo.getRemark());
+                String path=storefile+appraiseVo.getAppraisename()+"/"+awardInfoVo.getAwardname()+"/"+awardFileVo.getFiletargetname();
+                awardFile.setFilepath(path);
                 awardFilelist.add(awardFile);
             }
         }
+        appraiseService.saveAwardFileInfo(awardFilelist);
         appraiseService.saveAwardQuotoInfo(awardQuotalist);
         appraiseService.saveAwardSchoolInfo(awardSchoollist);
         Result result=  new Result<>(ResultCode.SUCCESS);
