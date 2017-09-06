@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -41,5 +42,14 @@ public class SchoolController {
         Map<String, Object> params= BeanUtilTest.transBean2Map(schoolVo);
         logger.info(params.toString());
         return schoolBusiness.getSchoolByCondition(params);
+    }
+
+
+    @ApiOperation(value = "根据地区和学校类型获取学校接口")
+    @ResponseBody
+    @RequestMapping(value = "/getAllSchool", method = RequestMethod.GET)
+    public Result getAllSchool(){
+        Map<String, Object> params= new HashMap<String, Object>();
+        return schoolBusiness.getAllSchool(params);
     }
 }

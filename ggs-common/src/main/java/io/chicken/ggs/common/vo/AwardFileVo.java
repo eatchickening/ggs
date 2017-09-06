@@ -6,6 +6,8 @@ public class AwardFileVo {
 
     private String filename;
 
+    private String filetargetname;
+
     private String filetype;
 
     private String filepath;
@@ -65,10 +67,19 @@ public class AwardFileVo {
         this.file = file;
     }*/
 
+    public String getFiletargetname() {
+        return filetargetname;
+    }
+
+    public void setFiletargetname(String filetargetname) {
+        this.filetargetname = filetargetname;
+    }
+
     @Override
     public String toString() {
         return "AwardFileVo{" +
-                ", filename='" + filename + '\'' +
+                "filename='" + filename + '\'' +
+                ", filetargetname='" + filetargetname + '\'' +
                 ", filetype='" + filetype + '\'' +
                 ", filepath='" + filepath + '\'' +
                 ", filedetail='" + filedetail + '\'' +

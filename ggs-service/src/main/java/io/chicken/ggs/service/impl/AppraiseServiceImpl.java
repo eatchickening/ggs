@@ -60,6 +60,11 @@ public class AppraiseServiceImpl implements AppraiseService {
     }
 
     @Override
+    public void saveAwardInfo(AwardInfo awardInfo) {
+        awardInfoMapper.insertSelective(awardInfo);
+    }
+
+    @Override
     public void saveAwardSchoolInfo(List<AwardSchool> awardSchoollist) {
         awardSchoolMapper.insertCollection(awardSchoollist);
     }

@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +68,39 @@ public class SchoolBusinessImpl implements SchoolBusiness {
         Result result=  new Result<>(ResultCode.SUCCESS);
         result.setTotal((long)listSchool.size());
         result.setData(listSchool);
+        return result;
+    }
+
+    @Override
+    public Result getAllSchool(Map<String, Object> params) {
+        //查询列表数据
+        List<School> listSchool=null;
+        Map<String,List<School>> returnmap=new HashMap<String,List<School>>();
+        long total=0;
+        try
+        {
+            listSchool = schoolService.getSchoolByCondition(params);
+            for(School school:listSchool) {
+                if (returnmap.get(school.getSchooltype()) == null)
+                {
+                    List<School> list=new ArrayList<School>();
+                    list.add(school);
+                    returnmap.put(school.getSchooltype(),list);
+                }else
+                {
+                    returnmap.get(school.getSchooltype()).add(school);
+                }
+            }
+
+
+        }catch(Exception e)
+        {
+            logger.error("数据库操作异常",e);
+            return new Result<>(ResultCode.DB_EXCEPTION);
+        }
+        Result result=  new Result<>(ResultCode.SUCCESS);
+        result.setTotal((long)listSchool.size());
+        result.setData(returnmap);
         return result;
     }
 
