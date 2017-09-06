@@ -18,7 +18,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
 
-    public long queryTotal(Map<String, Object> map) {
+    public Long queryTotal(Map<String, Object> map) {
         return studentMapper.queryTotal(map);
     }
 

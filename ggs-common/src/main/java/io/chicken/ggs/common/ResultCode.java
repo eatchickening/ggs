@@ -42,6 +42,12 @@ public enum ResultCode {
     DB_DELETE_FAIL(404, "删除失败"),
     DB_ADD_FAIL(405, "添加失败"),
 
+    /**
+     * 文件上传相关 500
+     */
+    UPLOAD_FAIL(501, "文件上传失败"),
+    UPLOAD_EXCEPTION(502, "文件上传异常"),
+
     ;
 
     private Integer code;

@@ -52,7 +52,7 @@
   </insert>
 
 
-  <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.AwardInfo" >
+  <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.AwardInfo"  useGeneratedKeys="true" keyProperty="id">
     insert into awardinfo
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

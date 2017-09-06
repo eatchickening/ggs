@@ -5,16 +5,11 @@ import java.util.Date;
 public class AwardQuotaVo {
 
 
-
     private String awardquota;
 
     private String quotacontent;
 
     private String remark;
-
-    private Date createTime;
-
-
 
 
 
@@ -42,13 +37,7 @@ public class AwardQuotaVo {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 
     @Override
     public String toString() {
@@ -56,7 +45,6 @@ public class AwardQuotaVo {
                 ", awardquota='" + awardquota + '\'' +
                 ", quotacontent='" + quotacontent + '\'' +
                 ", remark='" + remark + '\'' +
-                ", createTime=" + createTime +
                 '}';
     }
 }

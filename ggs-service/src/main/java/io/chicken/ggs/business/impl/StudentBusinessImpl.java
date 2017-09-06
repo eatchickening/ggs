@@ -35,11 +35,12 @@ public class StudentBusinessImpl implements StudentBusiness{
             return new Result<>(ResultCode.PARAMETER_INVALID);
         }
         List<Student> listStudent=null;
-        long total=0;
+        Long total=null;
         try
         {
             listStudent = studentService.queryList(query);
             total = studentService.queryTotal(query);
+            if(total==null)total=new Long(0);
         }catch(Exception e)
         {
             logger.error("数据库操作异常",e);

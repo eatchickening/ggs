@@ -45,7 +45,7 @@
 
 
 
-        <table tableName="sysmenu" domainObjectName="SysMenu" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="activity_file" domainObjectName="ActivityFile" enableCountByExample="false" enableUpdateByExample="false"
            enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 
 	</context>

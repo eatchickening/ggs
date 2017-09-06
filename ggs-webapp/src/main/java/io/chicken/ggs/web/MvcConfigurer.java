@@ -1,6 +1,9 @@
 
 package io.chicken.ggs.web;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -8,16 +11,22 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import javax.servlet.MultipartConfigElement;
+
 @Configuration
 public class MvcConfigurer extends WebMvcConfigurerAdapter {
+   /* @Value("${file.size}")
+    private String filesize;
 
+    @Value("${request.size}")
+    private String requestsize;*/
     /**
      * 首页跳转
      * @param registry
      */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("forward:/index.html");
+        registry.addViewController("/").setViewName("forward:app/src/index.html");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         super.addViewControllers(registry);
     }
@@ -42,11 +51,16 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
         registry.addMapping("/**").allowedOrigins("*");
         super.addCorsMappings(registry);
     }
-
-    //
-    // @Override
-    // public void configurePathMatch(PathMatchConfigurer configurer) {
-    //     super.configurePathMatch(configurer);
-    //     configurer.setUseSuffixPatternMatch(false);
-    // }
+   /* *//**
+     * 配置上传文件大小
+     *//*
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        //文件最大
+        factory.setMaxFileSize(filesize+"");
+        //设置总上传数据总大小
+        factory.setMaxRequestSize(requestsize+"");
+        return factory.createMultipartConfig();
+    }*/
 }

@@ -13,8 +13,8 @@ CREATE TABLE `user_info` (
     `postcode` varchar(50) DEFAULT NULL COMMENT '岗位编码',
     `organcode` varchar(50) DEFAULT NULL COMMENT '机构编码',
     `create_account` varchar(30) DEFAULT NULL COMMENT '创建人账号',
-    `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time` datetime DEFAULT NULL COMMENT '数据更新时间',
+    `create_time` timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '数据更新时间',
     `is_delete` tinyint(1) DEFAULT '0' COMMENT '是否删除：0-未删除；1-已删除',
     PRIMARY KEY (`id`),
     UNIQUE KEY `idx_account` (`account`) USING BTREE

@@ -26,7 +26,7 @@ public interface BaseDao<T> {
 
     List<T> queryList(Object id);
 
-    long queryTotal(Map<String, Object> map);
+    Long queryTotal(Map<String, Object> map);
 
-    int queryTotal();
+    Long queryTotal();
 }

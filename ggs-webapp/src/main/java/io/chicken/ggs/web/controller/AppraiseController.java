@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -48,40 +49,23 @@ public class AppraiseController {
         return appraiseBusiness.queryList(name, Integer.parseInt(pageNum), Integer.parseInt(pageSize));
     }
 
-    @ApiOperation(value = "评优奖项信息保存")
+    @ApiOperation(value = "评优奖项文件保存")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "appraisename", value = "评优名称", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "awardname", value = "奖项名称", required = true, dataType = "String", paramType = "form"),
+    })
     @RequestMapping(value = "/savefile", method = RequestMethod.POST)
     @ResponseBody
-    public String save(AppraiseVo appraiseVo, MultipartFile[] files ) {
-
-        MultipartFile file = null;
-        BufferedOutputStream stream = null;
-        for (int i = 0; i < files.length; ++i) {
-            file = files[i];
-            if (!file.isEmpty()) {
-                try {
-                    byte[] bytes = file.getBytes();
-                    stream = new BufferedOutputStream(new FileOutputStream(
-                            new File(file.getOriginalFilename())));
-                    stream.write(bytes);
-                    stream.close();
-
-                } catch (Exception e) {
-                    stream = null;
-                    return "You failed to upload " + i + " => "
-                            + e.getMessage();
-                }
-            } else {
-                return "You failed to upload " + i
-                        + " because the file was empty.";
-            }
-        }
-        return "upload successful";
+    public Result save(String appraisename,String awardname, MultipartFile file ) {
+        logger.info("评优奖项信息:"+appraisename+"awardcode"+awardname);
+        return appraiseBusiness.savefile(appraisename,awardname,file);
     }
 
     @ApiOperation(value = "评优奖项信息保存")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
-    public Result save(@RequestBody AppraiseVo appraiseVo) {
+    @Transactional(rollbackFor = Exception.class)
+    public Result save(@RequestBody AppraiseVo appraiseVo) throws Exception{
         logger.info("评优奖项信息:"+appraiseVo.toString());
         return appraiseBusiness.save(appraiseVo);
     }

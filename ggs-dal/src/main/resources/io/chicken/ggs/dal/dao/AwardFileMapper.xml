@@ -35,6 +35,28 @@
       #{filedetail,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
+
+
+  <insert id="insertCollection" >
+    insert into award_file ( appraisecode, awardcode,
+    filename, filetype, filepath,filedetail,remark,
+    create_time)
+    values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (
+      #{item.appraisecode},
+      #{item.awardcode},
+      #{item.filename},
+      #{item.filetype},
+      #{item.filepath},
+      #{item.filedetail},
+      #{item.remark},
+      #{item.createTime}
+      )
+    </foreach>
+  </insert>
+
+
   <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.AwardFile" >
     insert into award_file
     <trim prefix="(" suffix=")" suffixOverrides="," >

@@ -10,7 +10,7 @@ public interface AppraiseMapper {
 
     int insert(Appraise record);
 
-    int insertSelective(Appraise record);
+    long insertSelective(Appraise record);
 
     Appraise selectByPrimaryKey(Long id);
 
@@ -22,8 +22,9 @@ public interface AppraiseMapper {
                              @Param("start") Integer start,
                              @Param("last") Integer last);
 
-    long queryTotal(@Param("appraiseName") String appraiseName,
+    Long queryTotal(@Param("appraiseName") String appraiseName,
                     @Param("start") Integer start,
                     @Param("last") Integer last);
 
+    List<Appraise> queryListByIds(List<Long> ids);
 }

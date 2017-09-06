@@ -28,7 +28,7 @@ insert into `post` ( `departcode`, `postcode`, `name`, `remark`) values ( 'BM001
 
 
 -- 基础设置
-INSERT INTO user_info` (`id`, `account`, `username`, `password`, `email`, `mobile`, `areacode`, `departcode`, `postcode`, `organcode`, `create_account`, `create_time`, `update_time`, `is_delete`) VALUES ('1', 'admin', 'admin', 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-02 20:40:21', NULL, '0');
+INSERT INTO `user_info` (`id`, `account`, `username`, `password`, `email`, `mobile`, `areacode`, `departcode`, `postcode`, `organcode`, `create_account`, `create_time`, `update_time`, `is_delete`) VALUES ('1', 'admin', 'admin', 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-02 20:40:21', NULL, '0');
 insert into `sysmenu` ( `order_num`, `remark`, `perms`, `parent_id`, `angular_state`, `name`, `url`)
 values ( null, null, null, '0', 'root.basic', '基础设置', null);
 
@@ -50,6 +50,11 @@ select null, null, '', (select id from `sysmenu` where angular_state = 'root.inf
 
 -- 评优表信息
 INSERT INTO `appraise` (`id`, `appraisedate`, `appraisename`, `appraisecode`, `appraiselevel`, `appraisenumber`, `appraiseschool`, `appraisequota`, `remark`, `create_time`) VALUES ('2', '2017-09-02', '山东农大垃圾毕业生', 'shandongsuck', 'city', NULL, NULL, NULL, NULL, '2017-09-02 21:31:28');
-INSERT INTO awardinfo` (`id`, `appraisecode`, `awardname`, `awardcode`, `awardlevel`, `remark`, `create_time`) VALUES ('2', 'shandongeducation', '看电影高手', 'movie', 'city', NULL, '2017-09-02 21:19:09');
-INSERT INTO award_school` (`id`, `appraisecode`, `awardcode`, `schoolcode`, `schoolquota`, `remark`, `create_time`) VALUES ('2', 'shandongeducation', 'youxi', 'shannongnongda', '52', NULL, '2017-09-02 20:58:59');
-INSERT INTO award_quota` (`id`, `appraisecode`, `awardcode`, `awardquota`, `quotacontent`, `remark`, `create_time`) VALUES ('1', 'shandongeducation', 'youxi', '游戏打得好', '游戏打得好', NULL, '2017-09-02 20:52:21');
+INSERT INTO `appraise` ( `appraisedate`, `appraisename`, `appraisecode`, `appraiselevel`, `appraisenumber`, `appraiseschool`, `appraisequota`, `remark`) VALUES ( '2017-09-02', '山东农大垃圾毕业生', 'shandongsuck', 'city', NULL, NULL, NULL, NULL);
+INSERT INTO `awardinfo` (`id`, `appraisecode`, `awardname`, `awardcode`, `awardlevel`, `remark`, `create_time`) VALUES ('2', 'shandongeducation', '看电影高手', 'movie', 'city', NULL, '2017-09-02 21:19:09');
+INSERT INTO `award_school` (`id`, `appraisecode`, `awardcode`, `schoolcode`, `schoolquota`, `remark`, `create_time`) VALUES ('2', 'shandongeducation', 'youxi', 'shannongnongda', '52', NULL, '2017-09-02 20:58:59');
+INSERT INTO `award_quota` (`id`, `appraisecode`, `awardcode`, `awardquota`, `quotacontent`, `remark`, `create_time`) VALUES ('1', 'shandongeducation', 'youxi', '游戏打得好', '游戏打得好', NULL, '2017-09-02 20:52:21');
+
+-- 评优活动表
+insert into `ggs`.`Appraised_Activity` ( `remark`, `activity_name`, `activity_status`, `update_time`, `begin_date`, `create_time`, `appraise_id`, `end_date`, `creator`, `sign_End_date`) values ( '美少女评选了！！！', '2017美少女', '1', null, '2017-09-04 11:41:46', '2017-09-05 11:42:33', '1', '2017-09-08 11:41:56', null, '2017-09-06 11:42:02');
+insert into `ggs`.`Appraised_Activity` ( `remark`, `activity_name`, `activity_status`, `update_time`, `begin_date`, `create_time`, `appraise_id`, `end_date`, `creator`, `sign_End_date`) values ( null, '2017美少男', '2', null, '2017-09-05 11:43:00', '2017-09-05 11:43:18', '1', '2017-09-16 11:43:04', null, '2017-09-13 11:43:07');

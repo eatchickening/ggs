@@ -1,9 +1,6 @@
 package io.chicken.ggs.service;
 
-import io.chicken.ggs.dal.model.Appraise;
-import io.chicken.ggs.dal.model.AwardInfo;
-import io.chicken.ggs.dal.model.AwardQuota;
-import io.chicken.ggs.dal.model.AwardSchool;
+import io.chicken.ggs.dal.model.*;
 
 import java.util.List;
 
@@ -14,12 +11,19 @@ public interface AppraiseService {
 
     List<Appraise> queryList(String appraiseName, Integer pageNum, Integer pageSize);
 
-    long queryTotal(String appraiseName, Integer pageNum, Integer pageSize);
+    Long queryTotal(String appraiseName, Integer pageNum, Integer pageSize);
 
-    void save(Appraise appraise);
+    long save(Appraise appraise);
+
     void saveAwardInfo(List<AwardInfo> awardInfolist);
+
+    void saveAwardInfo(AwardInfo awardInfo);
 
     void saveAwardSchoolInfo(List<AwardSchool> awardSchoollist);
 
     void saveAwardQuotoInfo(List<AwardQuota> awardQuotalist);
+
+    void saveAwardFileInfo(List<AwardFile> awardFilelist);
+
+    List<Appraise> queryListByIds(List<Long> ids);
 }
