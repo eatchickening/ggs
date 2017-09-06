@@ -16,6 +16,6 @@ import java.util.Map;
 public interface SchoolService {
     List<School> queryList(Map<String, Object> map);
     List<School> getSchoolByCondition(Map<String, Object> map);
-    long queryTotal(Map<String, Object> map);
+    Long queryTotal(Map<String, Object> map);
 
 }

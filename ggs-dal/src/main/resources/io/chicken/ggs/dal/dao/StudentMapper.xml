@@ -34,7 +34,7 @@
         and `studentid` = #{studentid}
       </if>
       <if test="name != null and name.trim() != ''">
-        and `name` like concat('%',#{name},'%')
+        and a.name like concat('%',#{name},'%')
       </if>
 
       <if test="(

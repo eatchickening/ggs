@@ -19,7 +19,7 @@ public class SchoolServiceImpl implements SchoolService {
     }
 
 
-    public long queryTotal(Map<String, Object> map) {
+    public Long queryTotal(Map<String, Object> map) {
         return schoolMapper.queryTotal(map);
     }
 

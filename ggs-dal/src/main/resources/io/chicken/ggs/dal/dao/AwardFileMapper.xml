@@ -40,7 +40,7 @@
   <insert id="insertCollection" >
     insert into award_file ( appraisecode, awardcode,
     filename, filetype, filepath,filedetail,remark,
-    create_time )
+    create_time)
     values
     <foreach collection="list" item="item" index="index" separator="," >
       (

@@ -37,11 +37,12 @@ public class SchoolBusinessImpl implements SchoolBusiness {
             return new Result<>(ResultCode.PARAMETER_INVALID);
         }
         List<School> listSchool=null;
-        long total=0;
+        Long total=null;
         try
         {
             listSchool = schoolService.queryList(query);
             total = schoolService.queryTotal(query);
+            if(total==null)total=new Long(0);
         }catch(Exception e)
         {
             logger.error("数据库操作异常",e);

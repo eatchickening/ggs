@@ -16,6 +16,6 @@ import java.util.Map;
 public interface StudentService {
     List<Student> queryList(Map<String, Object> map);
 
-    long queryTotal(Map<String, Object> map);
+    Long queryTotal(Map<String, Object> map);
 
 }

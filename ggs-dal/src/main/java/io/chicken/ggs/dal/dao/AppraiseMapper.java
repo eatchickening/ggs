@@ -22,7 +22,7 @@ public interface AppraiseMapper {
                              @Param("start") Integer start,
                              @Param("last") Integer last);
 
-    long queryTotal(@Param("appraiseName") String appraiseName,
+    Long queryTotal(@Param("appraiseName") String appraiseName,
                     @Param("start") Integer start,
                     @Param("last") Integer last);
 

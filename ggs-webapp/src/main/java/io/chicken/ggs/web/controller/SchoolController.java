@@ -45,7 +45,7 @@ public class SchoolController {
     }
 
 
-    @ApiOperation(value = "根据地区和学校类型获取学校接口")
+    @ApiOperation(value = "获取全部学校信息接口-按照学校类型分类")
     @ResponseBody
     @RequestMapping(value = "/getAllSchool", method = RequestMethod.GET)
     public Result getAllSchool(){

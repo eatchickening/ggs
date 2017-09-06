@@ -1,6 +1,7 @@
 package io.chicken.ggs.business.impl;
 
 import io.chicken.ggs.business.AppraiseBusiness;
+import io.chicken.ggs.common.AwardLevelEnum;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.util.DateUtil;
@@ -39,10 +40,16 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
         }
         //查询列表数据
         List<Appraise> appraiseList = null;
-        long total=0;
+        Long total=new Long(0);
         try {
             appraiseList = appraiseService.queryList(appraiseName, pageNum, pageSize);
+            for(Appraise appraise:appraiseList)
+            {
+                AwardLevelEnum byCode = AwardLevelEnum.getByCode(appraise.getAppraiselevel());
+                appraise.setAppraiselevel(byCode==null?null:byCode.getMessage());
+            }
             total = appraiseService.queryTotal(appraiseName, pageNum, pageSize);
+            if(total==null)total=new Long(0);
         }catch(Exception e)
         {
             logger.error("数据库操作异常",e);

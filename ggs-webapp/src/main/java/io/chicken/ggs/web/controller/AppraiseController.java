@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -63,7 +64,8 @@ public class AppraiseController {
     @ApiOperation(value = "评优奖项信息保存")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
-    public Result save(@RequestBody AppraiseVo appraiseVo) {
+    @Transactional(rollbackFor = Exception.class)
+    public Result save(@RequestBody AppraiseVo appraiseVo) throws Exception{
         logger.info("评优奖项信息:"+appraiseVo.toString());
         return appraiseBusiness.save(appraiseVo);
     }

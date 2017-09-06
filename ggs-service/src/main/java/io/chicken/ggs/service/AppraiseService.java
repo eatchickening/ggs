@@ -11,7 +11,7 @@ public interface AppraiseService {
 
     List<Appraise> queryList(String appraiseName, Integer pageNum, Integer pageSize);
 
-    long queryTotal(String appraiseName, Integer pageNum, Integer pageSize);
+    Long queryTotal(String appraiseName, Integer pageNum, Integer pageSize);
 
     long save(Appraise appraise);
 

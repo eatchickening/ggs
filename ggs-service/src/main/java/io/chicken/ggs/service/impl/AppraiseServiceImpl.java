@@ -39,7 +39,7 @@ public class AppraiseServiceImpl implements AppraiseService {
         return appraiseMapper.queryList(appraiseName, start, pageSize * CommonConstant.PAGE_PRE);
     }
 
-    public long queryTotal(String appraiseName,
+    public Long queryTotal(String appraiseName,
                            Integer pageNum,
                            Integer pageSize) {
         Integer start = (pageNum - 1) * pageSize;

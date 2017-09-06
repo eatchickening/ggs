@@ -45,7 +45,7 @@
       </if>
   </select>
   <select id = "queryTotal" resultType="java.lang.Long">
-      select count(appraisecode)
+      select IFNULL(count(appraisecode),0)
       from appraise
       <where>
           <if test="appraiseName != null or appraiseName !=''">
