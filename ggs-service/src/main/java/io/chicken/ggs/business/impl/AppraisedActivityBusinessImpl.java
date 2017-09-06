@@ -79,8 +79,8 @@ public class AppraisedActivityBusinessImpl implements AppraisedActivityBusiness 
                 Appraise appraise = appraiseMap.get(appraisedActivity.getAppraiseId());
                 if (appraise != null) {
                     BeanUtils.copyProperties(appraise, appraisedActivityVO);
+                    appraisedActivityVO.setAppraiselevelValue(AwardLevelEnum.getByCode(appraise.getAppraiselevel()).getMessage());
                 }
-                appraisedActivityVO.setAppraiselevelValue(AwardLevelEnum.valueOf(appraise.getAppraisecode()).getMessage());
 
                 BeanUtils.copyProperties(appraisedActivity, appraisedActivityVO);
                 appraisedActivityVO.setActivityStatusValue(AppraisedActivityStatusEnum.getDesc(appraisedActivity.getActivityStatus()));
