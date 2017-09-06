@@ -36,7 +36,7 @@
     ) ai
     on ap.id=ai.appraisecode
       <where>
-          <if test="appraiseName != null or appraiseName !=''">
+          <if test="appraiseName != null and appraiseName.trim() != ''">
               and ap.appraisename like concat('%', #{appraiseName}, '%')
           </if>
       </where>
@@ -48,13 +48,11 @@
       select count(*)
       from appraise
       <where>
-          <if test="appraiseName != null or appraiseName !=''">
+        <if test="appraiseName != null and appraiseName.trim() != ''">
               appraisename like concat('%', #{appraiseName}, '%')
           </if>
       </where>
-      <if test="start != null and last != null">
-          limit #{start}, #{last}
-      </if>
+
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 

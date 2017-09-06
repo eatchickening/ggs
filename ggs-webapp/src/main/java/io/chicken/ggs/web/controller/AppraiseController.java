@@ -39,8 +39,8 @@ public class AppraiseController {
     @ApiOperation(value = "获取评优奖项列表", notes="默认name参数为空, pageSize pageNum不能为空")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", value = "评优名称", required = false, dataType = "String", paramType = "form"),
-            @ApiImplicitParam(name = "pageNum", value = "每页显示个数", required = true, dataType = "String", paramType = "form"),
-            @ApiImplicitParam(name = "pageSize", value = "显示页数", required = true, dataType = "String", paramType = "form")
+            @ApiImplicitParam(name = "pageNum", value = "页数", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "pageSize", value = "每页条数", required = true, dataType = "String", paramType = "form")
     })
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     public Result appraiseList(String name,

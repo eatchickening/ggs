@@ -35,9 +35,7 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
     @Value("${file.basepath}")
     private String storefile;
     public Result<List<Appraise>> queryList(String appraiseName, Integer pageNum, Integer pageSize) {
-        if (appraiseName == null) {
-            appraiseName = "";
-        }
+
         //查询列表数据
         List<Appraise> appraiseList = null;
         Long total=new Long(0);
