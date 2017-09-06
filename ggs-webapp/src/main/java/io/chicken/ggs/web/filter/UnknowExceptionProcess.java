@@ -17,9 +17,10 @@ public class UnknowExceptionProcess {
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public Result jsonErrorHandler(Exception e) {
+    public Result<String> jsonErrorHandler(Exception e) {
         logger.error("发生未知错误",e);
-        Result result=  new Result<>(ResultCode.SYS_EXCEPTION);
+        Result<String> result =  new Result<>(ResultCode.SYS_EXCEPTION);
+        result.setData(e.getMessage());
         return result;
     }
 
