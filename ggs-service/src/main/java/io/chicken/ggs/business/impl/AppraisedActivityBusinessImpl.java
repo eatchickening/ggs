@@ -5,9 +5,7 @@ package io.chicken.ggs.business.impl;
 
 import io.chicken.ggs.business.AppraiseBusiness;
 import io.chicken.ggs.business.AppraisedActivityBusiness;
-import io.chicken.ggs.common.GGSException;
-import io.chicken.ggs.common.Result;
-import io.chicken.ggs.common.ResultCode;
+import io.chicken.ggs.common.*;
 import io.chicken.ggs.common.util.PropertiesUtils;
 import io.chicken.ggs.common.vo.AppraisedActivityQueryParam;
 import io.chicken.ggs.common.vo.AppraisedActivityVO;
@@ -82,7 +80,11 @@ public class AppraisedActivityBusinessImpl implements AppraisedActivityBusiness 
                 if (appraise != null) {
                     BeanUtils.copyProperties(appraise, appraisedActivityVO);
                 }
+                appraisedActivityVO.setAppraiselevelValue(AwardLevelEnum.valueOf(appraise.getAppraisecode()).getMessage());
+
                 BeanUtils.copyProperties(appraisedActivity, appraisedActivityVO);
+                appraisedActivityVO.setActivityStatusValue(AppraisedActivityStatusEnum.getDesc(appraisedActivity.getActivityStatus()));
+
                 appraisedActivityVOList.add(appraisedActivityVO);
             }
 
