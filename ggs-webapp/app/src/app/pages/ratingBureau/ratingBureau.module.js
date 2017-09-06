@@ -36,6 +36,11 @@
                 sidebarMeta: {
                     order: 3
                 }
+            }).state('root.ratingBureau.new', {
+                url: '/new',
+                templateUrl: 'app/pages/ratingBureau/awardManager/createActivity.html',
+                title: '添加评优活动',
+                controller: 'AddNewActivity'
             });
     }
 
