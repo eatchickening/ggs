@@ -19,6 +19,14 @@
     from award_school
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="selectByAppraisId" resultMap="BaseResultMap"  parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from award_school
+    where appraisecode = #{appraiseid,jdbcType=BIGINT}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from award_school
     where id = #{id,jdbcType=BIGINT}

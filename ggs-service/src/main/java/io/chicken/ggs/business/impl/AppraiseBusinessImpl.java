@@ -211,6 +211,8 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
 
     @Override
     public Result getDetail(Long id) {
+
+
         return null;
     }
 }

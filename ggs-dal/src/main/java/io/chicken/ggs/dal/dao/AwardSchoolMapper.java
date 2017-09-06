@@ -15,6 +15,8 @@ public interface AwardSchoolMapper {
     int insertCollection(List<AwardSchool> record);
     AwardSchool selectByPrimaryKey(Long id);
 
+    List<AwardSchool> selectByAppraisId(String id);
+
     int updateByPrimaryKeySelective(AwardSchool record);
 
     int updateByPrimaryKey(AwardSchool record);

@@ -28,4 +28,9 @@ public interface AppraiseService {
     List<Appraise> queryListByIds(List<Long> ids);
 
     void delete(Long id);
+
+    void selectByAppraisId(long id);
+
+
+
 }

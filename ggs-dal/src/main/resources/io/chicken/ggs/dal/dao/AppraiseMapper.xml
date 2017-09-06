@@ -55,9 +55,23 @@
 
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from appraise
+     select
+    ap.id,
+    ap.appraisedate appraisedate, ap.appraisename, ap.appraisecode, ap.appraiselevel,
+    ai.appraisenumber,aw.appraiseschool,aw.appraisequota,ap.remark, ap.create_time
+    from appraise ap
+    left join
+    (
+    select
+    appraisecode, count(distinct(schoolcode)) appraiseschool, sum(schoolquota) appraisequota
+    from award_school group by appraisecode) aw
+    on ap.id=aw.appraisecode
+    left join
+    (
+    select appraisecode, count(*) appraisenumber from
+    awardinfo group by appraisecode
+    ) ai
+    on ap.id=ai.appraisecode
     where id = #{id,jdbcType=BIGINT}
   </select>
 

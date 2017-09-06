@@ -16,6 +16,8 @@ public interface AwardInfoMapper {
 
     int insertSelective(AwardInfo record);
 
+    List<AwardInfo> selectByAppraisId(String id);
+
     AwardInfo selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(AwardInfo record);

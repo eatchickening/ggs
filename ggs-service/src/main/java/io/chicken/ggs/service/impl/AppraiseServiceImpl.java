@@ -93,4 +93,18 @@ public class AppraiseServiceImpl implements AppraiseService {
         awardInfoMapper.deleteByAppraisecode(id+"");
         appraiseMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public void selectByAppraisId(long id) {
+        List<AwardFile> awardFiles = awardFileMapper.selectByAppraisId(id + "");
+
+        List<AwardQuota> awardQuotas = awardQuotaMapper.selectByAppraisId(id + "");
+
+        List<AwardSchool> awardSchools = awardSchoolMapper.selectByAppraisId(id + "");
+
+        List<AwardInfo> awardInfos = awardInfoMapper.selectByAppraisId(id + "");
+
+        Appraise appraise = appraiseMapper.selectByPrimaryKey(id);
+
+    }
 }
