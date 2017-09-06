@@ -15,11 +15,11 @@ import javax.servlet.MultipartConfigElement;
 
 @Configuration
 public class MvcConfigurer extends WebMvcConfigurerAdapter {
-    @Value("${file.size}")
+   /* @Value("${file.size}")
     private String filesize;
 
     @Value("${request.size}")
-    private String requestsize;
+    private String requestsize;*/
     /**
      * 首页跳转
      * @param registry
@@ -51,9 +51,9 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
         registry.addMapping("/**").allowedOrigins("*");
         super.addCorsMappings(registry);
     }
-    /**
+   /* *//**
      * 配置上传文件大小
-     */
+     *//*
     @Bean
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
@@ -62,5 +62,5 @@ public class MvcConfigurer extends WebMvcConfigurerAdapter {
         //设置总上传数据总大小
         factory.setMaxRequestSize(requestsize+"");
         return factory.createMultipartConfig();
-    }
+    }*/
 }
