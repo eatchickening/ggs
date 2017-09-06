@@ -4,6 +4,7 @@
 package io.chicken.ggs.business.impl;
 
 import io.chicken.ggs.business.ActivityFileBusiness;
+import io.chicken.ggs.common.GGSException;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.dal.model.ActivityFile;
@@ -32,6 +33,17 @@ public class ActivityFileBusinessImpl implements ActivityFileBusiness {
         } catch (Exception e) {
             LOGGER.error(activityFile.getOrigFileName() + ", save() 异常： " + e.getMessage());
             return new Result(ResultCode.UPLOAD_EXCEPTION);
+        }
+    }
+
+    @Override
+    public Result delete(Long id) {
+        try {
+            activityFileService.delete(id);
+            return new Result(ResultCode.SUCCESS);
+        } catch (GGSException e) {
+            LOGGER.error(id + ", 活动材料删除时异常：" + e.getMessage());
+            return new Result(e.getCode(), e.getMessage());
         }
     }
 }

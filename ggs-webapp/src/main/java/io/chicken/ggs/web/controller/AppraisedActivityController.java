@@ -136,6 +136,19 @@ public class AppraisedActivityController {
         return appraisedActivityBusiness.delete(id);
     }
 
+    @ApiOperation(value = "删除评优活动的材料")
+    @ApiImplicitParam(value = "材料id", name = "id", dataType = "Long", paramType = "form")
+    @ResponseBody
+    @RequestMapping(value = "/deleteFile", method = RequestMethod.POST)
+    public Result deleteFile(Long id) {
+        logger.info("deleteFile() id = " + id);
+        if (id == null) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+
+        return activityFileBusiness.delete(id);
+    }
+
     @ApiOperation(value = "结束评优活动")
     @ApiImplicitParam(value = "评优活动id", name = "id", dataType = "Long", paramType = "form")
     @ResponseBody

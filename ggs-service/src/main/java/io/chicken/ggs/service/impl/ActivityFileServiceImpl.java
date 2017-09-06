@@ -32,4 +32,13 @@ public class ActivityFileServiceImpl implements ActivityFileService {
         }
         activityFileMapper.insert(activityFile);
     }
+
+    @Override
+    public void delete(Long id) {
+        LOGGER.info("delete(), id = " + id);
+        if (id == null) {
+            throw new GGSException(ResultCode.PARAMETER_EMPTY);
+        }
+        activityFileMapper.deleteByPrimaryKey(id);
+    }
 }

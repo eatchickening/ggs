@@ -12,4 +12,6 @@ import io.chicken.ggs.dal.model.ActivityFile;
 public interface ActivityFileBusiness {
 
     Result save(ActivityFile activityFile);
+
+    Result delete(Long id);
 }
