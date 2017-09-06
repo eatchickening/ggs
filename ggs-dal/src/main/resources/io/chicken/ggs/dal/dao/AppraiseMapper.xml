@@ -19,6 +19,7 @@
   </sql>
   <select id = "queryList" resultMap="BaseResultMap">
     select
+    ap.id,
     ap.appraisedate appraisedate, ap.appraisename, ap.appraisecode, ap.appraiselevel,
     ai.appraisenumber,aw.appraiseschool,aw.appraisequota,ap.remark, ap.create_time
     from appraise ap
@@ -27,25 +28,24 @@
     select
     appraisecode, count(distinct(schoolcode)) appraiseschool, sum(schoolquota) appraisequota
     from award_school group by appraisecode) aw
-    on ap.appraisecode=aw.appraisecode
+    on ap.id=aw.appraisecode
     left join
     (
     select appraisecode, count(distinct(awardcode)) appraisenumber from
     awardinfo group by appraisecode
     ) ai
-    on ap.appraisecode=ai.appraisecode
+    on ap.id=ai.appraisecode
       <where>
           <if test="appraiseName != null or appraiseName !=''">
               and ap.appraisename like concat('%', #{appraiseName}, '%')
           </if>
       </where>
-      group by ap.appraisename, ap.appraisecode, ap.create_time, ap.appraiselevel, ap.remark, ap.appraisedate
       <if test="start != null and last != null">
           limit #{start}, #{last}
       </if>
   </select>
   <select id = "queryTotal" resultType="java.lang.Long">
-      select IFNULL(count(appraisecode),0)
+      select count(*)
       from appraise
       <where>
           <if test="appraiseName != null or appraiseName !=''">

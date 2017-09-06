@@ -49,6 +49,7 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
                 appraise.setAppraiselevel(byCode==null?null:byCode.getMessage());
             }
             total = appraiseService.queryTotal(appraiseName, pageNum, pageSize);
+            logger.info("查询总数："+total);
             if(total==null)total=new Long(0);
         }catch(Exception e)
         {
