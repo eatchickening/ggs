@@ -3,7 +3,7 @@
 
     angular.module('chicken.pages.info').factory('TeacherService', ['$http', '$q' ,function ($http, $q) {
         return {
-            query: function (pageNum, pageSize, teacherName, schoolName,areaName,schoolType ) {
+            query: function (pageNum, pageSize, teacherName, schoolCode,areaCode,schoolType ) {
                 var deferred = $q.defer();
                 $http({
                     method: 'POST',
@@ -12,8 +12,8 @@
                         pageNum: pageNum,
                         pageSize: pageSize,
                         name:teacherName,
-                        schoolname:schoolName,
-                        areaname:areaName,
+                        schoolcode:schoolCode,
+                        areacode:areaCode,
                         schooltype:schoolType
                     }
                 }).then(function (response) {

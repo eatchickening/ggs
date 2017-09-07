@@ -11,7 +11,7 @@
 												<div ng-class="{'hotel-filter-list':true,'filter-list-has-more':true,'hotel-filter-list-min':isShowMoreRegion}"><strong class="tit"></strong>
 													<div class="con radio">
 														<ul class="list">
-															<li ng-repeat="type in regions" ng-click="onRegionChanged(type.value)"><a ng-class="{true:'filter-tag selected',false:'filter-tag'}[type.value==curRegion]">{{type.name}}<i></i></a></li>
+															<li ng-repeat="type in regions" ng-click="onRegionChanged(type.bizcode)"><a ng-class="{true:'filter-tag selected',false:'filter-tag'}[type.bizcode==curRegion]">{{type.datavalue}}<i></i></a></li>
 														</ul> 
 														<span class="filter-more">
 															<span class="filter-open"  ng-click="showMoreRegion(false)">更多</span>
@@ -27,7 +27,7 @@
 												<div ng-class="{'hotel-filter-list':true,'filter-list-has-more':true,'hotel-filter-list-min':isShowMoreSchoolType}"><strong class="tit"></strong>
 													<div class="con radio">
 														<ul class="list">
-															<li ng-repeat="type in schoolTypes" ng-click="onSchoolTypeChanged(type.value)"><a ng-class="{true:'filter-tag selected',false:'filter-tag'}[type.value==curSchoolType]">{{type.name}}<i></i></a></li>
+															<li ng-repeat="type in schoolTypes" ng-click="onSchoolTypeChanged(type.bizcode)"><a ng-class="{true:'filter-tag selected',false:'filter-tag'}[type.bizcode==curSchoolType]">{{type.datavalue}}<i></i></a></li>
 														</ul> 
 														<span class="filter-more">
 															<span class="filter-open"  ng-click="showMoreSchoolType(false)">更多</span>
@@ -43,7 +43,7 @@
 											<div ng-class="{'hotel-filter-list':true,'filter-list-has-more':true,'hotel-filter-list-min':isShowMoreSchool}"><strong class="tit"></strong>
 												<div class="con radio">
 													<ul class="list">
-														<li ng-repeat="type in schools" ng-click="onSchoolChanged(type.value)"><a ng-class="{true:'filter-tag selected',false:'filter-tag'}[type.value==curSchool]">{{type.name}}<i></i></a></li>
+														<li ng-repeat="type in schools" ng-click="onSchoolChanged(type.schoolcode)"><a ng-class="{true:'filter-tag selected',false:'filter-tag'}[type.schoolcode==curSchool]">{{type.name}}<i></i></a></li>
 													</ul> 
 													<span class="filter-more">
 														<span class="filter-open"  ng-click="showMoreSchool(false)">更多</span>
@@ -70,14 +70,14 @@
 					</table>
 
 
-					<table class="table" st-safe-src="teacherList" st-table="displayed">
+					<table class="table" yw-safe-src="teacherList" yw-table="displayed">
 						<thead>
 							<tr class="sortable ">
-								<th class="table-id" st-sort="id" st-sort-default="true">#</th>
-								<th st-sort="firstName">教师姓名</th>
-								<th st-sort="lastName">性别</th>
-								<th>所属学校</th>
-								<th>任课班级</th>
+								<th class="table-id" yw-sort="id" yw-sort-default="true">#</th>
+								<th yw-sort="teaname">教师姓名</th>
+								<th yw-sort="teasex">性别</th>
+								<th yw-sort="teaschool">所属学校</th>
+								<th yw-sort="teaclass">任课班级</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -108,8 +108,8 @@
                                         <select class="page-size" title="Rows on page" ng-model="pageSize" ng-options="pageSize for pageSize in pageSizes" ng-change="changePageSize(pageSize)"></select>
                                         <span class="page-items">&nbsp条</span>
                                     </div>
-                                    <div st-pagination="" st-total-items="totalItems" st-items-by-page="pageSize" st-displayed-pages="5" st-page-change="pageChange(newPage)"
-                                        st-template="app/pages/common/pagination.html"></div>
+                                    <div yw-pagination="" yw-total-items="totalItems" yw-items-by-page="pageSize" yw-displayed-pages="5" yw-page-change="pageChange(newPage)"
+                                        yw-template="app/pages/common/pagination.html"></div>
 								</td>
 							</tr>
 						</tfoot>

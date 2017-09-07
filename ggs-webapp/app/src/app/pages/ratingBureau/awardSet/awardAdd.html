@@ -1,0 +1,48 @@
+<div class="modal-content">
+	<div class="modal-header bg-info">
+		<i class="ion-information-circled modal-icon"></i><span>添加评优奖项</span>
+	</div>
+	<div class="modal-body">
+		<ba-wizard>
+			<ba-wizard-step title="1.添加评优奖项名称和奖项" form="vm.personalInfoForm">
+				<form name="vm.personalInfoForm" novalidate>
+					<div class="row">
+							<div class="col-md-6">
+									<div class="form-group has-feedback"
+									ng-class="{'has-error': vm.personalInfoForm.username.$invalid && (vm.personalInfoForm.username.$dirty || vm.personalInfoForm.$submitted)}">
+								   <label for="exampleUsername1">Username</label>
+								   <input type="text" class="form-control" id="exampleUsername1" name="username" placeholder="Username" ng-model="vm.personalInfo.username" required>
+								   <span class="help-block error-block basic-block">Required</span>
+							   </div>
+							   <div class="form-group" ng-class="{'has-error': vm.personalInfoForm.email.$invalid && (vm.personalInfoForm.email.$dirty || vm.personalInfoForm.$submitted)}">
+								   <label for="exampleInputEmail1">Email address</label>
+								   <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Email" ng-model="vm.personalInfo.email" required>
+								   <span class="help-block error-block basic-block">Proper email required</span>
+							   </div>
+							</div>
+					</div>
+				</form>
+			</ba-wizard-step>
+			<ba-wizard-step title="2.选择参选评优学校和名额" form="productInfoForm">
+				<form name="productInfoForm" novalidate>
+					<div class="row">
+						<div class="col-md-6">
+						</div>
+						<div class="col-md-6">
+						</div>
+					</div>
+				</form>
+			</ba-wizard-step>
+			<ba-wizard-step title="3.设置奖项指标标准、材料类型" form="addressForm">
+				<form name="addressForm" novalidate>
+					<div class="row">
+					</div>
+				</form>
+			</ba-wizard-step>
+		</ba-wizard>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" ng-click="$dismiss()">取消</button>
+		<button type="button" class="btn btn-info" ng-click="$close('OK')">提交</button>
+	</div>
+</div>
