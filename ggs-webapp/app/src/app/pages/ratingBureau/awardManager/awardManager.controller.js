@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('chicken.pages.ratingBureau')
-        .controller('RatingBureauAwardManagerCtrl', function ($scope, $state, AwardBureauService) {
+        .controller('RatingBureauAwardManagerCtrl', function ($scope, $state, AwardBureauService, $uibModal, toastr) {
             // list activities by page
             var currentScope = 1;
             var tempPageSize = 10;
@@ -48,6 +48,27 @@
             // search activity by activity name
             $scope.searchActivity = function(activityName) {
                 getActivityList(activityName, 1, 10);
+            };
+
+            // delete activity
+            $scope.deleteActivity = function(activity) {
+                $scope.delActivityName = activity.activityName;
+                var delActivityModal = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'app/pages/ratingBureau/awardManager/delActivity.html',
+                    size: 'sm',
+                    scope: $scope
+                });
+                delActivityModal.result.then(function(result){
+                    if (result && result === 'OK') {
+                        return AwardBureauService.deleteActivity(activity.id).then(function(response) {
+                            if (response.data && response.data.code === 0) {
+                                getActivityList('', 1, tempPageSize);
+                                toastr.success('删除评优活动'+activity.activityName+'成功！', '成功');
+                            }
+                        });
+                    }
+                }); 
             };
 
             // add new activity

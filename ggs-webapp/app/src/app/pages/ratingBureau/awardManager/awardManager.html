@@ -21,7 +21,7 @@
                                 <th yw-sort="appraisenumber">奖项数</th>
                                 <th yw-sort="appraisequota">奖项指标</th>
                                 <th yw-sort="appraiselevel">级别</th>
-                                <th yw-sort="activityStatus">状态</th>
+                                <th yw-sort="activityStatusValue">状态</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -33,7 +33,7 @@
                                 <td>{{item.appraisenumber}}</td>
                                 <td>{{item.appraisequota}}</td>
                                 <td>{{item.appraiselevel}}</td>
-                                <td>{{item.activityStatus}}</td>
+                                <td>{{item.activityStatusValue}}</td>
                                 <td>
                                     <div class="btn-group" uib-dropdown dropdown-append-to-body>
                                         <button type="button" class="btn btn-info " uib-dropdown-toggle>
@@ -62,6 +62,7 @@
                                 </td>
                             </tr>
                         </tfoot>
+                    </table>
                 </div>
             </div>
         </div>

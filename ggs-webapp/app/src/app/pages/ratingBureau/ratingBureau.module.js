@@ -40,7 +40,7 @@
                 url: '/new',
                 templateUrl: 'app/pages/ratingBureau/awardManager/createActivity.html',
                 title: '添加评优活动',
-                controller: 'AddNewActivity'
+                controller: 'CreateActivityCtrl'
             });
     }
 

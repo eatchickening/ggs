@@ -147,6 +147,7 @@
                         console.log($scope.user);
                         return BasicService.addUser($scope.user, selectedMenus.join(',')).then(function(response){
                             if (response.code === 0) {
+                                getUserList(1, tempPageSize);
                                 toastr.success('添加用户：'+$scope.user.username+'成功！', '成功');
                             }
                         });

@@ -1,0 +1,75 @@
+<div class="widgets">
+    <div class="row">
+        <div class="col-md-12">
+            <div ba-panel ba-panel-class="with-scroll">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">评优活动名称：</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="评优活动名称" ng-required="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">评优奖项：</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="评优奖项" ng-required="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">起止时间：</label>
+                        <div class="col-sm-3 datepicker">
+                            <p class="input-group">
+                                <input type="text" class="form-control" uib-datepicker-popup="yyyy/MM/dd" datepicker-options="options" ng-model="bd" is-open="beginDate"
+                                    ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" placeholder="开始时间"
+                                />
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="beginDate=!beginDate"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                            </p>
+                        </div>
+                        <div class="col-sm-3 datepicker">
+                            <p class="input-group">
+                                <input type="text" class="form-control" uib-datepicker-popup="yyyy/MM/dd" datepicker-options="options" ng-model="ed" is-open="endDate"
+                                    ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" placeholder="结束时间"
+                                />
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="endDate=!endDate"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">报名截止时间：</label>
+                        <div class="col-sm-6 datepicker">
+                            <p class="input-group">
+                                <input type="text" class="form-control" uib-datepicker-popup="yyyy/MM/dd" datepicker-options="options" ng-model="sed" is-open="signEndDate"
+                                    ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" placeholder="报名截止时间"
+                                />
+                                <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="signEndDate=!signEndDate"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">活动说明：</label>
+                        <div class="col-sm-6">
+                            <textarea placeholder="活动说明" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">上传文件：</label>
+                        <div class="col-sm-6">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-6">
+                            <button type="submit" class="btn btn-warning">创建</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
