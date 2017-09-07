@@ -13,6 +13,8 @@
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="BaseResultMapDeail" type="io.chicken.ggs.dal.model.AppraiseDetail" extends="BaseResultMap">
+  </resultMap>
   <sql id="Base_Column_List" >
     id, appraisedate, appraisename, appraisecode, appraiselevel, appraisenumber, appraiseschool,
     appraisequota, remark, create_time
@@ -31,7 +33,7 @@
     on ap.id=aw.appraisecode
     left join
     (
-    select appraisecode, count(distinct(awardcode)) appraisenumber from
+    select appraisecode, count(*) appraisenumber from
     awardinfo group by appraisecode
     ) ai
     on ap.id=ai.appraisecode
@@ -54,17 +56,45 @@
       </where>
 
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from appraise
+  <select id="selectByPrimaryKey" resultMap="BaseResultMapDeail" parameterType="java.lang.Long" >
+     select
+    ap.id,
+    ap.appraisedate appraisedate, ap.appraisename, ap.appraisecode, ap.appraiselevel,
+    ai.appraisenumber,aw.appraiseschool,aw.appraisequota,ap.remark, ap.create_time
+    from appraise ap
+    left join
+    (
+    select
+    appraisecode, count(distinct(schoolcode)) appraiseschool, sum(schoolquota) appraisequota
+    from award_school group by appraisecode) aw
+    on ap.id=aw.appraisecode
+    left join
+    (
+    select appraisecode, count(*) appraisenumber from
+    awardinfo group by appraisecode
+    ) ai
+    on ap.id=ai.appraisecode
     where id = #{id,jdbcType=BIGINT}
   </select>
 
   <select id = "queryListByIds" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+    ap.id,
+    ap.appraisedate appraisedate, ap.appraisename, ap.appraisecode, ap.appraiselevel,
+    ai.appraisenumber,aw.appraiseschool,aw.appraisequota,ap.remark, ap.create_time
     from appraise ap
+    left join
+    (
+    select
+    appraisecode, count(distinct(schoolcode)) appraiseschool, sum(schoolquota) appraisequota
+    from award_school group by appraisecode) aw
+    on ap.id=aw.appraisecode
+    left join
+    (
+    select appraisecode, count(*) appraisenumber from
+    awardinfo group by appraisecode
+    ) ai
+    on ap.id=ai.appraisecode
     where ap.id in
     <foreach collection="list" open="(" separator="," close=")" item="id" index="index">
         #{id}

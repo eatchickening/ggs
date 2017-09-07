@@ -104,6 +104,7 @@
 
 .hotel-filter-list .con .any a {
 	padding-left: 10px;
+	cursor:pointer;
 }
 
 .hotel-filter-list .con .any a:hover {
@@ -122,6 +123,7 @@
 
 .hotel-filter-list .radio a:hover {
 	background-color: #eff2f5;
+	cursor:pointer;
 }
 
 .hotel-filter-list .radio a.selected, .hotel-filter-list .radio a.selected:hover {

@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class AwardInfoVo {
-
+    private Long id;
     private String awardname;
 
 
@@ -68,10 +68,19 @@ public class AwardInfoVo {
         this.awardQuotaList = awardQuotaList;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "AwardInfoVo{" +
-                "awardname='" + awardname + '\'' +
+                "id=" + id +
+                ", awardname='" + awardname + '\'' +
                 ", awardlevel='" + awardlevel + '\'' +
                 ", remark='" + remark + '\'' +
                 ", awardSchoolList=" + awardSchoolList +

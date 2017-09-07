@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class AwardQuotaVo {
 
-
+    private Long id;
     private String awardquota;
 
     private String quotacontent;
@@ -37,11 +37,18 @@ public class AwardQuotaVo {
         this.remark = remark == null ? null : remark.trim();
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
         return "AwardQuotaVo{" +
+                "id=" + id +
                 ", awardquota='" + awardquota + '\'' +
                 ", quotacontent='" + quotacontent + '\'' +
                 ", remark='" + remark + '\'' +

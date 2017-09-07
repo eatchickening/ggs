@@ -2,107 +2,8 @@
   'use strict';
 
   angular.module('chicken.pages.info')
-    .controller('SchoolCtrl', function ($scope, $uibModal, toastr, SchoolService) {
+    .controller('SchoolCtrl', function ($scope, $uibModal, toastr, SchoolService, InfoService) {
 
-      $scope.regions = [
-        { name: '全部', value: '0' },
-        { name: '地区1', value: '1' },
-        { name: '地区2', value: '2' },
-        { name: '地区3', value: '3' },
-        { name: '地区4', value: '4' },
-        { name: '地区5', value: '5' },
-      ];
-
-      $scope.schoolTypes = [
-        { name: '全部', value: '1' },
-        { name: '高职', value: '2' },
-        { name: '高中', value: '3' },
-        { name: '初中', value: '4' },
-        { name: '小学', value: '5' },
-      ];
-
-      $scope.smartTableData = [
-        {
-          id: 1,
-          firstName: 'Mark',
-          lastName: 'Otto',
-          username: '@mdo',
-          email: 'mdo@gmail.com',
-          age: '28'
-        },
-        {
-          id: 2,
-          firstName: 'Jacob',
-          lastName: 'Thornton',
-          username: '@fat',
-          email: 'fat@yandex.ru',
-          age: '45'
-        },
-        {
-          id: 3,
-          firstName: 'Larry',
-          lastName: 'Bird',
-          username: '@twitter',
-          email: 'twitter@outlook.com',
-          age: '18'
-        },
-        {
-          id: 4,
-          firstName: 'John',
-          lastName: 'Snow',
-          username: '@snow',
-          email: 'snow@gmail.com',
-          age: '20'
-        },
-        {
-          id: 5,
-          firstName: 'Jack',
-          lastName: 'Sparrow',
-          username: '@jack',
-          email: 'jack@yandex.ru',
-          age: '30'
-        },
-        {
-          id: 1,
-          firstName: 'Mark',
-          lastName: 'Otto',
-          username: '@mdo',
-          email: 'mdo@gmail.com',
-          age: '28'
-        },
-        {
-          id: 2,
-          firstName: 'Jacob',
-          lastName: 'Thornton',
-          username: '@fat',
-          email: 'fat@yandex.ru',
-          age: '45'
-        },
-        {
-          id: 3,
-          firstName: 'Larry',
-          lastName: 'Bird',
-          username: '@twitter',
-          email: 'twitter@outlook.com',
-          age: '18'
-        },
-        {
-          id: 4,
-          firstName: 'John',
-          lastName: 'Snow',
-          username: '@snow',
-          email: 'snow@gmail.com',
-          age: '20'
-        },
-        {
-          id: 5,
-          firstName: 'Jack',
-          lastName: 'Sparrow',
-          username: '@jack',
-          email: 'jack@yandex.ru',
-          age: '30'
-        }
-      ];
 
       //控制查询条件的'更多'按钮
       $scope.isShowMoreRegion = true;
@@ -116,42 +17,95 @@
       };
 
       //当前选择的区域
-      $scope.curRegion = 0;
+      $scope.curRegion = '';
 
       //当前选中的学校类型
-      $scope.curSchoolType = 1;
+      $scope.curSchoolType = '';
 
 
       //查询条件---地区变化
       $scope.onRegionChanged = function (value) {
+        if (value == $scope.curRegion) {
+          return;
+        }
+
         $scope.curRegion = value;
+        //地区变化后重新查询对应的学校
+        getSchoolList(1, $scope.tempPageSize, $scope.curRegion, $scope.curSchoolType, '');
       };
 
       $scope.onSchoolTypeChanged = function (value) {
-        $scope.curSchoolType = value;
-      };
-
-      //根据查询条件加载教师数据
-      $scope.querySchoolInfo = function (schoolName) {
-
-        if (!schoolName) {
-          toastr.error('请输入学校名称!', '精确查询', {});
+        if (value == $scope.curSchoolType) {
           return;
         }
-        getSchoolList(1, $scope.tempPageSize, $scope.curRegion, $scope.curSchoolType, $scope.schoolName);
+
+        $scope.curSchoolType = value;
+        //学校类型变化后重新查询对应的学校
+        getSchoolList(1, $scope.tempPageSize, $scope.curRegion, $scope.curSchoolType, '');
+      };
+
+      //根据查询条件加载学校数据
+      $scope.querySchoolInfo = function (schoolName) {
+        if (!schoolName) {
+          schoolName = '';
+        }
+
+        // if (!schoolName) {
+        //   toastr.error('请输入学校名称!', '精确查询', {});
+        //   return;
+        // }
+        getSchoolList(1, $scope.tempPageSize, $scope.curRegion, $scope.curSchoolType, schoolName);
       };
 
       function getSchoolList(pageNum, pageSize, region, schoolType, schoolName) {
-        $scope.totalItems = 10;
-
-        $scope.schoolList = $scope.smartTableData;
+        SchoolService.query(pageNum, pageSize, region, schoolType, schoolName).then(function (data) {
+          if (data.code === 0 && data.data && data.data instanceof Array) {
+            $scope.schoolList = data.data;
+            $scope.totalItems = data.total;
+          } else {
+            toastr.error(data.message);
+          }
+        }).catch(function (err) {
+          toastr.error(err);
+        });
       }
 
       var currentScope = 1;
       $scope.tempPageSize = 5;
       $scope.pageSize = 5;
 
+      function initArea() {
+        //初始化区域和学校类型等查询条件
+        InfoService.queryAreas().then(function (data) {
+          if (data.code === 0 && data.data && data.data instanceof Array) {
+            $scope.regions = data.data;
+            $scope.regions.unshift({ 'bizcode': '', 'datavalue': '全部' });
+          } else {
+            toastr.error(data.message);
+          }
+        }).catch(function (err) {
+          toastr.error(err);
+        });
+      }
+
+      function initSchoolTypes() {
+        InfoService.querySchoolTypes().then(function (data) {
+          if (data.code === 0 && data.data && data.data instanceof Array) {
+            $scope.schoolTypes = data.data;
+            $scope.schoolTypes.unshift({ 'bizcode': '', 'datavalue': '全部' });
+          } else {
+            toastr.error(data.message);
+          }
+        }).catch(function (err) {
+          toastr.error(err);
+        });
+      }
+
       function init() {
+
+        initArea();
+        initSchoolTypes();
+
         $scope.displayed = [];
         $scope.pageSizes = [5, 10, 15, 20, 25];
         // getUserList(1, 10);

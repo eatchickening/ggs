@@ -3,7 +3,7 @@ package io.chicken.ggs.common.vo;
 import java.util.Date;
 
 public class AwardSchoolVo {
-
+    private Long id;
     private String schoolcode;
 
     private Integer schoolquota;
@@ -34,15 +34,21 @@ public class AwardSchoolVo {
         this.remark = remark == null ? null : remark.trim();
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
         return "AwardSchoolVo{" +
+                "id=" + id +
                 ", schoolcode='" + schoolcode + '\'' +
                 ", schoolquota=" + schoolquota +
                 ", remark='" + remark + '\'' +
-
                 '}';
     }
 }

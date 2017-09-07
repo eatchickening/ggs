@@ -3,7 +3,7 @@ package io.chicken.ggs.common.vo;
 import org.springframework.web.multipart.MultipartFile;
 
 public class AwardFileVo {
-
+    private Long id;
     private String filename;
 
     private String filetargetname;
@@ -75,10 +75,19 @@ public class AwardFileVo {
         this.filetargetname = filetargetname;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "AwardFileVo{" +
-                "filename='" + filename + '\'' +
+                "id=" + id +
+                ", filename='" + filename + '\'' +
                 ", filetargetname='" + filetargetname + '\'' +
                 ", filetype='" + filetype + '\'' +
                 ", filepath='" + filepath + '\'' +

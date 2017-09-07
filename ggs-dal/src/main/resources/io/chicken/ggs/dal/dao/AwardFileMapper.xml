@@ -21,6 +21,15 @@
     from award_file
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+
+  <select id="selectByAwardInfoId" resultMap="BaseResultMap"  parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from award_file
+    where awardcode = #{awardcode,jdbcType=BIGINT}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from award_file
     where id = #{id,jdbcType=BIGINT}

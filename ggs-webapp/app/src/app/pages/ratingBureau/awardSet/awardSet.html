@@ -1,1 +1,71 @@
-<h1>评优奖项设置</h1>
+<div class="widgets">
+	<div class="row">
+		<div class="col-md-12">
+			<div ba-panel ba-panel-class="with-scroll">
+				<div class="horizontal-scroll">
+                    <form class="row form-inline ul-center">
+                        <div class="form-group col-sm-3 col-xs-6">
+                            <input type="text" class="form-control" ng-model="awardName" placeholder="搜索评优奖项名称"/>
+                        </div>
+                        <div class="form-group col-sm-3 col-xs-6">
+                            <button type="submit" class="btn btn-primary" ng-click="queryAwardInfo(awardName)">查询</button>
+                        </div>
+                        <div class="form-group col-sm-4 col-xs-6">
+                            <button type="submit" class="btn btn-primary" ng-click="addAward()">添加评优奖项</button>
+                        </div>
+                    </form>
+
+					<table class="table" yw-safe-src="awardList" yw-table="displayed">
+						<thead>
+							<tr class="sortable ">
+								<th yw-sort="appraisename">奖项名称</th>
+                                <th yw-sort="appraisedate">时间</th>
+                                <th yw-sort="appraiselevel">级别</th>
+                                <th yw-sort="appraisenumber">奖项数</th>
+								<th yw-sort="appraiseschool">学校数量</th>
+								<th yw-sort="appraisequota">奖项指标</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in displayed">
+								<td>{{item.appraisename}}</td>
+								<td>{{item.appraisedate | date:'yyyy/MM/dd'}}</td>
+								<td>{{item.appraiselevel}}</td>
+								<td>{{item.appraisenumber}}</td>
+								<td>{{item.appraiseschool}}</td>
+								<td>{{item.appraisequota}}</td>
+								<td>
+									<div class="btn-group" uib-dropdown dropdown-append-to-body>
+										<button type="button" class="btn btn-info " uib-dropdown-toggle>
+                                                  操作 <span class="caret"></span>
+                                                </button>
+										<ul uib-dropdown-menu>
+                                            <li ng-click="editeAward(item)"><a href>编辑</a></li>
+                                            <li ng-click="deleteAward(item)"><a href>删除</a></li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="10" class="text-center">
+									<div style="float: left">
+                                        <span class="page-items">共{{totalItems}}条&nbsp&nbsp每页显示&nbsp</span>
+                                        <select class="page-size" title="Rows on page" ng-model="pageSize" ng-options="pageSize for pageSize in pageSizes" ng-change="changePageSize(pageSize)"></select>
+                                        <span class="page-items">&nbsp条</span>
+                                    </div>
+                                    <div yw-pagination="" yw-total-items="totalItems" yw-items-by-page="pageSize" yw-displayed-pages="5" yw-page-change="pageChange(newPage)"
+                                        yw-template="app/pages/common/pagination.html"></div>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

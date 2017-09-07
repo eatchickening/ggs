@@ -20,4 +20,7 @@ public interface AwardFileMapper {
     int updateByPrimaryKeySelective(AwardFile record);
 
     int updateByPrimaryKey(AwardFile record);
+
+    List<AwardFile> selectByAwardInfoId(String id);
+
 }

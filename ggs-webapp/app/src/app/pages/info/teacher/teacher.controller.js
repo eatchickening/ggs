@@ -2,207 +2,8 @@
   'use strict';
 
   angular.module('chicken.pages.info')
-    .controller('TeacherCtrl', function ($scope, $uibModal, toastr, TeacherService) {
+    .controller('TeacherCtrl', function ($scope, $uibModal, toastr, TeacherService, InfoService) {
 
-      $scope.regions = [{
-          name: '全部',
-          value: ''
-        },
-        {
-          name: '地区1',
-          value: '1'
-        },
-        {
-          name: '地区2',
-          value: '2'
-        },
-        {
-          name: '地区3',
-          value: '3'
-        },
-        {
-          name: '地区4',
-          value: '4'
-        },
-        {
-          name: '地区5',
-          value: '5'
-        },
-      ];
-
-      $scope.schoolTypes = [{
-          name: '全部',
-          value: ''
-        },
-        {
-          name: '高职',
-          value: '2'
-        },
-        {
-          name: '高中',
-          value: '3'
-        },
-        {
-          name: '初中',
-          value: '4'
-        },
-        {
-          name: '小学',
-          value: '5'
-        },
-      ];
-
-      $scope.schools = [{
-          name: '全部',
-          value: ''
-        },
-        {
-          name: '学校1',
-          value: '2'
-        },
-        {
-          name: '学校2',
-          value: '3'
-        },
-        {
-          name: '学校3',
-          value: '4'
-        },
-        {
-          name: '学校4',
-          value: '5'
-        },
-        {
-          name: '学校5',
-          value: '6'
-        },
-        {
-          name: '学校6',
-          value: '7'
-        },
-        {
-          name: '学校7',
-          value: '8'
-        },
-        {
-          name: '学校8',
-          value: '9'
-        },
-        {
-          name: '学校9',
-          value: '10'
-        },
-        {
-          name: '学校10',
-          value: '11'
-        },
-        {
-          name: '学校11',
-          value: '12'
-        },
-        {
-          name: '学校12',
-          value: '13'
-        },
-        {
-          name: '学校13',
-          value: '14'
-        },
-        {
-          name: '学校14',
-          value: '15'
-        },
-        {
-          name: '学校15',
-          value: '16'
-        },
-        {
-          name: '学校16',
-          value: '17'
-        },
-      ];
-
-      $scope.smartTableData = [{
-          id: 1,
-          firstName: 'Mark',
-          lastName: 'Otto',
-          username: '@mdo',
-          email: 'mdo@gmail.com',
-          age: '28'
-        },
-        {
-          id: 2,
-          firstName: 'Jacob',
-          lastName: 'Thornton',
-          username: '@fat',
-          email: 'fat@yandex.ru',
-          age: '45'
-        },
-        {
-          id: 3,
-          firstName: 'Larry',
-          lastName: 'Bird',
-          username: '@twitter',
-          email: 'twitter@outlook.com',
-          age: '18'
-        },
-        {
-          id: 4,
-          firstName: 'John',
-          lastName: 'Snow',
-          username: '@snow',
-          email: 'snow@gmail.com',
-          age: '20'
-        },
-        {
-          id: 5,
-          firstName: 'Jack',
-          lastName: 'Sparrow',
-          username: '@jack',
-          email: 'jack@yandex.ru',
-          age: '30'
-        },
-        {
-          id: 1,
-          firstName: 'Mark',
-          lastName: 'Otto',
-          username: '@mdo',
-          email: 'mdo@gmail.com',
-          age: '28'
-        },
-        {
-          id: 2,
-          firstName: 'Jacob',
-          lastName: 'Thornton',
-          username: '@fat',
-          email: 'fat@yandex.ru',
-          age: '45'
-        },
-        {
-          id: 3,
-          firstName: 'Larry',
-          lastName: 'Bird',
-          username: '@twitter',
-          email: 'twitter@outlook.com',
-          age: '18'
-        },
-        {
-          id: 4,
-          firstName: 'John',
-          lastName: 'Snow',
-          username: '@snow',
-          email: 'snow@gmail.com',
-          age: '20'
-        },
-        {
-          id: 5,
-          firstName: 'Jack',
-          lastName: 'Sparrow',
-          username: '@jack',
-          email: 'jack@yandex.ru',
-          age: '30'
-        }
-      ];
 
       //控制查询条件的'更多'按钮
       $scope.isShowMoreRegion = true;
@@ -222,37 +23,54 @@
 
 
       //当前选择的区域
-      $scope.curRegion = "";
+      $scope.curRegion = '';
 
       //当前选中的学校类型
-      $scope.curSchoolType = "";
+      $scope.curSchoolType = '';
 
       //当前选择的学校
-      $scope.curSchool = "";
+      $scope.curSchool = '';
 
       //查询条件---地区变化
       $scope.onRegionChanged = function (value) {
+
+        if (value == $scope.curRegion) {
+          return;
+        }
+
         $scope.curRegion = value;
+        //地区变化后重新查询对应的学校
+        initSchools();
+        getTeacherList(1, $scope.tempPageSize, $scope.curRegion, $scope.curSchoolType, $scope.curSchool, '');
       };
 
       $scope.onSchoolTypeChanged = function (value) {
+
+        if (value == $scope.curSchoolType) {
+          return;
+        }
+
         $scope.curSchoolType = value;
+        //学校类型变化后重新查询对应的学校
+        initSchools();
+        getTeacherList(1, $scope.tempPageSize, $scope.curRegion, $scope.curSchoolType, $scope.curSchool, '');
       };
 
       $scope.onSchoolChanged = function (value) {
+        if (value == $scope.curSchool) {
+          return;
+        }
         $scope.curSchool = value;
+        getTeacherList(1, $scope.tempPageSize, $scope.curRegion, $scope.curSchoolType, $scope.curSchool, '');
       };
 
       //根据查询条件加载教师数据
       $scope.queryTeacherInfo = function (teacherName) {
 
-        //  if(!teacherName){
-        //    toastr.error('请输入教师姓名!', '精确查询', {});
-        //    return;
-        //  }
         if (!teacherName) {
-          teacherName = "";
+          teacherName = '';
         }
+
         getTeacherList(1, $scope.tempPageSize, $scope.curRegion, $scope.curSchoolType, $scope.curSchool, teacherName);
       };
 
@@ -260,12 +78,53 @@
       $scope.tempPageSize = 5;
       $scope.pageSize = 5;
 
-      function getTeacherList(pageNum, pageSize, region, schoolType, schoolName, teacherName) {
-        TeacherService.query(pageNum, pageSize, teacherName, schoolName, region, schoolType).then(function (data) {
+      function getTeacherList(pageNum, pageSize, region, schoolType, schoolCode, teacherName) {
+        TeacherService.query(pageNum, pageSize, teacherName, schoolCode, region, schoolType).then(function (data) {
           if (data.code === 0 && data.data && data.data instanceof Array) {
             $scope.teacherList = data.data;
             $scope.totalItems = data.total;
-          }else{
+          } else {
+            toastr.error(data.message);
+          }
+        }).catch(function (err) {
+          toastr.error(err);
+        });
+      }
+
+      function initArea() {
+        //初始化区域和学校类型等查询条件
+        InfoService.queryAreas().then(function (data) {
+          if (data.code === 0 && data.data && data.data instanceof Array) {
+            $scope.regions = data.data;
+            $scope.regions.unshift({ 'bizcode': '', 'datavalue': '全部' });
+          } else {
+            toastr.error(data.message);
+          }
+        }).catch(function (err) {
+          toastr.error(err);
+        });
+      }
+
+      function initSchoolTypes() {
+        InfoService.querySchoolTypes().then(function (data) {
+          if (data.code === 0 && data.data && data.data instanceof Array) {
+            $scope.schoolTypes = data.data;
+            $scope.schoolTypes.unshift({ 'bizcode': '', 'datavalue': '全部' });
+          } else {
+            toastr.error(data.message);
+          }
+        }).catch(function (err) {
+          toastr.error(err);
+        });
+      }
+
+      function initSchools(){
+        $scope.curSchool = '';
+        InfoService.querySchools($scope.curRegion, $scope.curSchoolType).then(function (data) {
+          if (data.code === 0 && data.data && data.data instanceof Array) {
+            $scope.schools = data.data;
+            $scope.schools.unshift({ 'schoolcode': '', 'name': '全部' });
+          } else {
             toastr.error(data.message);
           }
         }).catch(function (err) {
@@ -274,8 +133,14 @@
       }
 
       function init() {
+
+        initArea();
+        initSchoolTypes();
+        initSchools();
+
         $scope.displayed = [];
         $scope.pageSizes = [5, 10, 15, 20, 25];
+        
         getTeacherList(1, $scope.tempPageSize, $scope.curRegion, $scope.curSchoolType, $scope.curSchool, '');
       }
 

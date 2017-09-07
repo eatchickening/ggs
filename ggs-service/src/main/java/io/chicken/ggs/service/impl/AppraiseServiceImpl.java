@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -52,6 +53,11 @@ public class AppraiseServiceImpl implements AppraiseService {
     }
 
     @Override
+    public long update(Appraise appraise) {
+       return appraiseMapper.updateByPrimaryKeySelective(appraise);
+    }
+
+    @Override
     public void saveAwardInfo(List<AwardInfo> awardInfolist) {
         awardInfoMapper.insertCollection(awardInfolist);
     }
@@ -92,5 +98,40 @@ public class AppraiseServiceImpl implements AppraiseService {
         awardSchoolMapper.deleteByAppraisecode(id+"");
         awardInfoMapper.deleteByAppraisecode(id+"");
         appraiseMapper.deleteByPrimaryKey(id);
+    }
+    @Override
+    public void deleteAwardInfo(Long id) {
+        awardFileMapper.deleteByAppraisecode(id+"");
+        awardQuotaMapper.deleteByAppraisecode(id+"");
+        awardSchoolMapper.deleteByAppraisecode(id+"");
+        awardInfoMapper.deleteByAppraisecode(id+"");
+    }
+
+
+    @Override
+    public AppraiseDetail selectByAppraisId(long id) {
+
+        AppraiseDetail appraise= appraiseMapper.selectByPrimaryKey(id);
+
+        List<AwardInfoDetail> awardInfos = awardInfoMapper.selectByAppraisId(id + "");
+
+        List<AwardInfoDetail> awardInfoDetails=new ArrayList<AwardInfoDetail>();
+
+        for(AwardInfo awardInfo:awardInfos){
+            List<AwardFile> awardFiles = awardFileMapper.selectByAwardInfoId(awardInfo.getId() + "");
+
+            List<AwardQuota> awardQuotas = awardQuotaMapper.selectByAwardInfoId(awardInfo.getId() + "");
+
+            List<AwardSchool> awardSchools = awardSchoolMapper.selectByAwardInfoId(awardInfo.getId() + "");
+
+            AwardInfoDetail awardInfoDetail=(AwardInfoDetail)awardInfo;
+            awardInfoDetail.setAwardFiles(awardFiles);
+            awardInfoDetail.setAwardQuotas(awardQuotas);
+            awardInfoDetail.setAwardSchools(awardSchools);
+
+            awardInfoDetails.add(awardInfoDetail);
+        }
+        appraise.setAwardInfoList(awardInfoDetails);
+        return appraise;
     }
 }

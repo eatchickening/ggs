@@ -16,6 +16,9 @@ public interface AwardQuotaMapper {
     int insertCollection(List<AwardQuota> record);
     AwardQuota selectByPrimaryKey(Long id);
 
+    List<AwardQuota> selectByAwardInfoId(String id);
+
+
     int updateByPrimaryKeySelective(AwardQuota record);
 
     int updateByPrimaryKey(AwardQuota record);
