@@ -1,6 +1,7 @@
 package io.chicken.ggs.dal.dao;
 
 import io.chicken.ggs.dal.model.Appraise;
+import io.chicken.ggs.dal.model.AppraiseDetail;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface AppraiseMapper {
 
     long insertSelective(Appraise record);
 
-    Appraise selectByPrimaryKey(Long id);
+    AppraiseDetail selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(Appraise record);
 

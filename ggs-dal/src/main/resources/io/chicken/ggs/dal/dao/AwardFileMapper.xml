@@ -23,11 +23,11 @@
   </select>
 
 
-  <select id="selectByAppraisId" resultMap="BaseResultMap"  parameterType="java.lang.String">
+  <select id="selectByAwardInfoId" resultMap="BaseResultMap"  parameterType="java.lang.String">
     select
     <include refid="Base_Column_List" />
     from award_file
-    where appraisecode = #{appraiseid,jdbcType=BIGINT}
+    where awardcode = #{awardcode,jdbcType=BIGINT}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >

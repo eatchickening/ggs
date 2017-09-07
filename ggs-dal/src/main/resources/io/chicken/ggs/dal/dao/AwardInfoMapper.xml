@@ -10,6 +10,8 @@
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="BaseResultMapDeail" type="io.chicken.ggs.dal.model.AwardInfoDetail" extends="BaseResultMap">
+  </resultMap>
   <sql id="Base_Column_List" >
     id, appraisecode, awardname, awardcode, awardlevel, remark, create_time
   </sql>
@@ -20,7 +22,7 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <select id="selectByAppraisId" resultMap="BaseResultMap"  parameterType="java.lang.String">
+  <select id="selectByAppraisId" resultMap="BaseResultMapDeail"  parameterType="java.lang.String">
     select
     <include refid="Base_Column_List" />
     from awardinfo

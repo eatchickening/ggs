@@ -148,6 +148,88 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
     }
 
     @Override
+    public Result update(AppraiseVo appraiseVo) {
+        //修改评优表
+        Appraise appraise=new Appraise();
+        appraise.setId(appraiseVo.getId());
+        appraise.setAppraisename(appraiseVo.getAppraisename());
+        appraise.setAppraiselevel(appraiseVo.getAppraiselevel());
+        appraiseService.update(appraise);
+        long appraiseid =appraise.getId();
+        appraiseService.deleteAwardInfo(appraiseid);
+
+        //保存奖项信息表
+        List<AwardInfo> awardInfolist=new ArrayList<AwardInfo>();
+
+        //保存奖项学校列表
+        List<AwardSchool> awardSchoollist=new ArrayList<AwardSchool>();
+
+        //保存指标列表
+        List<AwardQuota> awardQuotalist=new ArrayList<AwardQuota>();
+        //保存文件列表
+        List<AwardFile> awardFilelist=new ArrayList<AwardFile>();
+
+        //循环接收到的奖项信息
+        List<AwardInfoVo> awardInfoVoList = appraiseVo.getAwardInfoList();
+        for(AwardInfoVo awardInfoVo:awardInfoVoList)
+        {
+            AwardInfo awardInfo=new AwardInfo();
+            awardInfo.setAppraisecode(""+appraiseid);
+            awardInfo.setAwardname(awardInfoVo.getAwardname());
+            awardInfo.setAwardlevel( awardInfoVo.getAwardlevel());
+            awardInfo.setCreateTime(new Date());
+            awardInfo.setRemark(awardInfoVo.getRemark());
+            appraiseService.saveAwardInfo(awardInfo);
+            Long awardInfoId = awardInfo.getId();
+            List<AwardSchoolVo> awardSchoolList = awardInfoVo.getAwardSchoolList();
+            for(AwardSchoolVo awardSchoolVo:awardSchoolList)
+            {
+                AwardSchool awardSchool=new AwardSchool();
+                awardSchool.setAwardcode(""+awardInfoId);
+                awardSchool.setAppraisecode(""+appraiseid);
+                awardSchool.setCreateTime(new Date());
+                awardSchool.setSchoolcode(awardSchoolVo.getSchoolcode());
+                awardSchool.setSchoolquota(awardSchoolVo.getSchoolquota());
+                awardSchool.setRemark(awardSchoolVo.getRemark());
+                awardSchoollist.add(awardSchool);
+            }
+            List<AwardQuotaVo> awardQuotaVoList = awardInfoVo.getAwardQuotaList();
+            for(AwardQuotaVo awardQuotaVo:awardQuotaVoList)
+            {
+                AwardQuota awardQuota=new AwardQuota();
+                awardQuota.setAwardcode(""+awardInfoId);
+                awardQuota.setAppraisecode(""+appraiseid);
+                awardQuota.setCreateTime(new Date());
+                awardQuota.setAwardquota(awardQuotaVo.getAwardquota());
+                awardQuota.setQuotacontent(awardQuotaVo.getQuotacontent());
+                awardQuota.setRemark(awardQuotaVo.getRemark());
+                awardQuotalist.add(awardQuota);
+            }
+            List<AwardFileVo> awardFileList = awardInfoVo.getAwardFileList();
+            for(AwardFileVo awardFileVo:awardFileList)
+            {
+                AwardFile awardFile=new AwardFile();
+                awardFile.setAppraisecode(""+appraiseid);
+                awardFile.setAwardcode(""+awardInfoId);
+                awardFile.setFilename(awardFileVo.getFilename());
+                awardFile.setFiletype(awardFileVo.getFiletype());
+                awardFile.setCreateTime(new Date());
+                awardFile.setFiledetail(awardFileVo.getFiledetail());
+                awardFile.setRemark(awardFileVo.getRemark());
+                String path=storefile+appraiseVo.getAppraisename()+"/"+awardInfoVo.getAwardname()+"/"+awardFileVo.getFiletargetname();
+                awardFile.setFilepath(path);
+                awardFilelist.add(awardFile);
+            }
+        }
+        appraiseService.saveAwardFileInfo(awardFilelist);
+        appraiseService.saveAwardQuotoInfo(awardQuotalist);
+        appraiseService.saveAwardSchoolInfo(awardSchoollist);
+
+        Result result=  new Result<>(ResultCode.SUCCESS);
+        return result;
+    }
+
+    @Override
     public Result savefile(String appraisecode, String awardcode, MultipartFile file) {
         if (awardcode == null || awardcode.isEmpty()||appraisecode == null || appraisecode.isEmpty()||file == null ) {
             return new Result<>(ResultCode.PARAMETER_EMPTY);
@@ -211,8 +293,16 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
 
     @Override
     public Result getDetail(Long id) {
-
-
-        return null;
+        try {
+            AppraiseDetail appraiseDetail = appraiseService.selectByAppraisId(id);
+            Result result= new Result(ResultCode.SUCCESS);
+            result.setData(appraiseDetail);
+            return result;
+        } catch (GGSException e) {
+            return new Result(e.getCode(), e.getMessage());
+        } catch (Exception e) {
+            logger.error(id + ", select() 异常： " + e.getMessage());
+            return new Result(ResultCode.DB_QUERY_FAIL);
+        }
     }
 }

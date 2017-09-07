@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,6 +50,11 @@ public class AppraiseServiceImpl implements AppraiseService {
     @Override
     public long save(Appraise appraise) {
         return appraiseMapper.insertSelective(appraise);
+    }
+
+    @Override
+    public long update(Appraise appraise) {
+       return appraiseMapper.updateByPrimaryKeySelective(appraise);
     }
 
     @Override
@@ -93,18 +99,39 @@ public class AppraiseServiceImpl implements AppraiseService {
         awardInfoMapper.deleteByAppraisecode(id+"");
         appraiseMapper.deleteByPrimaryKey(id);
     }
+    @Override
+    public void deleteAwardInfo(Long id) {
+        awardFileMapper.deleteByAppraisecode(id+"");
+        awardQuotaMapper.deleteByAppraisecode(id+"");
+        awardSchoolMapper.deleteByAppraisecode(id+"");
+        awardInfoMapper.deleteByAppraisecode(id+"");
+    }
+
 
     @Override
-    public void selectByAppraisId(long id) {
-        List<AwardFile> awardFiles = awardFileMapper.selectByAppraisId(id + "");
+    public AppraiseDetail selectByAppraisId(long id) {
 
-        List<AwardQuota> awardQuotas = awardQuotaMapper.selectByAppraisId(id + "");
+        AppraiseDetail appraise= appraiseMapper.selectByPrimaryKey(id);
 
-        List<AwardSchool> awardSchools = awardSchoolMapper.selectByAppraisId(id + "");
+        List<AwardInfoDetail> awardInfos = awardInfoMapper.selectByAppraisId(id + "");
 
-        List<AwardInfo> awardInfos = awardInfoMapper.selectByAppraisId(id + "");
+        List<AwardInfoDetail> awardInfoDetails=new ArrayList<AwardInfoDetail>();
 
-        Appraise appraise = appraiseMapper.selectByPrimaryKey(id);
+        for(AwardInfo awardInfo:awardInfos){
+            List<AwardFile> awardFiles = awardFileMapper.selectByAwardInfoId(awardInfo.getId() + "");
 
+            List<AwardQuota> awardQuotas = awardQuotaMapper.selectByAwardInfoId(awardInfo.getId() + "");
+
+            List<AwardSchool> awardSchools = awardSchoolMapper.selectByAwardInfoId(awardInfo.getId() + "");
+
+            AwardInfoDetail awardInfoDetail=(AwardInfoDetail)awardInfo;
+            awardInfoDetail.setAwardFiles(awardFiles);
+            awardInfoDetail.setAwardQuotas(awardQuotas);
+            awardInfoDetail.setAwardSchools(awardSchools);
+
+            awardInfoDetails.add(awardInfoDetail);
+        }
+        appraise.setAwardInfoList(awardInfoDetails);
+        return appraise;
     }
 }

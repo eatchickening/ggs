@@ -3,13 +3,13 @@ package io.chicken.ggs.dal.model;
 import java.util.List;
 
 public class AppraiseDetail extends Appraise{
-    List<AwardInfo> awardInfoList;
+    List<AwardInfoDetail> awardInfoList;
 
-    public List<AwardInfo> getAwardInfoList() {
+    public List<AwardInfoDetail> getAwardInfoList() {
         return awardInfoList;
     }
 
-    public void setAwardInfoList(List<AwardInfo> awardInfoList) {
+    public void setAwardInfoList(List<AwardInfoDetail> awardInfoList) {
         this.awardInfoList = awardInfoList;
     }
 }

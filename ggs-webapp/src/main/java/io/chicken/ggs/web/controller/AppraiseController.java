@@ -72,6 +72,15 @@ public class AppraiseController {
         return appraiseBusiness.save(appraiseVo);
     }
 
+    @ApiOperation(value = "评优奖项信息修改")
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional(rollbackFor = Exception.class)
+    public Result update(@RequestBody AppraiseVo appraiseVo) throws Exception{
+        logger.info("评优奖项信息:"+appraiseVo.toString());
+        return appraiseBusiness.update(appraiseVo);
+    }
+
     @ApiOperation(value = "删除评优奖项")
     @ApiImplicitParam(value = "评优奖项id", name = "id", dataType = "Long", paramType = "form")
     @ResponseBody

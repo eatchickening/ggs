@@ -16,6 +16,8 @@ public interface AppraiseBusiness {
 
     Result save(AppraiseVo appraiseVo);
 
+    Result update(AppraiseVo appraiseVo);
+
     Result savefile(String appraisecode,String awardcode, MultipartFile file);
 
     Result<List<Appraise>> queryListByIds(List<Long> ids);

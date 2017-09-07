@@ -7,10 +7,10 @@ import java.util.List;
  */
 public class AppraiseVo {
 
+    private Long id;
     private String appraisedate;
 
     private String appraisename;
-
 
     private String appraiselevel;
 
@@ -49,11 +49,20 @@ public class AppraiseVo {
         this.awardInfoList = awardInfoList;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "AppraiseVo{" +
                 "appraisedate='" + appraisedate + '\'' +
                 ", appraisename='" + appraisename + '\'' +
+                ", id=" + id +
                 ", appraiselevel='" + appraiselevel + '\'' +
                 ", awardInfoList=" + awardInfoList +
                 '}';

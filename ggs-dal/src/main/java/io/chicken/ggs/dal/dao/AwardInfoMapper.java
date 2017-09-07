@@ -1,6 +1,7 @@
 package io.chicken.ggs.dal.dao;
 
 import io.chicken.ggs.dal.model.AwardInfo;
+import io.chicken.ggs.dal.model.AwardInfoDetail;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface AwardInfoMapper {
 
     int insertSelective(AwardInfo record);
 
-    List<AwardInfo> selectByAppraisId(String id);
+    List<AwardInfoDetail> selectByAppraisId(String id);
 
     AwardInfo selectByPrimaryKey(Long id);
 

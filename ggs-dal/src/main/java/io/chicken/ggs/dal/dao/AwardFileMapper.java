@@ -21,6 +21,6 @@ public interface AwardFileMapper {
 
     int updateByPrimaryKey(AwardFile record);
 
-    List<AwardFile> selectByAppraisId(String id);
+    List<AwardFile> selectByAwardInfoId(String id);
 
 }

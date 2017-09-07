@@ -13,6 +13,8 @@
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="BaseResultMapDeail" type="io.chicken.ggs.dal.model.AppraiseDetail" extends="BaseResultMap">
+  </resultMap>
   <sql id="Base_Column_List" >
     id, appraisedate, appraisename, appraisecode, appraiselevel, appraisenumber, appraiseschool,
     appraisequota, remark, create_time
@@ -54,7 +56,7 @@
       </where>
 
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMapDeail" parameterType="java.lang.Long" >
      select
     ap.id,
     ap.appraisedate appraisedate, ap.appraisename, ap.appraisecode, ap.appraiselevel,
