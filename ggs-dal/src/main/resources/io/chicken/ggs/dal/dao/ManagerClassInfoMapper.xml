@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="io.chicken.ggs.dal.dao.ManagerClassInfoMapper" >
+  <resultMap id="BaseResultMap" type="io.chicken.ggs.dal.model.ManagerClassInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="teacherid" property="teacherid" jdbcType="VARCHAR" />
+    <result column="classcode" property="classcode" jdbcType="VARCHAR" />
+    <result column="schoolcode" property="schoolcode" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, teacherid, classcode, schoolcode, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from managerclassinfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+    <select id="queryByTeacherid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from managerclassinfo
+        where teacherid = #{teacherid,jdbcType=VARCHAR}
+    </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from managerclassinfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="io.chicken.ggs.dal.model.ManagerClassInfo" >
+    insert into managerclassinfo (id, teacherid, classcode, 
+      schoolcode, remark)
+    values (#{id,jdbcType=BIGINT}, #{teacherid,jdbcType=VARCHAR}, #{classcode,jdbcType=VARCHAR}, 
+      #{schoolcode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="io.chicken.ggs.dal.model.ManagerClassInfo" >
+    insert into managerclassinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="teacherid != null" >
+        teacherid,
+      </if>
+      <if test="classcode != null" >
+        classcode,
+      </if>
+      <if test="schoolcode != null" >
+        schoolcode,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="teacherid != null" >
+        #{teacherid,jdbcType=VARCHAR},
+      </if>
+      <if test="classcode != null" >
+        #{classcode,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolcode != null" >
+        #{schoolcode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="io.chicken.ggs.dal.model.ManagerClassInfo" >
+    update managerclassinfo
+    <set >
+      <if test="teacherid != null" >
+        teacherid = #{teacherid,jdbcType=VARCHAR},
+      </if>
+      <if test="classcode != null" >
+        classcode = #{classcode,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolcode != null" >
+        schoolcode = #{schoolcode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="io.chicken.ggs.dal.model.ManagerClassInfo" >
+    update managerclassinfo
+    set teacherid = #{teacherid,jdbcType=VARCHAR},
+      classcode = #{classcode,jdbcType=VARCHAR},
+      schoolcode = #{schoolcode,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
