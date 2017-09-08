@@ -1,6 +1,5 @@
 package io.chicken.ggs.web.controller;
 
-import com.alibaba.fastjson.JSON;
 import io.chicken.ggs.business.impl.DictionaryBusinessImpl;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
@@ -14,7 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.List;
