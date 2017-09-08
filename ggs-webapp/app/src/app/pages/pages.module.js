@@ -7,6 +7,7 @@
 
   angular.module('chicken.pages', [
       'ui.router',
+      'ngFileUpload',
       'chicken.pages.login',
       'chicken.pages.home',
       'chicken.pages.basic',

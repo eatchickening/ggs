@@ -12,14 +12,15 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">评优奖项：</label>
                         <div class="col-sm-6">
-                            <select class="form-control" ng-model="user.depart" ng-options="depart.departName for depart in user.organ.departVoList" placeholder="评优奖项"></select>
+                            <select class="form-control" ng-model="user.depart" ng-disabled="awardDisable" ng-options="depart.departName for depart in user.organ.departVoList"
+                                placeholder="评优奖项"></select>
                         </div>
                         <div class="col-sm-4">
-                            <label class="radio-inline custom-radio nowrap" ng-click="">
+                            <label class="radio-inline custom-radio nowrap" ng-click="awardDisable=false">
                                 <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                                 <span>有奖项</span>
                             </label>
-                            <label class="radio-inline custom-radio nowrap" ng-click="">
+                            <label class="radio-inline custom-radio nowrap" ng-click="awardDisable=true">
                                 <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
                                 <span>无奖项</span>
                             </label>
@@ -30,8 +31,8 @@
                         <div class="col-sm-3 datepicker">
                             <p class="input-group">
                                 <input type="text" class="form-control" uib-datepicker-popup="yyyy/MM/dd" datepicker-options="options" ng-model="bd" is-open="beginDate"
-                                    ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" placeholder="开始时间"
-                                />
+                                    ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false"
+                                    placeholder="开始时间" />
                                 <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="beginDate=!beginDate"><i class="glyphicon glyphicon-calendar"></i></button>
                               </span>
@@ -40,8 +41,8 @@
                         <div class="col-sm-3 datepicker">
                             <p class="input-group">
                                 <input type="text" class="form-control" uib-datepicker-popup="yyyy/MM/dd" datepicker-options="options" ng-model="ed" is-open="endDate"
-                                    ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" placeholder="结束时间"
-                                />
+                                    ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false"
+                                    placeholder="结束时间" />
                                 <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="endDate=!endDate"><i class="glyphicon glyphicon-calendar"></i></button>
                               </span>
@@ -53,8 +54,8 @@
                         <div class="col-sm-6 datepicker">
                             <p class="input-group">
                                 <input type="text" class="form-control" uib-datepicker-popup="yyyy/MM/dd" datepicker-options="options" ng-model="sed" is-open="signEndDate"
-                                    ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false" placeholder="报名截止时间"
-                                />
+                                    ng-required="true" close-text="Close" alt-input-formats="altInputFormats" show-button-bar="false"
+                                    placeholder="报名截止时间" />
                                 <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="signEndDate=!signEndDate"><i class="glyphicon glyphicon-calendar"></i></button>
                               </span>
@@ -69,8 +70,18 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">上传文件：</label>
-                        <div class="col-sm-6">
-
+                        <div class="col-sm-6 lists-widget">
+                            <button class="btn btn-default" ngf-select="uploadFiles($files)" multiple accept="image/png,image/jpg,image/gif,application/msword">选择文件</button>
+                            <ul class="blur">
+                                <li ng-repeat="f in files" style="font:smaller">
+                                    {{f.name}}
+                                </li>
+                            </ul>
+                            <!-- <div class="progress" ng-show="progress > 0">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                    {{progress}}%
+                                </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="form-group">
