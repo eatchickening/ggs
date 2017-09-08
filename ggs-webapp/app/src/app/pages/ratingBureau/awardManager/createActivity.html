@@ -12,7 +12,17 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">评优奖项：</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" placeholder="评优奖项" ng-required="true">
+                            <select class="form-control" ng-model="user.depart" ng-options="depart.departName for depart in user.organ.departVoList" placeholder="评优奖项"></select>
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="radio-inline custom-radio nowrap" ng-click="">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <span>有奖项</span>
+                            </label>
+                            <label class="radio-inline custom-radio nowrap" ng-click="">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <span>无奖项</span>
+                            </label>
                         </div>
                     </div>
                     <div class="form-group">
