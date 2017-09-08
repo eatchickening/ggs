@@ -45,7 +45,7 @@
 
 
 
-        <table tableName="managerclassinfo" domainObjectName="ManagerClassInfo" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="notice_readed" domainObjectName="NoticeReaded" enableCountByExample="false" enableUpdateByExample="false"
            enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 
 	</context>
