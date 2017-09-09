@@ -1,6 +1,7 @@
 package io.chicken.ggs.dal.dao;
 
 import io.chicken.ggs.dal.model.AwardSchool;
+import io.chicken.ggs.dal.model.AwardSchoolDetail;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface AwardSchoolMapper {
     int updateByPrimaryKeySelective(AwardSchool record);
 
     int updateByPrimaryKey(AwardSchool record);
+
+    List<AwardSchoolDetail> selectDetailByAppraiseId(String id);
 }

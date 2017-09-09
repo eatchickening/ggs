@@ -10,6 +10,23 @@
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <resultMap id="BaseResultMapDeail" type="io.chicken.ggs.dal.model.AwardSchoolDetail">
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="schoolcode" property="schoolcode" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="areacode" property="areacode" jdbcType="VARCHAR" />
+    <result column="areaname" property="areaname" jdbcType="VARCHAR" />
+    <result column="schoolname" property="schoolname" jdbcType="VARCHAR" />
+    <result column="schooltype" property="schooltype" jdbcType="VARCHAR" />
+    <collection property="awardquota" ofType="io.chicken.ggs.common.vo.AwardQuotaShowVo">
+      <result column="awardname" property="awardname" jdbcType="VARCHAR" />
+      <result column="awardcode" property="awardcode" jdbcType="VARCHAR" />
+      <result column="schoolquota" property="schoolquota" jdbcType="VARCHAR" />
+    </collection>
+
+  </resultMap>
+
   <sql id="Base_Column_List" >
     id, appraisecode, awardcode, schoolcode, schoolquota, remark, create_time
   </sql>
@@ -25,6 +42,21 @@
     <include refid="Base_Column_List" />
     from award_school
     where awardcode = #{awardcode,jdbcType=BIGINT}
+  </select>
+
+
+  <select id="selectDetailByAppraiseId" resultMap="BaseResultMapDeail"  parameterType="java.lang.String">
+      select sch.*
+      ,awas.awardname,awas.awardcode,awas.schoolquota  from
+      school  sch
+      left join
+      (select a.*,b.awardname from award_school a,awardinfo b
+        where a.awardcode=b.id and a.appraisecode= #{appraisecode,jdbcType=BIGINT})
+         awas
+      on sch.schoolcode = awas.schoolcode
+      where sch.schoolcode in
+      (select schoolcode from award_school where appraisecode= #{appraisecode,jdbcType=BIGINT})
+
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >

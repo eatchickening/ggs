@@ -35,6 +35,6 @@ public interface AppraiseService {
 
     AppraiseDetail selectByAppraisId(long id);
 
-
+    AppraiseDetail selectByAppraisInfo(long id);
 
 }
