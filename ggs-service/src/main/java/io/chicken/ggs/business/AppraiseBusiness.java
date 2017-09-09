@@ -25,4 +25,6 @@ public interface AppraiseBusiness {
     Result delete(Long id);
 
     Result getDetail(Long id);
+
+    Result getAppraiseInfo(Long id);
 }

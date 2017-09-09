@@ -107,6 +107,18 @@ public class AppraiseController {
         return appraiseBusiness.getDetail(id);
     }
 
+    @ApiOperation(value = "评优活动评定列表展示奖项信息")
+    @ApiImplicitParam(value = "评优奖项id", name = "id", dataType = "Long", paramType = "form")
+    @ResponseBody
+    @Transactional(rollbackFor = Exception.class)
+    @RequestMapping(value = "/getAppraiseInfo", method = RequestMethod.POST)
+    public Result getAppraiseInfo(Long id) {
+        logger.info("getAppraiseInfo() id = " + id);
+        if (id == null) {
+            return new Result<>(ResultCode.PARAMETER_EMPTY);
+        }
+        return appraiseBusiness.getAppraiseInfo(id);
+    }
 
 
 

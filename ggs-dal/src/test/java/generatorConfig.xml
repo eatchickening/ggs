@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>    
-<!DOCTYPE generatorConfiguration    
-  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"    
-  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+		PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
 	<!-- mybatis-generator:generate -->
 	<!-- 到本文件的目录下,执行如下cmd命令 -->
@@ -10,8 +10,8 @@
 	<!-- <classPathEntry location="mysql-connector-java-5.1.35.jar" /> -->
 
 	<!-- 根据自己本地实际的jar位置修改 -->
-	<!--<classPathEntry location="/home/nyh/.m2/repository/mysql/mysql-connector-java/5.1.33/mysql-connector-java-5.1.33.jar" />-->
-	<classPathEntry location="/Users/wungmc/mvn_repository/mysql/mysql-connector-java/5.1.33/mysql-connector-java-5.1.33.jar" />
+	<classPathEntry
+			location="E:/meng/maven_jar/mysql/mysql-connector-java/5.1.35/mysql-connector-java-5.1.35.jar" />
 
 	<!-- maven 自动生成代码  命令(在 ggs-dal 目录下)：
 			mvn mybatis-generator:generate
@@ -45,8 +45,9 @@
 
 
 
-        <table tableName="notice_readed" domainObjectName="NoticeReaded" enableCountByExample="false" enableUpdateByExample="false"
-           enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+	<table tableName="activity_file" domainObjectName="ActivityFile" enableCountByExample="false" enableUpdateByExample="false"
+	   enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+
 
 	</context>
 </generatorConfiguration> 

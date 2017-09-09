@@ -305,4 +305,21 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
             return new Result(ResultCode.DB_QUERY_FAIL);
         }
     }
+
+    @Override
+    public Result getAppraiseInfo(Long id) {
+        try {
+            AppraiseDetail appraiseDetail = appraiseService.selectByAppraisInfo(id);
+            Result result= new Result(ResultCode.SUCCESS);
+            result.setData(appraiseDetail);
+            return result;
+        } catch (GGSException e) {
+            return new Result(e.getCode(), e.getMessage());
+        } catch (Exception e) {
+            logger.error(id + ", select() 异常： " + e.getMessage());
+            return new Result(ResultCode.DB_QUERY_FAIL);
+        }
+    }
+
+
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by nyh on 8/31/17.
@@ -128,6 +129,32 @@ public class AppraiseServiceImpl implements AppraiseService {
             awardInfoDetail.setAwardFiles(awardFiles);
             awardInfoDetail.setAwardQuotas(awardQuotas);
             awardInfoDetail.setAwardSchools(awardSchools);
+
+            awardInfoDetails.add(awardInfoDetail);
+        }
+        appraise.setAwardInfoList(awardInfoDetails);
+        return appraise;
+    }
+
+    @Override
+    public AppraiseDetail selectByAppraisInfo(long id) {
+        AppraiseDetail appraise= appraiseMapper.selectByPrimaryKey(id);
+
+        List<AwardInfoDetail> awardInfos = awardInfoMapper.selectByAppraisId(id + "");
+
+        List<AwardInfoDetail> awardInfoDetails=new ArrayList<AwardInfoDetail>();
+        List<AwardSchoolDetail> awardSchoolDetail = awardSchoolMapper.selectDetailByAppraiseId(id + "");
+
+        appraise.setAwardSchoolDetailList(awardSchoolDetail);
+
+        for(AwardInfo awardInfo:awardInfos){
+            List<AwardFile> awardFiles = awardFileMapper.selectByAwardInfoId(awardInfo.getId() + "");
+
+            List<AwardQuota> awardQuotas = awardQuotaMapper.selectByAwardInfoId(awardInfo.getId() + "");
+
+            AwardInfoDetail awardInfoDetail=(AwardInfoDetail)awardInfo;
+            awardInfoDetail.setAwardFiles(awardFiles);
+            awardInfoDetail.setAwardQuotas(awardQuotas);
 
             awardInfoDetails.add(awardInfoDetail);
         }
