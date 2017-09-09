@@ -155,6 +155,7 @@ CREATE TABLE classinfo (
     id bigint NOT NULL AUTO_INCREMENT,
     classname  varchar(50) COMMENT '班级姓名',
     schoolcode varchar(50) COMMENT '学校编码',
+    classlevel varchar(50) COMMENT '年级',
     classcode varchar(50) COMMENT '班级编码',
     remark varchar(500) COMMENT '备注',
     PRIMARY KEY (id)
