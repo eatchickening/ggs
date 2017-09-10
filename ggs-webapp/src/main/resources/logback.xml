@@ -105,7 +105,6 @@ ch.qos.logback.classic.filter.LevelFilter   将过滤器的日志级别配置为
 	</appender>
 
 	<logger name="org" level="INFO" />  <!--将org包下面的所有日志级别设为了ERROR -->
-	<logger name="monitor" additivity="false" level="DEBUG" />
 
 	<logger name="monitor" additivity="false" level="DEBUG">
 		<appender-ref ref="MONITOR" />

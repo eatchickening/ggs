@@ -20,6 +20,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,6 +48,9 @@ public class AppraisedActivityController {
     private AppraisedActivityBusiness appraisedActivityBusiness;
     @Autowired
     private ActivityFileBusiness activityFileBusiness;
+
+    @Value("${file.basepath}")
+    private String fileBasepath;
 
     @ApiOperation(value = "活动列表")
     @ResponseBody
@@ -87,12 +91,13 @@ public class AppraisedActivityController {
             return new Result<>(ResultCode.PARAMETER_EMPTY);
         }
         System.out.println(file.getOriginalFilename());
+        System.out.println("basepath:" + fileBasepath);
 
         // 处理文件 (这块可以抽象出来公用)todo
         BufferedOutputStream stream = null;
         try {
             byte[] bytes = file.getBytes();
-            stream = new BufferedOutputStream(new FileOutputStream(new File(file.getOriginalFilename())));
+            stream = new BufferedOutputStream(new FileOutputStream(new File(fileBasepath + file.getOriginalFilename())));
             stream.write(bytes);
             stream.close();
         } catch (Exception e) {
@@ -120,6 +125,55 @@ public class AppraisedActivityController {
         activityFile.setActivityId(id);
         return activityFileBusiness.save(activityFile);
     }
+
+
+    // @ApiOperation(value = "评优活动的材料上传")
+    // @ApiImplicitParam(value = "评优活动id", name = "id", dataType = "Long", paramType = "form")
+    // @ResponseBody
+    // @RequestMapping(value = "/upload2", method = RequestMethod.POST)
+    // public Result upload2(@RequestParam Long id, HttpServletRequest request) {
+    //     logger.info("upload2() id = " + id);
+    //     if (id == null) {
+    //         return new Result<>(ResultCode.PARAMETER_EMPTY);
+    //     }
+    //
+    //     MultipartHttpServletRequest req = (MultipartHttpServletRequest) request;
+    //     Map<String, MultipartFile> map = req.getFileMap();
+    //     System.out.println(map.size());
+    //
+    //     // 处理文件 (这块可以抽象出来公用)todo
+    //     BufferedOutputStream stream = null;
+    //     // try {
+    //     //     byte[] bytes = file.getBytes();
+    //     //     stream = new BufferedOutputStream(new FileOutputStream(new File(file.getOriginalFilename())));
+    //     //     stream.write(bytes);
+    //     //     stream.close();
+    //     // } catch (Exception e) {
+    //     //     logger.error(file.getOriginalFilename() + ", 上传评优活动的材料异常：" + e.getMessage());
+    //     //     return new Result(ResultCode.UPLOAD_EXCEPTION);
+    //     // } finally {
+    //     //     if (stream != null) {
+    //     //         try {
+    //     //             stream.close();
+    //     //         } catch (IOException e) {
+    //     //             e.printStackTrace();
+    //     //         }
+    //     //     }
+    //     // }
+    //
+    //     // 保存路径信息
+    //     // String origFileName = file.getOriginalFilename();
+    //     // String fileType = origFileName.substring(origFileName.lastIndexOf(".")).toLowerCase();
+    //     // String sysFileName = UUID.randomUUID().toString() + fileType;
+    //
+    //     ActivityFile activityFile = new ActivityFile();
+    //     // activityFile.setOrigFileName(origFileName);
+    //     // activityFile.setSysFileName(sysFileName);
+    //     // activityFile.setFileType(fileType);
+    //     // activityFile.setActivityId(id);
+    //     // return activityFileBusiness.save(activityFile);
+    //     return new Result(ResultCode.SUCCESS);
+    // }
 
 
     @ApiOperation(value = "更新评优活动")
