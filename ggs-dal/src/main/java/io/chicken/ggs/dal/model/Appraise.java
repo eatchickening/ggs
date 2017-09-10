@@ -19,6 +19,8 @@ public class Appraise {
 
     private Integer appraisequota;
 
+    private String  operator;
+    private String organcode;
     private String remark;
 
     private Date createTime;
@@ -101,5 +103,21 @@ public class Appraise {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
+
+    public String getOrgancode() {
+        return organcode;
+    }
+
+    public void setOrgancode(String organcode) {
+        this.organcode = organcode;
     }
 }

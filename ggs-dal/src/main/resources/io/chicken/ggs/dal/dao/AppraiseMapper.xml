@@ -10,13 +10,15 @@
     <result column="appraisenumber" property="appraisenumber" jdbcType="INTEGER" />
     <result column="appraiseschool" property="appraiseschool" jdbcType="INTEGER" />
     <result column="appraisequota" property="appraisequota" jdbcType="INTEGER" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="organcode" property="organcode" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <resultMap id="BaseResultMapDeail" type="io.chicken.ggs.dal.model.AppraiseDetail" extends="BaseResultMap">
   </resultMap>
   <sql id="Base_Column_List" >
-    id, appraisedate, appraisename, appraisecode, appraiselevel, appraisenumber, appraiseschool,
+    id, appraisedate, appraisename, appraisecode, appraiselevel, appraisenumber, appraiseschool,operator,organcode
     appraisequota, remark, create_time
   </sql>
   <select id = "queryList" resultMap="BaseResultMap">
@@ -144,6 +146,14 @@
       <if test="remark != null" >
         remark,
       </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="organcode != null" >
+        organcode,
+      </if>
+
+
       <if test="createTime != null" >
         create_time,
       </if>
@@ -175,6 +185,12 @@
       </if>
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="organcode != null" >
+        #{organcode,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},

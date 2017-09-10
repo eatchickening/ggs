@@ -11,6 +11,7 @@ CREATE TABLE appraise (
     appraiseschool int  COMMENT '评优学校数量',
     appraisequota int  COMMENT '评优指标',
     operator varchar(40) COMMENT '操作人',
+    organcode varchar(40) COMMENT '操作机构',
     remark varchar(500) COMMENT '备注',
     create_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (id)
@@ -42,6 +43,21 @@ CREATE TABLE award_school (
     create_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='奖项学校表';
+
+
+--  奖项班级表
+DROP  TABLE  IF EXISTS award_class;
+CREATE TABLE award_class (
+    id bigint NOT NULL AUTO_INCREMENT,
+    appraisecode varchar(40)  COMMENT '所属评优编码',
+    awardcode varchar(40)  COMMENT '奖项编码',
+    classcode varchar(20)  COMMENT '班级代码',
+    schoolcode varchar(20)  COMMENT '学校代码',
+    classquota int  COMMENT '班级指标',
+    remark varchar(500) COMMENT '备注',
+    create_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='奖项班级表';
 
 --  奖项指标表
 DROP  TABLE  IF EXISTS award_quota;

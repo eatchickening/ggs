@@ -23,6 +23,9 @@ public interface AppraiseService {
 
     void saveAwardSchoolInfo(List<AwardSchool> awardSchoollist);
 
+    void saveAwardClassInfo(List<AwardClass> awardClasslist);
+
+
     void saveAwardQuotoInfo(List<AwardQuota> awardQuotalist);
 
     void saveAwardFileInfo(List<AwardFile> awardFilelist);
@@ -31,7 +34,11 @@ public interface AppraiseService {
 
     void delete(Long id);
 
+    void deleteSchoolAppraise(Long id);
+
     void deleteAwardInfo(Long id);
+
+    void deleteAwardInfoSchool(Long id);
 
     AppraiseDetail selectByAppraisId(long id);
 

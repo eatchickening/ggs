@@ -33,6 +33,9 @@ public class AppraiseServiceImpl implements AppraiseService {
     private AwardQuotaMapper awardQuotaMapper;
 
     @Autowired
+    private AwardClassMapper awardClassMapper;
+
+    @Autowired
     private AwardFileMapper awardFileMapper;
     public List<Appraise> queryList(String appraiseName,
                                     Integer pageNum,
@@ -79,6 +82,13 @@ public class AppraiseServiceImpl implements AppraiseService {
     }
 
     @Override
+    public void saveAwardClassInfo(List<AwardClass> awardClasslist) {
+        awardClassMapper.insertCollection(awardClasslist);
+    }
+
+
+
+    @Override
     public void saveAwardFileInfo(List<AwardFile> awardFilelist) {
         awardFileMapper.insertCollection(awardFilelist);
     }
@@ -101,10 +111,28 @@ public class AppraiseServiceImpl implements AppraiseService {
         appraiseMapper.deleteByPrimaryKey(id);
     }
     @Override
+    public void deleteSchoolAppraise(Long id){
+        awardFileMapper.deleteByAppraisecode(id+"");
+        awardQuotaMapper.deleteByAppraisecode(id+"");
+        awardClassMapper.deleteByAppraisecode(id+"");
+        awardInfoMapper.deleteByAppraisecode(id+"");
+        appraiseMapper.deleteByPrimaryKey(id);
+    }
+
+
+    @Override
     public void deleteAwardInfo(Long id) {
         awardFileMapper.deleteByAppraisecode(id+"");
         awardQuotaMapper.deleteByAppraisecode(id+"");
         awardSchoolMapper.deleteByAppraisecode(id+"");
+        awardInfoMapper.deleteByAppraisecode(id+"");
+    }
+
+    @Override
+    public void deleteAwardInfoSchool(Long id) {
+        awardFileMapper.deleteByAppraisecode(id+"");
+        awardQuotaMapper.deleteByAppraisecode(id+"");
+        awardClassMapper.deleteByAppraisecode(id+"");
         awardInfoMapper.deleteByAppraisecode(id+"");
     }
 

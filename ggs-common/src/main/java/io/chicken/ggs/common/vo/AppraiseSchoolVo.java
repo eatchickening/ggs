@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 奖项信息表
  */
-public class AppraiseVo {
+public class AppraiseSchoolVo {
 
     private Long id;
     private String appraisedate;
@@ -13,10 +13,10 @@ public class AppraiseVo {
     private String appraisename;
 
     private String appraiselevel;
-
-    List<AwardInfoVo> awardInfoList;
     private String  operator;
     private String organcode;
+    List<AwardInfoSchoolVo> awardInfoList;
+
     public String getAppraisedate() {
         return appraisedate;
     }
@@ -31,31 +31,6 @@ public class AppraiseVo {
 
     public void setAppraisename(String appraisename) {
         this.appraisename = appraisename;
-    }
-
-
-    public String getAppraiselevel() {
-        return appraiselevel;
-    }
-
-    public void setAppraiselevel(String appraiselevel) {
-        this.appraiselevel = appraiselevel;
-    }
-
-    public List<AwardInfoVo> getAwardInfoList() {
-        return awardInfoList;
-    }
-
-    public void setAwardInfoList(List<AwardInfoVo> awardInfoList) {
-        this.awardInfoList = awardInfoList;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getOperator() {
@@ -74,13 +49,39 @@ public class AppraiseVo {
         this.organcode = organcode;
     }
 
+    public String getAppraiselevel() {
+        return appraiselevel;
+    }
+
+    public void setAppraiselevel(String appraiselevel) {
+        this.appraiselevel = appraiselevel;
+    }
+
+    public List<AwardInfoSchoolVo> getAwardInfoList() {
+        return awardInfoList;
+    }
+
+    public void setAwardInfoList(List<AwardInfoSchoolVo> awardInfoList) {
+        this.awardInfoList = awardInfoList;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
-        return "AppraiseVo{" +
-                "appraisedate='" + appraisedate + '\'' +
+        return "AppraiseSchoolVo{" +
+                "id=" + id +
+                ", appraisedate='" + appraisedate + '\'' +
                 ", appraisename='" + appraisename + '\'' +
-                ", id=" + id +
                 ", appraiselevel='" + appraiselevel + '\'' +
+                ", operator='" + operator + '\'' +
+                ", organcode='" + organcode + '\'' +
                 ", awardInfoList=" + awardInfoList +
                 '}';
     }
