@@ -6,6 +6,7 @@ import io.chicken.ggs.common.GGSException;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
 import io.chicken.ggs.common.util.DateUtil;
+import io.chicken.ggs.common.util.Query;
 import io.chicken.ggs.common.vo.*;
 import io.chicken.ggs.dal.model.*;
 import io.chicken.ggs.service.AppraiseService;
@@ -17,10 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by nyh on 8/31/17.
@@ -66,6 +64,48 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
         return result;
 
     }
+
+
+    public Result<List<Appraise>> queryList(Map<String, Object> params) {
+        //查询列表数据
+        List<Appraise> appraiseList = null;
+        Long total=new Long(0);
+        //查询列表数据
+        Query query=null;
+        try{
+            query = new Query(params);
+        }catch(Exception e)
+        {
+            logger.error("参数异常",e);
+            return new Result<>(ResultCode.PARAMETER_INVALID);
+        }
+        try {
+            appraiseList = appraiseService.queryList(params);
+            for(Appraise appraise:appraiseList)
+            {
+                AwardLevelEnum byCode = AwardLevelEnum.getByCode(appraise.getAppraiselevel());
+                appraise.setAppraiselevel(byCode==null?null:byCode.getMessage());
+            }
+            total = appraiseService.queryTotal(params);
+            logger.info("查询总数："+total);
+            if(total==null)total=new Long(0);
+        }catch(Exception e)
+        {
+            logger.error("数据库操作异常",e);
+            return new Result<>(ResultCode.DB_EXCEPTION);
+        }
+        Result result=  new Result<>(ResultCode.SUCCESS);
+        result.setTotal(total);
+        if (total == 0) {
+            result.setData(Collections.EMPTY_LIST);
+        }
+        else {
+            result.setData(appraiseList);
+        }
+        return result;
+
+    }
+
 
     @Override
     public Result save(AppraiseVo appraiseVo)  throws  RuntimeException{
