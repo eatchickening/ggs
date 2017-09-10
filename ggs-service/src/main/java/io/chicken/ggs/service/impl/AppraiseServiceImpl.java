@@ -44,6 +44,17 @@ public class AppraiseServiceImpl implements AppraiseService {
         return appraiseMapper.queryList(appraiseName, start, pageSize * CommonConstant.PAGE_PRE);
     }
 
+    @Override
+    public List<Appraise> queryList(Map<String, Object> params) {
+        return appraiseMapper.queryList(params);
+
+    }
+
+    @Override
+    public Long queryTotal(Map<String, Object> params) {
+       return appraiseMapper.queryTotal(params);
+    }
+
     public Long queryTotal(String appraiseName,
                            Integer pageNum,
                            Integer pageSize) {

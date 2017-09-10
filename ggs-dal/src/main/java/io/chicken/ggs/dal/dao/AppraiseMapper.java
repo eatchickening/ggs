@@ -5,6 +5,7 @@ import io.chicken.ggs.dal.model.AppraiseDetail;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AppraiseMapper {
     int deleteByPrimaryKey(Long id);
@@ -27,6 +28,11 @@ public interface AppraiseMapper {
     Long queryTotal(@Param("appraiseName") String appraiseName,
                     @Param("start") Integer start,
                     @Param("last") Integer last);
+
+
+    List<Appraise> queryList(Map<String, Object> params);
+
+    Long queryTotal(Map<String, Object> params);
 
     List<Appraise> queryListByIds(List<Long> ids);
 }

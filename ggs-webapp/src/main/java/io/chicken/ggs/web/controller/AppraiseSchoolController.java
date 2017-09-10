@@ -3,6 +3,9 @@ package io.chicken.ggs.web.controller;
 import io.chicken.ggs.business.AppraiseBusiness;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
+import io.chicken.ggs.common.util.BeanUtilTest;
+import io.chicken.ggs.common.util.Query;
+import io.chicken.ggs.common.vo.AppraiseParameter;
 import io.chicken.ggs.common.vo.AppraiseSchoolVo;
 import io.chicken.ggs.common.vo.AppraiseVo;
 import io.swagger.annotations.Api;
@@ -15,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Map;
 
 /**
  * Created by nyh on 8/31/17.
@@ -29,6 +34,16 @@ public class AppraiseSchoolController {
 
     @Autowired
     private AppraiseBusiness appraiseBusiness;
+
+
+
+    @ApiOperation(value = "获取评优奖项列表")
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public Result appraiseList(@RequestBody AppraiseParameter appraiseParameter){
+        Map<String, Object> params= BeanUtilTest.transBean2Map(appraiseParameter);
+        logger.info(params.toString());
+       return  appraiseBusiness.queryList(params);
+    }
 
 
     @ApiOperation(value = "评优奖项文件保存")

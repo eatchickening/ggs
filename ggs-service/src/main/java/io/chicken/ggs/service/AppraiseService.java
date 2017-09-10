@@ -3,6 +3,7 @@ package io.chicken.ggs.service;
 import io.chicken.ggs.dal.model.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by nyh on 8/31/17.
@@ -10,6 +11,10 @@ import java.util.List;
 public interface AppraiseService {
 
     List<Appraise> queryList(String appraiseName, Integer pageNum, Integer pageSize);
+
+    List<Appraise> queryList(Map<String, Object> params);
+
+    Long queryTotal(Map<String, Object> params);
 
     Long queryTotal(String appraiseName, Integer pageNum, Integer pageSize);
 
