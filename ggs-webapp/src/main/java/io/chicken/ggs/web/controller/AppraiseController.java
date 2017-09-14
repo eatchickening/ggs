@@ -3,6 +3,8 @@ package io.chicken.ggs.web.controller;
 import io.chicken.ggs.business.AppraiseBusiness;
 import io.chicken.ggs.common.Result;
 import io.chicken.ggs.common.ResultCode;
+import io.chicken.ggs.common.util.BeanUtilTest;
+import io.chicken.ggs.common.vo.AppraiseParameter;
 import io.chicken.ggs.common.vo.AppraiseVo;
 import io.chicken.ggs.common.vo.AreaDetailVO;
 import io.swagger.annotations.Api;
@@ -23,6 +25,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by nyh on 8/31/17.
@@ -38,17 +41,13 @@ public class AppraiseController {
     @Autowired
     private AppraiseBusiness appraiseBusiness;
 
-    @ApiOperation(value = "获取评优奖项列表", notes="默认name参数为空, pageSize pageNum不能为空")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "name", value = "评优名称", required = false, dataType = "String", paramType = "form"),
-            @ApiImplicitParam(name = "pageNum", value = "页数", required = true, dataType = "String", paramType = "form"),
-            @ApiImplicitParam(name = "pageSize", value = "每页条数", required = true, dataType = "String", paramType = "form")
-    })
+    @ApiOperation(value = "获取评优奖项列表1:教育局账号查询教育局评优活动时organcode必填，查询学校评优活动时appraiseLevel必填2：学校账号" +
+            "查询学校评优活动时organcode必填")
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result appraiseList(String name,
-                              String pageNum,
-                              String pageSize){
-        return appraiseBusiness.queryList(name, Integer.parseInt(pageNum), Integer.parseInt(pageSize));
+    public Result appraiseList(@RequestBody AppraiseParameter appraiseParameter){
+        Map<String, Object> params= BeanUtilTest.transBean2Map(appraiseParameter);
+        logger.info(params.toString());
+        return  appraiseBusiness.queryList(params);
     }
 
     @ApiOperation(value = "评优奖项文件保存")

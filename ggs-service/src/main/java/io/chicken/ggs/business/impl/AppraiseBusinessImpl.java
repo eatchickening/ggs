@@ -33,38 +33,6 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
 
     @Value("${file.basepath}")
     private String storefile;
-    public Result<List<Appraise>> queryList(String appraiseName, Integer pageNum, Integer pageSize) {
-
-        //查询列表数据
-        List<Appraise> appraiseList = null;
-        Long total=new Long(0);
-        try {
-            appraiseList = appraiseService.queryList(appraiseName, pageNum, pageSize);
-            for(Appraise appraise:appraiseList)
-            {
-                AwardLevelEnum byCode = AwardLevelEnum.getByCode(appraise.getAppraiselevel());
-                appraise.setAppraiselevel(byCode==null?null:byCode.getMessage());
-            }
-            total = appraiseService.queryTotal(appraiseName, pageNum, pageSize);
-            logger.info("查询总数："+total);
-            if(total==null)total=new Long(0);
-        }catch(Exception e)
-        {
-            logger.error("数据库操作异常",e);
-            return new Result<>(ResultCode.DB_EXCEPTION);
-        }
-        Result result=  new Result<>(ResultCode.SUCCESS);
-        result.setTotal(total);
-        if (total == 0) {
-            result.setData(Collections.EMPTY_LIST);
-        }
-        else {
-            result.setData(appraiseList);
-        }
-        return result;
-
-    }
-
 
     public Result<List<Appraise>> queryList(Map<String, Object> params) {
         //查询列表数据
@@ -80,13 +48,14 @@ public class AppraiseBusinessImpl implements AppraiseBusiness {
             return new Result<>(ResultCode.PARAMETER_INVALID);
         }
         try {
-            appraiseList = appraiseService.queryList(params);
+            logger.info("query"+query);
+            appraiseList = appraiseService.queryList(query);
             for(Appraise appraise:appraiseList)
             {
                 AwardLevelEnum byCode = AwardLevelEnum.getByCode(appraise.getAppraiselevel());
                 appraise.setAppraiselevel(byCode==null?null:byCode.getMessage());
             }
-            total = appraiseService.queryTotal(params);
+            total = appraiseService.queryTotal(query);
             logger.info("查询总数："+total);
             if(total==null)total=new Long(0);
         }catch(Exception e)

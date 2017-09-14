@@ -1,5 +1,6 @@
 package io.chicken.ggs.service.impl;
 
+import io.chicken.ggs.common.AwardLevelEnum;
 import io.chicken.ggs.common.CommonConstant;
 import io.chicken.ggs.dal.dao.*;
 import io.chicken.ggs.dal.model.*;
@@ -37,12 +38,7 @@ public class AppraiseServiceImpl implements AppraiseService {
 
     @Autowired
     private AwardFileMapper awardFileMapper;
-    public List<Appraise> queryList(String appraiseName,
-                                    Integer pageNum,
-                                    Integer pageSize) {
-        Integer start = (pageNum - 1) * pageSize;
-        return appraiseMapper.queryList(appraiseName, start, pageSize * CommonConstant.PAGE_PRE);
-    }
+
 
     @Override
     public List<Appraise> queryList(Map<String, Object> params) {
@@ -55,12 +51,7 @@ public class AppraiseServiceImpl implements AppraiseService {
        return appraiseMapper.queryTotal(params);
     }
 
-    public Long queryTotal(String appraiseName,
-                           Integer pageNum,
-                           Integer pageSize) {
-        Integer start = (pageNum - 1) * pageSize;
-        return appraiseMapper.queryTotal(appraiseName, start, pageSize * CommonConstant.PAGE_PRE);
-    }
+
 
     @Override
     public long save(Appraise appraise) {
@@ -158,16 +149,25 @@ public class AppraiseServiceImpl implements AppraiseService {
         List<AwardInfoDetail> awardInfoDetails=new ArrayList<AwardInfoDetail>();
 
         for(AwardInfo awardInfo:awardInfos){
+            AwardInfoDetail awardInfoDetail=(AwardInfoDetail)awardInfo;
             List<AwardFile> awardFiles = awardFileMapper.selectByAwardInfoId(awardInfo.getId() + "");
 
             List<AwardQuota> awardQuotas = awardQuotaMapper.selectByAwardInfoId(awardInfo.getId() + "");
 
-            List<AwardSchool> awardSchools = awardSchoolMapper.selectByAwardInfoId(awardInfo.getId() + "");
 
-            AwardInfoDetail awardInfoDetail=(AwardInfoDetail)awardInfo;
+            if(AwardLevelEnum.getByCode(appraise.getAppraiselevel())==AwardLevelEnum.SCHOOLLEVEL)
+            {
+                List<AwardClass> awardClasses = awardClassMapper.selectByAwardInfoId(awardInfo.getId() + "");
+                awardInfoDetail.setAwardClass(awardClasses);
+            }else
+            {
+                List<AwardSchool> awardSchools = awardSchoolMapper.selectByAwardInfoId(awardInfo.getId() + "");
+                awardInfoDetail.setAwardSchools(awardSchools);
+            }
+
             awardInfoDetail.setAwardFiles(awardFiles);
             awardInfoDetail.setAwardQuotas(awardQuotas);
-            awardInfoDetail.setAwardSchools(awardSchools);
+
 
             awardInfoDetails.add(awardInfoDetail);
         }

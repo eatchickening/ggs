@@ -21,13 +21,6 @@ public interface AppraiseMapper {
     int updateByPrimaryKey(Appraise record);
 
 
-    List<Appraise> queryList(@Param("appraiseName") String appraiseName,
-                             @Param("start") Integer start,
-                             @Param("last") Integer last);
-
-    Long queryTotal(@Param("appraiseName") String appraiseName,
-                    @Param("start") Integer start,
-                    @Param("last") Integer last);
 
 
     List<Appraise> queryList(Map<String, Object> params);

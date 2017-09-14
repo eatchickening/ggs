@@ -15,6 +15,9 @@ public interface AwardClassMapper {
 
     int deleteByAppraisecode(String appraiseid);
 
+    List<AwardClass> selectByAwardInfoId(String id);
+
+
     AwardClass selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(AwardClass record);

@@ -18,86 +18,101 @@
   <resultMap id="BaseResultMapDeail" type="io.chicken.ggs.dal.model.AppraiseDetail" extends="BaseResultMap">
   </resultMap>
   <sql id="Base_Column_List" >
-    id, appraisedate, appraisename, appraisecode, appraiselevel, appraisenumber, appraiseschool,operator,organcode
-    appraisequota, remark, create_time
+    id, appraisedate, appraisename, appraisecode, appraiselevel, appraisenumber, appraiseschool,appraisequota,operator,organcode,
+    remark, create_time
   </sql>
   <select id = "queryList" resultMap="BaseResultMap">
     select
-    ap.id,
-    ap.appraisedate appraisedate, ap.appraisename, ap.appraisecode, ap.appraiselevel,
-    ai.appraisenumber,aw.appraiseschool,aw.appraisequota,ap.remark, ap.create_time
-    from appraise ap
-    left join
-    (
-    select
-    appraisecode, count(distinct(schoolcode)) appraiseschool, sum(schoolquota) appraisequota
-    from award_school group by appraisecode) aw
-    on ap.id=aw.appraisecode
-    left join
-    (
-    select appraisecode, count(*) appraisenumber from
-    awardinfo group by appraisecode
-    ) ai
-    on ap.id=ai.appraisecode
+    id, appraisedate, appraisename, appraisecode, appraiselevel, appraisenumber, appraiseschool,appraisequota,operator,organcode,
+    remark, create_time
+    from appraise
       <where>
           <if test="appraiseName != null and appraiseName.trim() != ''">
-              and ap.appraisename like concat('%', #{appraiseName}, '%')
+              and appraisename like concat('%', #{appraisename}, '%')
           </if>
+          <if test="appraiseLevel != null and appraiseLevel.trim() != ''">
+            and appraiselevel like concat('%', #{appraiseLevel}, '%')
+          </if>
+          <if test="organcode != null and organcode.trim() != ''">
+            and organcode like concat('%', #{organcode}, '%')
+          </if>
+        <if test="((areacode != null and areacode.trim() != '')
+          or (schooltype != null and schooltype.trim() != '')
+          or (schoolcode != null and schoolcode.trim() != '')
+          ) ">
+          and `organcode`in
+          (
+          select schoolcode from school
+          <where>
+            <if test="schoolcode != null and schoolcode.trim() != ''">
+              and `schoolcode` = #{schoolcode}
+            </if>
+            <if test="areacode != null and areacode.trim() != ''">
+              and `areacode` = #{areacode}
+            </if>
+            <if test="schooltype != null  and schooltype.trim() != ''">
+              and `schooltype` = #{schooltype}
+            </if>
+          </where>
+          )
+        </if>
       </where>
-      <if test="start != null and last != null">
-          limit #{start}, #{last}
-      </if>
+    <if test="offset != null and limit != null">
+        limit #{offset}, #{limit}
+    </if>
   </select>
   <select id = "queryTotal" resultType="java.lang.Long">
       select count(*)
       from appraise
-      <where>
-        <if test="appraiseName != null and appraiseName.trim() != ''">
-              appraisename like concat('%', #{appraiseName}, '%')
+    <where>
+      <if test="appraiseName != null and appraiseName.trim() != ''">
+        and appraisename like concat('%', #{appraisename}, '%')
+      </if>
+      <if test="appraiseLevel != null and appraiseLevel.trim() != ''">
+        and appraiselevel like concat('%', #{appraiseLevel}, '%')
+      </if>
+      <if test="organcode != null and organcode.trim() != ''">
+        and organcode like concat('%', #{organcode}, '%')
+      </if>
+      <if test="((areacode != null and areacode.trim() != '')
+          or (schooltype != null and schooltype.trim() != '')
+          or (schoolcode != null and schoolcode.trim() != '')
+          ) ">
+        and `organcode`in
+        (
+        select schoolcode from school
+        <where>
+          <if test="schoolcode != null and schoolcode.trim() != ''">
+            and `schoolcode` = #{schoolcode}
           </if>
-      </where>
+          <if test="areacode != null and areacode.trim() != ''">
+            and `areacode` = #{areacode}
+          </if>
+          <if test="schooltype != null  and schooltype.trim() != ''">
+            and `schooltype` = #{schooltype}
+          </if>
+        </where>
+        )
+      </if>
+    </where>
 
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMapDeail" parameterType="java.lang.Long" >
-     select
-    ap.id,
-    ap.appraisedate appraisedate, ap.appraisename, ap.appraisecode, ap.appraiselevel,
-    ai.appraisenumber,aw.appraiseschool,aw.appraisequota,ap.remark, ap.create_time
-    from appraise ap
-    left join
-    (
     select
-    appraisecode, count(distinct(schoolcode)) appraiseschool, sum(schoolquota) appraisequota
-    from award_school group by appraisecode) aw
-    on ap.id=aw.appraisecode
-    left join
-    (
-    select appraisecode, count(*) appraisenumber from
-    awardinfo group by appraisecode
-    ) ai
-    on ap.id=ai.appraisecode
+       id, appraisedate, appraisename, appraisecode, appraiselevel, appraisenumber, appraiseschool,appraisequota,operator,organcode,
+        remark, create_time
+    from
+      appraise
     where id = #{id,jdbcType=BIGINT}
   </select>
 
   <select id = "queryListByIds" resultMap="BaseResultMap">
     select
-    ap.id,
-    ap.appraisedate appraisedate, ap.appraisename, ap.appraisecode, ap.appraiselevel,
-    ai.appraisenumber,aw.appraiseschool,aw.appraisequota,ap.remark, ap.create_time
-    from appraise ap
-    left join
-    (
-    select
-    appraisecode, count(distinct(schoolcode)) appraiseschool, sum(schoolquota) appraisequota
-    from award_school group by appraisecode) aw
-    on ap.id=aw.appraisecode
-    left join
-    (
-    select appraisecode, count(*) appraisenumber from
-    awardinfo group by appraisecode
-    ) ai
-    on ap.id=ai.appraisecode
-    where ap.id in
+      id, appraisedate, appraisename, appraisecode, appraiselevel, appraisenumber, appraiseschool,appraisequota,operator,organcode,
+      remark, create_time
+    from
+      appraise
+    where id in
     <foreach collection="list" open="(" separator="," close=")" item="id" index="index">
         #{id}
     </foreach>

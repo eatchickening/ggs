@@ -9,6 +9,8 @@ public class AwardInfoDetail extends AwardInfo {
 
     List<AwardSchool> awardSchools;
 
+    List<AwardClass> awardClass;
+
     public List<AwardFile> getAwardFiles() {
         return awardFiles;
     }
@@ -31,5 +33,13 @@ public class AwardInfoDetail extends AwardInfo {
 
     public void setAwardSchools(List<AwardSchool> awardSchools) {
         this.awardSchools = awardSchools;
+    }
+
+    public List<AwardClass> getAwardClass() {
+        return awardClass;
+    }
+
+    public void setAwardClass(List<AwardClass> awardClass) {
+        this.awardClass = awardClass;
     }
 }

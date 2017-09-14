@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public interface AppraiseBusiness {
 
-    Result<List<Appraise>> queryList(String appraiseName, Integer pageNum, Integer pageSize);
+
 
     Result<List<Appraise>> queryList(Map<String, Object> params);
 

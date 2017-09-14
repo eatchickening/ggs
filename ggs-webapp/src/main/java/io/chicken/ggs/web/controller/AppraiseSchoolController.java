@@ -37,26 +37,6 @@ public class AppraiseSchoolController {
 
 
 
-    @ApiOperation(value = "获取评优奖项列表")
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result appraiseList(@RequestBody AppraiseParameter appraiseParameter){
-        Map<String, Object> params= BeanUtilTest.transBean2Map(appraiseParameter);
-        logger.info(params.toString());
-       return  appraiseBusiness.queryList(params);
-    }
-
-
-    @ApiOperation(value = "评优奖项文件保存")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "appraisename", value = "评优名称", required = true, dataType = "String", paramType = "form"),
-            @ApiImplicitParam(name = "awardname", value = "奖项名称", required = true, dataType = "String", paramType = "form"),
-    })
-    @RequestMapping(value = "/savefile", method = RequestMethod.POST)
-    @ResponseBody
-    public Result save(String appraisename,String awardname, MultipartFile file ) {
-        logger.info("评优奖项信息:"+appraisename+"awardcode"+awardname);
-        return appraiseBusiness.savefile(appraisename,awardname,file);
-    }
 
     @ApiOperation(value = "评优奖项信息保存")
     @RequestMapping(value = "/save", method = RequestMethod.POST)

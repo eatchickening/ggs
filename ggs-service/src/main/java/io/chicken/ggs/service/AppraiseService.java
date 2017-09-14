@@ -10,13 +10,13 @@ import java.util.Map;
  */
 public interface AppraiseService {
 
-    List<Appraise> queryList(String appraiseName, Integer pageNum, Integer pageSize);
+
 
     List<Appraise> queryList(Map<String, Object> params);
 
     Long queryTotal(Map<String, Object> params);
 
-    Long queryTotal(String appraiseName, Integer pageNum, Integer pageSize);
+
 
     long save(Appraise appraise);
 
