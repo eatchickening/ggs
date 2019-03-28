@@ -1,6 +1,4 @@
-/**
- * Copyright (C), 2011-2017, 微贷网.
- */
+
 package io.chicken.ggs.web.controller;
 
 import io.chicken.ggs.common.CommonConstant;
